@@ -1,0 +1,30 @@
+.orgManage {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+.treeMenu {
+    width: 310px;
+    height: 100%;
+}
+
+.tree {
+    margin-top: 10px;
+    width: 100%;
+    height: calc(100% - 42px);
+    overflow: auto;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+:global .ant-tree-title {
+    margin-left: 5px;
+}
+
+:global .materialIcons {
+    font-size: 20px;
+    vertical-align: -5px;
+}
+

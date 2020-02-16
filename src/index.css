@@ -1,13 +1,104 @@
+@import '~antd/dist/antd.css';
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: PingFangSC, "Microsoft YaHei", sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root {
+    height: 100%;
+}
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Material Icons'), local('MaterialIcons-Regular'),
+    url(./assets/MaterialIcons-Regular.woff2) format('woff2'),
+    url(./assets/MaterialIcons-Regular.woff) format('woff'),
+    url(./assets/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.materialIcons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px; /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+/* reset antd */
+.ant-drawer-title {
+    font-weight: normal;
+}
+
+.ant-drawer-body {
+    max-height: calc(100% - 55px);
+    overflow: auto;
+}
+
+.ant-descriptions-item-label {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.ant-descriptions-item-content {
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.ant-table-thead > tr > th {
+    font-weight: normal;
+    padding: 10px 16px;
+}
+
+.ant-table {
+    border: 1px solid #eee;
+    border-bottom: none;
+}
+
+.ant-table-pagination.ant-pagination {
+    margin-bottom: 0;
+}
+
+/* reset antd end */
+
+.ant-menu.ctrlMenu {
+    width: 220px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.tableSearch {
+    margin-bottom: 20px;
+}
+
+.tableSearch input {
+    height: 40px;
+}
+
+.tableSearch .ant-input-search-button {
+    height: 40px;
+}
+
+.emptyBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 50px;
 }

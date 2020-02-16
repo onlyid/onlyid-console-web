@@ -1,0 +1,35 @@
+.userPool {
+    height: 100%;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.userVisible {
+    padding-bottom: 20px;
+}
+
+.userVisible .left {
+    width: 310px;
+}
+
+.userVisible .left :global .ant-table-tbody > tr > td {
+    padding: 5px 0;
+}
+
+.selectedRow {
+    background: #e6f7ff;
+}
+
+:global .ant-table-body {
+    overflow-y: auto !important;
+}
+
+:global .ant-table-tbody > tr > td {
+    padding: 5px 16px;
+}
+
+.userPool .backMenuItem {
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+}
