@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react'
-import { Form, Input, Button, message, Upload, Tooltip, Radio, Row, Col } from 'antd'
+import { Button, Form, Input, message, Radio, Tooltip, Upload } from 'antd'
 import http, { baseURL } from '../../http'
-import { IMG_UPLOAD_TIP, REG_EXP } from '../../constants'
+import { GENDER_TEXT, IMG_UPLOAD_TIP, REG_EXP } from '../../constants'
 import _ from 'lodash'
 import Avatar from '../../components/Avatar'
-import { GENDER_TEXT } from '../../constants'
 
 const { Item } = Form
 const { TextArea } = Input
@@ -83,13 +82,14 @@ class AddOrEdit extends PureComponent {
             onChange={this.onUploadChange}
           >
             <Tooltip title={IMG_UPLOAD_TIP}>
-              <Avatar url={avatarUrl}
-                      cursorPointer/>
-              <Button type="link">上传头像</Button>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Avatar url={avatarUrl}
+                        cursorPointer/>
+                <Button type="link">上传头像</Button>
+              </div>
             </Tooltip>
           </Upload>
         </Item>
-        {/* TODO: 加个姓名 */}
         <Item label="昵称">
           {getFieldDecorator('nickname', {
             initialValue: info && info.nickname,
@@ -101,20 +101,13 @@ class AddOrEdit extends PureComponent {
         </Item>
         <Item label="手机号"
               extra="手机号或邮箱至少填一项，作为登录账号">
-          <Row gutter={10}>
-            <Col span={19}>
-              {getFieldDecorator('mobile', {
-                initialValue: info && info.mobile,
-                rules: [
-                  { max: 50, message: '不能超过50字' },
-                  { pattern: REG_EXP.mobile, message: '手机号格式不正确' },
-                ],
-              })(<Input/>)}
-            </Col>
-            <Col span={5}>
-              <Button type="primary">发送验证码</Button>
-            </Col>
-          </Row>
+          {getFieldDecorator('mobile', {
+            initialValue: info && info.mobile,
+            rules: [
+              { max: 50, message: '不能超过50字' },
+              { pattern: REG_EXP.mobile, message: '手机号格式不正确' },
+            ],
+          })(<Input/>)}
         </Item>
         <Item label="邮箱">
           {getFieldDecorator('email', {

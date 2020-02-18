@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import Layout from './components/Layout'
 import UserPool from './pages/UserPool'
 import OrgManage from './pages/OrgManage'
@@ -16,6 +16,7 @@ function App () {
             <OrgManage/>
           </Route>
           <Route path="/">
+            <Redirect to="/org-manage" />
           </Route>
         </Switch>
       </Layout>

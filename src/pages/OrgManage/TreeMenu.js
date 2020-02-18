@@ -141,14 +141,14 @@ class TreeMenu extends PureComponent {
     let icon = null
     switch (node.type) {
       case 'ORG':
-        icon = <i className="materialIcons">business</i>
+        icon = <i className="material-icons">business</i>
         break
       case 'POSITION':
-        icon = <i className="materialIcons">desktop_windows</i>
+        icon = <i className="material-icons">desktop_windows</i>
         break
       default:
         // 'USER_GROUP'
-        icon = <i className="materialIcons">group</i>
+        icon = <i className="material-icons">group</i>
     }
 
     return (

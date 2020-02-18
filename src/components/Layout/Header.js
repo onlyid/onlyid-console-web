@@ -13,7 +13,7 @@ const MENU_DATA = {
   orgManage: '组织机构',
   appRes: '应用权限',
   statistics: '统计数据',
-  audit: '审计日志',
+  auditLog: '审计日志',
   admin: '系统管理',
 }
 
@@ -24,6 +24,16 @@ class Header extends PureComponent {
 
   componentDidMount () {
     const { pathname } = this.props.location
+    const p = _.camelCase(pathname.split('/')[1])
+    if (p in MENU_DATA) {
+      this.setState({ menuCurrent: p })
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    const { pathname } = this.props.location
+    if (prevProps.location.pathname === pathname) return
+
     const p = _.camelCase(pathname.split('/')[1])
     if (p in MENU_DATA) {
       this.setState({ menuCurrent: p })
@@ -61,7 +71,7 @@ class Header extends PureComponent {
                 <Icon type="bell"
                       className={styles.notification}/>
               </Badge>
-              <i className={classNames('materialIcons', styles.avatar)}>account_circle</i>
+              <i className={classNames('material-icons', styles.avatar)}>account_circle</i>
               <span className={styles.name}>ltb</span>
             </div>
           </div>
