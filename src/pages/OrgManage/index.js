@@ -28,7 +28,7 @@ class OrgManage extends PureComponent {
       orgManage: { showEmpty, selectedType },
     } = this.props
 
-    const portalNode = window.document.getElementById('subHeaderPortal')
+    const portalNode = window.document.getElementById('headerPortal')
 
     const createNew = (
       <Button onClick={this.showAdd}

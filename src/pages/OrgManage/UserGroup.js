@@ -9,7 +9,7 @@ import { eventEmitter } from '../../utils'
 
 const { Item } = Menu
 
-const menuItems = [
+const MENU_DATA = [
   { icon: 'info-circle', title: '用户组详情' },
   { icon: 'link', title: '关联用户' },
   { icon: 'delete', title: '删除', key: 'delete' },
@@ -68,20 +68,24 @@ class UserGroup extends PureComponent {
 
     return (
       <>
-        <Menu
-          onClick={this.onMenuClick}
-          selectedKeys={[menuCurrent]}
-          className="ctrlMenu"
-          mode="inline"
-        >
-          {menuItems.map((item, index) => (
-            <Item key={item.key || String(index)}>
-              <Icon type={item.icon}/>
-              {item.title}
-            </Item>
-          ))}
-        </Menu>
-        <Card title={menuItems[menuCurrent].title}>{right}</Card>
+        <div>
+          <Menu
+            onClick={this.onMenuClick}
+            selectedKeys={[menuCurrent]}
+            className="ctrlMenu"
+            mode="inline"
+          >
+            {MENU_DATA.map((item, index) => (
+              <Item key={item.key || String(index)}>
+                <Icon type={item.icon}/>
+                {item.title}
+              </Item>
+            ))}
+          </Menu>
+        </div>
+        <div>
+          <Card title={MENU_DATA[menuCurrent].title}>{right}</Card>
+        </div>
       </>
     )
   }

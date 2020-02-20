@@ -5,11 +5,8 @@ body {
     font-family: PingFangSC, "Microsoft YaHei", sans-serif;
 }
 
-#root {
-    height: 100%;
-}
+/* reset antd start */
 
-/* reset antd */
 .ant-drawer-title {
     font-weight: normal;
 }
@@ -37,17 +34,13 @@ body {
     border-bottom: none;
 }
 
-.ant-table-pagination.ant-pagination {
-    margin-bottom: 0;
-}
-
 /* reset antd end */
 
 .ant-menu.ctrlMenu {
     width: 220px;
     border: 1px solid #eee;
     border-radius: 4px;
-    box-sizing: border-box;
+    min-height: 600px;
 }
 
 .tableSearch {
@@ -67,5 +60,5 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-bottom: 50px;
+    height: 50vh;
 }

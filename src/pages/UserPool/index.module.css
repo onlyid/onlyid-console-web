@@ -1,8 +1,10 @@
 .userPool {
-    height: 100%;
-
     display: flex;
     justify-content: space-between;
+}
+
+.left {
+    width: 100%;
 }
 
 .userVisible {
@@ -19,10 +21,6 @@
 
 .selectedRow {
     background: #e6f7ff;
-}
-
-:global .ant-table-body {
-    overflow-y: auto !important;
 }
 
 :global .ant-table-tbody > tr > td {

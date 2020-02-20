@@ -50,9 +50,9 @@ class Header extends PureComponent {
     const { menuCurrent } = this.state
 
     return (
-      <>
-        <div className={styles.headerBg}>
-          <div className={styles.header}>
+      <div className={styles.header}>
+        <div className={styles.box1bg}>
+          <div className={styles.box1}>
             <img src={Logo}
                  alt="logo"
                  height="33"/>
@@ -62,9 +62,7 @@ class Header extends PureComponent {
               mode="horizontal"
               className={styles.menu}
             >
-              {Object.keys(MENU_DATA).map(key => (
-                <Item key={key}>{MENU_DATA[key]}</Item>
-              ))}
+              {Object.keys(MENU_DATA).map(key => <Item key={key}>{MENU_DATA[key]}</Item>)}
             </Menu>
             <div className={styles.right}>
               <Badge count={5}>
@@ -76,15 +74,15 @@ class Header extends PureComponent {
             </div>
           </div>
         </div>
-        <div className={styles.subHeaderBg}>
-          <div className={styles.subHeader}>
+        <div className={styles.box2bg}>
+          <div className={styles.box2}>
             <span style={{ fontSize: 18 }}>{MENU_DATA[menuCurrent]}</span>
-            <div id="subHeaderPortal"/>
+            <div id="headerPortal"/>
           </div>
         </div>
-      </>
+      </div>
     )
   }
 }
 
-export default withRouter(props => <Header {...props} />)
+export default withRouter(Header)

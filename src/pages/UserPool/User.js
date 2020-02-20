@@ -11,7 +11,7 @@ import { eventEmitter } from '../../utils'
 
 const { Item } = Menu
 
-const menuItems = [
+const MENU_DATA = [
   { icon: 'arrow-left', title: '返回用户列表', key: 'back', className: styles.backMenuItem },
   { icon: 'info-circle', title: '用户详情' },
   { icon: 'link', title: '关联组织机构' },
@@ -52,7 +52,7 @@ class User extends PureComponent {
         } = this.props
         await http.delete('users/' + selectedKey)
 
-        eventEmitter.emit("userPool/refresh", true)
+        eventEmitter.emit('userPool/refresh', true)
       },
     })
   }
@@ -84,21 +84,24 @@ class User extends PureComponent {
 
     return (
       <>
-        <Menu
-          onClick={this.onMenuClick}
-          selectedKeys={[menuCurrent]}
-          className="ctrlMenu"
-          mode="inline"
-        >
-          {menuItems.map((item, index) => (
-            <Item key={item.key || String(index)}
-                  className={item.className}>
-              <Icon type={item.icon}/>
-              {item.title}
-            </Item>
-          ))}
-        </Menu>
-        <Card title={menuItems[menuCurrent].title}>{right}</Card>
+        <div>
+          <Menu
+            onClick={this.onMenuClick}
+            selectedKeys={[menuCurrent]}
+            className="ctrlMenu"
+          >
+            {MENU_DATA.map((item, index) => (
+              <Item key={item.key || String(index)}
+                    className={item.className}>
+                <Icon type={item.icon}/>
+                {item.title}
+              </Item>
+            ))}
+          </Menu>
+        </div>
+        <div>
+          <Card title={MENU_DATA[menuCurrent].title}>{right}</Card>
+        </div>
       </>
     )
   }

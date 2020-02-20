@@ -44,12 +44,8 @@ class UserPool extends PureComponent {
     {
       title: '操作',
       dataIndex: 'id',
-      render: value => (
-        <Button type="link"
-                onClick={() => this.onAction(value)}>
-          操作
-        </Button>
-      ),
+      render: value => <Button type="link"
+                               onClick={() => this.onAction(value)}>操作</Button>,
       mustShow: true,
     },
   ]
@@ -61,7 +57,6 @@ class UserPool extends PureComponent {
     total: 0,
     keyword: '',
     loading: true,
-    tableScrollHeight: 500,
     showEmpty: false,
     drawerVisible: false,
   }
@@ -73,18 +68,6 @@ class UserPool extends PureComponent {
 
   componentWillUnmount () {
     eventEmitter.removeListener('userPool/refresh', this.refresh)
-  }
-
-  componentDidUpdate () {
-    const {
-      userPool: { selectedKey },
-    } = this.props
-    const element = document.querySelector('.' + styles.userPool)
-
-    let tableScrollHeight = element.clientHeight - 124
-    if (!selectedKey) tableScrollHeight -= 30
-
-    this.setState({ tableScrollHeight })
   }
 
   refresh = async (selectNew) => {
@@ -154,7 +137,6 @@ class UserPool extends PureComponent {
       pageSize,
       total,
       loading,
-      tableScrollHeight,
       showEmpty,
       drawerVisible,
     } = this.state
@@ -166,7 +148,7 @@ class UserPool extends PureComponent {
 
     const columns = selectedKey ? this.columns.filter(item => item.mustShow) : this.columns
 
-    const portalNode = window.document.getElementById('subHeaderPortal')
+    const portalNode = window.document.getElementById('headerPortal')
 
     const createNew = (
       <Button onClick={this.showAdd}
@@ -175,7 +157,7 @@ class UserPool extends PureComponent {
       </Button>
     )
 
-    const content = showEmpty ? (
+    const left = showEmpty ? (
       <div className="emptyBox">
         <Empty description="暂无用户，请新建">{createNew}</Empty>
       </div>
@@ -194,7 +176,6 @@ class UserPool extends PureComponent {
           pagination={selectedKey ? false : pagination}
           loading={loading}
           onChange={this.onChange}
-          scroll={{ y: tableScrollHeight }}
           rowClassName={({ id }) => id === selectedKey && styles.selectedRow}
         />
       </div>
@@ -215,7 +196,7 @@ class UserPool extends PureComponent {
           <AddOrEdit onSave={this.closeAdd}
                      onCancel={this.closeAdd}/>
         </Drawer>
-        {content}
+        {left}
         {selectedKey && <User/>}
       </div>
     )
