@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Menu, Icon, Modal } from 'antd'
+import { Menu, Icon, Modal, message } from 'antd'
 import Info from './Info'
 import LinkUser from './LinkUser'
 import { connect } from 'react-redux'
@@ -44,6 +44,7 @@ class Position extends PureComponent {
         } = this.props
         await http.delete('org-nodes/' + selectedKey)
 
+        message.success('删除成功')
         eventEmitter.emit('orgManage/initTree', { selectNode: 'neighbor' })
       },
     })

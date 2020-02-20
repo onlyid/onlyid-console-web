@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Menu, Icon, Modal } from 'antd'
+import { Menu, Icon, Modal, message } from 'antd'
 import Info from './Info'
 import UpdatePassword from './UpdatePassword'
 import LinkOrg from './LinkOrg'
@@ -19,7 +19,7 @@ const MENU_DATA = [
   { icon: 'link', title: '关联用户组' },
   { icon: 'link', title: '关联角色' },
   { icon: 'lock', title: '修改密码' },
-  { icon: 'delete', title: '删除', key: 'delete' },
+  { icon: 'delete', title: '移除', key: 'delete' },
 ]
 
 class User extends PureComponent {
@@ -44,14 +44,15 @@ class User extends PureComponent {
 
   delete1 = () => {
     Modal.confirm({
-      content: '删除后不可恢复，确定删除？',
+      content: '移除用户会将该用户从用户池移除，并删除该用户和组织机构、角色等对象的关联，但不会物理删除该用户，确定移除？',
       okType: 'danger',
       onOk: async () => {
         const {
           userPool: { selectedKey },
         } = this.props
-        await http.delete('users/' + selectedKey)
+        await http.post('users/unlink-tenant', { userId: selectedKey })
 
+        message.success('移除成功')
         eventEmitter.emit('userPool/refresh', true)
       },
     })

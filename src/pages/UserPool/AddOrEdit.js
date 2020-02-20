@@ -31,7 +31,6 @@ class AddOrEdit extends PureComponent {
       // 编辑
       if (info) {
         await http.put('users/' + info.id, values)
-        message.success('保存成功')
         onSave()
       }
       // 新增
@@ -40,6 +39,8 @@ class AddOrEdit extends PureComponent {
         await http.post('users', values)
         onSave()
       }
+
+      message.success('保存成功')
     })
   }
 
