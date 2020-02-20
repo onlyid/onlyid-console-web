@@ -130,6 +130,15 @@ class UserPool extends PureComponent {
     this.setState({ drawerVisible: false })
   }
 
+  onUserAdd = () => {
+    const { total, pageSize } = this.state
+    const { dispatch } = this.props
+
+    this.setState({ drawerVisible: false, current: Math.ceil((total + 1) / pageSize) })
+    dispatch({ type: 'userPool/save', payload: { selectedKey: null } })
+    this.initData()
+  }
+
   render () {
     const {
       list,
@@ -193,7 +202,7 @@ class UserPool extends PureComponent {
           width="600"
           destroyOnClose
         >
-          <AddOrEdit onSave={this.closeAdd}
+          <AddOrEdit onSave={this.onUserAdd}
                      onCancel={this.closeAdd}/>
         </Drawer>
         {left}

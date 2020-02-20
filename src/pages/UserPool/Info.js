@@ -5,6 +5,7 @@ import AddOrEdit from './AddOrEdit';
 import { connect } from 'react-redux';
 import { GENDER_TEXT } from '../../constants';
 import Avatar from '../../components/Avatar';
+import { eventEmitter } from '../../utils'
 
 const { Item } = Descriptions;
 
@@ -34,6 +35,7 @@ class Info extends PureComponent {
   onSave = () => {
     this.setState({ isEdit: false });
     this.initData();
+    eventEmitter.emit('userPool/refresh')
   };
 
   onCancel = () => {
