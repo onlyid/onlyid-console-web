@@ -15,7 +15,7 @@
     width: 100%;
     height: calc(100% - 42px);
     overflow: auto;
-    border: 1px solid #eee;
+    border: 1px solid #ddd;
     border-radius: 4px;
 }
 

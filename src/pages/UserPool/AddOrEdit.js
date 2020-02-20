@@ -16,6 +16,13 @@ class AddOrEdit extends PureComponent {
     user2Add: {}
   }
 
+  componentDidMount () {
+    const { info } = this.props
+    if (info) {
+      this.setState({ avatarUrl: info.avatarUrl })
+    }
+  }
+
   submit = () => {
     const { form, onSave, info } = this.props
     const { filename } = this.state
@@ -28,6 +35,8 @@ class AddOrEdit extends PureComponent {
         return
       }
 
+      values.filename = filename
+
       // 编辑
       if (info) {
         await http.put('users/' + info.id, values)
@@ -35,7 +44,6 @@ class AddOrEdit extends PureComponent {
       }
       // 新增
       else {
-        values.filename = filename
         await http.post('users', values)
         onSave()
       }
@@ -88,7 +96,11 @@ class AddOrEdit extends PureComponent {
   }
 
   checkUserOnBlur = (type) => {
-    const { form } = this.props
+    const { form, info } = this.props
+
+    // 编辑状态 不需检查
+    if (info) return
+
     form.validateFields([type], async (errors, values) => {
       if (errors) return
 
