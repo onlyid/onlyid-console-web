@@ -8,7 +8,7 @@
     position: fixed;
     width: 100%;
     background-color: white;
-    z-index: 1;
+    z-index: 2;
 }
 
 .box1bg {
@@ -52,6 +52,7 @@
 }
 
 .box2bg {
+    border-bottom: 1px solid #eee;
     box-shadow: 0 1px 4px #eee;
 }
 

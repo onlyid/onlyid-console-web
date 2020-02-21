@@ -32,6 +32,7 @@ class OrgManage extends PureComponent {
 
     const createNew = (
       <Button onClick={this.showAdd}
+              icon="plus"
               type="primary">
         新建顶级组织机构
       </Button>

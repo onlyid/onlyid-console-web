@@ -64,7 +64,7 @@ class User extends PureComponent {
     let right
     switch (menuCurrent) {
       case '1':
-        right = <Info/>
+        right = <Card title={MENU_DATA[menuCurrent].title}><Info/></Card>
         break
       case '2':
         right = <LinkOrg type="ORG"/>
@@ -80,7 +80,7 @@ class User extends PureComponent {
         break
       default:
         // 6
-        right = <UpdatePassword/>
+        right = <Card title={MENU_DATA[menuCurrent].title}><UpdatePassword/></Card>
     }
 
     return (
@@ -101,7 +101,7 @@ class User extends PureComponent {
           </Menu>
         </div>
         <div>
-          <Card title={MENU_DATA[menuCurrent].title}>{right}</Card>
+          {right}
         </div>
       </>
     )

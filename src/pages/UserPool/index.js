@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import styles from './index.module.css'
 import http from '../../http'
 import Table from '../../components/Table'
-import { Input, Button, Empty, Drawer } from 'antd'
+import { Input, Button, Empty, Drawer, Icon } from 'antd'
 import { connect } from 'react-redux'
 import User from './User'
 import { GENDER_TEXT } from '../../constants'
@@ -45,7 +45,7 @@ class UserPool extends PureComponent {
       title: '操作',
       dataIndex: 'id',
       render: value => <Button type="link"
-                               onClick={() => this.onAction(value)}>操作</Button>,
+                               onClick={() => this.onAction(value)}>操作<Icon type="arrow-right"/></Button>,
       mustShow: true,
     },
   ]
@@ -161,6 +161,7 @@ class UserPool extends PureComponent {
 
     const createNew = (
       <Button onClick={this.showAdd}
+              icon="plus"
               type="primary">
         新建用户
       </Button>
@@ -176,7 +177,7 @@ class UserPool extends PureComponent {
           onSearch={this.onSearch}
           placeholder="搜索昵称、手机号、邮箱"
           enterButton
-          className="tableSearch"
+          style={{ marginBottom: 20 }}
         />
         <Table
           rowKey="id"

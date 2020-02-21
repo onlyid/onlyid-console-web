@@ -30,7 +30,7 @@ body {
 }
 
 .ant-table {
-    border: 1px solid #eee;
+    border: 1px solid #e8e8e8;
     border-bottom: none;
 }
 
@@ -38,21 +38,9 @@ body {
 
 .ant-menu.ctrlMenu {
     width: 220px;
-    border: 1px solid #ddd;
+    border: 1px solid #e8e8e8;
     border-radius: 4px;
     min-height: 600px;
-}
-
-.tableSearch {
-    margin-bottom: 20px;
-}
-
-.tableSearch input {
-    height: 40px;
-}
-
-.tableSearch .ant-input-search-button {
-    height: 40px;
 }
 
 .emptyBox {
