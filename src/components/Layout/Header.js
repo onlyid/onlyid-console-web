@@ -66,17 +66,9 @@ class Header extends PureComponent {
                         </Menu>
                         <div className={styles.right}>
                             <Badge count={5}>
-                                <Icon
-                                    type="bell"
-                                    className={styles.notification}
-                                />
+                                <Icon type="bell" className={styles.notification} />
                             </Badge>
-                            <i
-                                className={classNames(
-                                    "material-icons",
-                                    styles.avatar
-                                )}
-                            >
+                            <i className={classNames("material-icons", styles.avatar)}>
                                 account_circle
                             </i>
                             <span className={styles.name}>ltb</span>
@@ -85,9 +77,7 @@ class Header extends PureComponent {
                 </div>
                 <div className={styles.box2bg}>
                     <div className={styles.box2}>
-                        <span style={{ fontSize: 18 }}>
-                            {MENU_DATA[menuCurrent]}
-                        </span>
+                        <span style={{ fontSize: 18 }}>{MENU_DATA[menuCurrent]}</span>
                         <div id="headerPortal" />
                     </div>
                 </div>

@@ -74,11 +74,7 @@ class OrgManage extends PureComponent {
                     width="600"
                     destroyOnClose
                 >
-                    <AddOrEdit
-                        type="TOP_ORG"
-                        onSave={this.closeAdd}
-                        onCancel={this.closeAdd}
-                    />
+                    <AddOrEdit type="TOP_ORG" onSave={this.closeAdd} onCancel={this.closeAdd} />
                 </Drawer>
                 {content}
             </div>

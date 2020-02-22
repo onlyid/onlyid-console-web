@@ -18,10 +18,7 @@ class Avatar extends PureComponent {
                 style={cursorPointer && { cursor: "pointer" }}
             />
         ) : (
-            <i
-                className={classNames("material-icons", styles.icon)}
-                style={iconStyle}
-            >
+            <i className={classNames("material-icons", styles.icon)} style={iconStyle}>
                 account_circle
             </i>
         );

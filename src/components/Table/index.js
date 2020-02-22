@@ -6,11 +6,9 @@ export default class extends PureComponent {
         const { pagination, columns, ...restProps } = this.props;
 
         if (pagination) {
-            if (pagination.showSizeChanger === undefined)
-                pagination.showSizeChanger = true;
+            if (pagination.showSizeChanger === undefined) pagination.showSizeChanger = true;
 
-            if (!pagination.showTotal)
-                pagination.showTotal = total => `共 ${total} 项`;
+            if (!pagination.showTotal) pagination.showTotal = total => `共 ${total} 项`;
         }
 
         columns.forEach(item => {
@@ -19,8 +17,6 @@ export default class extends PureComponent {
             if (!item.align) item.align = "center";
         });
 
-        return (
-            <Table pagination={pagination} columns={columns} {...restProps} />
-        );
+        return <Table pagination={pagination} columns={columns} {...restProps} />;
     }
 }

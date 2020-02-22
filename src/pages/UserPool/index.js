@@ -149,24 +149,14 @@ class UserPool extends PureComponent {
     };
 
     render() {
-        const {
-            list,
-            current,
-            pageSize,
-            total,
-            loading,
-            showEmpty,
-            drawerVisible
-        } = this.state;
+        const { list, current, pageSize, total, loading, showEmpty, drawerVisible } = this.state;
         const {
             userPool: { selectedKey }
         } = this.props;
 
         const pagination = { current, pageSize, total };
 
-        const columns = selectedKey
-            ? this.columns.filter(item => item.mustShow)
-            : this.columns;
+        const columns = selectedKey ? this.columns.filter(item => item.mustShow) : this.columns;
 
         const portalNode = window.document.getElementById("headerPortal");
 
@@ -195,9 +185,7 @@ class UserPool extends PureComponent {
                     pagination={selectedKey ? false : pagination}
                     loading={loading}
                     onChange={this.onChange}
-                    rowClassName={({ id }) =>
-                        id === selectedKey && styles.selectedRow
-                    }
+                    rowClassName={({ id }) => id === selectedKey && styles.selectedRow}
                 />
             </div>
         );
@@ -218,10 +206,7 @@ class UserPool extends PureComponent {
                     width="600"
                     destroyOnClose
                 >
-                    <AddOrEdit
-                        onSave={this.onUserAdd}
-                        onCancel={this.closeAdd}
-                    />
+                    <AddOrEdit onSave={this.onUserAdd} onCancel={this.closeAdd} />
                 </Drawer>
                 {left}
                 {selectedKey && <User />}

@@ -1,15 +1,5 @@
 import React, { PureComponent } from "react";
-import {
-    Button,
-    Descriptions,
-    Form,
-    Input,
-    message,
-    Modal,
-    Radio,
-    Tooltip,
-    Upload
-} from "antd";
+import { Button, Descriptions, Form, Input, message, Modal, Radio, Tooltip, Upload } from "antd";
 import http, { baseURL } from "../../http";
 import { GENDER_TEXT, IMG_UPLOAD_TIP, REG_EXP } from "../../constants";
 import _ from "lodash";
@@ -90,8 +80,7 @@ class AddOrEdit extends PureComponent {
 
     checkPassword = (rule, value, callback) => {
         const { form } = this.props;
-        if (form.isFieldTouched("password1"))
-            form.validateFields(["password1"]);
+        if (form.isFieldTouched("password1")) form.validateFields(["password1"]);
 
         callback();
     };
@@ -169,41 +158,30 @@ class AddOrEdit extends PureComponent {
                             initialValue: info && info.nickname,
                             rules: [
                                 { required: true, message: "请填写" },
-                                { max: 50, message: "不能超过50字" }
+                                { max: 50, message: "最多输入50字" }
                             ]
                         })(<Input />)}
                     </Item>
-                    <Item
-                        label="手机号"
-                        extra="手机号或邮箱至少填一项，作为登录账号"
-                    >
+                    <Item label="手机号" extra="手机号或邮箱至少填一项，作为登录账号">
                         {getFieldDecorator("mobile", {
                             initialValue: info && info.mobile,
                             rules: [
-                                { max: 50, message: "不能超过50字" },
+                                { max: 50, message: "最多输入50字" },
                                 {
                                     pattern: REG_EXP.mobile,
                                     message: "手机号格式不正确"
                                 }
                             ]
-                        })(
-                            <Input
-                                onBlur={() => this.checkUserOnBlur("mobile")}
-                            />
-                        )}
+                        })(<Input onBlur={() => this.checkUserOnBlur("mobile")} />)}
                     </Item>
                     <Item label="邮箱">
                         {getFieldDecorator("email", {
                             initialValue: info && info.email,
                             rules: [
-                                { max: 50, message: "不能超过50字" },
+                                { max: 50, message: "最多输入50字" },
                                 { type: "email", message: "邮箱格式不正确" }
                             ]
-                        })(
-                            <Input
-                                onBlur={() => this.checkUserOnBlur("email")}
-                            />
-                        )}
+                        })(<Input onBlur={() => this.checkUserOnBlur("email")} />)}
                     </Item>
                     {!info && (
                         <>
@@ -211,13 +189,16 @@ class AddOrEdit extends PureComponent {
                                 {getFieldDecorator("password", {
                                     rules: [
                                         { required: true, message: "请填写" },
-                                        { min: 6, message: "不能少于6个字符" },
-                                        { max: 50, message: "不能超过50字" },
+                                        {
+                                            min: 6,
+                                            message: "密码最少要输入6位"
+                                        },
+                                        { max: 50, message: "最多输入50字" },
                                         { validator: this.checkPassword }
                                     ]
                                 })(<Input.Password />)}
                             </Item>
-                            <Item label="重复输入密码">
+                            <Item label="重复密码">
                                 {getFieldDecorator("password1", {
                                     rules: [
                                         { required: true, message: "请填写" },
@@ -243,7 +224,7 @@ class AddOrEdit extends PureComponent {
                     <Item label="备注">
                         {getFieldDecorator("description", {
                             initialValue: info && info.description,
-                            rules: [{ max: 500, message: "不能超过500字" }]
+                            rules: [{ max: 500, message: "最多输入500字" }]
                         })(<TextArea />)}
                     </Item>
                     <Item>
@@ -270,9 +251,7 @@ class AddOrEdit extends PureComponent {
                         <Item label="手机号">{user2Add.mobile || "-"}</Item>
                         <Item label="邮箱">{user2Add.email || "-"}</Item>
                         <Item label="性别">
-                            {user2Add.gender
-                                ? GENDER_TEXT[user2Add.gender]
-                                : "-"}
+                            {user2Add.gender ? GENDER_TEXT[user2Add.gender] : "-"}
                         </Item>
                         <Item label="备注">{user2Add.description || "-"}</Item>
                     </Descriptions>

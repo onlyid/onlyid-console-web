@@ -31,8 +31,7 @@ class TreeLinkDialog extends PureComponent {
             let node = item;
             while (node.parentId !== -1) {
                 const parent = orgs.find(o => o.id === node.parentId);
-                if (newOrgs.findIndex(no => no.id === parent.id) < 0)
-                    newOrgs.push(parent);
+                if (newOrgs.findIndex(no => no.id === parent.id) < 0) newOrgs.push(parent);
 
                 node = parent;
             }
@@ -161,29 +160,15 @@ class TreeLinkDialog extends PureComponent {
     };
 
     render() {
-        const {
-            expandedKeys,
-            autoExpandParent,
-            orgNodes,
-            selectedKey
-        } = this.state;
+        const { expandedKeys, autoExpandParent, orgNodes, selectedKey } = this.state;
         const { visible, type } = this.props;
         const root = { id: -1 };
 
         return (
-            <Modal
-                visible={visible}
-                title="关联更多"
-                onOk={this.submit}
-                onCancel={this.cancel}
-            >
+            <Modal visible={visible} title="关联更多" onOk={this.submit} onCancel={this.cancel}>
                 {orgNodes.length ? (
                     <>
-                        <Search
-                            onSearch={this.onSearch}
-                            placeholder="搜索组织机构树"
-                            enterButton
-                        />
+                        <Search onSearch={this.onSearch} placeholder="搜索组织机构树" enterButton />
                         <Tree
                             showIcon
                             onExpand={this.onExpand}
@@ -197,9 +182,7 @@ class TreeLinkDialog extends PureComponent {
                         </Tree>
                     </>
                 ) : (
-                    <Empty
-                        description={`暂无${TYPE_LABEL[type]}，请到组织机构页新建`}
-                    />
+                    <Empty description={`暂无${TYPE_LABEL[type]}，请到组织机构页新建`} />
                 )}
             </Modal>
         );

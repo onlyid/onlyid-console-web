@@ -33,9 +33,12 @@ class User extends PureComponent {
     };
 
     componentDidUpdate({ userPool: { selectedKey } }) {
-        if (selectedKey !== this.props.userPool.selectedKey)
-            this.setState({ menuCurrent: "1" });
+        if (selectedKey !== this.props.userPool.selectedKey) this.setState({ menuCurrent: "1" });
     }
+
+    back2info = () => {
+        this.setState({ menuCurrent: "1" });
+    };
 
     onMenuClick = ({ key }) => {
         if (key === "delete") {
@@ -51,7 +54,7 @@ class User extends PureComponent {
     delete1 = () => {
         Modal.confirm({
             content:
-                "移除用户会将该用户从用户池移除，并删除该用户和组织机构、角色等对象的关联，但不会物理删除该用户，确定移除？",
+                "移除用户会将用户从用户池移除，并删除该用户和组织机构、角色等对象的关联，但不会物理删除该用户，确定移除？",
             okType: "danger",
             onOk: async () => {
                 const {
@@ -93,7 +96,7 @@ class User extends PureComponent {
                 // 6
                 right = (
                     <Card title={MENU_DATA[menuCurrent].title}>
-                        <UpdatePassword />
+                        <UpdatePassword onClose={this.back2info} />
                     </Card>
                 );
         }
@@ -107,10 +110,7 @@ class User extends PureComponent {
                         className="ctrlMenu"
                     >
                         {MENU_DATA.map((item, index) => (
-                            <Item
-                                key={item.key || String(index)}
-                                className={item.className}
-                            >
+                            <Item key={item.key || String(index)} className={item.className}>
                                 <Icon type={item.icon} />
                                 {item.title}
                             </Item>

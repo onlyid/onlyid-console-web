@@ -28,11 +28,7 @@ class LinkOrg extends PureComponent {
             dataIndex: "id",
             render: value => {
                 return (
-                    <Button
-                        onClick={() => this.delete1(value)}
-                        type="link"
-                        icon="delete"
-                    >
+                    <Button onClick={() => this.delete1(value)} type="link" icon="delete">
                         移除
                     </Button>
                 );
@@ -100,9 +96,7 @@ class LinkOrg extends PureComponent {
         return (
             <div className={styles.linkOrg}>
                 <div className={styles.titleBox}>
-                    <span className={styles.title}>
-                        关联{TYPE_LABEL[type]}列表
-                    </span>
+                    <span className={styles.title}>关联{TYPE_LABEL[type]}列表</span>
                     <Button
                         onClick={() => this.setState({ dialogVisible: true })}
                         type="primary"
@@ -124,11 +118,7 @@ class LinkOrg extends PureComponent {
                     loading={loading}
                     pagination={false}
                 />
-                <TreeLinkDialog
-                    visible={dialogVisible}
-                    type={type}
-                    onClose={this.closeDialog}
-                />
+                <TreeLinkDialog visible={dialogVisible} type={type} onClose={this.closeDialog} />
             </div>
         );
     }

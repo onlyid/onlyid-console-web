@@ -57,21 +57,14 @@ class AddOrEdit extends PureComponent {
             info
         } = this.props;
 
-        const children = orgNodes.filter(
-            item => item.parentId === node.id && item.type === "ORG"
-        );
+        const children = orgNodes.filter(item => item.parentId === node.id && item.type === "ORG");
 
         // 岗位和用户组节点 无需展示根节点
         if (info.type !== "ORG" && node.id === -1)
             return children.map(item => this.renderTree(item));
 
         return (
-            <TreeNode
-                title={node.name}
-                key={String(node.id)}
-                dataRef={node}
-                value={node.id}
-            >
+            <TreeNode title={node.name} key={String(node.id)} dataRef={node} value={node.id}>
                 {children.map(item => this.renderTree(item))}
             </TreeNode>
         );
@@ -91,14 +84,14 @@ class AddOrEdit extends PureComponent {
                         initialValue: info && info.name,
                         rules: [
                             { required: true, message: "请填写" },
-                            { max: 50, message: "不能超过50字" }
+                            { max: 50, message: "最多输入50字" }
                         ]
                     })(<Input />)}
                 </Item>
                 <Item label={`${typeLabel}描述`}>
                     {getFieldDecorator("description", {
                         initialValue: info && info.description,
-                        rules: [{ max: 500, message: "不能超过500字" }]
+                        rules: [{ max: 500, message: "最多输入500字" }]
                     })(<TextArea />)}
                 </Item>
                 {info && (
@@ -125,6 +118,4 @@ class AddOrEdit extends PureComponent {
     }
 }
 
-export default Form.create()(
-    connect(({ orgManage }) => ({ orgManage }))(AddOrEdit)
-);
+export default Form.create()(connect(({ orgManage }) => ({ orgManage }))(AddOrEdit));

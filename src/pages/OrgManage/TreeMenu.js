@@ -41,8 +41,7 @@ class TreeMenu extends PureComponent {
             let selectedKey = null;
             if (orgNodes.length) {
                 const topNodes = orgNodes.filter(item => item.parentId === -1);
-                const node =
-                    selectNode === "last" ? _.last(topNodes) : _.head(topNodes);
+                const node = selectNode === "last" ? _.last(topNodes) : _.head(topNodes);
                 selectedType = node.type;
                 selectedKey = String(node.id);
             }
@@ -53,16 +52,10 @@ class TreeMenu extends PureComponent {
         }
         // 规则：先下后上 都无则parent
         else if (selectNode === "neighbor") {
-            const parentId = prevOrgNodes.find(
-                item => String(item.id) === selectedKey
-            ).parentId;
-            const children = prevOrgNodes.filter(
-                item => item.parentId === parentId
-            );
+            const parentId = prevOrgNodes.find(item => String(item.id) === selectedKey).parentId;
+            const children = prevOrgNodes.filter(item => item.parentId === parentId);
             if (children.length > 1) {
-                const index = children.findIndex(
-                    item => String(item.id) === selectedKey
-                );
+                const index = children.findIndex(item => String(item.id) === selectedKey);
                 let newIndex;
 
                 if (index + 1 < children.length) newIndex = index + 1;
@@ -220,11 +213,7 @@ class TreeMenu extends PureComponent {
 
         return (
             <div className={styles.treeMenu}>
-                <Search
-                    onSearch={this.onSearch}
-                    placeholder="搜索组织机构树"
-                    enterButton
-                />
+                <Search onSearch={this.onSearch} placeholder="搜索组织机构树" enterButton />
                 <Tree
                     showIcon
                     className={styles.tree}

@@ -22,9 +22,7 @@ class Info extends PureComponent {
     }
 
     initData = async () => {
-        const info = await http.get(
-            "org-nodes/" + this.props.orgManage.selectedKey
-        );
+        const info = await http.get("org-nodes/" + this.props.orgManage.selectedKey);
         this.setState({ info });
     };
 
@@ -47,14 +45,7 @@ class Info extends PureComponent {
             orgManage: { selectedType }
         } = this.props;
 
-        if (isEdit)
-            return (
-                <AddOrEdit
-                    info={info}
-                    onSave={this.onSave}
-                    onCancel={this.onCancel}
-                />
-            );
+        if (isEdit) return <AddOrEdit info={info} onSave={this.onSave} onCancel={this.onCancel} />;
 
         const typeLabel = TYPE_LABEL[selectedType];
 
@@ -62,17 +53,10 @@ class Info extends PureComponent {
             <>
                 <Descriptions column={1} layout="vertical" colon={false}>
                     <Item label={`${typeLabel}名称`}>{info.name}</Item>
-                    <Item label={`${typeLabel}描述`}>
-                        {info.description || "-"}
-                    </Item>
-                    <Item label="上级组织机构">
-                        {info.parent && info.parent.name}
-                    </Item>
+                    <Item label={`${typeLabel}描述`}>{info.description || "-"}</Item>
+                    <Item label="上级组织机构">{info.parent && info.parent.name}</Item>
                 </Descriptions>
-                <Button
-                    onClick={this.showEdit}
-                    style={{ marginTop: 10, marginBottom: 24 }}
-                >
+                <Button onClick={this.showEdit} style={{ marginTop: 10, marginBottom: 24 }}>
                     编辑
                 </Button>
             </>

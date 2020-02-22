@@ -25,8 +25,7 @@ class Org extends PureComponent {
     };
 
     componentDidUpdate({ orgManage: { selectedKey } }) {
-        if (selectedKey !== this.props.orgManage.selectedKey)
-            this.setState({ menuCurrent: "0" });
+        if (selectedKey !== this.props.orgManage.selectedKey) this.setState({ menuCurrent: "0" });
     }
 
     onMenuClick = ({ key }) => {
@@ -68,21 +67,11 @@ class Org extends PureComponent {
                 right = <Info />;
                 break;
             case "1":
-                right = (
-                    <AddOrEdit
-                        type="ORG"
-                        onSave={this.back2info}
-                        onCancel={this.back2info}
-                    />
-                );
+                right = <AddOrEdit type="ORG" onSave={this.back2info} onCancel={this.back2info} />;
                 break;
             case "2":
                 right = (
-                    <AddOrEdit
-                        type="POSITION"
-                        onSave={this.back2info}
-                        onCancel={this.back2info}
-                    />
+                    <AddOrEdit type="POSITION" onSave={this.back2info} onCancel={this.back2info} />
                 );
                 break;
             case "3":

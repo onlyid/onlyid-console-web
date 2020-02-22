@@ -11,8 +11,8 @@ class Layout extends PureComponent {
                 <Header />
                 <div className={styles.content}>{children}</div>
                 <div className={styles.footer}>
-                    &copy; 2015-{new Date().getFullYear()} &nbsp;
-                    深圳市友全科技有限公司 &nbsp; All rights reserved.
+                    &copy; 2015-{new Date().getFullYear()} &nbsp; 深圳市友全科技有限公司 &nbsp; All
+                    rights reserved.
                 </div>
             </div>
         );

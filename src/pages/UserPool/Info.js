@@ -45,14 +45,7 @@ class Info extends PureComponent {
     render() {
         const { info, isEdit } = this.state;
 
-        if (isEdit)
-            return (
-                <AddOrEdit
-                    info={info}
-                    onSave={this.onSave}
-                    onCancel={this.onCancel}
-                />
-            );
+        if (isEdit) return <AddOrEdit info={info} onSave={this.onSave} onCancel={this.onCancel} />;
 
         return (
             <>
@@ -63,15 +56,10 @@ class Info extends PureComponent {
                     <Item label="昵称">{info.nickname}</Item>
                     <Item label="手机号">{info.mobile || "-"}</Item>
                     <Item label="邮箱">{info.email || "-"}</Item>
-                    <Item label="性别">
-                        {info.gender ? GENDER_TEXT[info.gender] : "-"}
-                    </Item>
+                    <Item label="性别">{info.gender ? GENDER_TEXT[info.gender] : "-"}</Item>
                     <Item label="备注">{info.description || "-"}</Item>
                 </Descriptions>
-                <Button
-                    onClick={this.showEdit}
-                    style={{ marginTop: 10, marginBottom: 24 }}
-                >
+                <Button onClick={this.showEdit} style={{ marginTop: 10, marginBottom: 24 }}>
                     编辑
                 </Button>
             </>
