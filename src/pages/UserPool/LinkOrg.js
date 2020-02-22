@@ -5,6 +5,7 @@ import { Button, Input, message, Modal } from "antd";
 import http from "../../http";
 import styles from "./index.module.css";
 import TreeLinkDialog from "./TreeLinkDialog";
+import { TYPE_LABEL } from "../../constants";
 
 const { Search } = Input;
 
@@ -55,9 +56,10 @@ class LinkOrg extends PureComponent {
 
         const { keyword } = this.state;
         const {
-            userPool: { selectedKey }
+            userPool: { selectedKey },
+            type
         } = this.props;
-        const params = { keyword, userId: selectedKey };
+        const params = { keyword, userId: selectedKey, type };
 
         const list = await http.get("org-nodes/by-user-link", { params });
         this.setState({ list, loading: false });
@@ -93,11 +95,14 @@ class LinkOrg extends PureComponent {
 
     render() {
         const { list, loading, dialogVisible } = this.state;
+        const { type } = this.props;
 
         return (
             <div className={styles.linkOrg}>
                 <div className={styles.titleBox}>
-                    <span className={styles.title}>关联组织机构列表</span>
+                    <span className={styles.title}>
+                        关联{TYPE_LABEL[type]}列表
+                    </span>
                     <Button
                         onClick={() => this.setState({ dialogVisible: true })}
                         type="primary"
@@ -108,7 +113,7 @@ class LinkOrg extends PureComponent {
                 </div>
                 <Search
                     onSearch={this.onSearch}
-                    placeholder="搜索组织机构名称"
+                    placeholder={`搜索${TYPE_LABEL[type]}名称`}
                     enterButton
                     style={{ marginBottom: 20 }}
                 />
@@ -121,7 +126,7 @@ class LinkOrg extends PureComponent {
                 />
                 <TreeLinkDialog
                     visible={dialogVisible}
-                    type="ORG"
+                    type={type}
                     onClose={this.closeDialog}
                 />
             </div>

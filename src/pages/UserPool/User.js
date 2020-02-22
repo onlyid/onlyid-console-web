@@ -78,16 +78,16 @@ class User extends PureComponent {
                 );
                 break;
             case "2":
-                right = <LinkOrg type="ORG" />;
+                right = <LinkOrg key="ORG" type="ORG" />;
                 break;
             case "3":
-                right = <LinkOrg type="POSITION" />;
+                right = <LinkOrg key="POSITION" type="POSITION" />;
                 break;
             case "4":
-                right = <LinkOrg type="USER_GROUP" />;
+                right = <LinkOrg key="USER_GROUP" type="USER_GROUP" />;
                 break;
             case "5":
-                right = <LinkOrg type="ROLE" />;
+                right = <LinkOrg key="ROLE" type="ROLE" />;
                 break;
             default:
                 // 6

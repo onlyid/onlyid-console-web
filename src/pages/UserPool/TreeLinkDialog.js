@@ -74,6 +74,7 @@ class TreeLinkDialog extends PureComponent {
 
         await http.post("org-nodes/link-user", { userId, orgNodeId });
 
+        this.setState({ selectedKey: null });
         onClose(true);
     };
 
