@@ -1,12 +1,18 @@
 import { combineReducers } from "redux";
 
-function userPool(state, action) {
-    if (!state) {
-        state = {
-            selectedKey: null
-        };
-    }
+const defaultUserPool = {
+    selectedKey: null
+};
 
+const defaultOrgManage = {
+    orgNodes: [],
+    showEmpty: false,
+    selectedKey: null,
+    selectedType: null,
+    showUser: false
+};
+
+function userPool(state = defaultUserPool, action) {
     const { type, payload } = action;
 
     switch (type) {
@@ -17,16 +23,7 @@ function userPool(state, action) {
     }
 }
 
-function orgManage(state, action) {
-    if (!state) {
-        state = {
-            orgNodes: [],
-            showEmpty: false,
-            selectedKey: null,
-            selectedType: null
-        };
-    }
-
+function orgManage(state = defaultOrgManage, action) {
     const { type, payload } = action;
 
     switch (type) {

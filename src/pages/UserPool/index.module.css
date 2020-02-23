@@ -27,7 +27,7 @@
     padding: 5px 16px;
 }
 
-.userPool .backMenuItem {
+.user .backMenuItem {
     margin-top: 0;
     border-bottom: 1px solid #eee;
 }
@@ -56,4 +56,12 @@
     width: 100%;
     overflow: auto;
     margin-top: 10px;
+}
+
+.user {
+    display: flex;
+}
+
+.right {
+    margin-left: 15px;
 }

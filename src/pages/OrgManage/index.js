@@ -8,11 +8,17 @@ import { connect } from "react-redux";
 import Org from "./Org";
 import Position from "./Position";
 import UserGroup from "./UserGroup";
+import User from "../UserPool/User";
 
 class OrgManage extends PureComponent {
     state = {
         drawerVisible: false
     };
+
+    componentWillUnmount() {
+        const { dispatch } = this.props;
+        dispatch({ type: "orgManage/save", payload: { showUser: false } });
+    }
 
     showAdd = () => {
         this.setState({ drawerVisible: true });
@@ -25,7 +31,7 @@ class OrgManage extends PureComponent {
     render() {
         const { drawerVisible } = this.state;
         const {
-            orgManage: { showEmpty, selectedType }
+            orgManage: { showEmpty, selectedType, showUser }
         } = this.props;
 
         const portalNode = window.document.getElementById("headerPortal");
@@ -58,7 +64,8 @@ class OrgManage extends PureComponent {
         ) : (
             <>
                 <TreeMenu />
-                {right}
+                {<div style={{ display: showUser ? "none" : "block" }}>{right}</div>}
+                {showUser && <User inOrg />}
             </>
         );
 

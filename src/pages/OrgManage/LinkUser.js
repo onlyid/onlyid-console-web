@@ -73,6 +73,14 @@ class LinkUser extends PureComponent {
         this.initData();
     }
 
+    componentDidUpdate(prevProps) {
+        const {
+            orgManage: { showUser }
+        } = this.props;
+
+        if (prevProps.orgManage.showUser && !showUser) this.initData();
+    }
+
     initData = async () => {
         this.setState({ loading: true });
 
@@ -107,8 +115,10 @@ class LinkUser extends PureComponent {
         });
     };
 
-    onAction = () => {
-        console.log("onAction");
+    onAction = userId => {
+        const { dispatch } = this.props;
+        dispatch({ type: "orgManage/save", payload: { showUser: true } });
+        dispatch({ type: "userPool/save", payload: { selectedKey: userId } });
     };
 
     onSearch = keyword => {

@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import http from "../../http";
 import Card from "../../components/Card";
 import { eventEmitter } from "../../utils";
+import styles from "./index.module.css";
 
 const { Item } = Menu;
 
@@ -105,7 +106,7 @@ class Org extends PureComponent {
         }
 
         return (
-            <>
+            <div className={styles.org}>
                 <div>
                     <Menu
                         onClick={this.onMenuClick}
@@ -120,8 +121,8 @@ class Org extends PureComponent {
                         ))}
                     </Menu>
                 </div>
-                <div>{right}</div>
-            </>
+                <div className={styles.right}>{right}</div>
+            </div>
         );
     }
 }

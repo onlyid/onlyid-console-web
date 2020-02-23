@@ -8,32 +8,49 @@ import http from "../../http";
 import Card from "../../components/Card";
 import styles from "./index.module.css";
 import { eventEmitter } from "../../utils";
+import { TYPE_LABEL } from "../../constants";
 
 const { Item } = Menu;
 
-const MENU_DATA = [
-    {
-        icon: "arrow-left",
-        title: "返回用户列表",
-        key: "back",
-        className: styles.backMenuItem
-    },
-    { icon: "info-circle", title: "用户详情" },
-    { icon: "link", title: "关联组织机构" },
-    { icon: "link", title: "关联岗位" },
-    { icon: "link", title: "关联用户组" },
-    { icon: "link", title: "关联角色" },
-    { icon: "lock", title: "修改密码" },
-    { icon: "delete", title: "移除", key: "delete" }
-];
-
 class User extends PureComponent {
     state = {
-        menuCurrent: "1"
+        menuCurrent: "1",
+        MENU_DATA: [
+            {
+                icon: "arrow-left",
+                title: "返回用户列表",
+                key: "back",
+                className: styles.backMenuItem
+            },
+            { icon: "info-circle", title: "用户详情" },
+            { icon: "link", title: "关联组织机构" },
+            { icon: "link", title: "关联岗位" },
+            { icon: "link", title: "关联用户组" },
+            { icon: "link", title: "关联角色" },
+            { icon: "lock", title: "修改密码" },
+            { icon: "delete", title: "移除", key: "delete" }
+        ]
     };
 
-    componentDidUpdate({ userPool: { selectedKey } }) {
-        if (selectedKey !== this.props.userPool.selectedKey) this.setState({ menuCurrent: "1" });
+    componentDidMount() {
+        const {
+            inOrg,
+            orgManage: { selectedType }
+        } = this.props;
+        const { MENU_DATA } = this.state;
+
+        if (inOrg) {
+            MENU_DATA[0].title = `返回 [${TYPE_LABEL[selectedType]}]`;
+            this.setState({ MENU_DATA: [...MENU_DATA] });
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        const {
+            userPool: { selectedKey }
+        } = this.props;
+
+        if (selectedKey !== prevProps.userPool.selectedKey) this.setState({ menuCurrent: "1" });
     }
 
     back2info = () => {
@@ -46,6 +63,7 @@ class User extends PureComponent {
         } else if (key === "back") {
             const { dispatch } = this.props;
             dispatch({ type: "userPool/save", payload: { selectedKey: null } });
+            dispatch({ type: "orgManage/save", payload: { showUser: false } });
         } else {
             this.setState({ menuCurrent: key });
         }
@@ -57,10 +75,12 @@ class User extends PureComponent {
             okType: "danger",
             onOk: async () => {
                 const {
+                    dispatch,
                     userPool: { selectedKey }
                 } = this.props;
                 await http.post("users/unlink-tenant", { userId: selectedKey });
 
+                dispatch({ type: "orgManage/save", payload: { showUser: false } });
                 message.success("移除成功");
                 eventEmitter.emit("userPool/refresh", true);
             }
@@ -68,7 +88,7 @@ class User extends PureComponent {
     };
 
     render() {
-        const { menuCurrent } = this.state;
+        const { menuCurrent, MENU_DATA } = this.state;
 
         let right;
         switch (menuCurrent) {
@@ -101,7 +121,7 @@ class User extends PureComponent {
         }
 
         return (
-            <>
+            <div className={styles.user}>
                 <div>
                     <Menu
                         onClick={this.onMenuClick}
@@ -116,8 +136,8 @@ class User extends PureComponent {
                         ))}
                     </Menu>
                 </div>
-                <div>{right}</div>
-            </>
+                <div className={styles.right}>{right}</div>
+            </div>
         );
     }
 }

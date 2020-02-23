@@ -68,6 +68,9 @@ class UserPool extends PureComponent {
     componentDidMount() {
         this.initData();
         eventEmitter.on("userPool/refresh", this.refresh);
+
+        const { dispatch } = this.props;
+        dispatch({ type: "userPool/save", payload: { selectedKey: null } });
     }
 
     componentWillUnmount() {
