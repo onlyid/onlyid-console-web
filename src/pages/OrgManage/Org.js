@@ -64,23 +64,39 @@ class Org extends PureComponent {
         let right;
         switch (menuCurrent) {
             case "0":
-                right = <Info />;
+                right = (
+                    <Card title={MENU_DATA[menuCurrent].title}>
+                        <Info />
+                    </Card>
+                );
                 break;
             case "1":
-                right = <AddOrEdit type="ORG" onSave={this.back2info} onCancel={this.back2info} />;
+                right = (
+                    <Card title={MENU_DATA[menuCurrent].title}>
+                        <AddOrEdit type="ORG" onSave={this.back2info} onCancel={this.back2info} />
+                    </Card>
+                );
                 break;
             case "2":
                 right = (
-                    <AddOrEdit type="POSITION" onSave={this.back2info} onCancel={this.back2info} />
+                    <Card title={MENU_DATA[menuCurrent].title}>
+                        <AddOrEdit
+                            type="POSITION"
+                            onSave={this.back2info}
+                            onCancel={this.back2info}
+                        />
+                    </Card>
                 );
                 break;
             case "3":
                 right = (
-                    <AddOrEdit
-                        type="USER_GROUP"
-                        onSave={this.back2info}
-                        onCancel={this.back2info}
-                    />
+                    <Card title={MENU_DATA[menuCurrent].title}>
+                        <AddOrEdit
+                            type="USER_GROUP"
+                            onSave={this.back2info}
+                            onCancel={this.back2info}
+                        />
+                    </Card>
                 );
                 break;
             default:
@@ -104,9 +120,7 @@ class Org extends PureComponent {
                         ))}
                     </Menu>
                 </div>
-                <div>
-                    <Card title={MENU_DATA[menuCurrent].title}>{right}</Card>
-                </div>
+                <div>{right}</div>
             </>
         );
     }

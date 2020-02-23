@@ -73,6 +73,7 @@ class TreeLinkDialog extends PureComponent {
 
         await http.post("org-nodes/link-user", { userId, orgNodeId });
 
+        message.success("保存成功");
         this.setState({ selectedKey: null });
         onClose(true);
     };

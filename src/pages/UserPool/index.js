@@ -3,7 +3,7 @@ import classNames from "classnames";
 import styles from "./index.module.css";
 import http from "../../http";
 import Table from "../../components/Table";
-import { Input, Button, Empty, Drawer, Icon } from "antd";
+import { Button, Drawer, Empty, Input } from "antd";
 import { connect } from "react-redux";
 import User from "./User";
 import { GENDER_TEXT } from "../../constants";
@@ -44,10 +44,12 @@ class UserPool extends PureComponent {
             title: "操作",
             dataIndex: "id",
             render: value => (
-                <Button type="link" onClick={() => this.onAction(value)}>
-                    操作
-                    <Icon type="arrow-right" />
-                </Button>
+                <Button
+                    onClick={() => this.onAction(value)}
+                    icon="arrow-right"
+                    shape="circle"
+                    type="primary"
+                />
             ),
             mustShow: true
         }
@@ -60,7 +62,6 @@ class UserPool extends PureComponent {
         total: 0,
         keyword: "",
         loading: true,
-        showEmpty: false,
         drawerVisible: false
     };
 
@@ -106,13 +107,9 @@ class UserPool extends PureComponent {
         const params = { current, pageSize, keyword };
 
         const { list, total } = await http.get("users", { params });
-        if (list.length) {
-            this.setState({ list, total, loading: false, showEmpty: false });
-        } else if (current > 1) {
-            this.setState({ current: current - 1 }, this.initData);
-        } else {
-            this.setState({ showEmpty: true });
-        }
+
+        if (list.length || current === 1) this.setState({ list, total, loading: false });
+        else this.setState({ current: current - 1 }, this.initData);
     };
 
     onAction = id => {
@@ -149,7 +146,7 @@ class UserPool extends PureComponent {
     };
 
     render() {
-        const { list, current, pageSize, total, loading, showEmpty, drawerVisible } = this.state;
+        const { list, current, pageSize, total, loading, drawerVisible } = this.state;
         const {
             userPool: { selectedKey }
         } = this.props;
@@ -166,29 +163,30 @@ class UserPool extends PureComponent {
             </Button>
         );
 
-        const left = showEmpty ? (
-            <div className="emptyBox">
-                <Empty description="暂无用户，请新建">{createNew}</Empty>
-            </div>
-        ) : (
-            <div className={styles.left}>
-                <Search
-                    onSearch={this.onSearch}
-                    placeholder="搜索昵称、手机号、邮箱"
-                    enterButton
-                    style={{ marginBottom: 20 }}
-                />
-                <Table
-                    rowKey="id"
-                    dataSource={list}
-                    columns={columns}
-                    pagination={selectedKey ? false : pagination}
-                    loading={loading}
-                    onChange={this.onChange}
-                    rowClassName={({ id }) => id === selectedKey && styles.selectedRow}
-                />
-            </div>
-        );
+        const left =
+            list.length || loading ? (
+                <div className={styles.left}>
+                    <Search
+                        onSearch={this.onSearch}
+                        placeholder="搜索昵称、手机号、邮箱"
+                        enterButton
+                        style={{ marginBottom: 20 }}
+                    />
+                    <Table
+                        rowKey="id"
+                        dataSource={list}
+                        columns={columns}
+                        pagination={selectedKey ? false : pagination}
+                        loading={loading}
+                        onChange={this.onChange}
+                        rowClassName={({ id }) => id === selectedKey && styles.selectedRow}
+                    />
+                </div>
+            ) : (
+                <div className="emptyBox">
+                    <Empty description="暂无用户，请新建">{createNew}</Empty>
+                </div>
+            );
 
         return (
             <div

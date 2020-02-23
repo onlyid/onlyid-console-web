@@ -17,7 +17,8 @@ class LinkOrg extends PureComponent {
         },
         {
             title: "描述",
-            dataIndex: "description"
+            dataIndex: "description",
+            ellipsis: true
         },
         {
             title: "上级组织机构",
@@ -28,9 +29,13 @@ class LinkOrg extends PureComponent {
             dataIndex: "id",
             render: value => {
                 return (
-                    <Button onClick={() => this.delete1(value)} type="link" icon="delete">
-                        移除
-                    </Button>
+                    <Button
+                        onClick={() => this.delete1(value)}
+                        icon="delete"
+                        shape="circle"
+                        type="danger"
+                        className="buttonPlain"
+                    />
                 );
             }
         }

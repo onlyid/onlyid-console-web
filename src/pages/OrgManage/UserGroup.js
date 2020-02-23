@@ -62,7 +62,11 @@ class UserGroup extends PureComponent {
         let right;
         switch (menuCurrent) {
             case "0":
-                right = <Info />;
+                right = (
+                    <Card title={MENU_DATA[menuCurrent].title}>
+                        <Info />
+                    </Card>
+                );
                 break;
             default:
                 // 1
@@ -86,9 +90,7 @@ class UserGroup extends PureComponent {
                         ))}
                     </Menu>
                 </div>
-                <div>
-                    <Card title={MENU_DATA[menuCurrent].title}>{right}</Card>
-                </div>
+                <div>{right}</div>
             </>
         );
     }

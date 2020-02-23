@@ -53,8 +53,7 @@ class User extends PureComponent {
 
     delete1 = () => {
         Modal.confirm({
-            content:
-                "移除用户会将用户从用户池移除，并删除该用户和组织机构、角色等对象的关联，但不会物理删除该用户，确定移除？",
+            content: "将用户从用户池移除（但不会物理删除该用户），确定移除？",
             okType: "danger",
             onOk: async () => {
                 const {
