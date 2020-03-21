@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import { Button, Descriptions, Form, Input, message, Modal, Radio, Tooltip, Upload } from "antd";
-import http, { baseURL } from "../../http";
-import { GENDER_TEXT, IMG_UPLOAD_TIP, REG_EXP } from "../../constants";
+import http, { baseURL } from "my/http";
+import { GENDER_TEXT, IMG_UPLOAD_TIP, REG_EXP } from "my/constants";
 import _ from "lodash";
-import Avatar from "../../components/Avatar";
+import Avatar from "components/Avatar";
 
 const { Item } = Form;
 const { TextArea } = Input;

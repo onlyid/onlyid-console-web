@@ -11,7 +11,9 @@ const { Item } = Menu;
 const MENU_DATA = {
     userPool: "用户池",
     orgManage: "组织机构",
-    appRes: "应用权限",
+    appManage: "应用管理",
+    ResMange: "权限管理",
+    RoleManage: "角色管理",
     statistics: "统计数据",
     auditLog: "审计日志",
     admin: "系统管理"

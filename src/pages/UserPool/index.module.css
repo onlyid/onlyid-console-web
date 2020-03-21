@@ -27,6 +27,10 @@
     padding: 5px 16px;
 }
 
+:global .ant-table-pagination.ant-pagination {
+    margin-bottom: 0;
+}
+
 .user .backMenuItem {
     margin-top: 0;
     border-bottom: 1px solid #eee;

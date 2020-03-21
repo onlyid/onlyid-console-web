@@ -1,11 +1,11 @@
 import React, { PureComponent } from "react";
 import { Descriptions, Button } from "antd";
-import http from "../../http";
+import http from "my/http";
 import AddOrEdit from "./AddOrEdit";
 import { connect } from "react-redux";
-import { GENDER_TEXT } from "../../constants";
-import Avatar from "../../components/Avatar";
-import { eventEmitter } from "../../utils";
+import { GENDER_TEXT } from "my/constants";
+import Avatar from "components/Avatar";
+import { eventEmitter } from "my/utils";
 
 const { Item } = Descriptions;
 

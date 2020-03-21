@@ -1,16 +1,16 @@
 import React, { PureComponent } from "react";
 import classNames from "classnames";
 import styles from "./index.module.css";
-import http from "../../http";
-import Table from "../../components/Table";
+import http from "my/http";
+import Table from "components/Table";
 import { Button, Drawer, Empty, Input } from "antd";
 import { connect } from "react-redux";
 import User from "./User";
-import { GENDER_TEXT } from "../../constants";
+import { GENDER_TEXT } from "my/constants";
 import ReactDOM from "react-dom";
 import AddOrEdit from "./AddOrEdit";
-import Avatar from "../../components/Avatar";
-import { eventEmitter } from "../../utils";
+import Avatar from "components/Avatar";
+import { eventEmitter } from "my/utils";
 
 const { Search } = Input;
 

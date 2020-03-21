@@ -1,12 +1,11 @@
 import React, { PureComponent } from "react";
-import { Menu, Icon, Modal, message } from "antd";
+import { Icon, Menu, message, Modal } from "antd";
 import Info from "./Info";
 import LinkUser from "./LinkUser";
 import { connect } from "react-redux";
-import http from "../../http";
-import Card from "../../components/Card";
-import { eventEmitter } from "../../utils";
-import styles from "./index.module.css";
+import http from "my/http";
+import Card from "components/Card";
+import { eventEmitter } from "my/utils";
 
 const { Item } = Menu;
 
@@ -58,6 +57,11 @@ class UserGroup extends PureComponent {
     };
 
     render() {
+        const {
+            orgManage: { showUser }
+        } = this.props;
+        if (showUser) return null;
+
         const { menuCurrent } = this.state;
 
         let right;
@@ -75,13 +79,12 @@ class UserGroup extends PureComponent {
         }
 
         return (
-            <div className={styles.org}>
+            <>
                 <div>
                     <Menu
                         onClick={this.onMenuClick}
                         selectedKeys={[menuCurrent]}
                         className="ctrlMenu"
-                        mode="inline"
                     >
                         {MENU_DATA.map((item, index) => (
                             <Item key={item.key || String(index)}>
@@ -91,8 +94,8 @@ class UserGroup extends PureComponent {
                         ))}
                     </Menu>
                 </div>
-                <div className={styles.right}>{right}</div>
-            </div>
+                <div>{right}</div>
+            </>
         );
     }
 }

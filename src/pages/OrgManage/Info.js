@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import { Descriptions, Button } from "antd";
-import http from "../../http";
+import http from "my/http";
 import AddOrEdit from "./AddOrEdit";
 import { connect } from "react-redux";
-import { TYPE_LABEL } from "../../constants";
+import { TYPE_LABEL } from "my/constants";
 
 const { Item } = Descriptions;
 

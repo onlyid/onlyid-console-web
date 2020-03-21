@@ -12,6 +12,10 @@ const defaultOrgManage = {
     showUser: false
 };
 
+const defaultAppManage = {
+    selectedKey: null
+};
+
 function userPool(state = defaultUserPool, action) {
     const { type, payload } = action;
 
@@ -34,4 +38,15 @@ function orgManage(state = defaultOrgManage, action) {
     }
 }
 
-export default combineReducers({ userPool, orgManage });
+function appManage(state = defaultUserPool, action) {
+    const { type, payload } = action;
+
+    switch (type) {
+        case "userPool/save":
+            return { ...state, ...payload };
+        default:
+            return state;
+    }
+}
+
+export default combineReducers({ userPool, orgManage, appManage });

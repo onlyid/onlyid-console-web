@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import { Empty, Input, message, Modal, Tree } from "antd";
-import http from "../../http";
+import http from "my/http";
 import styles from "./index.module.css";
-import { TYPE_LABEL } from "../../constants";
+import { TYPE_LABEL } from "my/constants";
 import { connect } from "react-redux";
 
 const { Search } = Input;
@@ -30,6 +30,7 @@ class TreeLinkDialog extends PureComponent {
         for (const item of list) {
             let node = item;
             while (node.parentId !== -1) {
+                // eslint-disable-next-line no-loop-func
                 const parent = orgs.find(o => o.id === node.parentId);
                 if (newOrgs.findIndex(no => no.id === parent.id) < 0) newOrgs.push(parent);
 

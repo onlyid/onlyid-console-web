@@ -47,11 +47,3 @@
     height: 32px;
     line-height: 32px;
 }
-
-.org {
-    display: flex;
-}
-
-.right {
-    margin-left: 15px;
-}

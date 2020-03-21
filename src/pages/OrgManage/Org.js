@@ -1,13 +1,12 @@
 import React, { PureComponent } from "react";
-import { Menu, Icon, Modal, message } from "antd";
+import { Icon, Menu, message, Modal } from "antd";
 import Info from "./Info";
 import AddOrEdit from "./AddOrEdit";
 import LinkUser from "./LinkUser";
 import { connect } from "react-redux";
-import http from "../../http";
-import Card from "../../components/Card";
-import { eventEmitter } from "../../utils";
-import styles from "./index.module.css";
+import http from "my/http";
+import Card from "components/Card";
+import { eventEmitter } from "my/utils";
 
 const { Item } = Menu;
 
@@ -60,6 +59,11 @@ class Org extends PureComponent {
     };
 
     render() {
+        const {
+            orgManage: { showUser }
+        } = this.props;
+        if (showUser) return null;
+
         const { menuCurrent } = this.state;
 
         let right;
@@ -106,7 +110,7 @@ class Org extends PureComponent {
         }
 
         return (
-            <div className={styles.org}>
+            <>
                 <div>
                     <Menu
                         onClick={this.onMenuClick}
@@ -121,8 +125,8 @@ class Org extends PureComponent {
                         ))}
                     </Menu>
                 </div>
-                <div className={styles.right}>{right}</div>
-            </div>
+                <div>{right}</div>
+            </>
         );
     }
 }

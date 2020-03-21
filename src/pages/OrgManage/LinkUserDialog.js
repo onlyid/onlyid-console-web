@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Button, Empty, Input, message, Modal } from "antd";
-import http from "../../http";
-import Avatar from "../../components/Avatar";
-import Table from "../../components/Table";
+import http from "my/http";
+import Avatar from "components/Avatar";
+import Table from "components/Table";
 
 const { Search } = Input;
 

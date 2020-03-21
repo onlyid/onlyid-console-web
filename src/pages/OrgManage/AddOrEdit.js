@@ -2,10 +2,10 @@
 
 import React, { PureComponent } from "react";
 import { Form, Input, Button, message, TreeSelect } from "antd";
-import http from "../../http";
-import { TYPE_LABEL } from "../../constants";
+import http from "my/http";
+import { TYPE_LABEL } from "my/constants";
 import { connect } from "react-redux";
-import { eventEmitter } from "../../utils";
+import { eventEmitter } from "my/utils";
 
 const { Item } = Form;
 const { TextArea } = Input;

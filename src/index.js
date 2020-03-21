@@ -5,7 +5,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import reducers from "./reducers";
+import reducers from "my/reducers";
 import zhCN from "antd/es/locale/zh_CN";
 import { ConfigProvider } from "antd";
 

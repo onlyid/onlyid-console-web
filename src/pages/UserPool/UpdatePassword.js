@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { Form, Input, Button, message } from "antd";
 import { connect } from "react-redux";
-import http from "../../http";
+import http from "my/http";
 
 const { Password } = Input;
 

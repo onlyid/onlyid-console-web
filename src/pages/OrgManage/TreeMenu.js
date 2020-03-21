@@ -3,8 +3,8 @@ import { Input, Tree } from "antd";
 import styles from "./index.module.css";
 import { connect } from "react-redux";
 import _ from "lodash";
-import http from "../../http";
-import { eventEmitter } from "../../utils";
+import http from "my/http";
+import { eventEmitter } from "my/utils";
 
 const { Search } = Input;
 const { TreeNode } = Tree;

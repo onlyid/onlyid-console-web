@@ -4,11 +4,11 @@ import Info from "./Info";
 import UpdatePassword from "./UpdatePassword";
 import LinkOrg from "./LinkOrg";
 import { connect } from "react-redux";
-import http from "../../http";
-import Card from "../../components/Card";
+import http from "my/http";
+import Card from "components/Card";
 import styles from "./index.module.css";
-import { eventEmitter } from "../../utils";
-import { TYPE_LABEL } from "../../constants";
+import { eventEmitter } from "my/utils";
+import { TYPE_LABEL } from "my/constants";
 
 const { Item } = Menu;
 
@@ -18,7 +18,7 @@ class User extends PureComponent {
         MENU_DATA: [
             {
                 icon: "arrow-left",
-                title: "返回用户列表",
+                title: "返回用户池",
                 key: "back",
                 className: styles.backMenuItem
             },

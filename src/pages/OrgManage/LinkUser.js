@@ -1,11 +1,11 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import Table from "../../components/Table";
+import Table from "components/Table";
 import { Button, Input, message, Modal } from "antd";
-import http from "../../http";
+import http from "my/http";
 import styles from "./index.module.css";
 import LinkUserDialog from "./LinkUserDialog";
-import Avatar from "../../components/Avatar";
+import Avatar from "components/Avatar";
 
 const { Search } = Input;
 
