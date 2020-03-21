@@ -142,4 +142,4 @@ class User extends PureComponent {
     }
 }
 
-export default connect(({ userPool }) => ({ userPool }))(User);
+export default connect(({ userPool, orgManage }) => ({ userPool, orgManage }))(User);

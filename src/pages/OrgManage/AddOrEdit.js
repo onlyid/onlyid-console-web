@@ -53,11 +53,15 @@ class AddOrEdit extends PureComponent {
 
     renderTree = node => {
         const {
-            orgManage: { orgNodes },
+            orgManage: { orgNodes, selectedKey },
             info
         } = this.props;
 
-        const children = orgNodes.filter(item => item.parentId === node.id && item.type === "ORG");
+        let children = orgNodes.filter(item => item.parentId === node.id && item.type === "ORG");
+
+        // 如果当前是编辑组织机构 不展示自身
+        if (info.type === "ORG")
+            children = children.filter(item => String(item.id) !== selectedKey);
 
         // 岗位和用户组节点 无需展示根节点
         if (info.type !== "ORG" && node.id === -1)

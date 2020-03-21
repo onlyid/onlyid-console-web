@@ -106,8 +106,8 @@ class AddOrEdit extends PureComponent {
 
             if (!values[type]) return;
 
-            const user = await http.get("users/by-mobile-or-email/", {
-                params: { mobileOrEmail: values[type] }
+            const user = await http.get("users/by-mobile-or-email", {
+                params: { [type]: values[type] }
             });
             if (user) this.setState({ dialogVisible: true, user2Add: user });
         });

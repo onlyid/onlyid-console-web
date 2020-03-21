@@ -149,7 +149,7 @@ class UserPool extends PureComponent {
     };
 
     render() {
-        const { list, current, pageSize, total, loading, drawerVisible } = this.state;
+        const { list, current, pageSize, total, loading, drawerVisible, keyword } = this.state;
         const {
             userPool: { selectedKey }
         } = this.props;
@@ -167,7 +167,7 @@ class UserPool extends PureComponent {
         );
 
         const left =
-            list.length || loading ? (
+            list.length || loading || keyword ? (
                 <div className={styles.left}>
                     <Search
                         onSearch={this.onSearch}
