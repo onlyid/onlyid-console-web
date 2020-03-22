@@ -1,0 +1,17 @@
+.appManage {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+.uploadIcon {
+    font-size: 60px;
+    color: #bbb;
+    cursor: pointer;
+}
+
+.uploadImg {
+    border-radius: 4px;
+    cursor: pointer;
+    width: 60px;
+}

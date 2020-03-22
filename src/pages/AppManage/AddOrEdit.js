@@ -1,0 +1,154 @@
+import React, { PureComponent } from "react";
+import { Form, Input, Button, message, Radio, Upload, Tooltip } from "antd";
+import http, { baseURL } from "my/http";
+import { CLIENT_TYPE_TEXT, IMG_UPLOAD_TIP } from "my/constants";
+import { connect } from "react-redux";
+import { eventEmitter } from "my/utils";
+import _ from "lodash";
+import classNames from "classnames";
+import styles from "./index.module.css";
+
+const { Item } = Form;
+const { TextArea } = Input;
+
+class AddOrEdit extends PureComponent {
+    state = {
+        iconUrl: null,
+        filename: null
+    };
+
+    submit = () => {
+        const { form, onSave, info } = this.props;
+        const { filename } = this.state;
+
+        form.validateFields(async (err, values) => {
+            if (err) return;
+
+            let selectLast;
+            // 编辑
+            if (info) {
+                await http.put("clients/" + info.id, values);
+            }
+            // 新增
+            else {
+                if (!filename) {
+                    message.error("请上传应用 icon");
+                    return;
+                }
+
+                values.filename = filename;
+
+                await http.post("clients", values);
+                selectLast = true;
+            }
+
+            message.success("保存成功");
+            onSave();
+            eventEmitter.emit("appManage/init", { selectLast });
+        });
+    };
+
+    beforeUpload = file => {
+        if (file.type !== "image/jpeg" && file.type !== "image/png") {
+            message.error("只能是PNG、JPG或JPEG格式");
+            return false;
+        }
+
+        if (file.size > 350000) {
+            message.error("不能大于 350 KB");
+            return false;
+        }
+
+        return true;
+    };
+
+    onUploadChange = ({ file }) => {
+        if (file.status === "error") {
+            const msg = _.get(file, "response.error", "上传失败，请重试");
+            message.error(msg);
+        } else if (file.status === "done") {
+            this.setState({
+                iconUrl: URL.createObjectURL(file.originFileObj),
+                filename: file.response.filename
+            });
+        }
+    };
+
+    render() {
+        const { onCancel, form, info } = this.props;
+        const { getFieldDecorator } = form;
+        const { iconUrl } = this.state;
+
+        const icon = iconUrl ? (
+            <img src={iconUrl} alt="icon" className={styles.uploadImg} />
+        ) : (
+            <i className={classNames("material-icons", styles.uploadIcon)}>blur_on</i>
+        );
+
+        return (
+            <Form layout="vertical">
+                <Item>
+                    <Upload
+                        accept="image/jpeg,image/png"
+                        name="file"
+                        showUploadList={false}
+                        action={baseURL + "/img"}
+                        beforeUpload={this.beforeUpload}
+                        onChange={this.onUploadChange}
+                    >
+                        <Tooltip title={IMG_UPLOAD_TIP}>
+                            <div
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center"
+                                }}
+                            >
+                                {icon}
+                                <Button type="link">上传 icon</Button>
+                            </div>
+                        </Tooltip>
+                    </Upload>
+                </Item>
+                <Item label="应用名称">
+                    {getFieldDecorator("name", {
+                        initialValue: info && info.name,
+                        rules: [
+                            { required: true, message: "请填写" },
+                            { max: 50, message: "最多输入50字" }
+                        ]
+                    })(<Input />)}
+                </Item>
+                <Item label="应用类型">
+                    {getFieldDecorator("type", {
+                        initialValue: info && info.type,
+                        rules: [{ required: true, message: "请选择" }]
+                    })(
+                        <Radio.Group>
+                            {Object.keys(CLIENT_TYPE_TEXT).map(key => (
+                                <Radio value={key} key={key}>
+                                    {CLIENT_TYPE_TEXT[key]}
+                                </Radio>
+                            ))}
+                        </Radio.Group>
+                    )}
+                </Item>
+                <Item label="应用描述">
+                    {getFieldDecorator("description", {
+                        initialValue: info && info.description,
+                        rules: [{ max: 500, message: "最多输入500字" }]
+                    })(<TextArea />)}
+                </Item>
+                <Item>
+                    <Button type="primary" onClick={this.submit}>
+                        保存
+                    </Button>
+                    <Button onClick={onCancel} style={{ marginLeft: 20 }}>
+                        取消
+                    </Button>
+                </Item>
+            </Form>
+        );
+    }
+}
+
+export default Form.create()(connect(({ appManage }) => ({ appManage }))(AddOrEdit));

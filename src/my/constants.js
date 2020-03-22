@@ -16,3 +16,9 @@ export const IMG_UPLOAD_TIP = "256x256像素，支持JPG/PNG格式，大小不�
 export const REG_EXP = {
     mobile: /^1\d{10}$/
 };
+
+export const CLIENT_TYPE_TEXT = {
+    WEB: "网站",
+    APP: "APP",
+    OTHER: "其他"
+};

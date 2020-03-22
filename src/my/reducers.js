@@ -38,11 +38,11 @@ function orgManage(state = defaultOrgManage, action) {
     }
 }
 
-function appManage(state = defaultUserPool, action) {
+function appManage(state = defaultAppManage, action) {
     const { type, payload } = action;
 
     switch (type) {
-        case "userPool/save":
+        case "appManage/save":
             return { ...state, ...payload };
         default:
             return state;
