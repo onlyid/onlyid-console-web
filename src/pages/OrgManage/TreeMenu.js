@@ -116,7 +116,7 @@ class TreeMenu extends PureComponent {
         if (keyword) {
             const expandedKeys = orgNodes
                 .filter(({ name }) => name.includes(keyword))
-                .map(item => String(item.id));
+                .map(item => String(item.parentId));
 
             this.setState({ keyword, expandedKeys, autoExpandParent: true });
         } else {

@@ -7,7 +7,7 @@ import AppManage from "pages/AppManage";
 
 function App() {
     return (
-        <Router>
+        <Router basename="/console">
             <Layout>
                 <Switch>
                     <Route path="/user-pool">
