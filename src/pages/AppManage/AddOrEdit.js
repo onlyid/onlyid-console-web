@@ -32,7 +32,7 @@ class AddOrEdit extends PureComponent {
             // 新增
             else {
                 if (!filename) {
-                    message.error("请上传应用 icon");
+                    message.error("请上传应用icon");
                     return;
                 }
 
@@ -44,7 +44,7 @@ class AddOrEdit extends PureComponent {
 
             message.success("保存成功");
             onSave();
-            eventEmitter.emit("appManage/init", { selectLast });
+            eventEmitter.emit("appManage/initAppMenu", { selectLast });
         });
     };
 
@@ -87,7 +87,7 @@ class AddOrEdit extends PureComponent {
 
         return (
             <Form layout="vertical">
-                <Item>
+                <Item label="应用icon" required>
                     <Upload
                         accept="image/jpeg,image/png"
                         name="file"
@@ -104,7 +104,7 @@ class AddOrEdit extends PureComponent {
                                 }}
                             >
                                 {icon}
-                                <Button type="link">上传 icon</Button>
+                                <Button type="link">上传</Button>
                             </div>
                         </Tooltip>
                     </Upload>
