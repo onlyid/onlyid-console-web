@@ -61,6 +61,7 @@ class Header extends PureComponent {
                             selectedKeys={[menuCurrent]}
                             mode="horizontal"
                             className={styles.menu}
+                            theme="dark"
                         >
                             {Object.keys(MENU_DATA).map(key => (
                                 <Item key={key}>{MENU_DATA[key]}</Item>
