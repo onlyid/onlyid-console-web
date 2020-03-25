@@ -58,3 +58,8 @@
 .appItem span {
     vertical-align: middle;
 }
+
+.infoIcon {
+    border-radius: 4px;
+    width: 80px;
+}

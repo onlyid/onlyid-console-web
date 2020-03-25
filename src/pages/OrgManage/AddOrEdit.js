@@ -18,7 +18,8 @@ class AddOrEdit extends PureComponent {
             onSave,
             info,
             type,
-            orgManage: { selectedKey }
+            orgManage: { selectedKey },
+            dispatch
         } = this.props;
 
         form.validateFields(async (err, values) => {
@@ -43,6 +44,7 @@ class AddOrEdit extends PureComponent {
                     expand = "self";
                 }
                 await http.post("org-nodes", values);
+                dispatch({ type: "orgManage/save", payload: { showEmpty: false } });
             }
 
             message.success("保存成功");

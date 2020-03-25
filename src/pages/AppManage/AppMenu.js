@@ -12,23 +12,26 @@ const { Search } = Input;
 class AppMenu extends PureComponent {
     state = {
         list: [],
-        searchList: [],
         keyword: ""
     };
 
     componentDidMount() {
         this.initData();
         eventEmitter.on("appManage/initAppMenu", this.initData);
+        eventEmitter.on("appManage/deleteSelected", this.deleteSelected);
     }
 
     componentWillUnmount() {
         eventEmitter.off("appManage/initAppMenu", this.initData);
+        eventEmitter.off("appManage/deleteSelected", this.deleteSelected);
     }
 
     initData = async selectLast => {
         const { onShowEmptyChange, dispatch } = this.props;
+        const { keyword } = this.state;
 
-        const list = await http.get("clients");
+        const params = { keyword };
+        const list = await http.get("clients", { params });
         this.setState({ list });
 
         if (list.length) {
@@ -39,43 +42,51 @@ class AppMenu extends PureComponent {
         onShowEmptyChange(!list.length);
     };
 
+    deleteSelected = () => {
+        const {
+            appManage: { selectedKey },
+            onShowEmptyChange,
+            dispatch
+        } = this.props;
+        const { list } = this.state;
+
+        if (list.length === 1) {
+            onShowEmptyChange(true);
+            return;
+        }
+
+        const index = list.findIndex(item => item.id === selectedKey);
+        let newIndex;
+
+        if (index === list.length - 1) newIndex = index - 1;
+        else newIndex = index; // 删掉后 新的会移到原来的位置
+
+        list.splice(index, 1);
+        this.setState({ list: [...list] });
+
+        dispatch({ type: "appManage/save", payload: { selectedKey: list[newIndex].id } });
+    };
+
     onItemClick = id => {
         const { dispatch } = this.props;
         dispatch({ type: "appManage/save", payload: { selectedKey: id } });
     };
 
     onSearch = keyword => {
-        const { list } = this.state;
-        const { dispatch } = this.props;
-
-        if (keyword) {
-            const searchList = list.filter(item => item.name.includes(keyword));
-            this.setState({ keyword, searchList });
-
-            if (searchList.length) {
-                dispatch({
-                    type: "appManage/save",
-                    payload: { selectedKey: searchList[0].id }
-                });
-            }
-        } else {
-            this.setState({ keyword: "" });
-        }
+        this.setState({ keyword }, this.initData);
     };
 
     render() {
-        const { list, searchList, keyword } = this.state;
+        const { list } = this.state;
         const {
             appManage: { selectedKey }
         } = this.props;
-
-        const displayList = keyword ? searchList : list;
 
         return (
             <div className={styles.appMenu}>
                 <Search onSearch={this.onSearch} placeholder="搜索应用名称" enterButton />
                 <div className={styles.appMenuBox}>
-                    {displayList.map(item => (
+                    {list.map(item => (
                         <div
                             className={classNames(styles.appItem, {
                                 [styles.active]: selectedKey === item.id
