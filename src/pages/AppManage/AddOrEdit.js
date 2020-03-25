@@ -17,6 +17,14 @@ class AddOrEdit extends PureComponent {
         filename: null
     };
 
+    componentDidMount() {
+        const { info } = this.props;
+
+        if (info) {
+            this.setState({ iconUrl: info.iconUrl });
+        }
+    }
+
     submit = () => {
         const { form, onSave, info } = this.props;
         const { filename } = this.state;
@@ -24,10 +32,13 @@ class AddOrEdit extends PureComponent {
         form.validateFields(async (err, values) => {
             if (err) return;
 
-            let selectLast;
+            values.filename = filename;
+
+            let select;
             // 编辑
             if (info) {
                 await http.put("clients/" + info.id, values);
+                select = "no";
             }
             // 新增
             else {
@@ -36,15 +47,13 @@ class AddOrEdit extends PureComponent {
                     return;
                 }
 
-                values.filename = filename;
-
                 await http.post("clients", values);
-                selectLast = true;
+                select = "last";
             }
 
             message.success("保存成功");
             onSave();
-            eventEmitter.emit("appManage/initAppMenu", { selectLast });
+            eventEmitter.emit("appManage/initAppMenu", select);
         });
     };
 

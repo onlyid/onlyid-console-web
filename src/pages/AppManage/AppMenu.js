@@ -26,7 +26,7 @@ class AppMenu extends PureComponent {
         eventEmitter.off("appManage/deleteSelected", this.deleteSelected);
     }
 
-    initData = async selectLast => {
+    initData = async (select = "first") => {
         const { onShowEmptyChange, dispatch } = this.props;
         const { keyword } = this.state;
 
@@ -34,8 +34,8 @@ class AppMenu extends PureComponent {
         const list = await http.get("clients", { params });
         this.setState({ list });
 
-        if (list.length) {
-            const selectedKey = selectLast ? _.last(list).id : list[0].id;
+        if (list.length && select !== "no") {
+            const selectedKey = select === "last" ? _.last(list).id : list[0].id;
             dispatch({ type: "appManage/save", payload: { selectedKey } });
         }
 

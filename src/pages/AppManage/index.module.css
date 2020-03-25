@@ -5,7 +5,7 @@
 }
 
 .uploadIcon {
-    font-size: 60px;
+    font-size: 80px;
     color: #bbb;
     cursor: pointer;
 }
@@ -13,7 +13,7 @@
 .uploadImg {
     border-radius: 4px;
     cursor: pointer;
-    width: 60px;
+    width: 80px;
 }
 
 .appMenu {
