@@ -4,13 +4,18 @@
     padding-bottom: 20px;
 }
 
-.uploadIcon {
+.uploadBox {
+    display: flex;
+    align-items: center;
+}
+
+.uploadBox i {
     font-size: 80px;
     color: #bbb;
     cursor: pointer;
 }
 
-.uploadImg {
+.uploadBox img {
     border-radius: 4px;
     cursor: pointer;
     width: 80px;

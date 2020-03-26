@@ -59,10 +59,10 @@ class Info extends PureComponent {
 
         return (
             <>
-                <div style={{ marginBottom: 20 }}>
-                    <img src={info.iconUrl} alt="icon" className={styles.infoIcon} />
-                </div>
                 <Descriptions column={1} layout="vertical" colon={false}>
+                    <Item label="应用icon">
+                        <img src={info.iconUrl} alt="icon" className={styles.infoIcon} />
+                    </Item>
                     <Item label="应用名称">{info.name}</Item>
                     <Item label="应用类型">{CLIENT_TYPE_TEXT[info.type]}</Item>
                     <Item label="应用描述">{info.description || "-"}</Item>

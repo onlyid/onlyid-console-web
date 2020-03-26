@@ -88,35 +88,30 @@ class AddOrEdit extends PureComponent {
         const { getFieldDecorator } = form;
         const { iconUrl } = this.state;
 
-        const icon = iconUrl ? (
-            <img src={iconUrl} alt="icon" className={styles.uploadImg} />
-        ) : (
-            <i className={classNames("material-icons", styles.uploadIcon)}>blur_on</i>
+        const uploadIcon = (
+            <Upload
+                accept="image/jpeg,image/png"
+                name="file"
+                showUploadList={false}
+                action={baseURL + "/img"}
+                beforeUpload={this.beforeUpload}
+                onChange={this.onUploadChange}
+            >
+                <Tooltip title={IMG_UPLOAD_TIP} className={styles.uploadBox}>
+                    {iconUrl ? (
+                        <img src={iconUrl} alt="icon" />
+                    ) : (
+                        <i className="material-icons">blur_on</i>
+                    )}
+                    <Button type="link">上传</Button>
+                </Tooltip>
+            </Upload>
         );
 
         return (
             <Form layout="vertical">
                 <Item label="应用icon" required>
-                    <Upload
-                        accept="image/jpeg,image/png"
-                        name="file"
-                        showUploadList={false}
-                        action={baseURL + "/img"}
-                        beforeUpload={this.beforeUpload}
-                        onChange={this.onUploadChange}
-                    >
-                        <Tooltip title={IMG_UPLOAD_TIP}>
-                            <div
-                                style={{
-                                    display: "flex",
-                                    alignItems: "center"
-                                }}
-                            >
-                                {icon}
-                                <Button type="link">上传</Button>
-                            </div>
-                        </Tooltip>
-                    </Upload>
+                    {uploadIcon}
                 </Item>
                 <Item label="应用名称">
                     {getFieldDecorator("name", {

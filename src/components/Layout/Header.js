@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { Badge, Icon, Menu } from "antd";
 import styles from "./index.module.css";
 import classNames from "classnames";
-import Logo from "../../assets/logo.png";
+import logo from "assets/logo.svg";
 import { withRouter } from "react-router-dom";
 import _ from "lodash";
 
@@ -55,7 +55,7 @@ class Header extends PureComponent {
             <div className={styles.header}>
                 <div className={styles.box1bg}>
                     <div className={styles.box1}>
-                        <img src={Logo} alt="logo" height="33" />
+                        <img src={logo} alt="logo" height="33" />
                         <Menu
                             onClick={this.onMenuClick}
                             selectedKeys={[menuCurrent]}
