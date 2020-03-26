@@ -63,3 +63,16 @@
     border-radius: 4px;
     width: 80px;
 }
+
+.uri {
+    word-break: break-all;
+}
+
+.inputWithButton {
+    margin-right: 20px;
+    width: 90%;
+}
+
+.uriBox:not(:first-child) {
+    margin-top: 10px;
+}
