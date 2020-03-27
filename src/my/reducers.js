@@ -16,6 +16,12 @@ const defaultAppManage = {
     selectedKey: null
 };
 
+const defaultResManage = {
+    selectedApp: null,
+    selectedKey: null,
+    showEmpty: false
+};
+
 function userPool(state = defaultUserPool, action) {
     const { type, payload } = action;
 
@@ -49,4 +55,15 @@ function appManage(state = defaultAppManage, action) {
     }
 }
 
-export default combineReducers({ userPool, orgManage, appManage });
+function resManage(state = defaultResManage, action) {
+    const { type, payload } = action;
+
+    switch (type) {
+        case "resManage/save":
+            return { ...state, ...payload };
+        default:
+            return state;
+    }
+}
+
+export default combineReducers({ userPool, orgManage, appManage, resManage });

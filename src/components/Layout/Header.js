@@ -12,8 +12,8 @@ const MENU_DATA = {
     userPool: "用户池",
     orgManage: "组织机构",
     appManage: "应用管理",
-    ResMange: "权限管理",
-    RoleManage: "角色管理",
+    resManage: "权限管理",
+    roleManage: "角色管理",
     statistics: "统计数据",
     auditLog: "审计日志",
     admin: "系统管理"
@@ -80,7 +80,10 @@ class Header extends PureComponent {
                 </div>
                 <div className={styles.box2bg}>
                     <div className={styles.box2}>
-                        <span style={{ fontSize: 18 }}>{MENU_DATA[menuCurrent]}</span>
+                        <div className={styles.left1}>
+                            <span style={{ fontSize: 18 }}>{MENU_DATA[menuCurrent]}</span>
+                            <div id="headerPortal1" />
+                        </div>
                         <div id="headerPortal" />
                     </div>
                 </div>

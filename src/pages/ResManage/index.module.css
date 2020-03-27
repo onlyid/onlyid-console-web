@@ -1,0 +1,35 @@
+.resManage {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+.appSelect {
+    display: flex;
+    align-items: center;
+}
+
+.appBox {
+    margin-left: 5px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.appBox:hover {
+    background-color: #e6f7ff;
+}
+
+.appBox img {
+    width: 30px;
+    border-radius: 4px;
+}
+
+.appBox span {
+    margin-left: 5px;
+}
+
+.appIcon {
+    width: 40px;
+    border-radius: 4px;
+}

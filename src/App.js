@@ -4,6 +4,7 @@ import Layout from "components/Layout";
 import UserPool from "pages/UserPool";
 import OrgManage from "pages/OrgManage";
 import AppManage from "pages/AppManage";
+import ResManage from "pages/ResManage";
 
 function App() {
     return (
@@ -18,6 +19,9 @@ function App() {
                     </Route>
                     <Route path="/app-manage">
                         <AppManage />
+                    </Route>
+                    <Route path="/res-manage">
+                        <ResManage />
                     </Route>
                     <Route path="/">
                         <Redirect to="/org-manage" />
