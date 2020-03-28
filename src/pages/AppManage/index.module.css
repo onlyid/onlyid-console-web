@@ -4,15 +4,11 @@
     padding-bottom: 20px;
 }
 
-.uploadBox {
-    display: flex;
-    align-items: center;
-}
-
 .uploadBox i {
     font-size: 80px;
     color: #bbb;
     cursor: pointer;
+    vertical-align: middle;
 }
 
 .uploadBox img {

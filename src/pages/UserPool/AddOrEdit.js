@@ -141,15 +141,8 @@ class AddOrEdit extends PureComponent {
                             onChange={this.onUploadChange}
                         >
                             <Tooltip title={IMG_UPLOAD_TIP}>
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        alignItems: "center"
-                                    }}
-                                >
-                                    <Avatar url={avatarUrl} cursorPointer />
-                                    <Button type="link">上传头像</Button>
-                                </div>
+                                <Avatar url={avatarUrl} cursorPointer />
+                                <Button type="link">上传头像</Button>
                             </Tooltip>
                         </Upload>
                     </Item>
