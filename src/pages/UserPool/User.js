@@ -1,12 +1,11 @@
 import React, { PureComponent } from "react";
-import { Menu, Icon, Modal, message } from "antd";
+import { Icon, Menu, message, Modal } from "antd";
 import Info from "./Info";
 import UpdatePassword from "./UpdatePassword";
 import LinkOrg from "./LinkOrg";
 import { connect } from "react-redux";
 import http from "my/http";
 import Card from "components/Card";
-import styles from "./index.module.css";
 import { eventEmitter } from "my/utils";
 import { TYPE_LABEL } from "my/constants";
 
@@ -20,7 +19,7 @@ class User extends PureComponent {
                 icon: "arrow-left",
                 title: "返回用户池",
                 key: "back",
-                className: styles.backMenuItem
+                className: "backMenuItem"
             },
             { icon: "info-circle", title: "用户详情" },
             { icon: "link", title: "关联组织机构" },
@@ -40,7 +39,7 @@ class User extends PureComponent {
         const { MENU_DATA } = this.state;
 
         if (inOrg) {
-            MENU_DATA[0].title = `返回 [${TYPE_LABEL[selectedType]}]`;
+            MENU_DATA[0].title = `返回【${TYPE_LABEL[selectedType]}】`;
             this.setState({ MENU_DATA: [...MENU_DATA] });
         }
     }
@@ -121,7 +120,7 @@ class User extends PureComponent {
         }
 
         return (
-            <div className={styles.user}>
+            <>
                 <div>
                     <Menu
                         onClick={this.onMenuClick}
@@ -136,8 +135,8 @@ class User extends PureComponent {
                         ))}
                     </Menu>
                 </div>
-                <div className={styles.right}>{right}</div>
-            </div>
+                <div>{right}</div>
+            </>
         );
     }
 }

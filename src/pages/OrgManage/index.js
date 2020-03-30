@@ -63,7 +63,9 @@ class OrgManage extends PureComponent {
             </div>
         ) : (
             <>
-                <TreeMenu />
+                <div>
+                    <TreeMenu />
+                </div>
                 {right}
                 {showUser && <User inOrg />}
             </>
