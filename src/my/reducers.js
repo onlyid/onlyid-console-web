@@ -17,6 +17,7 @@ const defaultAppManage = {
 };
 
 const defaultResManage = {
+    resNodes: [],
     selectedApp: null,
     selectedKey: null,
     showEmpty: false

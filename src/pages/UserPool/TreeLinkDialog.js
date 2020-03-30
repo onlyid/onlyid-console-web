@@ -4,6 +4,7 @@ import http from "my/http";
 import styles from "./index.module.css";
 import { TYPE_LABEL } from "my/constants";
 import { connect } from "react-redux";
+import TreeNodeTitle from "../../components/TreeNodeTitle";
 
 const { Search } = Input;
 const { TreeNode } = Tree;
@@ -111,26 +112,8 @@ class TreeLinkDialog extends PureComponent {
         this.setState({ selectedKey });
     };
 
-    getTreeTitle = name => {
-        const { keyword } = this.state;
-
-        const index = name.indexOf(keyword);
-        const beforeStr = name.substr(0, index);
-        const afterStr = name.substr(index + keyword.length);
-
-        return index > -1 ? (
-            <span>
-                {beforeStr}
-                <span style={{ color: "#f50" }}>{keyword}</span>
-                {afterStr}
-            </span>
-        ) : (
-            <span>{name}</span>
-        );
-    };
-
     renderTree = node => {
-        const { orgNodes } = this.state;
+        const { orgNodes, keyword } = this.state;
 
         const children = orgNodes.filter(item => item.parentId === node.id);
 
@@ -151,7 +134,7 @@ class TreeLinkDialog extends PureComponent {
 
         return (
             <TreeNode
-                title={this.getTreeTitle(node.name)}
+                title={<TreeNodeTitle title={node.name} keyword={keyword} />}
                 key={String(node.id)}
                 icon={icon}
                 dataRef={node}

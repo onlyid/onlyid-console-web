@@ -31,7 +31,7 @@ class AppManage extends PureComponent {
     render() {
         const { drawerVisible, showEmpty } = this.state;
 
-        const portalNode = window.document.getElementById("headerPortal");
+        const portalNode = window.document.getElementById("headerRight");
 
         const createNew = (
             <Button onClick={this.showAdd} icon="plus" type="primary">

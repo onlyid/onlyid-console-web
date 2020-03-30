@@ -36,9 +36,13 @@
 }
 
 .appItem {
-    padding: 10px 15px;
+    padding: 5px 10px;
     border-bottom: 1px solid #eee;
     cursor: pointer;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .appItem:hover {
@@ -56,8 +60,9 @@
     margin-right: 15px;
 }
 
-.appItem span {
-    vertical-align: middle;
+.appItem .type {
+    font-size: 13px;
+    color: #7f7f7f;
 }
 
 .infoIcon {

@@ -3,21 +3,36 @@ import ReactDOM from "react-dom";
 import styles from "./index.module.css";
 import AppSelect from "./AppSelect";
 import { connect } from "react-redux";
-import { Button, Empty } from "antd";
+import { Button, Drawer, Empty } from "antd";
 import Res from "./Res";
 import TreeMenu from "./TreeMenu";
+import AddOrEdit from "./AddOrEdit";
 
 class ResManage extends PureComponent {
+    state = {
+        drawerVisible: false
+    };
+
     componentDidMount() {
         this.forceUpdate();
     }
 
+    showAdd = () => {
+        this.setState({ drawerVisible: true });
+    };
+
+    closeAdd = () => {
+        this.setState({ drawerVisible: false });
+    };
+
     render() {
+        const { drawerVisible } = this.state;
         const {
-            appManage: { selectedApp, showEmpty }
+            resManage: { selectedApp, showEmpty }
         } = this.props;
 
-        const portalNode1 = document.getElementById("headerPortal1");
+        const headerLeft = document.getElementById("headerLeft");
+        const headerRight = document.getElementById("headerRight");
 
         const createNew = (
             <Button onClick={this.showAdd} icon="plus" type="primary">
@@ -44,11 +59,23 @@ class ResManage extends PureComponent {
 
         return (
             <div className={styles.resManage}>
-                {portalNode1 && ReactDOM.createPortal(<AppSelect />, portalNode1)}
+                {headerLeft && ReactDOM.createPortal(<AppSelect />, headerLeft)}
+                {headerRight && ReactDOM.createPortal(createNew, headerRight)}
+                <Drawer
+                    title="新建权限"
+                    placement="right"
+                    onClose={this.closeAdd}
+                    visible={drawerVisible}
+                    maskClosable={false}
+                    width="600"
+                    destroyOnClose
+                >
+                    <AddOrEdit isTop onSave={this.closeAdd} onCancel={this.closeAdd} />
+                </Drawer>
                 {content}
             </div>
         );
     }
 }
 
-export default connect(({ appManage }) => ({ appManage }))(ResManage);
+export default connect(({ resManage }) => ({ resManage }))(ResManage);

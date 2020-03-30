@@ -158,7 +158,7 @@ class UserPool extends PureComponent {
 
         const columns = selectedKey ? this.columns.filter(item => item.mustShow) : this.columns;
 
-        const portalNode = window.document.getElementById("headerPortal");
+        const portalNode = window.document.getElementById("headerRight");
 
         const createNew = (
             <Button onClick={this.showAdd} icon="plus" type="primary">

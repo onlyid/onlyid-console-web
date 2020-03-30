@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import http from "my/http";
 import { eventEmitter } from "my/utils";
+import TreeNodeTitle from "components/TreeNodeTitle";
 
 const { Search } = Input;
 const { TreeNode } = Tree;
@@ -138,28 +139,11 @@ class TreeMenu extends PureComponent {
         });
     };
 
-    getTreeTitle = name => {
-        const { keyword } = this.state;
-
-        const index = name.indexOf(keyword);
-        const beforeStr = name.substr(0, index);
-        const afterStr = name.substr(index + keyword.length);
-
-        return index > -1 ? (
-            <span>
-                {beforeStr}
-                <span style={{ color: "#f50" }}>{keyword}</span>
-                {afterStr}
-            </span>
-        ) : (
-            <span>{name}</span>
-        );
-    };
-
     renderTree = node => {
         const {
             orgManage: { orgNodes }
         } = this.props;
+        const { keyword } = this.state;
 
         const children = orgNodes.filter(item => item.parentId === node.id);
 
@@ -180,7 +164,7 @@ class TreeMenu extends PureComponent {
 
         return (
             <TreeNode
-                title={this.getTreeTitle(node.name)}
+                title={<TreeNodeTitle title={node.name} keyword={keyword} />}
                 key={String(node.id)}
                 icon={icon}
                 dataRef={node}

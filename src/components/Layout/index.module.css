@@ -86,6 +86,6 @@
     align-items: center;
 }
 
-:global(#headerPortal1) {
+:global(#headerLeft) {
     margin-left: 10px;
 }

@@ -34,7 +34,7 @@ class OrgManage extends PureComponent {
             orgManage: { showEmpty, selectedType, showUser }
         } = this.props;
 
-        const portalNode = window.document.getElementById("headerPortal");
+        const portalNode = window.document.getElementById("headerRight");
 
         const createNew = (
             <Button onClick={this.showAdd} icon="plus" type="primary">

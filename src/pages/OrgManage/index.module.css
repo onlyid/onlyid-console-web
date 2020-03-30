@@ -23,11 +23,11 @@
     flex-grow: 1;
 }
 
-:global .ant-tree-title {
+.tree :global .ant-tree-title {
     margin-left: 5px;
 }
 
-:global .material-icons {
+.tree :global .material-icons {
     font-size: 20px;
     vertical-align: -5px;
 }

@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { eventEmitter } from "my/utils";
 import _ from "lodash";
 import { Input } from "antd";
+import { CLIENT_TYPE_TEXT } from "my/constants";
 
 const { Search } = Input;
 
@@ -94,8 +95,11 @@ class AppMenu extends PureComponent {
                             onClick={() => this.onItemClick(item.id)}
                             key={item.id}
                         >
-                            <img src={item.iconUrl} alt="icon" />
-                            <span>{item.name}</span>
+                            <div>
+                                <img src={item.iconUrl} alt="icon" />
+                                <span>{item.name}</span>
+                            </div>
+                            <span className={styles.type}>{CLIENT_TYPE_TEXT[item.type]}</span>
                         </div>
                     ))}
                 </div>

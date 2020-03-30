@@ -82,9 +82,9 @@ class Header extends PureComponent {
                     <div className={styles.box2}>
                         <div className={styles.left1}>
                             <span style={{ fontSize: 18 }}>{MENU_DATA[menuCurrent]}</span>
-                            <div id="headerPortal1" />
+                            <div id="headerLeft" />
                         </div>
-                        <div id="headerPortal" />
+                        <div id="headerRight" />
                     </div>
                 </div>
             </div>

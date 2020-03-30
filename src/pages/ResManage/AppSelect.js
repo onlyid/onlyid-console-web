@@ -58,7 +58,7 @@ class Dialog extends PureComponent {
 
     select = selectedApp => {
         const { dispatch, onClose } = this.props;
-        dispatch({ type: "appManage/save", payload: { selectedApp } });
+        dispatch({ type: "resManage/save", payload: { selectedApp } });
         onClose();
     };
 
@@ -91,7 +91,7 @@ class Dialog extends PureComponent {
     }
 }
 
-const SelectDialog = connect(({ appManage }) => ({ appManage }))(Dialog);
+const SelectDialog = connect(({ resManage }) => ({ resManage }))(Dialog);
 
 class AppSelect extends PureComponent {
     state = {
@@ -107,9 +107,9 @@ class AppSelect extends PureComponent {
 
         const list = await http.get("clients");
         if (list.length) {
-            dispatch({ type: "appManage/save", payload: { selectedApp: list[0] } });
+            dispatch({ type: "resManage/save", payload: { selectedApp: list[0] } });
         } else {
-            dispatch({ type: "appManage/save", payload: { showEmpty: true } });
+            dispatch({ type: "resManage/save", payload: { showEmpty: true } });
         }
     };
 
@@ -123,7 +123,7 @@ class AppSelect extends PureComponent {
 
     render() {
         const {
-            appManage: { selectedApp }
+            resManage: { selectedApp }
         } = this.props;
         const { visible } = this.state;
 
@@ -141,4 +141,4 @@ class AppSelect extends PureComponent {
     }
 }
 
-export default connect(({ appManage }) => ({ appManage }))(AppSelect);
+export default connect(({ resManage }) => ({ resManage }))(AppSelect);
