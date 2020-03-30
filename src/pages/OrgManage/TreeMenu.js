@@ -83,13 +83,7 @@ class TreeMenu extends PureComponent {
         if (expand === "self") {
             if (!expandedKeys.includes(selectedKey)) {
                 expandedKeys.push(selectedKey);
-                dispatch({
-                    type: "orgManage/save",
-                    payload: {
-                        expandedKeys: [...expandedKeys],
-                        autoExpandParent: false
-                    }
-                });
+                this.setState({ expandedKeys: [...expandedKeys], autoExpandParent: false });
             }
         } else if (expand === "parent") {
             const parentId = String(
@@ -97,13 +91,7 @@ class TreeMenu extends PureComponent {
             );
             if (!expandedKeys.includes(parentId)) {
                 expandedKeys.push(parentId);
-                dispatch({
-                    type: "orgManage/save",
-                    payload: {
-                        expandedKeys: [...expandedKeys],
-                        autoExpandParent: false
-                    }
-                });
+                this.setState({ expandedKeys: [...expandedKeys], autoExpandParent: false });
             }
         }
     };
