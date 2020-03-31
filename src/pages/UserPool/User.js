@@ -44,12 +44,11 @@ class User extends PureComponent {
         }
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState, snapshot) {
         const {
             userPool: { selectedKey }
         } = this.props;
-
-        if (selectedKey !== prevProps.userPool.selectedKey) this.setState({ menuCurrent: "1" });
+        if (prevProps.userPool.selectedKey !== selectedKey) this.back2info();
     }
 
     back2info = () => {

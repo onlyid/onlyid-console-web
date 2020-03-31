@@ -190,7 +190,7 @@ class OAuthConfig extends PureComponent {
         let redirectUris;
         if (info.redirectUris.length) {
             redirectUris = info.redirectUris.map((uri, index) => (
-                <span className={styles.uri} key={String(index)}>
+                <span className="uri" key={String(index)}>
                     {index + 1}. {uri}
                     <br />
                 </span>

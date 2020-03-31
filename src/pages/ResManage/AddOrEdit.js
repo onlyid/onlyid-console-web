@@ -72,7 +72,7 @@ class AddOrEdit extends PureComponent {
 
         return (
             <Form layout="vertical">
-                <Item label="权限名称">
+                <Item label="资源名称">
                     {getFieldDecorator("name", {
                         initialValue: info && info.name,
                         rules: [
@@ -81,14 +81,14 @@ class AddOrEdit extends PureComponent {
                         ]
                     })(<Input />)}
                 </Item>
-                <Item label="权限描述">
+                <Item label="资源描述">
                     {getFieldDecorator("description", {
                         initialValue: info && info.description,
                         rules: [{ max: 500, message: "最多输入500字" }]
                     })(<TextArea />)}
                 </Item>
                 {info && (
-                    <Item label="上级权限">
+                    <Item label="上级资源">
                         {getFieldDecorator("parentId", {
                             initialValue: info.parent.id
                         })(
@@ -108,10 +108,10 @@ class AddOrEdit extends PureComponent {
                         </Radio.Group>
                     )}
                 </Item>
-                <Item label="权限uri">
+                <Item label="资源uri">
                     {getFieldDecorator("uri", {
                         initialValue: info && info.uri,
-                        rules: [{ max: 50, message: "最多输入50字" }]
+                        rules: [{ max: 500, message: "最多输入500字" }]
                     })(<Input />)}
                 </Item>
                 <Item>

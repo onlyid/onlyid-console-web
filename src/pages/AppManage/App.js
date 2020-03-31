@@ -22,15 +22,11 @@ class App extends PureComponent {
         menuCurrent: "0"
     };
 
-    componentDidUpdate(prevProps) {
-        const {
-            appManage: { selectedKey: prevSelectedKey }
-        } = prevProps;
+    componentDidUpdate(prevProps, prevState, snapshot) {
         const {
             appManage: { selectedKey }
         } = this.props;
-
-        if (selectedKey !== prevSelectedKey) this.setState({ menuCurrent: "0" });
+        if (prevProps.appManage.selectedKey !== selectedKey) this.back2info();
     }
 
     onMenuClick = ({ key }) => {

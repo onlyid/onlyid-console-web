@@ -58,7 +58,7 @@ class Dialog extends PureComponent {
 
     select = selectedApp => {
         const { dispatch, onClose } = this.props;
-        dispatch({ type: "resManage/save", payload: { selectedApp } });
+        dispatch({ type: "resManage/save", payload: { selectedApp, showEmpty: false } });
         onClose();
     };
 

@@ -18,6 +18,7 @@ class TreeMenu extends PureComponent {
     };
 
     componentDidMount() {
+        this.initTree({});
         eventEmitter.on("resManage/initTree", this.initTree);
     }
 
@@ -38,6 +39,8 @@ class TreeMenu extends PureComponent {
             resManage: { selectedKey, resNodes: prevResNodes, selectedApp },
             dispatch
         } = this.props;
+
+        if (!selectedApp) return;
 
         const params = { clientId: selectedApp.id };
         const resNodes = await http.get("res-nodes", { params });
@@ -152,7 +155,7 @@ class TreeMenu extends PureComponent {
 
         return (
             <div className={styles.treeMenu}>
-                <Search onSearch={this.onSearch} placeholder="搜索权限树" enterButton />
+                <Search onSearch={this.onSearch} placeholder="搜索资源树" enterButton />
                 <Tree
                     showIcon
                     className={styles.tree}

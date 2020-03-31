@@ -36,14 +36,14 @@ class ResManage extends PureComponent {
 
         const createNew = (
             <Button onClick={this.showAdd} icon="plus" type="primary">
-                新建权限
+                新建资源
             </Button>
         );
 
         const content = showEmpty ? (
             <div className="emptyBox">
                 {selectedApp ? (
-                    <Empty description="暂无权限，请新建">{createNew}</Empty>
+                    <Empty description="暂无资源，请新建">{createNew}</Empty>
                 ) : (
                     <Empty description="暂无应用，请到应用管理页新建" />
                 )}
@@ -62,7 +62,7 @@ class ResManage extends PureComponent {
                 {headerLeft && ReactDOM.createPortal(<AppSelect />, headerLeft)}
                 {headerRight && ReactDOM.createPortal(createNew, headerRight)}
                 <Drawer
-                    title="新建权限"
+                    title="新建资源"
                     placement="right"
                     onClose={this.closeAdd}
                     visible={drawerVisible}

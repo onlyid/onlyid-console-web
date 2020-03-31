@@ -20,8 +20,11 @@ class UserGroup extends PureComponent {
         menuCurrent: "0"
     };
 
-    componentDidUpdate({ orgManage: { selectedKey } }) {
-        if (selectedKey !== this.props.orgManage.selectedKey) this.setState({ menuCurrent: "0" });
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const {
+            orgManage: { selectedKey }
+        } = this.props;
+        if (prevProps.orgManage.selectedKey !== selectedKey) this.back2info();
     }
 
     onMenuClick = ({ key }) => {
