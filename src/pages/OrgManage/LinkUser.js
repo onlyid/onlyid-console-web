@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import Table from "components/Table";
 import { Button, Input, message, Modal } from "antd";
 import http from "my/http";
-import styles from "./index.module.css";
 import LinkUserDialog from "./LinkUserDialog";
 import Avatar from "components/Avatar";
+import NoCard from "components/NoCard";
 
 const { Search } = Input;
 
@@ -140,9 +140,9 @@ class LinkUser extends PureComponent {
         const pagination = { current, pageSize, total };
 
         return (
-            <div className={styles.linkUser}>
-                <div className={styles.titleBox}>
-                    <span className={styles.title}>关联用户列表</span>
+            <NoCard
+                title="关联用户列表"
+                right={
                     <Button
                         onClick={() => this.setState({ dialogVisible: true })}
                         type="primary"
@@ -150,10 +150,11 @@ class LinkUser extends PureComponent {
                     >
                         关联更多
                     </Button>
-                </div>
+                }
+            >
                 <Search
                     onSearch={this.onSearch}
-                    placeholder={`搜索昵称、手机号、邮箱`}
+                    placeholder="搜索昵称、手机号、邮箱"
                     enterButton
                     style={{ marginBottom: 20 }}
                 />
@@ -166,7 +167,7 @@ class LinkUser extends PureComponent {
                     onChange={this.onChange}
                 />
                 <LinkUserDialog visible={dialogVisible} onClose={this.closeDialog} />
-            </div>
+            </NoCard>
         );
     }
 }

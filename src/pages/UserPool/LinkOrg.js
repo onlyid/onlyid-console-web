@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import Table from "components/Table";
 import { Button, Input, message, Modal } from "antd";
 import http from "my/http";
-import styles from "./index.module.css";
 import TreeLinkDialog from "./TreeLinkDialog";
 import { TYPE_LABEL } from "my/constants";
+import NoCard from "components/NoCard";
 
 const { Search } = Input;
 
@@ -99,9 +99,9 @@ class LinkOrg extends PureComponent {
         const { type } = this.props;
 
         return (
-            <div className={styles.linkOrg}>
-                <div className={styles.titleBox}>
-                    <span className={styles.title}>关联{TYPE_LABEL[type]}列表</span>
+            <NoCard
+                title={`关联${TYPE_LABEL[type]}列表`}
+                right={
                     <Button
                         onClick={() => this.setState({ dialogVisible: true })}
                         type="primary"
@@ -109,7 +109,8 @@ class LinkOrg extends PureComponent {
                     >
                         关联更多
                     </Button>
-                </div>
+                }
+            >
                 <Search
                     onSearch={this.onSearch}
                     placeholder={`搜索${TYPE_LABEL[type]}名称`}
@@ -124,7 +125,7 @@ class LinkOrg extends PureComponent {
                     pagination={false}
                 />
                 <TreeLinkDialog visible={dialogVisible} type={type} onClose={this.closeDialog} />
-            </div>
+            </NoCard>
         );
     }
 }
