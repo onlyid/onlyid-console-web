@@ -12,7 +12,7 @@ const { Item } = Menu;
 
 const MENU_DATA = [
     { icon: "info-circle", title: "资源详情" },
-    { icon: "plus-circle", title: "新建资源" },
+    { icon: "plus-circle", title: "新建子资源" },
     { icon: "number", title: "操作类型" },
     { icon: "delete", title: "删除", key: "delete" }
 ];

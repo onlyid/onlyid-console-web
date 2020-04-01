@@ -28,11 +28,11 @@ class AddOrEdit1 extends PureComponent {
         form.validateFields(async (err, values) => {
             if (err) return;
 
+            values.resId = selectedKey;
             if (info) {
                 values.id = info.id;
                 await http.put("res-nodes/operations", values);
             } else {
-                values.resId = selectedKey;
                 await http.post("res-nodes/operations", values);
             }
 
