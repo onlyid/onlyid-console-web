@@ -23,6 +23,13 @@ const defaultResManage = {
     showEmpty: false
 };
 
+const defaultRoleManage = {
+    selectedApp: null,
+    selectedKey: null,
+    showEmpty: false,
+    groupId: null // groupId有值 则当前选中的是role 否则选中的是role group
+};
+
 function userPool(state = defaultUserPool, action) {
     const { type, payload } = action;
 
@@ -67,4 +74,15 @@ function resManage(state = defaultResManage, action) {
     }
 }
 
-export default combineReducers({ userPool, orgManage, appManage, resManage });
+function roleManage(state = defaultRoleManage, action) {
+    const { type, payload } = action;
+
+    switch (type) {
+        case "roleManage/save":
+            return { ...state, ...payload };
+        default:
+            return state;
+    }
+}
+
+export default combineReducers({ userPool, orgManage, appManage, resManage, roleManage });

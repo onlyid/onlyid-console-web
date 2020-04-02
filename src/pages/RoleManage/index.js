@@ -4,16 +4,17 @@ import styles from "./index.module.css";
 import AppSelect1 from "components/AppSelect";
 import { connect } from "react-redux";
 import { Button, Drawer, Empty } from "antd";
-import Res from "./Res";
+import Role from "./Role";
+import RoleGroup from "./RoleGroup";
 import TreeMenu from "./TreeMenu";
-import AddOrEdit from "./AddOrEdit";
+import AddOrEdit from "./RoleGroup/AddOrEdit";
 
 const AppSelect = connect(
-    state => ({ selectedApp: state.resManage.selectedApp }),
-    dispatch => ({ savePayload: payload => dispatch({ type: "resManage/save", payload }) })
+    state => ({ selectedApp: state.roleManage.selectedApp }),
+    dispatch => ({ savePayload: payload => dispatch({ type: "roleManage/save", payload }) })
 )(AppSelect1);
 
-class ResManage extends PureComponent {
+class RoleManage extends PureComponent {
     state = {
         drawerVisible: false
     };
@@ -33,7 +34,7 @@ class ResManage extends PureComponent {
     render() {
         const { drawerVisible } = this.state;
         const {
-            resManage: { selectedApp, showEmpty }
+            roleManage: { selectedApp, showEmpty, groupId }
         } = this.props;
 
         const headerLeft = document.getElementById("headerLeft");
@@ -41,14 +42,16 @@ class ResManage extends PureComponent {
 
         const createNew = (
             <Button onClick={this.showAdd} icon="plus" type="primary">
-                新建资源
+                新建角色组
             </Button>
         );
+
+        const right = groupId ? <Role /> : <RoleGroup />;
 
         const content = showEmpty ? (
             <div className="emptyBox">
                 {selectedApp ? (
-                    <Empty description="暂无资源，请新建">{createNew}</Empty>
+                    <Empty description="暂无角色组，请新建">{createNew}</Empty>
                 ) : (
                     <Empty description="暂无应用，请到应用管理页新建" />
                 )}
@@ -58,16 +61,16 @@ class ResManage extends PureComponent {
                 <div>
                     <TreeMenu />
                 </div>
-                <Res />
+                {right}
             </>
         );
 
         return (
-            <div className={styles.resManage}>
+            <div className={styles.roleManage}>
                 {headerLeft && ReactDOM.createPortal(<AppSelect />, headerLeft)}
                 {headerRight && ReactDOM.createPortal(createNew, headerRight)}
                 <Drawer
-                    title="新建资源"
+                    title="新建角色组"
                     placement="right"
                     onClose={this.closeAdd}
                     visible={drawerVisible}
@@ -75,7 +78,7 @@ class ResManage extends PureComponent {
                     width="600"
                     destroyOnClose
                 >
-                    <AddOrEdit isTop onSave={this.closeAdd} onCancel={this.closeAdd} />
+                    <AddOrEdit onSave={this.closeAdd} onCancel={this.closeAdd} />
                 </Drawer>
                 {content}
             </div>
@@ -83,4 +86,4 @@ class ResManage extends PureComponent {
     }
 }
 
-export default connect(({ resManage }) => ({ resManage }))(ResManage);
+export default connect(({ roleManage }) => ({ roleManage }))(RoleManage);

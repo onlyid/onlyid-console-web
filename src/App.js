@@ -5,6 +5,7 @@ import UserPool from "pages/UserPool";
 import OrgManage from "pages/OrgManage";
 import AppManage from "pages/AppManage";
 import ResManage from "pages/ResManage";
+import RoleManage from "pages/RoleManage";
 
 function App() {
     return (
@@ -22,6 +23,9 @@ function App() {
                     </Route>
                     <Route path="/res-manage">
                         <ResManage />
+                    </Route>
+                    <Route path="/role-manage">
+                        <RoleManage />
                     </Route>
                     <Route path="/">
                         <Redirect to="/org-manage" />

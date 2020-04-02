@@ -1,14 +1,13 @@
 import React, { PureComponent } from "react";
 import http from "my/http";
-import { connect } from "react-redux";
 import styles from "./index.module.css";
-import { Modal, Input, Button } from "antd";
+import { Button, Input, Modal } from "antd";
 import Table from "components/Table";
 import { CLIENT_TYPE_TEXT } from "my/constants";
 
 const { Search } = Input;
 
-class Dialog extends PureComponent {
+class SelectDialog extends PureComponent {
     columns = [
         {
             title: "应用icon",
@@ -56,10 +55,9 @@ class Dialog extends PureComponent {
         this.setState({ list });
     };
 
-    select = selectedApp => {
-        const { dispatch, onClose } = this.props;
-        dispatch({ type: "resManage/save", payload: { selectedApp, showEmpty: false } });
-        onClose();
+    select = app => {
+        const { onSelect } = this.props;
+        onSelect(app);
     };
 
     onSearch = keyword => {
@@ -91,8 +89,6 @@ class Dialog extends PureComponent {
     }
 }
 
-const SelectDialog = connect(({ resManage }) => ({ resManage }))(Dialog);
-
 class AppSelect extends PureComponent {
     state = {
         visible: false
@@ -103,14 +99,12 @@ class AppSelect extends PureComponent {
     }
 
     initData = async () => {
-        const { dispatch } = this.props;
+        const { savePayload } = this.props;
 
         const list = await http.get("clients");
-        if (list.length) {
-            dispatch({ type: "resManage/save", payload: { selectedApp: list[0] } });
-        } else {
-            dispatch({ type: "resManage/save", payload: { showEmpty: true } });
-        }
+
+        if (list.length) savePayload({ selectedApp: list[0] });
+        else savePayload({ showEmpty: true });
     };
 
     showDialog = () => {
@@ -121,17 +115,26 @@ class AppSelect extends PureComponent {
         this.setState({ visible: false });
     };
 
+    onSelect = selectedApp => {
+        const { savePayload } = this.props;
+        savePayload({ selectedApp, showEmpty: false });
+        this.setState({ visible: false });
+    };
+
     render() {
-        const {
-            resManage: { selectedApp }
-        } = this.props;
+        const { selectedApp } = this.props;
         const { visible } = this.state;
 
         if (!selectedApp) return null;
 
         return (
             <div className={styles.appSelect}>
-                <SelectDialog visible={visible} onClose={this.closeDialog} />/
+                <SelectDialog
+                    visible={visible}
+                    onClose={this.closeDialog}
+                    onSelect={this.onSelect}
+                />
+                /
                 <div className={styles.appBox} onClick={this.showDialog}>
                     <img src={selectedApp.iconUrl} alt="icon" />
                     <span>{selectedApp.name}</span>
@@ -141,4 +144,4 @@ class AppSelect extends PureComponent {
     }
 }
 
-export default connect(({ resManage }) => ({ resManage }))(AppSelect);
+export default AppSelect;

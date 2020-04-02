@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import { Input, Tree } from "antd";
-import styles from "./index.module.css";
 import { connect } from "react-redux";
 import _ from "lodash";
 import http from "my/http";
@@ -154,11 +153,10 @@ class TreeMenu extends PureComponent {
         console.log(expandedKeys);
 
         return (
-            <div className={styles.treeMenu}>
+            <div className="treeMenu">
                 <Search onSearch={this.onSearch} placeholder="搜索资源树" enterButton />
                 <Tree
                     showIcon
-                    className={styles.tree}
                     onExpand={this.onExpand}
                     expandedKeys={expandedKeys}
                     autoExpandParent={autoExpandParent}
