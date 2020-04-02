@@ -3,6 +3,8 @@ import { Descriptions, Button } from "antd";
 import http from "my/http";
 import AddOrEdit from "./AddOrEdit";
 import { connect } from "react-redux";
+import moment from "moment";
+import { DATE_TIME_FORMAT } from "../../my/constants";
 
 const { Item } = Descriptions;
 
@@ -61,6 +63,7 @@ class Info extends PureComponent {
                     <Item label="资源uri" className="uri">
                         {info.uri || "-"}
                     </Item>
+                    <Item label="创建日期">{moment(info.createDate).format(DATE_TIME_FORMAT)}</Item>
                 </Descriptions>
                 <Button onClick={this.showEdit} style={{ marginTop: 10, marginBottom: 24 }}>
                     编辑

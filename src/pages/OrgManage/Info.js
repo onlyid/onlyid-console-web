@@ -3,7 +3,8 @@ import { Descriptions, Button } from "antd";
 import http from "my/http";
 import AddOrEdit from "./AddOrEdit";
 import { connect } from "react-redux";
-import { TYPE_LABEL } from "my/constants";
+import { DATE_TIME_FORMAT, TYPE_LABEL } from "my/constants";
+import moment from "moment";
 
 const { Item } = Descriptions;
 
@@ -55,6 +56,7 @@ class Info extends PureComponent {
                     <Item label={`${typeLabel}名称`}>{info.name}</Item>
                     <Item label={`${typeLabel}描述`}>{info.description || "-"}</Item>
                     <Item label="上级组织机构">{info.parent && info.parent.name}</Item>
+                    <Item label="创建日期">{moment(info.createDate).format(DATE_TIME_FORMAT)}</Item>
                 </Descriptions>
                 <Button onClick={this.showEdit} style={{ marginTop: 10, marginBottom: 24 }}>
                     编辑

@@ -3,9 +3,10 @@ import { Descriptions, Button } from "antd";
 import http from "my/http";
 import AddOrEdit from "./AddOrEdit";
 import { connect } from "react-redux";
-import { GENDER_TEXT } from "my/constants";
+import { DATE_TIME_FORMAT, GENDER_TEXT } from "my/constants";
 import Avatar from "components/Avatar";
 import { eventEmitter } from "my/utils";
+import moment from "moment";
 
 const { Item } = Descriptions;
 
@@ -58,6 +59,7 @@ class Info extends PureComponent {
                     <Item label="邮箱">{info.email || "-"}</Item>
                     <Item label="性别">{info.gender ? GENDER_TEXT[info.gender] : "-"}</Item>
                     <Item label="备注">{info.description || "-"}</Item>
+                    <Item label="创建日期">{moment(info.createDate).format(DATE_TIME_FORMAT)}</Item>
                 </Descriptions>
                 <Button onClick={this.showEdit} style={{ marginTop: 10, marginBottom: 24 }}>
                     编辑
