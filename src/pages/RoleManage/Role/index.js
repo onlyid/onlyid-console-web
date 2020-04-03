@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import http from "my/http";
 import Card from "components/Card";
 import { eventEmitter } from "my/utils";
+import Permission from "./Permission";
 
 const { Item } = Menu;
 
@@ -68,7 +69,11 @@ class Role extends PureComponent {
                 );
                 break;
             case "1":
-                // right = <div>权限分配</div>;
+                right = (
+                    <Card title={MENU_DATA[menuCurrent].title}>
+                        <Permission onClose={this.back2info} />
+                    </Card>
+                );
                 break;
             default:
             // right = <LinkUser type="ROLE" />;

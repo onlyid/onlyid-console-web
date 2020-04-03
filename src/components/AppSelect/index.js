@@ -103,7 +103,7 @@ class AppSelect extends PureComponent {
 
         const list = await http.get("clients");
 
-        if (list.length) savePayload({ selectedApp: list[0] });
+        if (list.length) savePayload({ selectedApp: list[0], showEmpty: false });
         else savePayload({ showEmpty: true });
     };
 

@@ -57,6 +57,8 @@ class TreeMenu extends PureComponent {
                 type: "roleManage/save",
                 payload: { selectedKey: String(group.id), groupId: null }
             });
+            // 自动展开第一个节点
+            if (select === "first") this.setState({ expandedKeys: ["g" + group.id] });
         }
         // 规则：先下后上 都无则parent
         else if (select === "neighbor") {

@@ -31,6 +31,9 @@ body {
 
 .ant-table {
     border: 1px solid #e8e8e8;
+}
+
+.ant-table > .ant-table-content .ant-table-row:last-child td {
     border-bottom: none;
 }
 
