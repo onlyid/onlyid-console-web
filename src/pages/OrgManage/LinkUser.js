@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Table from "components/Table";
 import { Button, Input, message, Modal } from "antd";
 import http from "my/http";
-import LinkUserDialog from "./LinkUserDialog";
+import SelectUserDialog from "components/SelectUserDialog";
 import Avatar from "components/Avatar";
 import NoCard from "components/NoCard";
 
@@ -122,7 +122,7 @@ class LinkUser extends PureComponent {
     };
 
     onSearch = keyword => {
-        this.setState({ keyword }, this.initData);
+        this.setState({ keyword, current: 1 }, this.initData);
     };
 
     onChange = pagination => {
@@ -132,6 +132,16 @@ class LinkUser extends PureComponent {
     closeDialog = () => {
         this.setState({ dialogVisible: false });
         this.initData();
+    };
+
+    onSelect = async userId => {
+        const {
+            orgManage: { selectedKey: orgNodeId }
+        } = this.props;
+
+        await http.post("org-nodes/link-user", { userId, orgNodeId });
+
+        message.success("保存成功");
     };
 
     render() {
@@ -166,7 +176,11 @@ class LinkUser extends PureComponent {
                     pagination={pagination}
                     onChange={this.onChange}
                 />
-                <LinkUserDialog visible={dialogVisible} onClose={this.closeDialog} />
+                <SelectUserDialog
+                    visible={dialogVisible}
+                    onClose={this.closeDialog}
+                    onSelect={this.onSelect}
+                />
             </NoCard>
         );
     }

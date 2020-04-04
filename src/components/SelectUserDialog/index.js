@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { Button, Empty, Input, message, Modal } from "antd";
+import { Button, Empty, Input, Modal } from "antd";
 import http from "my/http";
 import Avatar from "components/Avatar";
 import Table from "components/Table";
@@ -32,7 +31,7 @@ class LinkUserDialog extends PureComponent {
             render: value => {
                 return (
                     <Button
-                        onClick={() => this.link(value)}
+                        onClick={() => this.onAction(value)}
                         icon="plus"
                         shape="circle"
                         type="primary"
@@ -55,11 +54,6 @@ class LinkUserDialog extends PureComponent {
         this.initData();
     }
 
-    cancel = () => {
-        const { onClose } = this.props;
-        onClose();
-    };
-
     initData = async () => {
         this.setState({ loading: true });
 
@@ -80,31 +74,20 @@ class LinkUserDialog extends PureComponent {
         this.setState({ keyword, current: 1 }, this.initData);
     };
 
-    link = async userId => {
-        const {
-            orgManage: { selectedKey: orgNodeId }
-        } = this.props;
-
-        await http.post("org-nodes/link-user", { userId, orgNodeId });
-
-        message.success("保存成功");
+    onAction = async id => {
+        const { onSelect } = this.props;
+        onSelect(id);
     };
 
     render() {
-        const { list, current, pageSize, total, loading } = this.state;
-        const { visible } = this.props;
+        const { list, current, pageSize, total, loading, keyword } = this.state;
+        const { visible, onClose } = this.props;
 
         const pagination = { current, pageSize, total };
 
         return (
-            <Modal
-                visible={visible}
-                title="关联更多"
-                onCancel={this.cancel}
-                footer={false}
-                width={800}
-            >
-                {list.length || loading ? (
+            <Modal visible={visible} title="关联更多" onCancel={onClose} footer={false} width={800}>
+                {list.length || loading || keyword ? (
                     <>
                         <Search
                             onSearch={this.onSearch}
@@ -129,4 +112,4 @@ class LinkUserDialog extends PureComponent {
     }
 }
 
-export default connect(({ orgManage }) => ({ orgManage }))(LinkUserDialog);
+export default LinkUserDialog;

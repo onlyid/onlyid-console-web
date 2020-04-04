@@ -3,13 +3,12 @@ import { connect } from "react-redux";
 import Table from "components/Table";
 import { Button, Input, message, Modal } from "antd";
 import http from "my/http";
-import SelectOrgDialog from "./SelectOrgDialog";
-import { TYPE_LABEL } from "my/constants";
 import NoCard from "components/NoCard";
+import SelectRoleDialog from "./SelectRoleDialog";
 
 const { Search } = Input;
 
-class LinkOrg extends PureComponent {
+class LinkRole extends PureComponent {
     columns = [
         {
             title: "名称",
@@ -21,8 +20,8 @@ class LinkOrg extends PureComponent {
             ellipsis: true
         },
         {
-            title: "上级组织机构",
-            dataIndex: "parent.name"
+            title: "所属角色组",
+            dataIndex: "group.name"
         },
         {
             title: "操作",
@@ -57,16 +56,15 @@ class LinkOrg extends PureComponent {
 
         const { keyword } = this.state;
         const {
-            userPool: { selectedKey },
-            type
+            userPool: { selectedKey }
         } = this.props;
-        const params = { keyword, userId: selectedKey, type };
+        const params = { keyword, userId: selectedKey };
+        const list = await http.get("roles", { params });
 
-        const list = await http.get("org-nodes/by-user-link", { params });
         this.setState({ list, loading: false });
     };
 
-    delete1 = id => {
+    delete1 = roleId => {
         Modal.confirm({
             content: "确定移除？",
             okType: "danger",
@@ -74,10 +72,8 @@ class LinkOrg extends PureComponent {
                 const {
                     userPool: { selectedKey }
                 } = this.props;
-                await http.post("org-nodes/unlink-user", {
-                    userId: selectedKey,
-                    orgNodeId: id
-                });
+                const params = { userId: selectedKey, roleId };
+                await http.delete("roles/user-links", { params });
 
                 message.success("移除成功");
                 this.initData();
@@ -89,11 +85,12 @@ class LinkOrg extends PureComponent {
         this.setState({ keyword }, this.initData);
     };
 
-    onSelect = async orgNodeId => {
+    onSelect = async roleId => {
         const {
-            userPool: { selectedKey: userId }
+            userPool: { selectedKey }
         } = this.props;
-        await http.post("org-nodes/link-user", { userId, orgNodeId });
+
+        await http.post("roles/user-links", { userId: selectedKey, roleId });
 
         message.success("保存成功");
         this.setState({ dialogVisible: false });
@@ -106,11 +103,10 @@ class LinkOrg extends PureComponent {
 
     render() {
         const { list, loading, dialogVisible } = this.state;
-        const { type } = this.props;
 
         return (
             <NoCard
-                title={`关联${TYPE_LABEL[type]}列表`}
+                title="关联角色列表"
                 right={
                     <Button
                         onClick={() => this.setState({ dialogVisible: true })}
@@ -123,7 +119,7 @@ class LinkOrg extends PureComponent {
             >
                 <Search
                     onSearch={this.onSearch}
-                    placeholder={`搜索${TYPE_LABEL[type]}名称`}
+                    placeholder="搜索角色名称"
                     enterButton
                     style={{ marginBottom: 20 }}
                 />
@@ -134,9 +130,8 @@ class LinkOrg extends PureComponent {
                     loading={loading}
                     pagination={false}
                 />
-                <SelectOrgDialog
+                <SelectRoleDialog
                     visible={dialogVisible}
-                    type={type}
                     onCancel={this.onCancel}
                     onSelect={this.onSelect}
                 />
@@ -145,4 +140,4 @@ class LinkOrg extends PureComponent {
     }
 }
 
-export default connect(({ userPool }) => ({ userPool }))(LinkOrg);
+export default connect(({ userPool }) => ({ userPool }))(LinkRole);

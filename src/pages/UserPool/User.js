@@ -3,6 +3,7 @@ import { Icon, Menu, message, Modal } from "antd";
 import Info from "./Info";
 import UpdatePassword from "./UpdatePassword";
 import LinkOrg from "./LinkOrg";
+import LinkRole from "./LinkRole";
 import { connect } from "react-redux";
 import http from "my/http";
 import Card from "components/Card";
@@ -107,7 +108,7 @@ class User extends PureComponent {
                 right = <LinkOrg key="USER_GROUP" type="USER_GROUP" />;
                 break;
             case "5":
-                right = <LinkOrg key="ROLE" type="ROLE" />;
+                right = <LinkRole />;
                 break;
             default:
                 // 6

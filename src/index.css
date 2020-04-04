@@ -37,6 +37,10 @@ body {
     border-bottom: none;
 }
 
+.ant-table-placeholder {
+    border-bottom: none;
+}
+
 /* reset antd end */
 
 .ant-menu.ctrlMenu {

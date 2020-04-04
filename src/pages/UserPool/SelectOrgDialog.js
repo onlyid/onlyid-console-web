@@ -3,13 +3,12 @@ import { Empty, Input, message, Modal, Tree } from "antd";
 import http from "my/http";
 import styles from "./index.module.css";
 import { TYPE_LABEL } from "my/constants";
-import { connect } from "react-redux";
-import TreeNodeTitle from "../../components/TreeNodeTitle";
+import TreeNodeTitle from "components/TreeNodeTitle";
 
 const { Search } = Input;
 const { TreeNode } = Tree;
 
-class TreeLinkDialog extends PureComponent {
+class SelectOrgDialog extends PureComponent {
     state = {
         expandedKeys: [],
         autoExpandParent: false,
@@ -61,29 +60,22 @@ class TreeLinkDialog extends PureComponent {
     };
 
     submit = async () => {
-        const { selectedKey: orgNodeId } = this.state;
-        const {
-            onClose,
-            type,
-            userPool: { selectedKey: userId }
-        } = this.props;
+        const { selectedKey } = this.state;
+        const { onSelect, type } = this.props;
 
-        if (!orgNodeId) {
+        if (!selectedKey) {
             message.warn(`请选择一个${TYPE_LABEL[type]}`);
             return;
         }
 
-        await http.post("org-nodes/link-user", { userId, orgNodeId });
-
-        message.success("保存成功");
+        onSelect(selectedKey);
         this.setState({ selectedKey: null });
-        onClose(true);
     };
 
-    cancel = () => {
+    onCancel = () => {
         this.setState({ selectedKey: null });
-        const { onClose } = this.props;
-        onClose();
+        const { onCancel } = this.props;
+        onCancel();
     };
 
     onSearch = keyword => {
@@ -114,6 +106,7 @@ class TreeLinkDialog extends PureComponent {
 
     renderTree = node => {
         const { orgNodes, keyword } = this.state;
+        const { type } = this.props;
 
         const children = orgNodes.filter(item => item.parentId === node.id);
 
@@ -132,12 +125,15 @@ class TreeLinkDialog extends PureComponent {
                 icon = <i className="material-icons">group</i>;
         }
 
+        const selectable = !(type !== "ORG" && node.type === "ORG");
+
         return (
             <TreeNode
                 title={<TreeNodeTitle title={node.name} keyword={keyword} />}
                 key={String(node.id)}
                 icon={icon}
                 dataRef={node}
+                selectable={selectable}
             >
                 {children.map(item => this.renderTree(item))}
             </TreeNode>
@@ -150,7 +146,7 @@ class TreeLinkDialog extends PureComponent {
         const root = { id: -1 };
 
         return (
-            <Modal visible={visible} title="关联更多" onOk={this.submit} onCancel={this.cancel}>
+            <Modal visible={visible} title="关联更多" onOk={this.submit} onCancel={this.onCancel}>
                 {orgNodes.length ? (
                     <>
                         <Search onSearch={this.onSearch} placeholder="搜索组织机构树" enterButton />
@@ -174,4 +170,4 @@ class TreeLinkDialog extends PureComponent {
     }
 }
 
-export default connect(({ userPool }) => ({ userPool }))(TreeLinkDialog);
+export default SelectOrgDialog;

@@ -3,26 +3,34 @@ import { connect } from "react-redux";
 import Table from "components/Table";
 import { Button, Input, message, Modal } from "antd";
 import http from "my/http";
-import SelectOrgDialog from "./SelectOrgDialog";
-import { TYPE_LABEL } from "my/constants";
+import SelectUserDialog from "components/SelectUserDialog";
+import Avatar from "components/Avatar";
 import NoCard from "components/NoCard";
 
 const { Search } = Input;
 
-class LinkOrg extends PureComponent {
+class LinkUser extends PureComponent {
     columns = [
         {
-            title: "名称",
-            dataIndex: "name"
+            title: "头像",
+            dataIndex: "avatarUrl",
+            width: 70,
+            render: value => <Avatar url={value} width={40} />
         },
         {
-            title: "描述",
-            dataIndex: "description",
+            title: "昵称",
+            dataIndex: "nickname",
             ellipsis: true
         },
         {
-            title: "上级组织机构",
-            dataIndex: "parent.name"
+            title: "手机号",
+            dataIndex: "mobile",
+            ellipsis: true
+        },
+        {
+            title: "邮箱",
+            dataIndex: "email",
+            ellipsis: true
         },
         {
             title: "操作",
@@ -43,6 +51,9 @@ class LinkOrg extends PureComponent {
 
     state = {
         list: [],
+        current: 1,
+        pageSize: 10,
+        total: 0,
         keyword: "",
         loading: true,
         dialogVisible: false
@@ -55,15 +66,16 @@ class LinkOrg extends PureComponent {
     initData = async () => {
         this.setState({ loading: true });
 
-        const { keyword } = this.state;
+        const { current, pageSize, keyword } = this.state;
         const {
-            userPool: { selectedKey },
-            type
+            roleManage: { selectedKey }
         } = this.props;
-        const params = { keyword, userId: selectedKey, type };
+        const params = { current, pageSize, keyword, roleId: selectedKey };
 
-        const list = await http.get("org-nodes/by-user-link", { params });
-        this.setState({ list, loading: false });
+        const { list, total } = await http.get("users", { params });
+
+        if (list.length || current === 1) this.setState({ list, total, loading: false });
+        else this.setState({ current: current - 1 }, this.initData);
     };
 
     delete1 = id => {
@@ -72,11 +84,10 @@ class LinkOrg extends PureComponent {
             okType: "danger",
             onOk: async () => {
                 const {
-                    userPool: { selectedKey }
+                    roleManage: { selectedKey }
                 } = this.props;
-                await http.post("org-nodes/unlink-user", {
-                    userId: selectedKey,
-                    orgNodeId: id
+                await http.delete("roles/user-links", {
+                    params: { userId: id, roleId: selectedKey }
                 });
 
                 message.success("移除成功");
@@ -86,31 +97,36 @@ class LinkOrg extends PureComponent {
     };
 
     onSearch = keyword => {
-        this.setState({ keyword }, this.initData);
+        this.setState({ keyword, current: 1 }, this.initData);
     };
 
-    onSelect = async orgNodeId => {
-        const {
-            userPool: { selectedKey: userId }
-        } = this.props;
-        await http.post("org-nodes/link-user", { userId, orgNodeId });
+    onChange = pagination => {
+        this.setState({ ...pagination }, this.initData);
+    };
 
-        message.success("保存成功");
+    closeDialog = () => {
         this.setState({ dialogVisible: false });
         this.initData();
     };
 
-    onCancel = () => {
-        this.setState({ dialogVisible: false });
+    onSelect = async userId => {
+        const {
+            roleManage: { selectedKey }
+        } = this.props;
+
+        await http.post("roles/user-links", { userId, roleId: selectedKey });
+
+        message.success("保存成功");
     };
 
     render() {
-        const { list, loading, dialogVisible } = this.state;
-        const { type } = this.props;
+        const { list, current, pageSize, total, loading, dialogVisible } = this.state;
+
+        const pagination = { current, pageSize, total };
 
         return (
             <NoCard
-                title={`关联${TYPE_LABEL[type]}列表`}
+                title="关联用户列表"
                 right={
                     <Button
                         onClick={() => this.setState({ dialogVisible: true })}
@@ -123,7 +139,7 @@ class LinkOrg extends PureComponent {
             >
                 <Search
                     onSearch={this.onSearch}
-                    placeholder={`搜索${TYPE_LABEL[type]}名称`}
+                    placeholder="搜索昵称、手机号、邮箱"
                     enterButton
                     style={{ marginBottom: 20 }}
                 />
@@ -132,12 +148,12 @@ class LinkOrg extends PureComponent {
                     dataSource={list}
                     columns={this.columns}
                     loading={loading}
-                    pagination={false}
+                    pagination={pagination}
+                    onChange={this.onChange}
                 />
-                <SelectOrgDialog
+                <SelectUserDialog
                     visible={dialogVisible}
-                    type={type}
-                    onCancel={this.onCancel}
+                    onClose={this.closeDialog}
                     onSelect={this.onSelect}
                 />
             </NoCard>
@@ -145,4 +161,4 @@ class LinkOrg extends PureComponent {
     }
 }
 
-export default connect(({ userPool }) => ({ userPool }))(LinkOrg);
+export default connect(({ roleManage }) => ({ roleManage }))(LinkUser);

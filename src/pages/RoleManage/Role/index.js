@@ -6,6 +6,7 @@ import http from "my/http";
 import Card from "components/Card";
 import { eventEmitter } from "my/utils";
 import Permission from "./Permission";
+import LinkUser from "./LinkUser";
 
 const { Item } = Menu;
 
@@ -76,7 +77,7 @@ class Role extends PureComponent {
                 );
                 break;
             default:
-            // right = <LinkUser type="ROLE" />;
+                right = <LinkUser />;
         }
 
         return (
