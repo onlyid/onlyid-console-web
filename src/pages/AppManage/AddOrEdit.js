@@ -1,11 +1,10 @@
 import React, { PureComponent } from "react";
-import { Form, Input, Button, message, Radio, Upload, Tooltip } from "antd";
+import { Button, Form, Input, message, Radio, Tooltip, Upload } from "antd";
 import http, { baseURL } from "my/http";
 import { CLIENT_TYPE_TEXT, IMG_UPLOAD_TIP } from "my/constants";
 import { connect } from "react-redux";
 import { eventEmitter } from "my/utils";
 import _ from "lodash";
-import classNames from "classnames";
 import styles from "./index.module.css";
 
 const { Item } = Form;

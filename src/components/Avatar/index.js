@@ -4,9 +4,8 @@ import defaultAvatar from "assets/default-avatar.svg";
 
 class Avatar extends PureComponent {
     render() {
-        const { url, width = 80, cursorPointer } = this.props;
+        const { url, width = 80, cursorPointer, style = {} } = this.props;
 
-        const style = {};
         if (cursorPointer) style.cursor = "pointer";
 
         return (

@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import { Badge, Icon, Menu } from "antd";
 import styles from "./index.module.css";
-import classNames from "classnames";
 import logo from "assets/logo.svg";
 import { withRouter } from "react-router-dom";
 import _ from "lodash";
+import RightAccount from "./RightAccount";
 
 const { Item } = Menu;
 
@@ -71,10 +71,7 @@ class Header extends PureComponent {
                             <Badge count={5}>
                                 <Icon type="bell" className={styles.notification} />
                             </Badge>
-                            <i className={classNames("material-icons", styles.avatar)}>
-                                account_circle
-                            </i>
-                            <span className={styles.name}>ltb</span>
+                            <RightAccount />
                         </div>
                     </div>
                 </div>

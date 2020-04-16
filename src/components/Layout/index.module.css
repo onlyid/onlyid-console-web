@@ -41,15 +41,31 @@
     font-size: 18px;
 }
 
-.avatar {
+.rightAccount {
+    display: flex;
+    align-items: center;
     margin-left: 30px;
-    margin-right: 5px;
-    font-size: 30px;
-    color: #aaa;
+    cursor: default;
+    padding: 5px 0;
 }
 
-.name {
+.rightAccount {
+    opacity: 0.8;
+}
+
+.rightAccount:hover {
+    opacity: 1;
+}
+
+.accountName {
+    margin-left: 10px;
     font-size: 15px;
+    display: inline-block;
+    max-width: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #eee;
 }
 
 .box2bg {

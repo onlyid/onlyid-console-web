@@ -1,10 +1,5 @@
 @import "~antd/dist/antd.css";
 
-body {
-    margin: 0;
-    font-family: PingFangSC, "Microsoft YaHei", sans-serif;
-}
-
 /* reset antd start */
 
 .ant-drawer-title {

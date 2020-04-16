@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import Layout from "components/Layout";
+import OAuthRedirect from "pages/OAuthRedirect";
 import { Spin } from "antd";
 
 const UserPool = React.lazy(() => import("pages/UserPool"));
@@ -10,7 +11,7 @@ const ResManage = React.lazy(() => import("pages/ResManage"));
 const RoleManage = React.lazy(() => import("pages/RoleManage"));
 
 const loading = (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ textAlign: "center", padding: "100px 0" }}>
         <Spin size="large" />
     </div>
 );
@@ -35,6 +36,9 @@ function App() {
                         </Route>
                         <Route path="/role-manage">
                             <RoleManage />
+                        </Route>
+                        <Route path="/oauth-redirect">
+                            <OAuthRedirect />
                         </Route>
                         <Route path="/">
                             <Redirect to="/org-manage" />
