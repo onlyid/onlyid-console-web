@@ -2,11 +2,11 @@ import React, { PureComponent } from "react";
 import http from "my/http";
 import styles from "./index.module.css";
 import classNames from "classnames";
-import { connect } from "react-redux";
 import { eventEmitter } from "my/utils";
 import _ from "lodash";
 import { Input } from "antd";
 import { CLIENT_TYPE_TEXT } from "my/constants";
+import statisticsIcon from "assets/statistics-icon.png";
 
 const { Search } = Input;
 
@@ -28,7 +28,7 @@ class AppMenu extends PureComponent {
     }
 
     initData = async (select = "first") => {
-        const { onShowEmptyChange, dispatch } = this.props;
+        const { onShowEmptyChange, savePayload, showAll } = this.props;
         const { keyword } = this.state;
 
         const params = { keyword };
@@ -36,19 +36,17 @@ class AppMenu extends PureComponent {
         this.setState({ list });
 
         if (list.length && select !== "no") {
+            if (showAll) list.unshift({ id: "all", iconUrl: statisticsIcon, name: "所有应用" });
+
             const selectedKey = select === "last" ? _.last(list).id : list[0].id;
-            dispatch({ type: "appManage/save", payload: { selectedKey } });
+            savePayload({ selectedKey });
         }
 
         onShowEmptyChange(!list.length);
     };
 
     deleteSelected = () => {
-        const {
-            appManage: { selectedKey },
-            onShowEmptyChange,
-            dispatch
-        } = this.props;
+        const { selectedKey, onShowEmptyChange, savePayload } = this.props;
         const { list } = this.state;
 
         if (list.length === 1) {
@@ -65,12 +63,12 @@ class AppMenu extends PureComponent {
         list.splice(index, 1);
         this.setState({ list: [...list] });
 
-        dispatch({ type: "appManage/save", payload: { selectedKey: list[newIndex].id } });
+        savePayload({ selectedKey: list[newIndex].id });
     };
 
     onItemClick = id => {
-        const { dispatch } = this.props;
-        dispatch({ type: "appManage/save", payload: { selectedKey: id } });
+        const { savePayload } = this.props;
+        savePayload({ selectedKey: id });
     };
 
     onSearch = keyword => {
@@ -79,9 +77,7 @@ class AppMenu extends PureComponent {
 
     render() {
         const { list } = this.state;
-        const {
-            appManage: { selectedKey }
-        } = this.props;
+        const { selectedKey } = this.props;
 
         return (
             <div className={styles.appMenu}>
@@ -99,7 +95,9 @@ class AppMenu extends PureComponent {
                                 <img src={item.iconUrl} alt="icon" />
                                 <span>{item.name}</span>
                             </div>
-                            <span className={styles.type}>{CLIENT_TYPE_TEXT[item.type]}</span>
+                            <span className={styles.type}>
+                                {CLIENT_TYPE_TEXT[item.type] || "所有"}
+                            </span>
                         </div>
                     ))}
                 </div>
@@ -108,4 +106,4 @@ class AppMenu extends PureComponent {
     }
 }
 
-export default connect(({ appManage }) => ({ appManage }))(AppMenu);
+export default AppMenu;

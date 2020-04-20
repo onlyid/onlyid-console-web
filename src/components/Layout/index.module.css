@@ -59,7 +59,6 @@
 
 .accountName {
     margin-left: 10px;
-    font-size: 15px;
     display: inline-block;
     max-width: 100px;
     text-overflow: ellipsis;

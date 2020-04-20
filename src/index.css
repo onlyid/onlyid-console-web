@@ -1,7 +1,10 @@
 @import "~antd/dist/antd.css";
 
-/* reset antd start */
+body {
+    background-color: #fdfdfd;
+}
 
+/* reset antd start */
 .ant-drawer-title {
     font-weight: normal;
 }
@@ -26,6 +29,7 @@
 
 .ant-table {
     border: 1px solid #e8e8e8;
+    background-color: white;
 }
 
 .ant-table > .ant-table-content .ant-table-row:last-child td {
@@ -35,7 +39,6 @@
 .ant-table-placeholder {
     border-bottom: none;
 }
-
 /* reset antd end */
 
 .ant-menu.ctrlMenu {
@@ -83,6 +86,7 @@
     overflow: auto;
     border: 1px solid #e8e8e8;
     border-radius: 4px;
+    background-color: white;
 
     flex-grow: 1;
 }

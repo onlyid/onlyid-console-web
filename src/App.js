@@ -9,6 +9,7 @@ const OrgManage = React.lazy(() => import("pages/OrgManage"));
 const AppManage = React.lazy(() => import("pages/AppManage"));
 const ResManage = React.lazy(() => import("pages/ResManage"));
 const RoleManage = React.lazy(() => import("pages/RoleManage"));
+const Statistics = React.lazy(() => import("pages/Statistics"));
 
 const loading = (
     <div style={{ textAlign: "center", padding: "100px 0" }}>
@@ -39,6 +40,9 @@ function App() {
                         </Route>
                         <Route path="/oauth-redirect">
                             <OAuthRedirect />
+                        </Route>
+                        <Route path="/statistics">
+                            <Statistics />
                         </Route>
                         <Route path="/">
                             <Redirect to="/org-manage" />

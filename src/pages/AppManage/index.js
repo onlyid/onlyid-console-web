@@ -3,8 +3,14 @@ import styles from "./index.module.css";
 import ReactDOM from "react-dom";
 import { Button, Drawer, Empty } from "antd";
 import AddOrEdit from "./AddOrEdit";
-import AppMenu from "./AppMenu";
+import AppMenu1 from "components/AppMenu";
 import App from "./App";
+import { connect } from "react-redux";
+
+const AppMenu = connect(
+    state => ({ selectedKey: state.appManage.selectedKey }),
+    dispatch => ({ savePayload: payload => dispatch({ type: "appManage/save", payload }) })
+)(AppMenu1);
 
 class AppManage extends PureComponent {
     state = {
