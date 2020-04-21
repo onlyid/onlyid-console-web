@@ -47,20 +47,20 @@ class Summary extends PureComponent {
                         {data.userTotal}
                     </Item>
                     <Item label="昨天新增用户数">{data.userNewYesterday}</Item>
-                    <Item label="过去7天新增用户数">{data.userNewLastWeek}</Item>
-                    <Item label="过去30天新增用户数" span={2}>
+                    <Item label="最近7天新增用户数">{data.userNewLastWeek}</Item>
+                    <Item label="最近30天新增用户数" span={2}>
                         {data.userNewLastMonth}
                     </Item>
                     <Item label="昨天活跃用户数">{data.userActiveYesterday}</Item>
-                    <Item label="过去7天活跃用户数">{data.userActiveLastWeek}</Item>
-                    <Item label="过去30天活跃用户数" span={2}>
+                    <Item label="最近7天活跃用户数">{data.userActiveLastWeek}</Item>
+                    <Item label="最近30天活跃用户数" span={2}>
                         {data.userActiveLastMonth}
                     </Item>
                 </Descriptions>
                 <Descriptions column={2} bordered style={{ marginTop: 30 }}>
                     <Item label="昨天发送验证码数">{data.otpSentYesterday}</Item>
-                    <Item label="过去7天发送验证码数">{data.otpSentLastWeek}</Item>
-                    <Item label="过去30天发送验证码数" span={2}>
+                    <Item label="最近7天发送验证码数">{data.otpSentLastWeek}</Item>
+                    <Item label="最近30天发送验证码数" span={2}>
                         {data.otpSentLastMonth}
                     </Item>
                 </Descriptions>

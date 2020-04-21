@@ -9,6 +9,7 @@
     "antd": "^3.26.9",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
+    "echarts": "^4.7.0",
     "eventemitter3": "^4.0.0",
     "lodash": "^4.17.15",
     "qs": "^6.9.3",

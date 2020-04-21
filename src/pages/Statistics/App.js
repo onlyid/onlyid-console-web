@@ -3,16 +3,21 @@ import { Icon, Menu } from "antd";
 import { connect } from "react-redux";
 import Card from "components/Card";
 import Summary from "./Summary";
-import UsersActive from "./UsersActive";
-import OtpSent from "./OtpSent";
+import UsersActiveTable from "./UsersActiveTable";
+import UsersActiveChart from "./UsersActiveChart";
+import OtpSentTable from "./OtpSentTable";
+import OtpSentChart from "./OtpSentChart";
 
 const { Item } = Menu;
 
 const MENU_DATA = [
     { icon: "info-circle", title: "概览" },
-    { icon: "line-chart", title: "最近新增用户" },
-    { icon: "line-chart", title: "最近活跃用户" },
-    { icon: "line-chart", title: "最近发送验证码" }
+    { icon: "table", title: "最近新增用户列表" },
+    { icon: "line-chart", title: "最近新增用户折线图" },
+    { icon: "table", title: "最近活跃用户列表" },
+    { icon: "line-chart", title: "最近活跃用户折线图" },
+    { icon: "table", title: "最近发送验证码列表" },
+    { icon: "line-chart", title: "最近发送验证码折线图" }
 ];
 
 class App extends PureComponent {
@@ -48,14 +53,23 @@ class App extends PureComponent {
                 );
                 break;
             case "1":
-                right = <UsersActive isNew />;
+                right = <UsersActiveTable isNew />;
                 break;
             case "2":
-                right = <UsersActive />;
+                right = <UsersActiveChart isNew />;
+                break;
+            case "3":
+                right = <UsersActiveTable />;
+                break;
+            case "4":
+                right = <UsersActiveChart />;
+                break;
+            case "5":
+                right = <OtpSentTable />;
                 break;
             default:
-                // 3
-                right = <OtpSent />;
+                // 6
+                right = <OtpSentChart />;
         }
 
         return (

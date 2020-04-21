@@ -96,7 +96,7 @@ class AppMenu extends PureComponent {
                                 <span>{item.name}</span>
                             </div>
                             <span className={styles.type}>
-                                {CLIENT_TYPE_TEXT[item.type] || "所有"}
+                                {CLIENT_TYPE_TEXT[item.type] || "-"}
                             </span>
                         </div>
                     ))}

@@ -11,7 +11,7 @@ import Avatar from "components/Avatar";
 const { Search } = Input;
 const { Item } = Descriptions;
 
-class UsersActive extends PureComponent {
+class UsersActiveTable extends PureComponent {
     columns = [
         {
             title: "昵称",
@@ -178,4 +178,4 @@ class UsersActive extends PureComponent {
     }
 }
 
-export default connect(({ statistics }) => ({ statistics }))(UsersActive);
+export default connect(({ statistics }) => ({ statistics }))(UsersActiveTable);

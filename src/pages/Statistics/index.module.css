@@ -12,3 +12,18 @@
     color: #1890ff;
     font-size: 16px;
 }
+
+.chart {
+    width: 600px;
+    min-height: 600px;
+    background-color: white;
+}
+
+.recentButtonBox {
+    text-align: right;
+    font-size: 13px;
+}
+
+.recentButtonBox :global .ant-btn-sm {
+    font-size: 13px;
+}
