@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { Icon, Menu } from "antd";
 import { connect } from "react-redux";
 import Card from "components/Card";
+import NoCard from "components/NoCard";
 import Summary from "./Summary";
 import UsersActiveTable from "./UsersActiveTable";
 import UsersActiveChart from "./UsersActiveChart";
@@ -46,11 +47,7 @@ class App extends PureComponent {
         let right;
         switch (menuCurrent) {
             case "0":
-                right = (
-                    <Card title={MENU_DATA[menuCurrent].title}>
-                        <Summary />
-                    </Card>
-                );
+                right = <Summary />;
                 break;
             case "1":
                 right = <UsersActiveTable isNew />;
@@ -88,7 +85,9 @@ class App extends PureComponent {
                         ))}
                     </Menu>
                 </div>
-                <div>{right}</div>
+                <div>
+                    <NoCard title={MENU_DATA[menuCurrent].title}>{right}</NoCard>
+                </div>
             </>
         );
     }

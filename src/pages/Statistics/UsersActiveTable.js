@@ -115,13 +115,12 @@ class UsersActiveTable extends PureComponent {
             drawerVisible,
             currentRecord
         } = this.state;
-        const { isNew } = this.props;
 
         const pagination = { current, pageSize, total };
         const { history: activeHistory } = currentRecord;
 
         return (
-            <NoCard title={`最近${isNew ? "新增" : "活跃"}用户列表`}>
+            <>
                 <Search
                     onSearch={this.onSearch}
                     placeholder="搜索昵称、手机号、邮箱"
@@ -179,7 +178,7 @@ class UsersActiveTable extends PureComponent {
                         <Item label="是否新用户">{activeHistory.isNew ? "是" : "否"}</Item>
                     </Descriptions>
                 </Drawer>
-            </NoCard>
+            </>
         );
     }
 }

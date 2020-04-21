@@ -107,7 +107,7 @@ class OtpSentTable extends PureComponent {
         const pagination = { current, pageSize, total };
 
         return (
-            <NoCard title="最近发送验证码列表">
+            <>
                 <Search
                     onSearch={this.onSearch}
                     placeholder="搜索手机号、邮箱"
@@ -160,7 +160,7 @@ class OtpSentTable extends PureComponent {
                         <Item label="所属应用">{currentRecord.clientName}</Item>
                     </Descriptions>
                 </Drawer>
-            </NoCard>
+            </>
         );
     }
 }
