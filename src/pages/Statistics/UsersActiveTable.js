@@ -5,7 +5,13 @@ import { Button, Descriptions, Drawer, Input } from "antd";
 import http from "my/http";
 import NoCard from "components/NoCard";
 import moment from "moment";
-import { DATE_TIME_FORMAT, GENDER_TEXT, ACTIVE_TYPE_TEXT, AUTH_TYPE_TEXT } from "my/constants";
+import {
+    DATE_TIME_FORMAT,
+    GENDER_TEXT,
+    ACTIVE_TYPE_TEXT,
+    AUTH_TYPE_TEXT,
+    DATE_TIME_FORMAT_SHORT
+} from "my/constants";
 import Avatar from "components/Avatar";
 
 const { Search } = Input;
@@ -32,7 +38,7 @@ class UsersActiveTable extends PureComponent {
             title: "时间",
             dataIndex: "history.createDate",
             ellipsis: true,
-            render: text => moment(text).format(DATE_TIME_FORMAT)
+            render: text => moment(text).format(DATE_TIME_FORMAT_SHORT)
         },
         {
             title: "查看",

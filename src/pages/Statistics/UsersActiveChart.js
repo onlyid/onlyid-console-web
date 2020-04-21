@@ -5,6 +5,7 @@ import http from "my/http";
 import { connect } from "react-redux";
 import styles from "./index.module.css";
 import { Button } from "antd";
+import NoCard from "components/NoCard";
 
 const CHART_OPTION = {
     tooltip: { trigger: "axis" },
@@ -111,13 +112,13 @@ class UsersActiveChart extends PureComponent {
                     name: "成功",
                     type: "line",
                     data: arr1,
-                    itemStyle: { color: "#52c41a" }
+                    itemStyle: { color: "#67C23A" }
                 },
                 {
                     name: "失败",
                     type: "line",
                     data: arr2,
-                    itemStyle: { color: "#f5222d" }
+                    itemStyle: { color: "#F56C6C" }
                 }
             ],
             xAxis: { data: x }
@@ -131,17 +132,20 @@ class UsersActiveChart extends PureComponent {
 
     render() {
         const { isRecent30 } = this.state;
+        const { isNew } = this.props;
 
         return (
-            <div className={styles.chart}>
-                <div className={styles.recentButtonBox}>
-                    切换：
-                    <Button type="link" onClick={this.toggleRecent} size="small">
-                        最近{isRecent30 ? 7 : 30}天
-                    </Button>
+            <NoCard title={`最近${isNew ? "新增" : "活跃"}用户折线图`}>
+                <div className={styles.chart}>
+                    <div className={styles.recentButtonBox}>
+                        切换：
+                        <Button type="link" onClick={this.toggleRecent} size="small">
+                            最近{isRecent30 ? 7 : 30}天
+                        </Button>
+                    </div>
+                    <div id="chart1" style={{ height: 570 }} />
                 </div>
-                <div id="chart1" style={{ height: 570 }} />
-            </div>
+            </NoCard>
         );
     }
 }
