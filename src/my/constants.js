@@ -5,6 +5,25 @@ export const TYPE_LABEL = {
     USER_GROUP: "用户组"
 };
 
+export const AUDIT_TYPE_LABEL = {
+    ALL: "所有",
+    ORG: "组织机构",
+    POSITION: "岗位",
+    USER_GROUP: "用户组",
+    USER: "用户",
+    CLIENT: "应用",
+    RES: "权限资源",
+    ROLE_GROUP: "角色组",
+    ROLE: "角色"
+};
+
+export const OPERATION_TYPE_TEXT = {
+    CREATE: "新增",
+    DELETE: "删除",
+    UPDATE: "修改",
+    READ: "查询"
+};
+
 export const GENDER_TEXT = {
     MALE: "男",
     FEMALE: "女",

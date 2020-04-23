@@ -1,0 +1,14 @@
+.root {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+.app {
+    width: 835px;
+}
+
+.searchBox {
+    display: flex;
+    margin-bottom: 20px;
+}

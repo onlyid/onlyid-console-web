@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Layout from "components/Layout";
 import OAuthRedirect from "pages/OAuthRedirect";
 import { Spin } from "antd";
@@ -10,6 +10,7 @@ const AppManage = React.lazy(() => import("pages/AppManage"));
 const ResManage = React.lazy(() => import("pages/ResManage"));
 const RoleManage = React.lazy(() => import("pages/RoleManage"));
 const Statistics = React.lazy(() => import("pages/Statistics"));
+const AuditLog = React.lazy(() => import("pages/AuditLog"));
 
 const loading = (
     <div style={{ textAlign: "center", padding: "100px 0" }}>
@@ -19,7 +20,7 @@ const loading = (
 
 function App() {
     return (
-        <Router basename="/console">
+        <BrowserRouter basename="/console">
             <Layout>
                 <Suspense fallback={loading}>
                     <Switch>
@@ -44,13 +45,16 @@ function App() {
                         <Route path="/statistics">
                             <Statistics />
                         </Route>
+                        <Route path="/audit-log">
+                            <AuditLog />
+                        </Route>
                         <Route path="/">
                             <Redirect to="/org-manage" />
                         </Route>
                     </Switch>
                 </Suspense>
             </Layout>
-        </Router>
+        </BrowserRouter>
     );
 }
 

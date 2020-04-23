@@ -7,6 +7,7 @@ import _ from "lodash";
 import { Input } from "antd";
 import { CLIENT_TYPE_TEXT } from "my/constants";
 import statisticsIcon from "assets/statistics-icon.png";
+import auditIcon from "assets/audit-icon.png";
 
 const { Search } = Input;
 
@@ -28,7 +29,7 @@ class AppMenu extends PureComponent {
     }
 
     initData = async (select = "first") => {
-        const { onShowEmptyChange, savePayload, showAll } = this.props;
+        const { onShowEmptyChange, savePayload, type } = this.props;
         const { keyword } = this.state;
 
         const params = { keyword };
@@ -36,7 +37,9 @@ class AppMenu extends PureComponent {
         this.setState({ list });
 
         if (list.length && select !== "no") {
-            if (showAll) list.unshift({ id: "all", iconUrl: statisticsIcon, name: "所有应用" });
+            if (type === "statistics")
+                list.unshift({ id: "all", iconUrl: statisticsIcon, name: "所有应用" });
+            else if (type === "audit") list.unshift({ iconUrl: auditIcon, name: "所有审计日志" });
 
             const selectedKey = select === "last" ? _.last(list).id : list[0].id;
             savePayload({ selectedKey });
@@ -83,13 +86,13 @@ class AppMenu extends PureComponent {
             <div className={styles.appMenu}>
                 <Search onSearch={this.onSearch} placeholder="搜索应用名称" enterButton />
                 <div className={styles.appMenuBox}>
-                    {list.map(item => (
+                    {list.map((item, index) => (
                         <div
                             className={classNames(styles.appItem, {
                                 [styles.active]: selectedKey === item.id
                             })}
                             onClick={() => this.onItemClick(item.id)}
-                            key={item.id}
+                            key={item.id || String(index)}
                         >
                             <div>
                                 <img src={item.iconUrl} alt="icon" />

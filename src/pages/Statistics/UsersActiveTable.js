@@ -3,14 +3,13 @@ import { connect } from "react-redux";
 import Table from "components/Table";
 import { Button, Descriptions, Drawer, Input } from "antd";
 import http from "my/http";
-import NoCard from "components/NoCard";
 import moment from "moment";
 import {
-    DATE_TIME_FORMAT,
-    GENDER_TEXT,
     ACTIVE_TYPE_TEXT,
     AUTH_TYPE_TEXT,
-    DATE_TIME_FORMAT_SHORT
+    DATE_TIME_FORMAT,
+    DATE_TIME_FORMAT_SHORT,
+    GENDER_TEXT
 } from "my/constants";
 import Avatar from "components/Avatar";
 

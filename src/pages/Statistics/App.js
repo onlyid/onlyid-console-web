@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import { Icon, Menu } from "antd";
 import { connect } from "react-redux";
-import Card from "components/Card";
 import NoCard from "components/NoCard";
 import Summary from "./Summary";
 import UsersActiveTable from "./UsersActiveTable";

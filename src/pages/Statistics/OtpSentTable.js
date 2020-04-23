@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import Table from "components/Table";
 import { Button, Descriptions, Drawer, Icon, Input, Tooltip } from "antd";
 import http from "my/http";
-import NoCard from "components/NoCard";
 import moment from "moment";
 import { DATE_TIME_FORMAT, DATE_TIME_FORMAT_SHORT, SENT_BY_TEXT } from "my/constants";
 

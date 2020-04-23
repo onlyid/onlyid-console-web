@@ -4,17 +4,11 @@ import Table from "components/Table";
 import { Button, Drawer, Form, Input, message, Modal, Radio } from "antd";
 import http from "my/http";
 import NoCard from "components/NoCard";
+import { OPERATION_TYPE_TEXT } from "my/constants";
 
 const { Item } = Form;
 const { TextArea } = Input;
 const { Group } = Radio;
-
-const TYPE_TEXT = {
-    create: "增加",
-    delete: "删除",
-    update: "修改",
-    read: "查询"
-};
 
 class AddOrEdit1 extends PureComponent {
     submit = () => {
@@ -47,7 +41,7 @@ class AddOrEdit1 extends PureComponent {
         } = e;
         const { form } = this.props;
 
-        form.setFieldsValue({ code: value, name: TYPE_TEXT[value] });
+        form.setFieldsValue({ code: value, name: OPERATION_TYPE_TEXT[value] });
     };
 
     render() {
@@ -58,9 +52,9 @@ class AddOrEdit1 extends PureComponent {
             <Form layout="vertical">
                 <Item label="快速填充">
                     <Group onChange={this.onChange}>
-                        {Object.keys(TYPE_TEXT).map(key => (
+                        {Object.keys(OPERATION_TYPE_TEXT).map(key => (
                             <Radio value={key} key={key}>
-                                {TYPE_TEXT[key]}
+                                {OPERATION_TYPE_TEXT[key]}
                             </Radio>
                         ))}
                     </Group>
