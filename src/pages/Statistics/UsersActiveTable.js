@@ -12,6 +12,7 @@ import {
     GENDER_TEXT
 } from "my/constants";
 import Avatar from "components/Avatar";
+import SuccessStatus from "../../components/SuccessStatus";
 
 const { Search } = Input;
 const { Item } = Descriptions;
@@ -167,11 +168,7 @@ class UsersActiveTable extends PureComponent {
                         <Item label="IP地址">{activeHistory.ip || "-"}</Item>
                         <Item label="认证方式">{AUTH_TYPE_TEXT[activeHistory.authType]}</Item>
                         <Item label="是否成功">
-                            {activeHistory.success ? (
-                                <span style={{ color: "#52c41a" }}>成功</span>
-                            ) : (
-                                <span style={{ color: "#f5222d" }}>失败</span>
-                            )}
+                            <SuccessStatus success={activeHistory.success} />
                         </Item>
                         <Item label="所属应用">{activeHistory.clientName}</Item>
                         <Item label="是否新用户">{activeHistory.isNew ? "是" : "否"}</Item>

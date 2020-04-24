@@ -23,11 +23,7 @@ class OAuthRedirect extends PureComponent {
     login = async code => {
         const { history } = this.props;
 
-        const { tenant, avatarUrl, nickname } = await http.post("login", { code });
-
-        localStorage.tenant = tenant;
-        localStorage.avatarUrl = avatarUrl;
-        localStorage.nickname = nickname;
+        localStorage.setObj("userInfo", await http.post("login", { code }));
         eventEmitter.emit("app/login");
 
         history.replace("/");

@@ -30,9 +30,12 @@ class Info extends PureComponent {
         const info = await http.get("users/" + this.props.userPool.selectedKey);
         this.setState({ info });
 
-        const { tenant } = localStorage;
+        const userInfo = localStorage.getObj("userInfo");
         const { creator } = info;
-        dispatch({ type: "userPool/save", payload: { isCreator: Number(tenant) === creator } });
+        dispatch({
+            type: "userPool/save",
+            payload: { isCreator: Number(userInfo.id) === creator }
+        });
     };
 
     showEdit = () => {

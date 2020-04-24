@@ -99,3 +99,8 @@ body {
     font-size: 20px;
     vertical-align: -5px;
 }
+
+.tip {
+    font-size: 13px;
+    color: #7f7f7f;
+}

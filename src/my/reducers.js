@@ -39,6 +39,8 @@ const defaultAuditLog = {
     selectedKey: null
 };
 
+const defaultAdmin = {};
+
 function userPool(state = defaultUserPool, action) {
     const { type, payload } = action;
 
@@ -116,6 +118,17 @@ function auditLog(state = defaultAuditLog, action) {
     }
 }
 
+function admin(state = defaultAdmin, action) {
+    const { type, payload } = action;
+
+    switch (type) {
+        case "admin/save":
+            return { ...state, ...payload };
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     userPool,
     orgManage,
@@ -123,5 +136,6 @@ export default combineReducers({
     resManage,
     roleManage,
     statistics,
-    auditLog
+    auditLog,
+    admin
 });

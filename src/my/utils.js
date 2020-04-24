@@ -14,3 +14,14 @@ export function getRandomValue(length = 32) {
     if (s.length > length) s = s.substr(0, length);
     return s;
 }
+
+Storage.prototype.getObj = function(key) {
+    const s = this.getItem(key);
+    if (!s) return null;
+
+    return JSON.parse(s);
+};
+
+Storage.prototype.setObj = function(key, value) {
+    this.setItem(key, JSON.stringify(value));
+};

@@ -5,6 +5,7 @@ import { Button, Descriptions, Drawer, Icon, Input, Tooltip } from "antd";
 import http from "my/http";
 import moment from "moment";
 import { DATE_TIME_FORMAT, DATE_TIME_FORMAT_SHORT, SENT_BY_TEXT } from "my/constants";
+import SuccessStatus from "../../components/SuccessStatus";
 
 const { Search } = Input;
 const { Item } = Descriptions;
@@ -139,11 +140,7 @@ class OtpSentTable extends PureComponent {
                         </Item>
                         <Item label="发送者">{SENT_BY_TEXT[currentRecord.sentBy]}</Item>
                         <Item label="发送成功">
-                            {currentRecord.sentSuccess ? (
-                                <span style={{ color: "#52c41a" }}>成功</span>
-                            ) : (
-                                <span style={{ color: "#f5222d" }}>失败</span>
-                            )}
+                            <SuccessStatus success={currentRecord.sentSuccess} />
                             <Tooltip
                                 title={
                                     <span>
