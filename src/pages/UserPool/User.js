@@ -88,6 +88,9 @@ class User extends PureComponent {
 
     render() {
         const { menuCurrent, MENU_DATA } = this.state;
+        const {
+            userPool: { isCreator }
+        } = this.props;
 
         let right;
         switch (menuCurrent) {
@@ -128,7 +131,11 @@ class User extends PureComponent {
                         className="ctrlMenu"
                     >
                         {MENU_DATA.map((item, index) => (
-                            <Item key={item.key || String(index)} className={item.className}>
+                            <Item
+                                key={item.key || String(index)}
+                                className={item.className}
+                                disabled={index === 6 && !isCreator}
+                            >
                                 <Icon type={item.icon} />
                                 {item.title}
                             </Item>

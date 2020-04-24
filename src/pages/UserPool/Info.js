@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Descriptions, Button } from "antd";
+import { Button, Descriptions } from "antd";
 import http from "my/http";
 import AddOrEdit from "./AddOrEdit";
 import { connect } from "react-redux";
@@ -25,8 +25,14 @@ class Info extends PureComponent {
     }
 
     initData = async () => {
+        const { dispatch } = this.props;
+
         const info = await http.get("users/" + this.props.userPool.selectedKey);
         this.setState({ info });
+
+        const { tenant } = localStorage;
+        const { creator } = info;
+        dispatch({ type: "userPool/save", payload: { isCreator: Number(tenant) === creator } });
     };
 
     showEdit = () => {
@@ -45,6 +51,9 @@ class Info extends PureComponent {
 
     render() {
         const { info, isEdit } = this.state;
+        const {
+            userPool: { isCreator }
+        } = this.props;
 
         if (isEdit) return <AddOrEdit info={info} onSave={this.onSave} onCancel={this.onCancel} />;
 
@@ -61,7 +70,11 @@ class Info extends PureComponent {
                     <Item label="备注">{info.description || "-"}</Item>
                     <Item label="创建日期">{moment(info.createDate).format(DATE_TIME_FORMAT)}</Item>
                 </Descriptions>
-                <Button onClick={this.showEdit} style={{ marginTop: 10, marginBottom: 24 }}>
+                <Button
+                    onClick={this.showEdit}
+                    style={{ marginTop: 10, marginBottom: 24 }}
+                    disabled={!isCreator}
+                >
                     编辑
                 </Button>
             </>

@@ -119,7 +119,7 @@ class LogTable extends PureComponent {
                         onSearch={this.onSearch}
                         placeholder="搜索名称、IP地址"
                         enterButton
-                        style={{ marginLeft: 20 }}
+                        style={{ marginLeft: 10 }}
                     />
                 </div>
                 <Table

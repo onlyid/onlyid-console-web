@@ -1,7 +1,8 @@
 import { combineReducers } from "redux";
 
 const defaultUserPool = {
-    selectedKey: null
+    selectedKey: null,
+    isCreator: true
 };
 
 const defaultOrgManage = {

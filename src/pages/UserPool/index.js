@@ -49,6 +49,7 @@ class UserPool extends PureComponent {
                     icon="arrow-right"
                     shape="circle"
                     type="primary"
+                    className="buttonPlain"
                 />
             ),
             mustShow: true

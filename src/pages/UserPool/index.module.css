@@ -23,7 +23,7 @@
     background: #e6f7ff;
 }
 
-:global .ant-table-tbody > tr > td {
+.userPool :global .ant-table-tbody > tr > td {
     padding: 5px 16px;
 }
 
