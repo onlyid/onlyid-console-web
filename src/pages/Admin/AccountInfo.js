@@ -29,13 +29,27 @@ class AccountInfo extends PureComponent {
 
         return (
             <>
-                <Avatar url={userInfo.avatarUrl} style={{ marginBottom: 30 }} />
-                <Descriptions column={4} layout="vertical" colon={false}>
-                    <Item label="昵称">{userInfo.nickname}</Item>
-                    <Item label="性别">{userInfo.gender ? GENDER_TEXT[userInfo.gender] : "-"}</Item>
-                    <Item label="手机号">{userInfo.mobile || "-"}</Item>
-                    <Item label="邮箱">{userInfo.email || "-"}</Item>
-                </Descriptions>
+                <div className={styles.infoBox}>
+                    <div>
+                        <Avatar url={userInfo.avatarUrl} />
+                    </div>
+                    <Descriptions
+                        column={3}
+                        layout="vertical"
+                        colon={false}
+                        style={{ marginLeft: 50 }}
+                    >
+                        <Item label="开发者ID" span={2}>
+                            {userInfo.uid}
+                        </Item>
+                        <Item label="昵称">{userInfo.nickname}</Item>
+                        <Item label="性别">
+                            {userInfo.gender ? GENDER_TEXT[userInfo.gender] : "-"}
+                        </Item>
+                        <Item label="手机号">{userInfo.mobile || "-"}</Item>
+                        <Item label="邮箱">{userInfo.email || "-"}</Item>
+                    </Descriptions>
+                </div>
                 <p className="tip" style={{ marginTop: 20 }}>
                     编辑提示：和所有接入唯ID的应用一样，你应该使用唯ID
                     APP修改公共基础用户信息，「唯ID 控制台」不提供单独修改。

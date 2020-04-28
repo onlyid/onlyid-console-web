@@ -1,7 +1,8 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Layout from "components/Layout";
-import OAuthRedirect from "pages/OAuthRedirect";
+import OAuthCallback from "pages/OAuthCallback";
+import AliPayCallback from "pages/AliPayCallback";
 import { Spin } from "antd";
 
 const UserPool = React.lazy(() => import("pages/UserPool"));
@@ -40,8 +41,11 @@ function App() {
                         <Route path="/role-manage">
                             <RoleManage />
                         </Route>
-                        <Route path="/oauth-redirect">
-                            <OAuthRedirect />
+                        <Route path="/oauth-callback">
+                            <OAuthCallback />
+                        </Route>
+                        <Route path="/alipay-callback">
+                            <AliPayCallback />
                         </Route>
                         <Route path="/statistics">
                             <Statistics />

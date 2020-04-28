@@ -6,6 +6,8 @@ import AccountInfo from "./AccountInfo";
 import NotificationManage from "./NotificationManage";
 import Renew from "./Renew";
 import styles from "./index.module.css";
+import { withRouter } from "react-router-dom";
+import qs from "qs";
 
 const { Item } = Menu;
 
@@ -19,6 +21,14 @@ class Admin extends PureComponent {
     state = {
         menuCurrent: "0"
     };
+
+    componentDidMount() {
+        const {
+            location: { search }
+        } = this.props;
+        const query = qs.parse(search, { ignoreQueryPrefix: true });
+        if (query.show === "renew") this.setState({ menuCurrent: "1" });
+    }
 
     onMenuClick = ({ key }) => {
         this.setState({ menuCurrent: key });
@@ -66,4 +76,4 @@ class Admin extends PureComponent {
     }
 }
 
-export default connect(({ admin }) => ({ admin }))(Admin);
+export default connect(({ admin }) => ({ admin }))(withRouter(Admin));
