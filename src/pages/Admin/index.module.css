@@ -52,7 +52,7 @@
     margin-top: 20px;
 }
 
-.notification :global .ant-checkbox-group-item:not(:first-of-type) {
+.notification :global .ant-checkbox-group-item {
     margin-top: 10px;
-    width: 100%;
+    width: 49%;
 }

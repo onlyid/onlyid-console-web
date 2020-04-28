@@ -3,7 +3,7 @@ import { message } from "antd";
 
 export const baseURL = "/api";
 export const loginUrl =
-    "https://www.onlyid.net/oauth?client-id=xxx&redirect-uri=https%3A%2F%2Fwww.onlyid.net%2Fconsole%2Foauth-redirect";
+    "https://www.onlyid.net/oauth?client-id=xxx&redirect-uri=https%3A%2F%2Fwww.onlyid.net%2Fconsole%2Foauth-callback";
 
 const instance = axios.create({ baseURL });
 

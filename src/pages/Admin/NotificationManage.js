@@ -37,7 +37,7 @@ class NotificationManage extends PureComponent {
         const { notificationCategory, notificationSendEmail } = localStorage.getObj("tenantInfo");
         return (
             <div className={styles.notification}>
-                <p style={{ marginBottom: 20 }}>选择你希望接收唯ID发送的哪些通知。</p>
+                <p>选择你希望接收唯ID发送的哪些通知。</p>
                 <Checkbox.Group
                     options={this.options}
                     defaultValue={notificationCategory}
