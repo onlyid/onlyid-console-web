@@ -51,3 +51,8 @@
     color: rgba(0, 0, 0, 0.85);
     margin-top: 20px;
 }
+
+.notification :global .ant-checkbox-group-item:not(:first-of-type) {
+    margin-top: 10px;
+    width: 100%;
+}
