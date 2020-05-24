@@ -1,12 +1,13 @@
 import React, { PureComponent } from "react";
 import Avatar from "components/Avatar";
 import styles from "./index.module.css";
-import { loginUrl } from "my/http";
 import { Dropdown, Menu, Icon } from "antd";
 import http from "my/http";
 import { eventEmitter } from "my/utils";
 
 const { Item } = Menu;
+
+const HOME_URL = "https://www.onlyid.net/home";
 
 class RightAccount extends PureComponent {
     componentDidMount() {
@@ -16,7 +17,7 @@ class RightAccount extends PureComponent {
     logout = async () => {
         await http.post("logout");
 
-        window.location.replace(loginUrl);
+        window.location.replace(HOME_URL);
     };
 
     onClick = ({ key }) => {

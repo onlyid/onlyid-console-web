@@ -51,8 +51,8 @@ class AccountInfo extends PureComponent {
                     </Descriptions>
                 </div>
                 <p className="tip" style={{ marginTop: 20 }}>
-                    编辑提示：和所有接入唯ID的应用一样，你应该使用唯ID
-                    APP修改公共基础用户信息，「唯ID 控制台」不提供单独修改。
+                    编辑提示：和所有接入唯ID的应用一样，你应该使用「唯ID
+                    APP」修改公共基础用户信息，控制台不提供单独修改。
                 </p>
                 <hr className={styles.hr1} />
                 <Descriptions column={4} layout="vertical" colon={false}>
