@@ -67,6 +67,7 @@ class Info extends PureComponent {
                     <Item label="应用名称">{info.name}</Item>
                     <Item label="应用类型">{CLIENT_TYPE_TEXT[info.type]}</Item>
                     <Item label="应用描述">{info.description || "-"}</Item>
+                    <Item label="应用id">{info.uid}</Item>
                     <Item label="创建日期">{moment(info.createDate).format(DATE_TIME_FORMAT)}</Item>
                 </Descriptions>
                 <Button onClick={this.showEdit} style={{ marginTop: 10, marginBottom: 24 }}>

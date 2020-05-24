@@ -39,6 +39,12 @@
 
 .notification {
     font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+}
+
+.notification:hover {
+    color: white;
 }
 
 .rightAccount {
@@ -47,9 +53,6 @@
     margin-left: 30px;
     cursor: default;
     padding: 5px 0;
-}
-
-.rightAccount {
     opacity: 0.8;
 }
 

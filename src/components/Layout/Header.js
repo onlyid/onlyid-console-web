@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Badge, Icon, Menu } from "antd";
+import { Badge, Icon, Menu, Popover } from "antd";
 import styles from "./index.module.css";
 import logo from "assets/logo.svg";
 import { withRouter } from "react-router-dom";
@@ -68,9 +68,12 @@ class Header extends PureComponent {
                             ))}
                         </Menu>
                         <div className={styles.right}>
-                            <Badge count={5}>
+                            <Popover content="暂无新消息">
                                 <Icon type="bell" className={styles.notification} />
-                            </Badge>
+                            </Popover>
+                            {/*<Badge count={5}>*/}
+                            {/*    <Icon type="bell" className={styles.notification} />*/}
+                            {/*</Badge>*/}
                             <RightAccount />
                         </div>
                     </div>

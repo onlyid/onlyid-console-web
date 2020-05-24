@@ -69,7 +69,7 @@ class Summary extends PureComponent {
                         「唯ID OTP」服务已累计为你发送验证码
                         <span> {data.otpSentTotal} </span>
                         条，节省费用
-                        <span> {data.otpSentTotal * 0.05} </span>元。
+                        <span> {(data.otpSentTotal * 0.05).toFixed(1)} </span>元。
                     </p>
                 )}
             </>
