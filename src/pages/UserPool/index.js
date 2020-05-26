@@ -19,7 +19,7 @@ class UserPool extends PureComponent {
         {
             title: "头像",
             dataIndex: "avatarUrl",
-            render: value => <Avatar url={value} width={40} />,
+            render: value => <Avatar url={value} width={40} height={40} />,
             mustShow: true
         },
         {

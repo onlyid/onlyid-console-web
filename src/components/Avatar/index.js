@@ -14,6 +14,7 @@ class Avatar extends PureComponent {
                 alt="avatar"
                 className={styles.img}
                 width={width}
+                height={width}
                 style={style}
             />
         );
