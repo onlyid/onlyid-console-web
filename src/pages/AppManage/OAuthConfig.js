@@ -9,7 +9,7 @@ const { Item } = Descriptions;
 
 const RULE_URI = [{ required: true, type: "url" }];
 
-class EditForm extends PureComponent {
+class EditForm1 extends PureComponent {
     state = {
         uris: [],
         uri2add: ""
@@ -20,33 +20,46 @@ class EditForm extends PureComponent {
         this.setState({ uris: [...info.redirectUris] });
     }
 
-    submit = async () => {
-        const { info, onSave } = this.props;
+    validate = async () => {
+        const { info, form } = this.props;
         const { uris, uri2add } = this.state;
         console.log(uris);
         console.log(uri2add);
 
-        const uris2submit = [...uris];
-        if (uri2add) uris2submit.push(uri2add);
+        if (info.type === "APP") {
+            form.validateFields(async (err, values) => {
+                if (err) return;
 
-        if (!uris2submit.length) {
-            message.error("应用回调uri至少要填写一项");
-            return;
-        }
+                this.submit(info.id, values);
+            });
+        } else {
+            const uris2submit = [...uris];
+            if (uri2add) uris2submit.push(uri2add);
 
-        const validator = new Validator({ uri: RULE_URI });
-        for (let i = 0; i < uris2submit.length; i++) {
-            const uri = uris2submit[i];
-            try {
-                await validator.validate({ uri });
-            } catch ({ errors }) {
-                message.error(`应用回调uri第${i + 1}项不是合法的url`);
+            if (!uris2submit.length) {
+                message.error("应用回调uri至少要填写一项");
                 return;
             }
-        }
 
-        const values = { redirectUris: uris2submit };
-        await http.put(`clients/${info.id}/oauth-config`, values);
+            const validator = new Validator({ uri: RULE_URI });
+            for (let i = 0; i < uris2submit.length; i++) {
+                const uri = uris2submit[i];
+                try {
+                    await validator.validate({ uri });
+                } catch ({ errors }) {
+                    message.error(`应用回调uri第${i + 1}项不是合法的url`);
+                    return;
+                }
+            }
+
+            this.submit(info.id, { redirectUris: uris2submit });
+        }
+    };
+
+    submit = async (id, values) => {
+        const { onSave } = this.props;
+
+        await http.put(`clients/${id}/oauth-config`, values);
 
         onSave();
         message.success("保存成功");
@@ -92,8 +105,9 @@ class EditForm extends PureComponent {
     };
 
     render() {
-        const { onCancel, info } = this.props;
+        const { onCancel, info, form } = this.props;
         const { uri2add, uris } = this.state;
+        const { getFieldDecorator } = form;
 
         const uris1 = uris.map((uri, index) => (
             <div key={String(index)} className={styles.uriBox}>
@@ -107,7 +121,7 @@ class EditForm extends PureComponent {
                         icon="delete"
                         type="danger"
                         className="buttonPlain"
-                        onClick={index => this.onUriDelete(index)}
+                        onClick={() => this.onUriDelete(index)}
                     />
                 </Tooltip>
                 <br />
@@ -116,27 +130,47 @@ class EditForm extends PureComponent {
 
         return (
             <Form layout="vertical">
+                <Form.Item label="应用id">
+                    <Input value={info.uid} disabled />
+                </Form.Item>
                 <Form.Item label="应用secret" required>
                     <Input value={info.secret} disabled className={styles.inputWithButton} />
                     <Tooltip title="重置secret">
                         <Button icon="reload" onClick={this.updateSecret} />
                     </Tooltip>
                 </Form.Item>
-                <Form.Item label="应用回调uri" required>
-                    {uris1}
-                    <div className={styles.uriBox}>
-                        <Input
-                            value={uri2add}
-                            onChange={this.onChange}
-                            className={styles.inputWithButton}
-                        />
-                        <Tooltip title="新增一项">
-                            <Button icon="plus" onClick={this.onUriAdd} />
-                        </Tooltip>
-                    </div>
-                </Form.Item>
+                {info.type === "APP" ? (
+                    <>
+                        <Form.Item label="应用包名（Android）">
+                            {getFieldDecorator("packageName", {
+                                initialValue: info.packageName,
+                                rules: [{ max: 50, message: "最多输入50字" }]
+                            })(<Input />)}
+                        </Form.Item>
+                        <Form.Item label="Bundle ID（iOS）">
+                            {getFieldDecorator("bundleId", {
+                                initialValue: info.bundleId,
+                                rules: [{ max: 50, message: "最多输入50字" }]
+                            })(<Input />)}
+                        </Form.Item>
+                    </>
+                ) : (
+                    <Form.Item label="应用回调uri" required>
+                        {uris1}
+                        <div className={styles.uriBox}>
+                            <Input
+                                value={uri2add}
+                                onChange={this.onChange}
+                                className={styles.inputWithButton}
+                            />
+                            <Tooltip title="新增一项">
+                                <Button icon="plus" onClick={this.onUriAdd} />
+                            </Tooltip>
+                        </div>
+                    </Form.Item>
+                )}
                 <Form.Item>
-                    <Button type="primary" onClick={this.submit}>
+                    <Button type="primary" onClick={this.validate}>
                         保存
                     </Button>
                     <Button onClick={onCancel} style={{ marginLeft: 20 }}>
@@ -147,6 +181,8 @@ class EditForm extends PureComponent {
         );
     }
 }
+
+const EditForm = Form.create()(EditForm1);
 
 class OAuthConfig extends PureComponent {
     state = {
@@ -202,8 +238,16 @@ class OAuthConfig extends PureComponent {
         return (
             <>
                 <Descriptions column={1} layout="vertical" colon={false}>
+                    <Item label="应用id">{info.uid}</Item>
                     <Item label="应用secret">{info.secret}</Item>
-                    <Item label="应用回调uri">{redirectUris}</Item>
+                    {info.type === "APP" ? (
+                        <>
+                            <Item label="应用包名（Android）">{info.packageName || "-"}</Item>
+                            <Item label="Bundle ID（iOS）">{info.bundleId || "-"}</Item>
+                        </>
+                    ) : (
+                        <Item label="应用回调uri">{redirectUris}</Item>
+                    )}
                 </Descriptions>
                 <Button onClick={this.showEdit} style={{ marginTop: 10, marginBottom: 24 }}>
                     编辑
