@@ -57,7 +57,7 @@ function App() {
                             <Admin />
                         </Route>
                         <Route path="/">
-                            <Redirect to="/org-manage" />
+                            <Redirect to="/app-manage" />
                         </Route>
                     </Switch>
                 </Suspense>

@@ -55,7 +55,9 @@ class Header extends PureComponent {
             <div className={styles.header}>
                 <div className={styles.box1bg}>
                     <div className={styles.box1}>
-                        <img src={logo} alt="logo" height="33" />
+                        <a href="https://www.onlyid.net">
+                            <img src={logo} alt="logo" height="33" />
+                        </a>
                         <Menu
                             onClick={this.onMenuClick}
                             selectedKeys={[menuCurrent]}

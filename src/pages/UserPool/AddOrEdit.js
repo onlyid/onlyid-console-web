@@ -58,8 +58,8 @@ class AddOrEdit extends PureComponent {
             return false;
         }
 
-        if (file.size > 350000) {
-            message.error("不能大于 350 KB");
+        if (file.size > 1024 * 1024) {
+            message.error("不能大于 1 M");
             return false;
         }
 
