@@ -58,11 +58,6 @@ class AddOrEdit extends PureComponent {
             return false;
         }
 
-        if (file.size > 1024 * 1024) {
-            message.error("不能大于 1 M");
-            return false;
-        }
-
         return true;
     };
 
@@ -71,11 +66,25 @@ class AddOrEdit extends PureComponent {
             const msg = _.get(file, "response.error", "上传失败，请重试");
             message.error(msg);
         } else if (file.status === "done") {
-            this.setState({
-                avatarUrl: URL.createObjectURL(file.originFileObj),
-                filename: file.response.filename
-            });
+            this.setState({ filename: file.response.filename });
         }
+    };
+
+    transformFile = async file => {
+        const { image } = await window.loadImage(file, {
+            orientation: true,
+            aspectRatio: 1,
+            canvas: true
+        });
+        const scaledImage = window.loadImage.scale(image, { maxWidth: 256, minWidth: 256 });
+
+        this.setState({ avatarUrl: scaledImage.toDataURL(file.type) });
+
+        return new Promise(resolve => {
+            // 兼容IE11
+            if (scaledImage.toBlob) scaledImage.toBlob(resolve, file.type);
+            else resolve(scaledImage.msToBlob());
+        });
     };
 
     checkPassword = (rule, value, callback) => {
@@ -139,6 +148,7 @@ class AddOrEdit extends PureComponent {
                             action={baseURL + "/img"}
                             beforeUpload={this.beforeUpload}
                             onChange={this.onUploadChange}
+                            transformFile={this.transformFile}
                         >
                             <Tooltip title={IMG_UPLOAD_TIP}>
                                 <Avatar url={avatarUrl} cursorPointer />
