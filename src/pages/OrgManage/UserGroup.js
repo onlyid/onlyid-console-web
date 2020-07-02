@@ -1,18 +1,17 @@
 import React, { PureComponent } from "react";
-import { Icon, Menu, message, Modal } from "antd";
+import { message, Modal } from "antd";
 import Info from "./Info";
 import LinkUser from "./LinkUser";
 import { connect } from "react-redux";
 import http from "my/http";
 import Card from "components/Card";
 import { eventEmitter } from "my/utils";
-
-const { Item } = Menu;
+import CtrlMenu from "components/CtrlMenu";
 
 const MENU_DATA = [
     { icon: "info-circle", title: "用户组详情" },
     { icon: "link", title: "关联用户" },
-    { icon: "delete", title: "删除", key: "delete" }
+    { title: "删除用户组", key: "delete" }
 ];
 
 class UserGroup extends PureComponent {
@@ -84,18 +83,7 @@ class UserGroup extends PureComponent {
         return (
             <>
                 <div>
-                    <Menu
-                        onClick={this.onMenuClick}
-                        selectedKeys={[menuCurrent]}
-                        className="ctrlMenu"
-                    >
-                        {MENU_DATA.map((item, index) => (
-                            <Item key={item.key || String(index)}>
-                                <Icon type={item.icon} />
-                                {item.title}
-                            </Item>
-                        ))}
-                    </Menu>
+                    <CtrlMenu data={MENU_DATA} current={menuCurrent} onClick={this.onMenuClick} />
                 </div>
                 <div>{right}</div>
             </>

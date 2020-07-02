@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import { Icon, Menu } from "antd";
 import { connect } from "react-redux";
 import Card from "components/Card";
 import AccountInfo from "./AccountInfo";
@@ -8,8 +7,7 @@ import Renew from "./Renew";
 import styles from "./index.module.css";
 import { withRouter } from "react-router-dom";
 import qs from "qs";
-
-const { Item } = Menu;
+import CtrlMenu from "components/CtrlMenu";
 
 const MENU_DATA = [
     { icon: "user", title: "开发者信息" },
@@ -53,18 +51,7 @@ class Admin extends PureComponent {
         return (
             <div className={styles.root}>
                 <div>
-                    <Menu
-                        onClick={this.onMenuClick}
-                        selectedKeys={[menuCurrent]}
-                        className="ctrlMenu"
-                    >
-                        {MENU_DATA.map((item, index) => (
-                            <Item key={item.key || String(index)}>
-                                <Icon type={item.icon} />
-                                {item.title}
-                            </Item>
-                        ))}
-                    </Menu>
+                    <CtrlMenu data={MENU_DATA} current={menuCurrent} onClick={this.onMenuClick} />
                 </div>
                 <div>
                     <Card style={{ width: 925 }} title={MENU_DATA[menuCurrent].title}>

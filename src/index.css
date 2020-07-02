@@ -41,18 +41,6 @@ body {
 }
 /* reset antd end */
 
-.ant-menu.ctrlMenu {
-    width: 220px;
-    border: 1px solid #e8e8e8;
-    border-radius: 4px;
-    min-height: 600px;
-}
-
-.ctrlMenu .backMenuItem {
-    margin-top: 0;
-    border-bottom: 1px solid #eee;
-}
-
 .emptyBox {
     display: flex;
     align-items: center;

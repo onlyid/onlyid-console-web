@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import { Icon, Menu } from "antd";
 import { connect } from "react-redux";
 import NoCard from "components/NoCard";
 import Summary from "./Summary";
@@ -7,8 +6,7 @@ import UsersActiveTable from "./UsersActiveTable";
 import UsersActiveChart from "./UsersActiveChart";
 import OtpSentTable from "./OtpSentTable";
 import OtpSentChart from "./OtpSentChart";
-
-const { Item } = Menu;
+import CtrlMenu from "components/CtrlMenu";
 
 const MENU_DATA = [
     { icon: "info-circle", title: "概览" },
@@ -71,18 +69,7 @@ class App extends PureComponent {
         return (
             <>
                 <div>
-                    <Menu
-                        onClick={this.onMenuClick}
-                        selectedKeys={[menuCurrent]}
-                        className="ctrlMenu"
-                    >
-                        {MENU_DATA.map((item, index) => (
-                            <Item key={item.key || String(index)}>
-                                <Icon type={item.icon} />
-                                {item.title}
-                            </Item>
-                        ))}
-                    </Menu>
+                    <CtrlMenu data={MENU_DATA} current={menuCurrent} onClick={this.onMenuClick} />
                 </div>
                 <div>
                     <NoCard title={MENU_DATA[menuCurrent].title}>{right}</NoCard>

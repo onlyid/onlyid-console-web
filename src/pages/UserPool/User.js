@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Icon, Menu, message, Modal } from "antd";
+import { message, Modal } from "antd";
 import Info from "./Info";
 import UpdatePassword from "./UpdatePassword";
 import LinkOrg from "./LinkOrg";
@@ -9,41 +9,26 @@ import http from "my/http";
 import Card from "components/Card";
 import { eventEmitter } from "my/utils";
 import { TYPE_LABEL } from "my/constants";
+import CtrlMenu from "components/CtrlMenu";
 
-const { Item } = Menu;
+const MENU_DATA = [
+    {
+        title: "返回用户池",
+        key: "back"
+    },
+    { icon: "info-circle", title: "用户详情" },
+    { icon: "link", title: "关联组织机构" },
+    { icon: "link", title: "关联岗位" },
+    { icon: "link", title: "关联用户组" },
+    { icon: "link", title: "关联角色" },
+    { icon: "lock", title: "修改密码" },
+    { title: "移除用户", key: "delete" }
+];
 
 class User extends PureComponent {
     state = {
-        menuCurrent: "1",
-        MENU_DATA: [
-            {
-                icon: "arrow-left",
-                title: "返回用户池",
-                key: "back",
-                className: "backMenuItem"
-            },
-            { icon: "info-circle", title: "用户详情" },
-            { icon: "link", title: "关联组织机构" },
-            { icon: "link", title: "关联岗位" },
-            { icon: "link", title: "关联用户组" },
-            { icon: "link", title: "关联角色" },
-            { icon: "lock", title: "修改密码" },
-            { icon: "delete", title: "移除", key: "delete" }
-        ]
+        menuCurrent: "1"
     };
-
-    componentDidMount() {
-        const {
-            inOrg,
-            orgManage: { selectedType }
-        } = this.props;
-        const { MENU_DATA } = this.state;
-
-        if (inOrg) {
-            MENU_DATA[0].title = `返回【${TYPE_LABEL[selectedType]}】`;
-            this.setState({ MENU_DATA: [...MENU_DATA] });
-        }
-    }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         const {
@@ -87,10 +72,16 @@ class User extends PureComponent {
     };
 
     render() {
-        const { menuCurrent, MENU_DATA } = this.state;
+        const { menuCurrent } = this.state;
         const {
+            inOrg,
+            orgManage: { selectedType },
             userPool: { isCreator }
         } = this.props;
+
+        const menuData = [...MENU_DATA];
+        if (inOrg) menuData[0].title = `返回【${TYPE_LABEL[selectedType]}】`;
+        if (isCreator) menuData[6].disabled = true;
 
         let right;
         switch (menuCurrent) {
@@ -125,22 +116,7 @@ class User extends PureComponent {
         return (
             <>
                 <div>
-                    <Menu
-                        onClick={this.onMenuClick}
-                        selectedKeys={[menuCurrent]}
-                        className="ctrlMenu"
-                    >
-                        {MENU_DATA.map((item, index) => (
-                            <Item
-                                key={item.key || String(index)}
-                                className={item.className}
-                                disabled={index === 6 && !isCreator}
-                            >
-                                <Icon type={item.icon} />
-                                {item.title}
-                            </Item>
-                        ))}
-                    </Menu>
+                    <CtrlMenu data={menuData} current={menuCurrent} onClick={this.onMenuClick} />
                 </div>
                 <div>{right}</div>
             </>

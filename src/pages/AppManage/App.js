@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Icon, Menu, message, Modal } from "antd";
+import { message, Modal } from "antd";
 import Info from "./Info";
 import { connect } from "react-redux";
 import http from "my/http";
@@ -7,14 +7,13 @@ import Card from "components/Card";
 import { eventEmitter } from "my/utils";
 import OAuthConfig from "./OAuthConfig";
 import OtpConfig from "./OtpConfig";
-
-const { Item } = Menu;
+import CtrlMenu from "components/CtrlMenu";
 
 const MENU_DATA = [
     { icon: "info-circle", title: "应用详情" },
     { icon: "tool", title: "OAuth设置" },
     { icon: "tool", title: "验证码设置" },
-    { icon: "delete", title: "删除", key: "delete" }
+    { title: "删除应用", key: "delete" }
 ];
 
 class App extends PureComponent {
@@ -90,18 +89,7 @@ class App extends PureComponent {
         return (
             <>
                 <div>
-                    <Menu
-                        onClick={this.onMenuClick}
-                        selectedKeys={[menuCurrent]}
-                        className="ctrlMenu"
-                    >
-                        {MENU_DATA.map((item, index) => (
-                            <Item key={item.key || String(index)}>
-                                <Icon type={item.icon} />
-                                {item.title}
-                            </Item>
-                        ))}
-                    </Menu>
+                    <CtrlMenu data={MENU_DATA} current={menuCurrent} onClick={this.onMenuClick} />
                 </div>
                 <div>{right}</div>
             </>

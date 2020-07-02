@@ -1,0 +1,16 @@
+.root {
+    width: 220px;
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    min-height: 600px;
+}
+
+.deleteItem:hover {
+    color: #f5222d;
+}
+
+.hr1 {
+    color: #eee;
+    border-top: none;
+    margin: 8px 15px;
+}
