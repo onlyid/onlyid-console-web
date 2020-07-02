@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import styles from "./index.module.css";
 import ReactDOM from "react-dom";
-import { Button, Drawer, Empty } from "antd";
+import { Button, Drawer, Empty, Modal } from "antd";
 import AddOrEdit from "./AddOrEdit";
 import AppMenu1 from "components/AppMenu";
 import App from "./App";
@@ -12,10 +12,62 @@ const AppMenu = connect(
     dispatch => ({ savePayload: payload => dispatch({ type: "appManage/save", payload }) })
 )(AppMenu1);
 
+function GuideDialog(props) {
+    const { visible, onClose } = props;
+
+    return (
+        <Modal
+            visible={visible}
+            title="接入引导"
+            footer={[
+                <Button key="ok" onClick={onClose}>
+                    好的
+                </Button>
+            ]}
+            onCancel={onClose}
+        >
+            <p>已新建第一个应用，接下来你可能想：</p>
+            <p className={styles.guideText}>
+                <i className="material-icons">star_half</i>
+                使用唯ID OTP 发送无限量短信验证码：
+            </p>
+            <div className={styles.guideButtonBox}>
+                <a href="https://www.onlyid.net/home/docs/otp" target="_blank">
+                    <Button type="link" icon="question-circle">
+                        使用文档
+                    </Button>
+                </a>
+            </div>
+            <p className={styles.guideText}>
+                <i className="material-icons">star</i>
+                接入唯ID SSO 彻底解耦认证和业务，把琐事交给唯ID：
+            </p>
+            <div className={styles.guideButtonBox}>
+                <a href="https://www.onlyid.net/home/docs/sso/web" target="_blank">
+                    <Button type="link" icon="question-circle">
+                        网站接入文档
+                    </Button>
+                </a>
+                <a href="https://www.onlyid.net/home/docs/sso/android" target="_blank">
+                    <Button type="link" icon="question-circle">
+                        Android接入文档
+                    </Button>
+                </a>
+                <a href="https://www.onlyid.net/home/docs/sso/ios" target="_blank">
+                    <Button type="link" icon="question-circle">
+                        iOS接入文档
+                    </Button>
+                </a>
+            </div>
+        </Modal>
+    );
+}
+
 class AppManage extends PureComponent {
     state = {
         drawerVisible: false,
-        showEmpty: false
+        showEmpty: false,
+        dialogVisible: false
     };
 
     componentDidMount() {
@@ -31,11 +83,14 @@ class AppManage extends PureComponent {
     };
 
     saveAdd = () => {
+        const { showEmpty } = this.state;
+        if (showEmpty) this.setState({ dialogVisible: true });
+
         this.setState({ drawerVisible: false, showEmpty: false });
     };
 
     render() {
-        const { drawerVisible, showEmpty } = this.state;
+        const { drawerVisible, showEmpty, dialogVisible } = this.state;
 
         const portalNode = window.document.getElementById("headerRight");
 
@@ -73,6 +128,10 @@ class AppManage extends PureComponent {
                     <AddOrEdit onSave={this.saveAdd} onCancel={this.cancelAdd} />
                 </Drawer>
                 {content}
+                <GuideDialog
+                    visible={dialogVisible}
+                    onClose={() => this.setState({ dialogVisible: false })}
+                />
             </div>
         );
     }

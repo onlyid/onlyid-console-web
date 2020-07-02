@@ -30,3 +30,17 @@
 .uriBox:not(:first-child) {
     margin-top: 10px;
 }
+
+.guideText {
+    margin-top: 25px;
+}
+
+.guideText :global .material-icons {
+    color: #f57f17;
+    vertical-align: -25%;
+    margin-right: 10px;
+}
+
+.guideButtonBox {
+    margin-left: 18px;
+}

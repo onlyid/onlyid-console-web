@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Badge, Icon, Menu, Popover } from "antd";
+import { Badge, Icon, Menu, Popover, Tooltip } from "antd";
 import styles from "./index.module.css";
 import logo from "assets/logo.svg";
 import { withRouter } from "react-router-dom";
@@ -55,9 +55,11 @@ class Header extends PureComponent {
             <div className={styles.header}>
                 <div className={styles.box1bg}>
                     <div className={styles.box1}>
-                        <a href="https://www.onlyid.net">
-                            <img src={logo} alt="logo" height="33" />
-                        </a>
+                        <Tooltip title="打开官网">
+                            <a href="https://www.onlyid.net" target="_blank">
+                                <img src={logo} alt="logo" height="33" />
+                            </a>
+                        </Tooltip>
                         <Menu
                             onClick={this.onMenuClick}
                             selectedKeys={[menuCurrent]}
@@ -70,8 +72,17 @@ class Header extends PureComponent {
                             ))}
                         </Menu>
                         <div className={styles.right}>
+                            <Tooltip title="文档">
+                                <a
+                                    href="https://www.onlyid.net/home/docs"
+                                    target="_blank"
+                                    className={styles.rightIcon}
+                                >
+                                    <Icon type="question-circle" />
+                                </a>
+                            </Tooltip>
                             <Popover content="暂无新消息">
-                                <Icon type="bell" className={styles.notification} />
+                                <Icon type="bell" className={styles.rightIcon} />
                             </Popover>
                             {/*<Badge count={5}>*/}
                             {/*    <Icon type="bell" className={styles.notification} />*/}

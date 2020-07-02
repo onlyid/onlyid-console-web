@@ -37,14 +37,18 @@
     align-items: center;
 }
 
-.notification {
+.rightIcon {
     font-size: 18px;
     color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
 }
 
-.notification:hover {
+.rightIcon:hover {
     color: white;
+}
+
+.rightIcon:not(:first-child) {
+    margin-left: 20px;
 }
 
 .rightAccount {
