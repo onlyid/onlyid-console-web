@@ -7,11 +7,14 @@ const { Item } = Menu;
 export default function(props) {
     const { data, current, onClick } = props;
 
-    let deleteItem, backItem;
+    let deleteItem,
+        backItem,
+        indexPlus = 0;
     const data1 = data.filter(item => {
         switch (item.key) {
             case "back":
                 backItem = item;
+                indexPlus++;
                 return false;
             case "delete":
                 deleteItem = item;
@@ -32,7 +35,7 @@ export default function(props) {
             {backItem && <hr className={styles.hr1} />}
             {data1.map((item, index) => (
                 <Item
-                    key={item.key || String(index)}
+                    key={item.key || String(index + indexPlus)}
                     className={item.className}
                     disabled={item.disabled}
                 >
