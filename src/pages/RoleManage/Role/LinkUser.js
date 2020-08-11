@@ -111,10 +111,14 @@ class LinkUser extends PureComponent {
 
     onSelect = async userId => {
         const {
-            roleManage: { selectedKey }
+            roleManage: { selectedKey, selectedApp }
         } = this.props;
 
-        await http.post("roles/user-links", { userId, roleId: selectedKey });
+        await http.post("roles/user-links", {
+            userId,
+            roleId: selectedKey,
+            clientId: selectedApp.id
+        });
 
         message.success("保存成功");
     };
