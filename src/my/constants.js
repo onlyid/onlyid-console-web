@@ -84,7 +84,8 @@ export const ACTIVE_TYPE_TEXT = {
 
 export const AUTH_TYPE_TEXT = {
     PASSWORD: "密码",
-    OTP: "验证码"
+    OTP: "验证码",
+    SCAN: "扫二维码"
 };
 
 export const SENT_BY_TEXT = {
