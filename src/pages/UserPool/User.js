@@ -79,9 +79,9 @@ class User extends PureComponent {
             userPool: { isCreator }
         } = this.props;
 
-        const menuData = [...MENU_DATA];
-        if (inOrg) menuData[0].title = `返回【${TYPE_LABEL[selectedType]}】`;
-        if (isCreator) menuData[6].disabled = true;
+        if (inOrg) MENU_DATA[0].title = `返回【${TYPE_LABEL[selectedType]}】`;
+
+        MENU_DATA[6].disabled = !isCreator;
 
         let right;
         switch (menuCurrent) {
@@ -116,7 +116,7 @@ class User extends PureComponent {
         return (
             <>
                 <div>
-                    <CtrlMenu data={menuData} current={menuCurrent} onClick={this.onMenuClick} />
+                    <CtrlMenu data={MENU_DATA} current={menuCurrent} onClick={this.onMenuClick} />
                 </div>
                 <div>{right}</div>
             </>
