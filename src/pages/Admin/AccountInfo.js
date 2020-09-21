@@ -52,11 +52,11 @@ class AccountInfo extends PureComponent {
                 </div>
                 <p className="tip" style={{ marginTop: 20 }}>
                     编辑提示：和所有接入唯ID的应用一样，你应该使用「唯ID
-                    APP」修改公共基础用户信息，控制台不提供单独修改。
+                    APP」修改公共基础用户信息，此处不提供单独修改。
                 </p>
                 <hr className={styles.hr1} />
                 <Descriptions column={4} layout="vertical" colon={false}>
-                    <Item label="注册开发者时间">
+                    <Item label="注册时间">
                         {developerInfo.registerDate
                             ? moment(developerInfo.registerDate).format(DATE_TIME_FORMAT)
                             : "-"}
@@ -66,8 +66,8 @@ class AccountInfo extends PureComponent {
                             ? moment(developerInfo.lastLoginDate).format(DATE_TIME_FORMAT)
                             : "-"}
                     </Item>
-                    <Item label="是否登录成功">
-                        <SuccessStatus success={developerInfo.success} />
+                    <Item label="是否成功">
+                        <SuccessStatus success={developerInfo.lastLoginSuccess} />
                     </Item>
                 </Descriptions>
             </>
