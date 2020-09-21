@@ -139,7 +139,7 @@ class OtpSentTable extends PureComponent {
                             {moment(currentRecord.expireDate).format(DATE_TIME_FORMAT)}
                         </Item>
                         <Item label="发送者">{SENT_BY_TEXT[currentRecord.sentBy]}</Item>
-                        <Item label="发送成功">
+                        <Item label="是否成功">
                             <SuccessStatus success={currentRecord.sentSuccess} />
                             <Tooltip
                                 title={
