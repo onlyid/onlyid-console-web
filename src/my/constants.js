@@ -90,5 +90,5 @@ export const AUTH_TYPE_TEXT = {
 
 export const SENT_BY_TEXT = {
     OAUTH: "唯ID SSO",
-    DEVELOPER: "开发者"
+    OPEN_API: "OPEN API"
 };

@@ -29,7 +29,7 @@ class OtpSentTable extends PureComponent {
             render: text => moment(text).format(DATE_TIME_FORMAT_SHORT)
         },
         {
-            title: "发送者",
+            title: "发送自",
             dataIndex: "sentBy",
             width: 100,
             render: text => SENT_BY_TEXT[text]
