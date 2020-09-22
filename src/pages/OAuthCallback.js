@@ -4,6 +4,8 @@ import { withRouter } from "react-router-dom";
 import qs from "qs";
 import http from "my/http";
 import { eventEmitter } from "my/utils";
+import { connect } from "react-redux";
+import moment from "moment";
 
 class OAuthCallback extends PureComponent {
     componentDidMount() {
@@ -21,15 +23,16 @@ class OAuthCallback extends PureComponent {
     }
 
     login = async code => {
-        const { history } = this.props;
+        const { history, dispatch } = this.props;
         const { userInfo, tenantInfo } = await http.post("login", { code });
         localStorage.setObj("userInfo", userInfo);
         localStorage.setObj("tenantInfo", tenantInfo);
         eventEmitter.emit("app/login");
 
-        if (new Date(tenantInfo.expireDate) < new Date()) {
+        if (moment(tenantInfo.expireDate) < moment()) {
             history.replace("/admin?show=renew");
             message.warn("服务已到期，请续费");
+            dispatch({ type: "admin/save", payload: { tenantExpired: true } });
         } else {
             history.replace("/");
         }
@@ -44,4 +47,4 @@ class OAuthCallback extends PureComponent {
     }
 }
 
-export default withRouter(OAuthCallback);
+export default connect()(withRouter(OAuthCallback));

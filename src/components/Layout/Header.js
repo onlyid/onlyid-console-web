@@ -5,6 +5,7 @@ import logo from "assets/logo.svg";
 import { withRouter } from "react-router-dom";
 import _ from "lodash";
 import RightAccount from "./RightAccount";
+import { connect } from "react-redux";
 
 const { Item } = Menu;
 
@@ -50,6 +51,9 @@ class Header extends PureComponent {
 
     render() {
         const { menuCurrent } = this.state;
+        const {
+            admin: { tenantExpired }
+        } = this.props;
 
         return (
             <div className={styles.header}>
@@ -68,7 +72,9 @@ class Header extends PureComponent {
                             theme="dark"
                         >
                             {Object.keys(MENU_DATA).map(key => (
-                                <Item key={key}>{MENU_DATA[key]}</Item>
+                                <Item key={key} disabled={tenantExpired && key !== "admin"}>
+                                    {MENU_DATA[key]}
+                                </Item>
                             ))}
                         </Menu>
                         <div className={styles.right}>
@@ -105,4 +111,4 @@ class Header extends PureComponent {
     }
 }
 
-export default withRouter(Header);
+export default connect(({ admin }) => ({ admin }))(withRouter(Header));

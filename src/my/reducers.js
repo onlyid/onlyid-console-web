@@ -39,7 +39,9 @@ const defaultAuditLog = {
     selectedKey: null
 };
 
-const defaultAdmin = {};
+const defaultAdmin = {
+    tenantExpired: false
+};
 
 function userPool(state = defaultUserPool, action) {
     const { type, payload } = action;
