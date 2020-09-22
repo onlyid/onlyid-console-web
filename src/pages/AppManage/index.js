@@ -21,7 +21,7 @@ function GuideDialog(props) {
             title="接入引导"
             footer={[
                 <Button key="ok" onClick={onClose}>
-                    好的
+                    关闭
                 </Button>
             ]}
             onCancel={onClose}
