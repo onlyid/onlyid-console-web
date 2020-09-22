@@ -138,6 +138,7 @@ class Renew extends PureComponent {
         const { visible, loading, list } = this.state;
         const { expireDate } = localStorage.getObj("tenantInfo");
         const dayCount = moment(expireDate).diff(moment(), "days");
+        const tenantExpired = moment(expireDate) < moment();
 
         return (
             <>
@@ -145,7 +146,7 @@ class Renew extends PureComponent {
                     <Item label="产品信息">统一账号和认证解决方案</Item>
                     <Item label="有效期">{moment(expireDate).format(DATE_TIME_FORMAT)}</Item>
                     <Item label="状态">
-                        {new Date(expireDate) < new Date() ? (
+                        {tenantExpired ? (
                             <span style={{ color: "#f5222d" }}>已过期</span>
                         ) : (
                             <>
@@ -153,6 +154,11 @@ class Renew extends PureComponent {
                             </>
                         )}
                     </Item>
+                    {tenantExpired && (
+                        <Item label={<span style={{ color: "#52c41a" }}>过期提示</span>}>
+                            请放心，服务过期不会影响你的数据，也不会停止OTP、SSO等对用户的服务。
+                        </Item>
+                    )}
                 </Descriptions>
                 <Button
                     type="primary"
