@@ -39,7 +39,7 @@ class AccountInfo extends PureComponent {
                         colon={false}
                         style={{ marginLeft: 50 }}
                     >
-                        <Item label="开发者ID" span={2}>
+                        <Item label="开发者 ID" span={2}>
                             {userInfo.uid}
                         </Item>
                         <Item label="昵称">{userInfo.nickname}</Item>

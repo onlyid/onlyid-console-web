@@ -86,11 +86,11 @@ class RenewDialog extends PureComponent {
 class Renew extends PureComponent {
     columns = [
         {
-            title: "订单ID",
+            title: "订单 ID",
             dataIndex: "id"
         },
         {
-            title: "开发者ID",
+            title: "开发者 ID",
             key: "uid",
             render: () => localStorage.getObj("userInfo").uid
         },

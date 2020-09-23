@@ -61,7 +61,7 @@ class Info extends PureComponent {
         return (
             <>
                 <Descriptions column={1} layout="vertical" colon={false}>
-                    <Item label="应用icon">
+                    <Item label="应用 Icon">
                         <img src={info.iconUrl} alt="icon" className={styles.infoIcon} />
                     </Item>
                     <Item label="应用名称">{info.name}</Item>

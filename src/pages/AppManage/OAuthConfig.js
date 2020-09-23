@@ -130,12 +130,12 @@ class EditForm1 extends PureComponent {
 
         return (
             <Form layout="vertical">
-                <Form.Item label="应用id">
+                <Form.Item label="应用 ID">
                     <Input value={info.uid} disabled />
                 </Form.Item>
-                <Form.Item label="应用secret" required>
+                <Form.Item label="应用 Secret" required>
                     <Input value={info.secret} disabled className={styles.inputWithButton} />
-                    <Tooltip title="重置secret">
+                    <Tooltip title="重置 Secret">
                         <Button icon="reload" onClick={this.updateSecret} />
                     </Tooltip>
                 </Form.Item>
@@ -155,7 +155,7 @@ class EditForm1 extends PureComponent {
                         </Form.Item>
                     </>
                 ) : (
-                    <Form.Item label="应用回调uri" required>
+                    <Form.Item label="应用回调 URI" required>
                         {uris1}
                         <div className={styles.uriBox}>
                             <Input
@@ -238,15 +238,15 @@ class OAuthConfig extends PureComponent {
         return (
             <>
                 <Descriptions column={1} layout="vertical" colon={false}>
-                    <Item label="应用id">{info.uid}</Item>
-                    <Item label="应用secret">{info.secret}</Item>
+                    <Item label="应用 ID">{info.uid}</Item>
+                    <Item label="应用 Secret">{info.secret}</Item>
                     {info.type === "APP" ? (
                         <>
                             <Item label="应用包名（Android）">{info.packageName || "-"}</Item>
                             <Item label="Bundle ID（iOS）">{info.bundleId || "-"}</Item>
                         </>
                     ) : (
-                        <Item label="应用回调uri">{redirectUris}</Item>
+                        <Item label="应用回调 URI">{redirectUris}</Item>
                     )}
                 </Descriptions>
                 <Button onClick={this.showEdit} style={{ marginTop: 10, marginBottom: 24 }}>

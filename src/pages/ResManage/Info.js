@@ -60,7 +60,7 @@ class Info extends PureComponent {
                     <Item label="资源描述">{info.description || "-"}</Item>
                     <Item label="上级资源">{info.parent && info.parent.name}</Item>
                     <Item label="是否菜单">{info.isMenu ? "是" : "否"}</Item>
-                    <Item label="资源uri" className="uri">
+                    <Item label="资源 URI" className="uri">
                         {info.uri || "-"}
                     </Item>
                     <Item label="创建日期">{moment(info.createDate).format(DATE_TIME_FORMAT)}</Item>

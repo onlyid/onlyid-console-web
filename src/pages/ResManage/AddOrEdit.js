@@ -108,7 +108,7 @@ class AddOrEdit extends PureComponent {
                         </Radio.Group>
                     )}
                 </Item>
-                <Item label="资源uri">
+                <Item label="资源 URI">
                     {getFieldDecorator("uri", {
                         initialValue: info && info.uri,
                         rules: [{ max: 500, message: "最多输入500字" }]

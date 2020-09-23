@@ -18,10 +18,10 @@ export const AUDIT_TYPE_LABEL = {
 };
 
 export const OPERATION_TYPE_TEXT = {
-    CREATE: "新增",
-    DELETE: "删除",
-    UPDATE: "修改",
-    READ: "查询"
+    create: "新增",
+    delete: "删除",
+    update: "修改",
+    read: "查询"
 };
 
 export const GENDER_TEXT = {

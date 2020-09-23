@@ -119,7 +119,7 @@ class AddOrEdit extends PureComponent {
 
         return (
             <Form layout="vertical">
-                <Item label="应用icon" required>
+                <Item label="应用 Icon" required>
                     {uploadIcon}
                 </Item>
                 <Item label="应用名称">
