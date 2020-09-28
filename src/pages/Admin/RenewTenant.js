@@ -83,7 +83,7 @@ class RenewDialog extends PureComponent {
     }
 }
 
-class Renew extends PureComponent {
+class RenewTenant extends PureComponent {
     columns = [
         {
             title: "订单 ID",
@@ -156,7 +156,7 @@ class Renew extends PureComponent {
                     </Item>
                     {tenantExpired && (
                         <Item label={<span style={{ color: "#52c41a" }}>过期提示</span>}>
-                            请放心，服务过期不会影响你的数据，也不会停止OTP、SSO等对用户的服务。
+                            请放心，服务过期不会删除你的数据，也不会停止OTP、SSO等对用户的服务。
                         </Item>
                     )}
                 </Descriptions>
@@ -189,4 +189,4 @@ class Renew extends PureComponent {
     }
 }
 
-export default Renew;
+export default RenewTenant;

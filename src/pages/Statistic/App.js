@@ -2,8 +2,8 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import NoCard from "components/NoCard";
 import Summary from "./Summary";
-import UsersActiveTable from "./UsersActiveTable";
-import UsersActiveChart from "./UsersActiveChart";
+import UserActiveTable from "./UserActiveTable";
+import UserActiveChart from "./UserActiveChart";
 import OtpSentTable from "./OtpSentTable";
 import OtpSentChart from "./OtpSentChart";
 import CtrlMenu from "components/CtrlMenu";
@@ -47,16 +47,16 @@ class App extends PureComponent {
                 right = <Summary />;
                 break;
             case "1":
-                right = <UsersActiveTable isNew />;
+                right = <UserActiveTable isNew />;
                 break;
             case "2":
-                right = <UsersActiveChart isNew />;
+                right = <UserActiveChart isNew />;
                 break;
             case "3":
-                right = <UsersActiveTable />;
+                right = <UserActiveTable />;
                 break;
             case "4":
-                right = <UsersActiveChart />;
+                right = <UserActiveChart />;
                 break;
             case "5":
                 right = <OtpSentTable />;

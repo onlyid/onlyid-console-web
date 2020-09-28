@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Card from "components/Card";
 import AccountInfo from "./AccountInfo";
 import NotificationManage from "./NotificationManage";
-import Renew from "./Renew";
+import RenewTenant from "./RenewTenant";
 import styles from "./index.module.css";
 import { withRouter } from "react-router-dom";
 import qs from "qs";
@@ -41,7 +41,7 @@ class Admin extends PureComponent {
                 right = <AccountInfo />;
                 break;
             case "1":
-                right = <Renew />;
+                right = <RenewTenant />;
                 break;
             default:
                 // 2

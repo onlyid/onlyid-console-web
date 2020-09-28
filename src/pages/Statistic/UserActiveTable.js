@@ -17,7 +17,7 @@ import SuccessStatus from "../../components/SuccessStatus";
 const { Search } = Input;
 const { Item } = Descriptions;
 
-class UsersActiveTable extends PureComponent {
+class UserActiveTable extends PureComponent {
     columns = [
         {
             title: "昵称",
@@ -179,4 +179,4 @@ class UsersActiveTable extends PureComponent {
     }
 }
 
-export default connect(({ statistics }) => ({ statistics }))(UsersActiveTable);
+export default connect(({ statistics }) => ({ statistics }))(UserActiveTable);

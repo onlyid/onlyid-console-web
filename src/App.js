@@ -10,7 +10,7 @@ const OrgManage = React.lazy(() => import("pages/OrgManage"));
 const AppManage = React.lazy(() => import("pages/AppManage"));
 const ResManage = React.lazy(() => import("pages/ResManage"));
 const RoleManage = React.lazy(() => import("pages/RoleManage"));
-const Statistics = React.lazy(() => import("pages/Statistics"));
+const Statistic = React.lazy(() => import("pages/Statistic"));
 const AuditLog = React.lazy(() => import("pages/AuditLog"));
 const Admin = React.lazy(() => import("pages/Admin"));
 
@@ -48,7 +48,7 @@ function App() {
                             <AliPayCallback />
                         </Route>
                         <Route path="/statistics">
-                            <Statistics />
+                            <Statistic />
                         </Route>
                         <Route path="/audit-log">
                             <AuditLog />

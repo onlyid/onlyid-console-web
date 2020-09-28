@@ -3,7 +3,7 @@ import http from "my/http";
 import { connect } from "react-redux";
 import BaseChart from "./BaseChart";
 
-class UsersActiveChart extends PureComponent {
+class UserActiveChart extends PureComponent {
     state = {
         failList: [],
         successList: []
@@ -39,4 +39,4 @@ class UsersActiveChart extends PureComponent {
     }
 }
 
-export default connect(({ statistics }) => ({ statistics }))(UsersActiveChart);
+export default connect(({ statistics }) => ({ statistics }))(UserActiveChart);
