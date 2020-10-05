@@ -155,8 +155,9 @@ class RenewTenant extends PureComponent {
                         )}
                     </Item>
                     {tenantExpired && (
-                        <Item label={<span style={{ color: "#52c41a" }}>过期提示</span>}>
-                            请放心，服务过期不会删除你的数据，也不会停止OTP、SSO等对用户的服务。
+                        <Item label="过期提示">
+                            <span style={{ color: "#52c41a" }}>请放心</span>
+                            ，服务过期不会删除你的数据，也不会停止OTP、SSO等对用户的服务。
                         </Item>
                     )}
                 </Descriptions>

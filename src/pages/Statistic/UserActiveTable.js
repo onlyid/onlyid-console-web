@@ -87,7 +87,7 @@ class UserActiveTable extends PureComponent {
         const params = { current, pageSize, keyword, isNew };
         if (selectedKey !== "all") params.clientId = selectedKey;
 
-        const { list, total } = await http.get("statistic/users-active", { params });
+        const { list, total } = await http.get("statistics/users-active", { params });
 
         if (list.length || current === 1) this.setState({ list, total, loading: false });
         else this.setState({ current: current - 1 }, this.initData);

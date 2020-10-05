@@ -22,7 +22,7 @@ class Layout extends PureComponent {
 
         if (moment(tenantInfo.expireDate) < moment()) {
             dispatch({ type: "admin/save", payload: { tenantExpired: true } });
-            history.replace("/admin?show=renew");
+            history.replace("/admin/renewal");
         }
     }
 

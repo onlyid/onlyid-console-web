@@ -1,52 +1,47 @@
 import React, { PureComponent } from "react";
-import { Badge, Icon, Menu, Popover, Tooltip } from "antd";
+import { Icon, Menu, Popover, Tooltip } from "antd";
 import styles from "./index.module.css";
 import logo from "assets/logo.svg";
 import { withRouter } from "react-router-dom";
-import _ from "lodash";
 import RightAccount from "./RightAccount";
 import { connect } from "react-redux";
 
 const { Item } = Menu;
 
-const MENU_DATA = {
-    userPool: "用户池",
-    orgManage: "组织机构",
-    appManage: "应用管理",
-    resManage: "权限管理",
-    roleManage: "角色管理",
-    statistics: "统计数据",
-    auditLog: "审计日志",
-    admin: "系统管理"
-};
+const MENU_DATA = [
+    { title: "用户池", key: "user-pool" },
+    { title: "组织机构", key: "org-manage" },
+    { title: "应用管理", key: "app-manage" },
+    { title: "权限管理", key: "res-manage" },
+    { title: "角色管理", key: "role-manage" },
+    { title: "统计数据", key: "statistics" },
+    { title: "审计日志", key: "audit-logs" },
+    { title: "系统设置", key: "admin", hidden: true }
+];
 
 class Header extends PureComponent {
     state = {
-        menuCurrent: "userPool"
+        menuCurrent: null
     };
 
     componentDidMount() {
         const { pathname } = this.props.location;
-        const p = _.camelCase(pathname.split("/")[1]);
-        if (p in MENU_DATA) {
-            this.setState({ menuCurrent: p });
-        }
+        const p = pathname.split("/")[1];
+        this.setState({ menuCurrent: p });
     }
 
     componentDidUpdate(prevProps) {
         const { pathname } = this.props.location;
         if (prevProps.location.pathname === pathname) return;
 
-        const p = _.camelCase(pathname.split("/")[1]);
-        if (p in MENU_DATA) {
-            this.setState({ menuCurrent: p });
-        }
+        const p = pathname.split("/")[1];
+        this.setState({ menuCurrent: p });
     }
 
     onMenuClick = ({ key }) => {
         const { history } = this.props;
         this.setState({ menuCurrent: key });
-        history.push("/" + _.kebabCase(key));
+        history.push("/" + key);
     };
 
     render() {
@@ -54,6 +49,8 @@ class Header extends PureComponent {
         const {
             admin: { tenantExpired }
         } = this.props;
+
+        const item = MENU_DATA.find(item => item.key === menuCurrent);
 
         return (
             <div className={styles.header}>
@@ -71,9 +68,9 @@ class Header extends PureComponent {
                             className={styles.menu}
                             theme="dark"
                         >
-                            {Object.keys(MENU_DATA).map(key => (
-                                <Item key={key} disabled={tenantExpired && key !== "admin"}>
-                                    {MENU_DATA[key]}
+                            {MENU_DATA.filter(item => !item.hidden).map(item => (
+                                <Item key={item.key} disabled={tenantExpired}>
+                                    {item.title}
                                 </Item>
                             ))}
                         </Menu>
@@ -100,7 +97,7 @@ class Header extends PureComponent {
                 <div className={styles.box2bg}>
                     <div className={styles.box2}>
                         <div className={styles.left1}>
-                            <span style={{ fontSize: 18 }}>{MENU_DATA[menuCurrent]}</span>
+                            <span style={{ fontSize: 18 }}>{item && item.title}</span>
                             <div id="headerLeft" />
                         </div>
                         <div id="headerRight" />

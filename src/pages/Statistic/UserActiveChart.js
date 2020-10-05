@@ -25,7 +25,7 @@ class UserActiveChart extends PureComponent {
         } = this.props;
         const params = { isNew };
         if (selectedKey !== "all") params.clientId = selectedKey;
-        const { failList, successList } = await http.get("statistic/users-active/by-day", {
+        const { failList, successList } = await http.get("statistics/users-active/by-day", {
             params
         });
 

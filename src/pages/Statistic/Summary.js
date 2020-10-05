@@ -30,7 +30,7 @@ class Summary extends PureComponent {
         if (!selectedKey) return;
 
         const params = { clientId: selectedKey === "all" ? null : selectedKey };
-        const data = await http.get("statistic/summary", { params });
+        const data = await http.get("statistics/summary", { params });
         this.setState({ data });
     };
 

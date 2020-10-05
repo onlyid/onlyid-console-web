@@ -19,7 +19,7 @@ class OtpSentChart extends PureComponent {
         } = this.props;
         const params = {};
         if (selectedKey !== "all") params.clientId = selectedKey;
-        const { failList, successList } = await http.get("statistic/otp-sent/by-day", {
+        const { failList, successList } = await http.get("statistics/otp-sent/by-day", {
             params
         });
 

@@ -30,7 +30,7 @@ class OAuthCallback extends PureComponent {
         eventEmitter.emit("app/login");
 
         if (moment(tenantInfo.expireDate) < moment()) {
-            history.replace("/admin?show=renew");
+            history.replace("/admin/renewal");
             message.warn("服务已到期，请续费");
             dispatch({ type: "admin/save", payload: { tenantExpired: true } });
         } else {

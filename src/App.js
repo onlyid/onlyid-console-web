@@ -50,7 +50,7 @@ function App() {
                         <Route path="/statistics">
                             <Statistic />
                         </Route>
-                        <Route path="/audit-log">
+                        <Route path="/audit-logs">
                             <AuditLog />
                         </Route>
                         <Route path="/admin">

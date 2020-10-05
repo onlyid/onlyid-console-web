@@ -4,6 +4,7 @@ import styles from "./index.module.css";
 import { Dropdown, Menu, Icon } from "antd";
 import http from "my/http";
 import { eventEmitter } from "my/utils";
+import { withRouter } from "react-router-dom";
 
 const { Item } = Menu;
 
@@ -21,7 +22,10 @@ class RightAccount extends PureComponent {
     };
 
     onClick = ({ key }) => {
+        const { history } = this.props;
+
         if (key === "logout") this.logout();
+        else history.push("/admin/" + key);
     };
 
     render() {
@@ -30,6 +34,18 @@ class RightAccount extends PureComponent {
 
         const menu = (
             <Menu onClick={this.onClick}>
+                <Item key="developer">
+                    <Icon type="user" />
+                    开发者信息
+                </Item>
+                <Item key="renewal">
+                    <Icon type="transaction" />
+                    有效期和续费
+                </Item>
+                <Item key="notification">
+                    <Icon type="bell" />
+                    通知设置
+                </Item>
                 <Item key="logout">
                     <Icon type="logout" />
                     退出登录
@@ -38,7 +54,7 @@ class RightAccount extends PureComponent {
         );
 
         return (
-            <Dropdown overlay={menu}>
+            <Dropdown overlay={menu} placement="bottomCenter">
                 <div className={styles.rightAccount}>
                     <Avatar url={userInfo.avatarUrl} width={30} />
                     <span className={styles.accountName}>{userInfo.nickname}</span>
@@ -48,4 +64,4 @@ class RightAccount extends PureComponent {
     }
 }
 
-export default RightAccount;
+export default withRouter(RightAccount);

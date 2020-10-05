@@ -3,7 +3,7 @@ import { Checkbox, message } from "antd";
 import styles from "./index.module.css";
 import http from "my/http";
 
-class NotificationManage extends PureComponent {
+class NotificationSetting extends PureComponent {
     options = [
         {
             label: "服务通知（产品即将过期、SDK版本升级需开发者配合等）",
@@ -52,4 +52,4 @@ class NotificationManage extends PureComponent {
     }
 }
 
-export default NotificationManage;
+export default NotificationSetting;

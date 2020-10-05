@@ -9,7 +9,7 @@ import SuccessStatus from "components/SuccessStatus";
 
 const { Item } = Descriptions;
 
-class AccountInfo extends PureComponent {
+class DeveloperInfo extends PureComponent {
     state = {
         developerInfo: {}
     };
@@ -75,4 +75,4 @@ class AccountInfo extends PureComponent {
     }
 }
 
-export default AccountInfo;
+export default DeveloperInfo;

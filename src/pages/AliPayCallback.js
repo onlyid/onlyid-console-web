@@ -34,7 +34,7 @@ class AliPayCallback extends PureComponent {
                 dispatch({ type: "admin/save", payload: { tenantExpired: true } });
             throw e;
         } finally {
-            history.replace("/admin?show=renew");
+            history.replace("/admin/renewal");
         }
     };
 

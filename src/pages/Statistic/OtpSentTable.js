@@ -75,7 +75,7 @@ class OtpSentTable extends PureComponent {
         const params = { current, pageSize, keyword };
         if (selectedKey !== "all") params.clientId = selectedKey;
 
-        const { list, total } = await http.get("statistic/otp-sent", { params });
+        const { list, total } = await http.get("statistics/otp-sent", { params });
 
         if (list.length || current === 1) this.setState({ list, total, loading: false });
         else this.setState({ current: current - 1 }, this.initData);
