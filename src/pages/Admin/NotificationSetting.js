@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { Checkbox, message } from "antd";
 import styles from "./index.module.css";
 import http from "my/http";
+import classNames from "classnames";
 
 class NotificationSetting extends PureComponent {
     state = {
@@ -184,9 +185,16 @@ class NotificationSetting extends PureComponent {
                         </tr>
                     </tbody>
                 </table>
-                <p className="tip" style={{ marginTop: "2em" }}>
-                    温馨提示：邮件/短信仅在你账号的邮箱/手机号可用时才会发送。
+                <p className="tip" style={{ marginTop: "2em", marginBottom: 5 }}>
+                    温馨提示：
                 </p>
+                <ul className={classNames("tip", styles.notificationTip)}>
+                    <li>1）邮件/短信仅在你账号的邮箱/手机号可用时才会发送。</li>
+                    <li>
+                        2）<span style={{ color: "#52c41a" }}>请放心</span>
+                        ，唯ID恪守「不打扰原则」，不会给你发送无意义的垃圾信息。
+                    </li>
+                </ul>
             </div>
         );
     }

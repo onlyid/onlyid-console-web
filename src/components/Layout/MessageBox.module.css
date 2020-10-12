@@ -1,0 +1,44 @@
+.drawerTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.item {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.item:hover {
+    background-color: #f7f8f9;
+}
+
+.box1 {
+    display: flex;
+    justify-content: space-between;
+    height: 24px;
+    align-items: center;
+}
+
+.item .markRead {
+    display: none;
+}
+
+.item .createDate {
+    font-size: 13px;
+}
+
+.item:hover .markRead {
+    display: inline-block;
+}
+
+.item:hover .createDate {
+    display: none;
+}
+
+.itemTitle {
+    color: rgba(0, 0, 0, 0.85);
+    margin-bottom: 0;
+    margin-top: 0.5em;
+}

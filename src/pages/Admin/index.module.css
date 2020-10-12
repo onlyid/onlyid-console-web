@@ -79,3 +79,9 @@
 .notificationTable tr:hover {
     background-color: #f7f8f9;
 }
+
+.notificationTip {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}

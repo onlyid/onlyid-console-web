@@ -1,10 +1,13 @@
 import React, { PureComponent } from "react";
-import { Icon, Menu, Popover, Tooltip } from "antd";
+import { Badge, Icon, Menu, Tooltip } from "antd";
 import styles from "./index.module.css";
 import logo from "assets/logo.svg";
 import { withRouter } from "react-router-dom";
 import RightAccount from "./RightAccount";
 import { connect } from "react-redux";
+import MessageBox from "./MessageBox";
+import http from "my/http";
+import { eventEmitter } from "my/utils";
 
 const { Item } = Menu;
 
@@ -16,18 +19,25 @@ const MENU_DATA = [
     { title: "角色管理", key: "role-manage" },
     { title: "统计数据", key: "statistics" },
     { title: "审计日志", key: "audit-logs" },
-    { title: "系统设置", key: "admin", hidden: true }
+    { title: "系统设置", key: "admin", hidden: true },
+    { title: "站内信", key: "messages", hidden: true }
 ];
 
 class Header extends PureComponent {
     state = {
-        menuCurrent: null
+        menuCurrent: null,
+        drawerVisible: false
     };
 
     componentDidMount() {
         const { pathname } = this.props.location;
         const p = pathname.split("/")[1];
         this.setState({ menuCurrent: p });
+
+        this.getMessageCount();
+
+        eventEmitter.on("message/onMarkRead", this.getMessageCount);
+        eventEmitter.on("message/onDelete", this.getMessageCount);
     }
 
     componentDidUpdate(prevProps) {
@@ -38,16 +48,32 @@ class Header extends PureComponent {
         this.setState({ menuCurrent: p });
     }
 
+    getMessageCount = async () => {
+        const { dispatch } = this.props;
+
+        const { unread, total } = await http.get("messages/count");
+        dispatch({ type: "message/save", payload: { unreadCount: unread, total } });
+    };
+
     onMenuClick = ({ key }) => {
         const { history } = this.props;
         this.setState({ menuCurrent: key });
         history.push("/" + key);
     };
 
+    showDrawer = () => {
+        this.setState({ drawerVisible: true });
+    };
+
+    closeDrawer = () => {
+        this.setState({ drawerVisible: false });
+    };
+
     render() {
-        const { menuCurrent } = this.state;
+        const { menuCurrent, drawerVisible } = this.state;
         const {
-            admin: { tenantExpired }
+            admin: { tenantExpired },
+            message: { unreadCount }
         } = this.props;
 
         const item = MENU_DATA.find(item => item.key === menuCurrent);
@@ -84,12 +110,13 @@ class Header extends PureComponent {
                                     <Icon type="question-circle" />
                                 </a>
                             </Tooltip>
-                            <Popover content="暂无新消息">
-                                <Icon type="bell" className={styles.rightIcon} />
-                            </Popover>
-                            {/*<Badge count={5}>*/}
-                            {/*    <Icon type="bell" className={styles.notification} />*/}
-                            {/*</Badge>*/}
+                            <Badge
+                                count={unreadCount}
+                                className={styles.rightIcon}
+                                onClick={this.showDrawer}
+                            >
+                                <Icon type="bell" />
+                            </Badge>
                             <RightAccount />
                         </div>
                     </div>
@@ -103,9 +130,10 @@ class Header extends PureComponent {
                         <div id="headerRight" />
                     </div>
                 </div>
+                <MessageBox onClose={this.closeDrawer} visible={drawerVisible} />
             </div>
         );
     }
 }
 
-export default connect(({ admin }) => ({ admin }))(withRouter(Header));
+export default connect(({ admin, message }) => ({ admin, message }))(withRouter(Header));

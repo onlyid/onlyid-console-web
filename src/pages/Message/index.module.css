@@ -1,0 +1,39 @@
+.root {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+.inbox {
+    width: 545px;
+}
+
+.inbox tr.row:not(.selectedRow):hover > td {
+    background-color: #f7f8f9;
+}
+
+.row.selected {
+    background: #e6f7ff;
+}
+
+.row.isRead {
+    color: #7f7f7f;
+}
+
+.row.isRead :global .ant-btn {
+    color: #7f7f7f;
+}
+
+.contentBox {
+    border-left: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+    border-radius: 4px;
+}
+
+.emptyBox {
+    width: 600px;
+    opacity: 0.5;
+    text-align: center;
+    margin-top: 100px;
+}

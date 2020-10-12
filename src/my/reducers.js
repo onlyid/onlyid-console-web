@@ -43,6 +43,12 @@ const defaultAdmin = {
     tenantExpired: false
 };
 
+const defaultMessage = {
+    selectedKey: null,
+    unreadCount: 0,
+    total: 0
+};
+
 function userPool(state = defaultUserPool, action) {
     const { type, payload } = action;
 
@@ -131,6 +137,17 @@ function admin(state = defaultAdmin, action) {
     }
 }
 
+function message(state = defaultMessage, action) {
+    const { type, payload } = action;
+
+    switch (type) {
+        case "message/save":
+            return { ...state, ...payload };
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     userPool,
     orgManage,
@@ -139,5 +156,6 @@ export default combineReducers({
     roleManage,
     statistics,
     auditLog,
-    admin
+    admin,
+    message
 });

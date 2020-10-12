@@ -93,3 +93,11 @@ export const SENT_BY_TEXT = {
     OAUTH: "唯ID SSO",
     OPEN_API: "OPEN API"
 };
+
+export const CATEGORY_TEXT = {
+    PRODUCT: "产品消息",
+    WARN: "警告消息",
+    NEWS: "唯ID动态",
+    OTHER: "其他消息",
+    FINANCE: "财务消息"
+};

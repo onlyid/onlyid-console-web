@@ -13,6 +13,7 @@ const RoleManage = React.lazy(() => import("pages/RoleManage"));
 const Statistic = React.lazy(() => import("pages/Statistic"));
 const AuditLog = React.lazy(() => import("pages/AuditLog"));
 const Admin = React.lazy(() => import("pages/Admin"));
+const Message = React.lazy(() => import("pages/Message"));
 
 const loading = (
     <div style={{ textAlign: "center", padding: "100px 0" }}>
@@ -55,6 +56,9 @@ function App() {
                         </Route>
                         <Route path="/admin">
                             <Admin />
+                        </Route>
+                        <Route path="/messages">
+                            <Message />
                         </Route>
                         <Route path="/">
                             <Redirect to="/app-manage" />
