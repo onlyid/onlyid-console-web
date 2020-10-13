@@ -15,7 +15,7 @@ class OtpSentChart extends PureComponent {
 
     initData = async () => {
         const {
-            statistics: { selectedKey }
+            statistic: { selectedKey }
         } = this.props;
         const params = {};
         if (selectedKey !== "all") params.clientId = selectedKey;
@@ -33,4 +33,4 @@ class OtpSentChart extends PureComponent {
     }
 }
 
-export default connect(({ statistics }) => ({ statistics }))(OtpSentChart);
+export default connect(({ statistic }) => ({ statistic }))(OtpSentChart);

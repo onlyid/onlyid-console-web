@@ -6,7 +6,7 @@ import { eventEmitter } from "my/utils";
 import _ from "lodash";
 import { Input } from "antd";
 import { CLIENT_TYPE_TEXT } from "my/constants";
-import statisticsIcon from "assets/statistics-icon.png";
+import statisticIcon from "assets/statistic-icon.png";
 import auditIcon from "assets/audit-icon.png";
 
 const { Search } = Input;
@@ -37,8 +37,8 @@ class AppMenu extends PureComponent {
         this.setState({ list });
 
         if (list.length && select !== "no") {
-            if (type === "statistics")
-                list.unshift({ id: "all", iconUrl: statisticsIcon, name: "所有应用" });
+            if (type === "statistic")
+                list.unshift({ id: "all", iconUrl: statisticIcon, name: "所有应用" });
             else if (type === "audit") list.unshift({ iconUrl: auditIcon, name: "所有审计日志" });
 
             const selectedKey = select === "last" ? _.last(list).id : list[0].id;

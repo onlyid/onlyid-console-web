@@ -34,7 +34,8 @@ class Header extends PureComponent {
         const p = pathname.split("/")[1];
         this.setState({ menuCurrent: p });
 
-        this.getMessageCount();
+        // 如果还在登录中，直接请求会报401，所以推迟一点
+        setTimeout(this.getMessageCount, 2000);
 
         eventEmitter.on("message/onMarkRead", this.getMessageCount);
         eventEmitter.on("message/onDelete", this.getMessageCount);

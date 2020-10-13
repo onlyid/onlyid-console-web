@@ -25,9 +25,9 @@ class App extends PureComponent {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         const {
-            statistics: { selectedKey }
+            statistic: { selectedKey }
         } = this.props;
-        if (prevProps.statistics.selectedKey !== selectedKey) this.back2info();
+        if (prevProps.statistic.selectedKey !== selectedKey) this.back2info();
     }
 
     onMenuClick = ({ key }) => {
@@ -79,4 +79,4 @@ class App extends PureComponent {
     }
 }
 
-export default connect(({ statistics }) => ({ statistics }))(App);
+export default connect(({ statistic }) => ({ statistic }))(App);

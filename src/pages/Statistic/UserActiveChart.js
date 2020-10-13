@@ -20,7 +20,7 @@ class UserActiveChart extends PureComponent {
 
     initData = async () => {
         const {
-            statistics: { selectedKey },
+            statistic: { selectedKey },
             isNew
         } = this.props;
         const params = { isNew };
@@ -39,4 +39,4 @@ class UserActiveChart extends PureComponent {
     }
 }
 
-export default connect(({ statistics }) => ({ statistics }))(UserActiveChart);
+export default connect(({ statistic }) => ({ statistic }))(UserActiveChart);

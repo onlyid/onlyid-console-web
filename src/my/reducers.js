@@ -31,7 +31,7 @@ const defaultRoleManage = {
     groupId: null // groupId有值 则当前选中的是role 否则选中的是role group
 };
 
-const defaultStatistics = {
+const defaultStatistic = {
     selectedKey: null
 };
 
@@ -104,11 +104,11 @@ function roleManage(state = defaultRoleManage, action) {
     }
 }
 
-function statistics(state = defaultStatistics, action) {
+function statistic(state = defaultStatistic, action) {
     const { type, payload } = action;
 
     switch (type) {
-        case "statistics/save":
+        case "statistic/save":
             return { ...state, ...payload };
         default:
             return state;
@@ -154,7 +154,7 @@ export default combineReducers({
     appManage,
     resManage,
     roleManage,
-    statistics,
+    statistic,
     auditLog,
     admin,
     message

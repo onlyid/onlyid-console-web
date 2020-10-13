@@ -17,14 +17,14 @@ class Summary extends PureComponent {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         const {
-            statistics: { selectedKey }
+            statistic: { selectedKey }
         } = this.props;
-        if (prevProps.statistics.selectedKey !== selectedKey) this.initData();
+        if (prevProps.statistic.selectedKey !== selectedKey) this.initData();
     }
 
     initData = async () => {
         const {
-            statistics: { selectedKey }
+            statistic: { selectedKey }
         } = this.props;
 
         if (!selectedKey) return;
@@ -37,7 +37,7 @@ class Summary extends PureComponent {
     render() {
         const { data } = this.state;
         const {
-            statistics: { selectedKey }
+            statistic: { selectedKey }
         } = this.props;
 
         return (
@@ -77,4 +77,4 @@ class Summary extends PureComponent {
     }
 }
 
-export default connect(({ statistics }) => ({ statistics }))(Summary);
+export default connect(({ statistic }) => ({ statistic }))(Summary);

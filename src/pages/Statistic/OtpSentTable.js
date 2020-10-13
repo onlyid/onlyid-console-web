@@ -70,7 +70,7 @@ class OtpSentTable extends PureComponent {
 
         const { current, pageSize, keyword } = this.state;
         const {
-            statistics: { selectedKey }
+            statistic: { selectedKey }
         } = this.props;
         const params = { current, pageSize, keyword };
         if (selectedKey !== "all") params.clientId = selectedKey;
@@ -161,4 +161,4 @@ class OtpSentTable extends PureComponent {
     }
 }
 
-export default connect(({ statistics }) => ({ statistics }))(OtpSentTable);
+export default connect(({ statistic }) => ({ statistic }))(OtpSentTable);

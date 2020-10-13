@@ -6,11 +6,11 @@ import App from "./App";
 import AppMenu1 from "components/AppMenu";
 
 const AppMenu = connect(
-    state => ({ selectedKey: state.statistics.selectedKey }),
-    dispatch => ({ savePayload: payload => dispatch({ type: "statistics/save", payload }) })
+    state => ({ selectedKey: state.statistic.selectedKey }),
+    dispatch => ({ savePayload: payload => dispatch({ type: "statistic/save", payload }) })
 )(AppMenu1);
 
-class Statistics extends PureComponent {
+class Statistic extends PureComponent {
     state = {
         showEmpty: false
     };
@@ -28,7 +28,7 @@ class Statistics extends PureComponent {
                     <>
                         <div>
                             <AppMenu
-                                type="statistics"
+                                type="statistic"
                                 onShowEmptyChange={showEmpty => this.setState({ showEmpty })}
                             />
                         </div>
@@ -40,4 +40,4 @@ class Statistics extends PureComponent {
     }
 }
 
-export default connect(({ statistics }) => ({ statistics }))(Statistics);
+export default connect(({ statistic }) => ({ statistic }))(Statistic);

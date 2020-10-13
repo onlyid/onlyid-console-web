@@ -81,7 +81,7 @@ class UserActiveTable extends PureComponent {
 
         const { current, pageSize, keyword } = this.state;
         const {
-            statistics: { selectedKey },
+            statistic: { selectedKey },
             isNew
         } = this.props;
         const params = { current, pageSize, keyword, isNew };
@@ -179,4 +179,4 @@ class UserActiveTable extends PureComponent {
     }
 }
 
-export default connect(({ statistics }) => ({ statistics }))(UserActiveTable);
+export default connect(({ statistic }) => ({ statistic }))(UserActiveTable);
