@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { Badge, Icon, Menu, Tooltip } from "antd";
 import styles from "./index.module.css";
-import logo from "assets/logo.svg";
+import { ReactComponent as Logo } from "assets/logo.svg";
 import { withRouter } from "react-router-dom";
 import RightAccount from "./RightAccount";
 import { connect } from "react-redux";
@@ -85,7 +85,9 @@ class Header extends PureComponent {
                     <div className={styles.box1}>
                         <Tooltip title="打开官网">
                             <a href="https://www.onlyid.net" target="_blank">
-                                <img src={logo} alt="logo" height="33" />
+                                <Logo
+                                    style={{ fill: "#e8e8e8", width: 80, verticalAlign: "middle" }}
+                                />
                             </a>
                         </Tooltip>
                         <Menu
