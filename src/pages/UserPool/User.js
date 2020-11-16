@@ -18,8 +18,6 @@ const MENU_DATA = [
     },
     { icon: "info-circle", title: "用户详情" },
     { icon: "link", title: "关联组织机构" },
-    { icon: "link", title: "关联岗位" },
-    { icon: "link", title: "关联用户组" },
     { icon: "link", title: "关联角色" },
     { icon: "lock", title: "修改密码" },
     { title: "移除用户", key: "delete" }
@@ -80,8 +78,9 @@ class User extends PureComponent {
         } = this.props;
 
         if (inOrg) MENU_DATA[0].title = `返回【${TYPE_LABEL[selectedType]}】`;
+        else MENU_DATA[0].title = "返回用户池";
 
-        MENU_DATA[6].disabled = !isCreator;
+        MENU_DATA[4].disabled = !isCreator;
 
         let right;
         switch (menuCurrent) {
@@ -96,16 +95,10 @@ class User extends PureComponent {
                 right = <LinkOrg key="ORG" type="ORG" />;
                 break;
             case "3":
-                right = <LinkOrg key="POSITION" type="POSITION" />;
-                break;
-            case "4":
-                right = <LinkOrg key="USER_GROUP" type="USER_GROUP" />;
-                break;
-            case "5":
                 right = <LinkRole />;
                 break;
             default:
-                // 6
+                // 4
                 right = (
                     <Card title={MENU_DATA[menuCurrent].title}>
                         <UpdatePassword onClose={this.back2info} />

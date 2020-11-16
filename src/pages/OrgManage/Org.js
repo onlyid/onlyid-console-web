@@ -10,12 +10,12 @@ import { eventEmitter } from "my/utils";
 import CtrlMenu from "components/CtrlMenu";
 
 const MENU_DATA = [
-    { icon: "info-circle", title: "组织机构详情" },
-    { icon: "plus-circle", title: "新建组织机构" },
+    { icon: "info-circle", title: "机构详情" },
+    { icon: "plus-circle", title: "新建子机构" },
     { icon: "plus-circle", title: "新建岗位" },
     { icon: "plus-circle", title: "新建用户组" },
     { icon: "link", title: "关联用户" },
-    { title: "删除组织机构", key: "delete" }
+    { title: "删除机构", key: "delete" }
 ];
 
 class Org extends PureComponent {

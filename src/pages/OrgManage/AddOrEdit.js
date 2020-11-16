@@ -61,7 +61,7 @@ class AddOrEdit extends PureComponent {
 
         let children = orgNodes.filter(item => item.parentId === node.id && item.type === "ORG");
 
-        // 如果当前是编辑组织机构 不展示自身
+        // 如果当前是编辑机构 不展示自身
         if (info.type === "ORG")
             children = children.filter(item => String(item.id) !== selectedKey);
 
@@ -101,7 +101,7 @@ class AddOrEdit extends PureComponent {
                     })(<TextArea />)}
                 </Item>
                 {info && (
-                    <Item label="上级组织机构">
+                    <Item label="上级机构">
                         {getFieldDecorator("parentId", {
                             initialValue: info.parent.id
                         })(

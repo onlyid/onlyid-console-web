@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import { Empty, Input, message, Modal, Tree } from "antd";
 import http from "my/http";
 import styles from "./index.module.css";
-import { TYPE_LABEL } from "my/constants";
 import TreeNodeTitle from "components/TreeNodeTitle";
 
 const { Search } = Input;
@@ -21,50 +20,17 @@ class SelectOrgDialog extends PureComponent {
         this.initData();
     }
 
-    // 过滤掉构建树不需要的节点
-    filter = (orgNodes, type) => {
-        const list = orgNodes.filter(item => item.type === type);
-        const orgs = orgNodes.filter(item => item.type === "ORG");
-        const newOrgs = [];
-
-        for (const item of list) {
-            let node = item;
-            while (node.parentId !== -1) {
-                // eslint-disable-next-line no-loop-func
-                const parent = orgs.find(o => o.id === node.parentId);
-                if (newOrgs.findIndex(no => no.id === parent.id) < 0) newOrgs.push(parent);
-
-                node = parent;
-            }
-        }
-
-        newOrgs.sort((a, b) => {
-            if (a.createDate > b.createDate) return 1;
-            else return -1;
-        });
-
-        return [...newOrgs, ...list];
-    };
-
     initData = async () => {
-        const { type } = this.props;
-        let orgNodes = await http.get("org-nodes");
-
-        if (type === "ORG") {
-            orgNodes = orgNodes.filter(item => item.type === "ORG");
-        } else {
-            // POSITION, USER_GROUP
-            orgNodes = this.filter(orgNodes, type);
-        }
+        const orgNodes = await http.get("org-nodes");
         this.setState({ orgNodes });
     };
 
     submit = async () => {
         const { selectedKey } = this.state;
-        const { onSelect, type } = this.props;
+        const { onSelect } = this.props;
 
         if (!selectedKey) {
-            message.warn(`请选择一个${TYPE_LABEL[type]}`);
+            message.warn("请选择一个机构/岗位/用户组");
             return;
         }
 
@@ -106,7 +72,6 @@ class SelectOrgDialog extends PureComponent {
 
     renderTree = node => {
         const { orgNodes, keyword } = this.state;
-        const { type } = this.props;
 
         const children = orgNodes.filter(item => item.parentId === node.id);
 
@@ -125,15 +90,12 @@ class SelectOrgDialog extends PureComponent {
                 icon = <i className="material-icons">group</i>;
         }
 
-        const selectable = !(type !== "ORG" && node.type === "ORG");
-
         return (
             <TreeNode
                 title={<TreeNodeTitle title={node.name} keyword={keyword} />}
                 key={String(node.id)}
                 icon={icon}
                 dataRef={node}
-                selectable={selectable}
             >
                 {children.map(item => this.renderTree(item))}
             </TreeNode>
@@ -142,7 +104,7 @@ class SelectOrgDialog extends PureComponent {
 
     render() {
         const { expandedKeys, autoExpandParent, orgNodes, selectedKey } = this.state;
-        const { visible, type } = this.props;
+        const { visible } = this.props;
         const root = { id: -1 };
 
         return (
@@ -163,7 +125,7 @@ class SelectOrgDialog extends PureComponent {
                         </Tree>
                     </>
                 ) : (
-                    <Empty description={`暂无${TYPE_LABEL[type]}，请到组织机构页新建`} />
+                    <Empty description={`暂无组织机构，请到组织机构页新建`} />
                 )}
             </Modal>
         );

@@ -1,13 +1,13 @@
 export const TYPE_LABEL = {
-    TOP_ORG: "组织机构",
-    ORG: "组织机构",
+    TOP_ORG: "机构",
+    ORG: "机构",
     POSITION: "岗位",
     USER_GROUP: "用户组"
 };
 
 export const AUDIT_TYPE_LABEL = {
     ALL: "所有",
-    ORG: "组织机构",
+    ORG: "机构",
     POSITION: "岗位",
     USER_GROUP: "用户组",
     USER: "用户",

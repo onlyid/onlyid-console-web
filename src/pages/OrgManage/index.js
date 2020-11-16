@@ -38,7 +38,7 @@ class OrgManage extends PureComponent {
 
         const createNew = (
             <Button onClick={this.showAdd} icon="plus" type="primary">
-                新建顶级组织机构
+                新建顶级机构
             </Button>
         );
 
@@ -75,7 +75,7 @@ class OrgManage extends PureComponent {
             <div className={styles.orgManage}>
                 {portalNode && ReactDOM.createPortal(createNew, portalNode)}
                 <Drawer
-                    title="新建顶级组织机构"
+                    title="新建顶级机构"
                     placement="right"
                     onClose={this.closeAdd}
                     visible={drawerVisible}

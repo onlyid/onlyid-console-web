@@ -13,7 +13,8 @@ class LinkOrg extends PureComponent {
     columns = [
         {
             title: "名称",
-            dataIndex: "name"
+            dataIndex: "name",
+            ellipsis: true
         },
         {
             title: "描述",
@@ -21,12 +22,20 @@ class LinkOrg extends PureComponent {
             ellipsis: true
         },
         {
-            title: "上级组织机构",
-            dataIndex: "parent.name"
+            title: "上级机构",
+            dataIndex: "parent.name",
+            ellipsis: true
+        },
+        {
+            title: "类型",
+            dataIndex: "type",
+            width: 90,
+            render: value => TYPE_LABEL[value]
         },
         {
             title: "操作",
             dataIndex: "id",
+            width: 80,
             render: value => {
                 return (
                     <Button
@@ -57,10 +66,9 @@ class LinkOrg extends PureComponent {
 
         const { keyword } = this.state;
         const {
-            userPool: { selectedKey },
-            type
+            userPool: { selectedKey }
         } = this.props;
-        const params = { keyword, userId: selectedKey, type };
+        const params = { keyword, userId: selectedKey };
 
         const list = await http.get("org-nodes/by-user-link", { params });
         this.setState({ list, loading: false });
@@ -106,11 +114,10 @@ class LinkOrg extends PureComponent {
 
     render() {
         const { list, loading, dialogVisible } = this.state;
-        const { type } = this.props;
 
         return (
             <NoCard
-                title={`关联${TYPE_LABEL[type]}列表`}
+                title="关联组织机构列表"
                 right={
                     <Button
                         onClick={() => this.setState({ dialogVisible: true })}
@@ -123,7 +130,7 @@ class LinkOrg extends PureComponent {
             >
                 <Search
                     onSearch={this.onSearch}
-                    placeholder={`搜索${TYPE_LABEL[type]}名称`}
+                    placeholder="搜索机构、岗位、用户组名称"
                     enterButton
                     style={{ marginBottom: 20 }}
                 />
@@ -136,7 +143,6 @@ class LinkOrg extends PureComponent {
                 />
                 <SelectOrgDialog
                     visible={dialogVisible}
-                    type={type}
                     onCancel={this.onCancel}
                     onSelect={this.onSelect}
                 />

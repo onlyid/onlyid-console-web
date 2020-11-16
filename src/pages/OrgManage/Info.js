@@ -55,7 +55,7 @@ class Info extends PureComponent {
                 <Descriptions column={1} layout="vertical" colon={false}>
                     <Item label={`${typeLabel}名称`}>{info.name}</Item>
                     <Item label={`${typeLabel}描述`}>{info.description || "-"}</Item>
-                    <Item label="上级组织机构">{info.parent && info.parent.name}</Item>
+                    <Item label="上级机构">{info.parent && info.parent.name}</Item>
                     <Item label="创建日期">{moment(info.createDate).format(DATE_TIME_FORMAT)}</Item>
                 </Descriptions>
                 <Button onClick={this.showEdit} style={{ marginTop: 10, marginBottom: 24 }}>
