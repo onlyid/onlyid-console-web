@@ -70,7 +70,6 @@ class Info extends PureComponent {
                     <Item label="手机号">{info.mobile || "-"}</Item>
                     <Item label="邮箱">{info.email || "-"}</Item>
                     <Item label="性别">{info.gender ? GENDER_TEXT[info.gender] : "-"}</Item>
-                    <Item label="备注">{info.description || "-"}</Item>
                     <Item label="创建日期">{moment(info.createDate).format(DATE_TIME_FORMAT)}</Item>
                 </Descriptions>
                 <Button

@@ -6,7 +6,6 @@ import _ from "lodash";
 import Avatar from "components/Avatar";
 
 const { Item } = Form;
-const { TextArea } = Input;
 
 class AddOrEdit extends PureComponent {
     state = {
@@ -224,12 +223,6 @@ class AddOrEdit extends PureComponent {
                             </Radio.Group>
                         )}
                     </Item>
-                    <Item label="备注">
-                        {getFieldDecorator("description", {
-                            initialValue: info && info.description,
-                            rules: [{ max: 500, message: "最多输入500字" }]
-                        })(<TextArea />)}
-                    </Item>
                     <Item>
                         <Button type="primary" onClick={this.submit}>
                             保存
@@ -256,7 +249,6 @@ class AddOrEdit extends PureComponent {
                         <Item label="性别">
                             {user2Add.gender ? GENDER_TEXT[user2Add.gender] : "-"}
                         </Item>
-                        <Item label="备注">{user2Add.description || "-"}</Item>
                     </Descriptions>
                 </Modal>
             </>

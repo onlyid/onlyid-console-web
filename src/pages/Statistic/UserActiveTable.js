@@ -155,7 +155,6 @@ class UserActiveTable extends PureComponent {
                         <Item label="性别">
                             {currentRecord.gender ? GENDER_TEXT[currentRecord.gender] : "-"}
                         </Item>
-                        <Item label="备注">{currentRecord.description || "-"}</Item>
                         <Item label="创建日期">
                             {moment(currentRecord.createDate).format(DATE_TIME_FORMAT)}
                         </Item>
