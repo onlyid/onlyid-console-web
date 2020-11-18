@@ -33,7 +33,10 @@ class Edit1 extends PureComponent {
         form.validateFields(async (err, values) => {
             if (err) return;
 
-            await http.put(`users/${userPool.selectedKey}/extra`, values);
+            // 转成对象
+            const extra = values.extra && JSON.parse(values.extra);
+
+            await http.put(`users/${userPool.selectedKey}/extra`, { extra });
 
             onSave();
             message.success("保存成功");
@@ -46,7 +49,7 @@ class Edit1 extends PureComponent {
 
         return (
             <Form layout="vertical">
-                <Item>
+                <Item extra="保存时内容会自动格式化，无需手工处理">
                     {getFieldDecorator("extra", {
                         initialValue: extra,
                         rules: [
@@ -116,8 +119,7 @@ class UserExtra extends PureComponent {
     render() {
         const { userExtra, isEdit } = this.state;
 
-        const extra = userExtra && userExtra.extra;
-        const formatted = extra ? JSON.stringify(JSON.parse(extra), null, 2) : "-";
+        const extra = userExtra && userExtra.extra && JSON.stringify(userExtra.extra, null, 2);
 
         return (
             <>
@@ -126,7 +128,7 @@ class UserExtra extends PureComponent {
                 ) : (
                     <>
                         <pre style={{ margin: 0, minHeight: 100 }}>
-                            <code className="language-javascript">{formatted}</code>
+                            <code className="language-javascript">{extra || "-"}</code>
                         </pre>
                         <Button onClick={this.showEdit} style={{ marginTop: 32, marginBottom: 32 }}>
                             编辑
