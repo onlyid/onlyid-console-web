@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import { Checkbox, message } from "antd";
 import styles from "./index.module.css";
 import http from "my/http";
-import classNames from "classnames";
 
 class NotificationSetting extends PureComponent {
     state = {
@@ -188,7 +187,7 @@ class NotificationSetting extends PureComponent {
                 <p className="tip" style={{ marginTop: "2em", marginBottom: 5 }}>
                     温馨提示：
                 </p>
-                <ul className={classNames("tip", styles.notificationTip)}>
+                <ul className="tip ulTip">
                     <li>1）邮件/短信仅在你账号的邮箱/手机号可用时才会发送。</li>
                     <li>
                         2）<span style={{ color: "#52c41a" }}>请放心</span>

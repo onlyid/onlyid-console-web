@@ -92,3 +92,13 @@ body {
     font-size: 13px;
     color: #7f7f7f;
 }
+
+.ulTip {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+pre[class*="language-"] {
+    background-color: #f7f8f9;
+}

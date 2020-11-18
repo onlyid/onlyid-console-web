@@ -8,5 +8,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="prism" level="application" />
+    <orderEntry type="library" name="load-image.all" level="application" />
   </component>
 </module>
