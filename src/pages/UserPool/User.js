@@ -11,11 +11,13 @@ import { eventEmitter } from "my/utils";
 import { TYPE_LABEL } from "my/constants";
 import CtrlMenu from "components/CtrlMenu";
 import UserExtra from "./UserExtra";
+import RawJson from "./RawJson";
 
 const MENU_DATA = [
     { title: "", key: "back" },
     { icon: "info-circle", title: "用户账号详情" },
     { icon: "info-circle", title: "用户附加信息" },
+    { icon: "info-circle", title: "预览 JSON" },
     { icon: "link", title: "关联组织机构" },
     { icon: "link", title: "关联角色" },
     { icon: "lock", title: "修改密码" },
@@ -79,7 +81,7 @@ class User extends PureComponent {
         if (inOrg) MENU_DATA[0].title = `返回【${TYPE_LABEL[selectedType]}】`;
         else MENU_DATA[0].title = "返回用户列表";
 
-        MENU_DATA[5].disabled = !isCreator;
+        MENU_DATA[6].disabled = !isCreator;
 
         let right;
         switch (menuCurrent) {
@@ -98,13 +100,20 @@ class User extends PureComponent {
                 );
                 break;
             case "3":
-                right = <LinkOrg />;
+                right = (
+                    <Card title={MENU_DATA[menuCurrent].title}>
+                        <RawJson />
+                    </Card>
+                );
                 break;
             case "4":
+                right = <LinkOrg />;
+                break;
+            case "5":
                 right = <LinkRole />;
                 break;
             default:
-                // 5
+                // 6
                 right = (
                     <Card title={MENU_DATA[menuCurrent].title}>
                         <UpdatePassword onClose={this.back2info} />
