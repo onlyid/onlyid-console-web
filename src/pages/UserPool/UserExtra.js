@@ -33,8 +33,8 @@ class Edit1 extends PureComponent {
         form.validateFields(async (err, values) => {
             if (err) return;
 
-            // 转成对象
-            const extra = values.extra && JSON.parse(values.extra);
+            // 转成对象，如果为空，需要转成null
+            const extra = values.extra ? JSON.parse(values.extra) : null;
 
             await http.put(`users/${userPool.selectedKey}/extra`, { extra });
 
