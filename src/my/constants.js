@@ -74,6 +74,7 @@ export const OTP_TEMPLATE_TEXT = {
 };
 
 export const DATE_TIME_FORMAT = "YYYY-MM-DD HH:mm:ss";
+export const DATE_FORMAT = "YYYY-MM-DD";
 export const DATE_TIME_FORMAT_SHORT = "MM-DD HH:mm:ss";
 
 export const ACTIVE_TYPE_TEXT = {

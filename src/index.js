@@ -11,6 +11,10 @@ import reducers from "my/reducers";
 import zhCN from "antd/es/locale/zh_CN";
 import { ConfigProvider } from "antd";
 import "my/utils";
+import moment from "moment";
+import "moment/locale/zh-cn";
+
+moment.locale("zh-cn");
 
 const store = createStore(reducers);
 

@@ -1,11 +1,27 @@
 import React, { PureComponent } from "react";
-import { Button, Descriptions, Form, Input, message, Modal, Radio, Tooltip, Upload } from "antd";
+import {
+    Button,
+    Cascader,
+    DatePicker,
+    Descriptions,
+    Form,
+    Input,
+    message,
+    Modal,
+    Radio,
+    Tooltip,
+    Upload
+} from "antd";
 import http, { baseURL } from "my/http";
-import { GENDER_TEXT, IMG_UPLOAD_TIP, REG_EXP } from "my/constants";
+import { DATE_FORMAT, GENDER_TEXT, IMG_UPLOAD_TIP, REG_EXP } from "my/constants";
+import CHINA_CITY_LIST from "my/china-city-list";
 import _ from "lodash";
 import Avatar from "components/Avatar";
+import styles from "./index.module.css";
+import moment from "moment";
 
 const { Item } = Form;
+const { TextArea } = Input;
 
 class AddOrEdit extends PureComponent {
     state = {
@@ -35,6 +51,9 @@ class AddOrEdit extends PureComponent {
             }
 
             values.filename = filename;
+            values.location =
+                values.location && !values.location.isEmpty ? values.location.join(" ") : null;
+            values.birthday = values.birthday && values.birthday.format(DATE_FORMAT);
 
             // 编辑
             if (info) {
@@ -136,6 +155,12 @@ class AddOrEdit extends PureComponent {
         const { getFieldDecorator } = form;
         const { avatarUrl, user2Add, dialogVisible } = this.state;
 
+        const chinaCityOptions = CHINA_CITY_LIST.map(item => ({
+            value: item.province,
+            label: item.province,
+            children: item.city.map(city => ({ value: city, label: city }))
+        }));
+
         return (
             <>
                 <Form layout="vertical">
@@ -222,6 +247,27 @@ class AddOrEdit extends PureComponent {
                                 ))}
                             </Radio.Group>
                         )}
+                    </Item>
+                    <Item label="生日">
+                        {getFieldDecorator("birthday", {
+                            initialValue: info && info.birthday && moment(info.birthday)
+                        })(<DatePicker showToday={false} />)}
+                    </Item>
+                    <Item label="地区">
+                        {getFieldDecorator("location", {
+                            initialValue: info && info.location && info.location.split(" ")
+                        })(
+                            <Cascader
+                                options={chinaCityOptions}
+                                popupClassName={styles.chinaCityList}
+                            />
+                        )}
+                    </Item>
+                    <Item label="简介">
+                        {getFieldDecorator("bio", {
+                            initialValue: info && info.bio,
+                            rules: [{ max: 500, message: "最多输入500字" }]
+                        })(<TextArea />)}
                     </Item>
                     <Item>
                         <Button type="primary" onClick={this.submit}>

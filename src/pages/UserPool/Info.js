@@ -3,7 +3,7 @@ import { Button, Descriptions } from "antd";
 import http from "my/http";
 import AddOrEdit from "./AddOrEdit";
 import { connect } from "react-redux";
-import { DATE_TIME_FORMAT, GENDER_TEXT } from "my/constants";
+import { DATE_FORMAT, DATE_TIME_FORMAT, GENDER_TEXT } from "my/constants";
 import Avatar from "components/Avatar";
 import { eventEmitter } from "my/utils";
 import moment from "moment";
@@ -70,6 +70,13 @@ class Info extends PureComponent {
                     <Item label="手机号">{info.mobile || "-"}</Item>
                     <Item label="邮箱">{info.email || "-"}</Item>
                     <Item label="性别">{info.gender ? GENDER_TEXT[info.gender] : "-"}</Item>
+                    <Item label="生日">
+                        {info.birthday ? moment(info.birthday).format(DATE_FORMAT) : "-"}
+                    </Item>
+                    <Item label="地区">
+                        {info.location ? info.location.split(" ").join("-") : "-"}
+                    </Item>
+                    <Item label="简介">{info.bio || "-"}</Item>
                     <Item label="创建日期">{moment(info.createDate).format(DATE_TIME_FORMAT)}</Item>
                 </Descriptions>
                 <Button
