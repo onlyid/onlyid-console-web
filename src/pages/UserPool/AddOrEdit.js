@@ -151,6 +151,10 @@ class AddOrEdit extends PureComponent {
         onSave();
     };
 
+    disabledDate = current => {
+        return current > moment().endOf("day") || current < moment("1900-1-1").startOf("day");
+    };
+
     render() {
         const { onCancel, form, info } = this.props;
         const { getFieldDecorator } = form;
@@ -250,7 +254,7 @@ class AddOrEdit extends PureComponent {
                     <Item label="生日">
                         {getFieldDecorator("birthday", {
                             initialValue: info && info.birthday && moment(info.birthday)
-                        })(<DatePicker showToday={false} />)}
+                        })(<DatePicker showToday={false} disabledDate={this.disabledDate} />)}
                     </Item>
                     <Item label="地区">
                         {getFieldDecorator("location", {
