@@ -51,6 +51,7 @@ class AddOrEdit extends PureComponent {
             }
 
             values.filename = filename;
+            values.gender = values.gender || null;
             values.location =
                 values.location && !values.location.isEmpty ? values.location.join(" ") : null;
             values.birthday = values.birthday && values.birthday.format(DATE_FORMAT);
@@ -161,6 +162,12 @@ class AddOrEdit extends PureComponent {
             children: item.city.map(city => ({ value: city, label: city }))
         }));
 
+        const genderOptions = Object.keys(GENDER_TEXT).map(key => ({
+            value: key,
+            label: GENDER_TEXT[key]
+        }));
+        genderOptions.push({ value: "", label: "暂不设置" });
+
         return (
             <>
                 <Form layout="vertical">
@@ -237,16 +244,8 @@ class AddOrEdit extends PureComponent {
                     )}
                     <Item label="性别">
                         {getFieldDecorator("gender", {
-                            initialValue: info && info.gender
-                        })(
-                            <Radio.Group>
-                                {Object.keys(GENDER_TEXT).map(key => (
-                                    <Radio value={key} key={key}>
-                                        {GENDER_TEXT[key]}
-                                    </Radio>
-                                ))}
-                            </Radio.Group>
-                        )}
+                            initialValue: (info && info.gender) || ""
+                        })(<Radio.Group options={genderOptions} />)}
                     </Item>
                     <Item label="生日">
                         {getFieldDecorator("birthday", {
