@@ -28,7 +28,8 @@ class AddOrEdit extends PureComponent {
         avatarUrl: null,
         filename: null,
         dialogVisible: false,
-        user2Add: {}
+        user2Add: {},
+        mobileOrEmail: "mobile"
     };
 
     componentDidMount() {
@@ -106,23 +107,6 @@ class AddOrEdit extends PureComponent {
         });
     };
 
-    checkPassword = (rule, value, callback) => {
-        const { form } = this.props;
-        if (form.isFieldTouched("password1")) form.validateFields(["password1"]);
-
-        callback();
-    };
-
-    checkPassword1 = (rule, value, callback) => {
-        const { form } = this.props;
-        const password = form.getFieldValue("password");
-        if (password !== value) {
-            callback("两次输入的密码不一致");
-            return;
-        }
-        callback();
-    };
-
     checkUserOnBlur = type => {
         const { form, info } = this.props;
 
@@ -134,10 +118,10 @@ class AddOrEdit extends PureComponent {
 
             if (!values[type]) return;
 
-            const user = await http.get("users/by-mobile-or-email", {
-                params: { [type]: values[type] }
+            const user = await http.get("users/by-account-name", {
+                params: { accountName: values[type] }
             });
-            if (user) this.setState({ dialogVisible: true, user2Add: user });
+            if (user) this.setState({ dialogVisible: true, user2Add: user, mobileOrEmail: type });
         });
     };
 
@@ -158,7 +142,7 @@ class AddOrEdit extends PureComponent {
     render() {
         const { onCancel, form, info } = this.props;
         const { getFieldDecorator } = form;
-        const { avatarUrl, user2Add, dialogVisible } = this.state;
+        const { avatarUrl, user2Add, dialogVisible, mobileOrEmail } = this.state;
 
         const chinaCityOptions = CHINA_CITY_LIST.map(item => ({
             value: item.province,
@@ -221,31 +205,6 @@ class AddOrEdit extends PureComponent {
                             ]
                         })(<Input onBlur={() => this.checkUserOnBlur("email")} />)}
                     </Item>
-                    {!info && (
-                        <>
-                            <Item label="密码">
-                                {getFieldDecorator("password", {
-                                    rules: [
-                                        { required: true, message: "请填写" },
-                                        {
-                                            min: 6,
-                                            message: "密码最少要输入6位"
-                                        },
-                                        { max: 50, message: "最多输入50字" },
-                                        { validator: this.checkPassword }
-                                    ]
-                                })(<Input.Password />)}
-                            </Item>
-                            <Item label="重复密码">
-                                {getFieldDecorator("password1", {
-                                    rules: [
-                                        { required: true, message: "请填写" },
-                                        { validator: this.checkPassword1 }
-                                    ]
-                                })(<Input.Password />)}
-                            </Item>
-                        </>
-                    )}
                     <Item label="性别">
                         {getFieldDecorator("gender", {
                             initialValue: (info && info.gender) || ""
@@ -281,14 +240,23 @@ class AddOrEdit extends PureComponent {
                         </Button>
                     </Item>
                 </Form>
+                {!info && (
+                    <p className="tip">
+                        提示：通过控制台新建用户账号不能设置登录密码，在用户首次使用该账号登录任意应用时，认证中心会引导用户验证手机号/邮箱有效性并设置登录密码（称之为激活账号）。
+                    </p>
+                )}
                 <Modal
                     title="添加用户"
                     visible={dialogVisible}
                     onOk={this.onAddUser}
                     onCancel={() => this.setState({ dialogVisible: false })}
                 >
-                    <p>是否要添加用户：</p>
-                    <div style={{ marginBottom: 15 }}>
+                    <p>
+                        {mobileOrEmail === "mobile" ? "手机号 " : "邮箱 "}
+                        <span style={{ color: "#f50057" }}>{user2Add[mobileOrEmail]}</span>{" "}
+                        的用户已经存在，可以直接添加到用户池。
+                    </p>
+                    <div style={{ marginBottom: 15, marginTop: 15 }}>
                         <Avatar url={user2Add.avatarUrl} width={60} />
                     </div>
                     <Descriptions column={1}>

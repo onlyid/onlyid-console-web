@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Button, Descriptions } from "antd";
+import { Button, Descriptions, Tooltip } from "antd";
 import http from "my/http";
 import AddOrEdit from "./AddOrEdit";
 import { connect } from "react-redux";
@@ -25,17 +25,8 @@ class Info extends PureComponent {
     }
 
     initData = async () => {
-        const { dispatch } = this.props;
-
         const info = await http.get("users/" + this.props.userPool.selectedKey);
         this.setState({ info });
-
-        const userInfo = localStorage.getObj("userInfo");
-        const { creator } = info;
-        dispatch({
-            type: "userPool/save",
-            payload: { isCreator: Number(userInfo.id) === creator }
-        });
     };
 
     showEdit = () => {
@@ -54,9 +45,6 @@ class Info extends PureComponent {
 
     render() {
         const { info, isEdit } = this.state;
-        const {
-            userPool: { isCreator }
-        } = this.props;
 
         if (isEdit) return <AddOrEdit info={info} onSave={this.onSave} onCancel={this.onCancel} />;
 
@@ -79,13 +67,15 @@ class Info extends PureComponent {
                     <Item label="简介">{info.bio || "-"}</Item>
                     <Item label="创建日期">{moment(info.createDate).format(DATE_TIME_FORMAT)}</Item>
                 </Descriptions>
-                <Button
-                    onClick={this.showEdit}
-                    style={{ marginTop: 10, marginBottom: 24 }}
-                    disabled={!isCreator}
-                >
-                    编辑
-                </Button>
+                <Tooltip title={info.activated && "该用户不是你创建的或者已经激活，你不能编辑"}>
+                    <Button
+                        onClick={this.showEdit}
+                        style={{ marginTop: 10, marginBottom: 24 }}
+                        disabled={info.activated}
+                    >
+                        编辑
+                    </Button>
+                </Tooltip>
             </>
         );
     }

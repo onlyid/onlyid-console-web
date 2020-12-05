@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import { message, Modal } from "antd";
 import Info from "./Info";
-import UpdatePassword from "./UpdatePassword";
 import LinkOrg from "./LinkOrg";
 import LinkRole from "./LinkRole";
 import { connect } from "react-redux";
@@ -20,7 +19,6 @@ const MENU_DATA = [
     { icon: "info-circle", title: "预览 JSON" },
     { icon: "link", title: "关联组织机构" },
     { icon: "link", title: "关联角色" },
-    { icon: "lock", title: "修改密码" },
     { title: "移除用户", key: "delete" }
 ];
 
@@ -74,14 +72,11 @@ class User extends PureComponent {
         const { menuCurrent } = this.state;
         const {
             inOrg,
-            orgManage: { selectedType },
-            userPool: { isCreator }
+            orgManage: { selectedType }
         } = this.props;
 
         if (inOrg) MENU_DATA[0].title = `返回【${TYPE_LABEL[selectedType]}】`;
         else MENU_DATA[0].title = "返回用户列表";
-
-        MENU_DATA[6].disabled = !isCreator;
 
         let right;
         switch (menuCurrent) {
@@ -109,16 +104,9 @@ class User extends PureComponent {
             case "4":
                 right = <LinkOrg />;
                 break;
-            case "5":
-                right = <LinkRole />;
-                break;
             default:
-                // 6
-                right = (
-                    <Card title={MENU_DATA[menuCurrent].title}>
-                        <UpdatePassword onClose={this.back2info} />
-                    </Card>
-                );
+                // 5
+                right = <LinkRole />;
         }
 
         return (
