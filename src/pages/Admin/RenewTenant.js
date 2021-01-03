@@ -74,9 +74,7 @@ class RenewDialog extends PureComponent {
                     <p>
                         总计费用<span>{yearNum * 200}</span>元
                     </p>
-                    <p className="tip" style={{ marginBottom: 0 }}>
-                        点击“支付”后将跳转支付宝页面进行支付
-                    </p>
+                    <p className="tip">点击“支付”后将跳转支付宝页面进行支付</p>
                 </div>
             </Modal>
         );

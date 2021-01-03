@@ -12,7 +12,7 @@ import CtrlMenu from "components/CtrlMenu";
 const MENU_DATA = [
     { icon: "info-circle", title: "应用详情" },
     { icon: "tool", title: "OAuth 设置" },
-    { icon: "tool", title: "验证码设置" },
+    { icon: "tool", title: "OTP 验证码设置" },
     { title: "删除应用", key: "delete" }
 ];
 

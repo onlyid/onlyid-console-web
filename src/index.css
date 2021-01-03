@@ -91,6 +91,7 @@ body {
 .tip {
     font-size: 13px;
     color: #7f7f7f;
+    margin-bottom: 0;
 }
 
 .ulTip {
