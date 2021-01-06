@@ -4,7 +4,7 @@ import Table from "components/Table";
 import { Button, Descriptions, Drawer, Icon, Input, Tooltip } from "antd";
 import http from "my/http";
 import moment from "moment";
-import { DATE_TIME_FORMAT, DATE_TIME_FORMAT_SHORT, SENT_BY_TEXT } from "my/constants";
+import { CHANNEL_TEXT, DATE_TIME_FORMAT, DATE_TIME_FORMAT_SHORT } from "my/constants";
 import SuccessStatus from "../../components/SuccessStatus";
 
 const { Search } = Input;
@@ -29,10 +29,10 @@ class OtpSentTable extends PureComponent {
             render: text => moment(text).format(DATE_TIME_FORMAT_SHORT)
         },
         {
-            title: "发送自",
-            dataIndex: "sentBy",
+            title: "频道",
+            dataIndex: "channel",
             width: 100,
-            render: text => SENT_BY_TEXT[text]
+            render: text => CHANNEL_TEXT[text]
         },
         {
             title: "查看",
@@ -138,9 +138,9 @@ class OtpSentTable extends PureComponent {
                         <Item label="过期时间">
                             {moment(currentRecord.expireDate).format(DATE_TIME_FORMAT)}
                         </Item>
-                        <Item label="发送者">{SENT_BY_TEXT[currentRecord.sentBy]}</Item>
+                        <Item label="频道">{CHANNEL_TEXT[currentRecord.channel]}</Item>
                         <Item label="是否成功">
-                            <SuccessStatus success={currentRecord.success} />
+                            <SuccessStatus success={currentRecord.sendSuccess} />
                             <Tooltip
                                 title={
                                     <span>

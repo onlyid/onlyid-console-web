@@ -90,9 +90,9 @@ export const AUTH_TYPE_TEXT = {
     SSO: "保持登录"
 };
 
-export const SENT_BY_TEXT = {
-    OAUTH: "唯ID SSO",
-    OPEN_API: "OPEN API"
+export const CHANNEL_TEXT = {
+    SSO: "SSO",
+    OTP: "OTP"
 };
 
 export const CATEGORY_TEXT = {
