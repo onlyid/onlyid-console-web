@@ -8,22 +8,29 @@ import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducers from "my/reducers";
-import zhCN from "antd/es/locale/zh_CN";
-import { ConfigProvider } from "antd";
 import "my/utils";
 import moment from "moment";
 import "moment/locale/zh-cn";
+import { createMuiTheme, CssBaseline } from "@material-ui/core";
+import { StylesProvider, ThemeProvider } from "@material-ui/core/styles";
+import { zhCN } from "@material-ui/core/locale";
 
 moment.locale("zh-cn");
 
 const store = createStore(reducers);
+const theme = createMuiTheme({ zhCN });
 
 const content = (
-    <ConfigProvider locale={zhCN}>
-        <Provider store={store}>
-            <App />
-        </Provider>
-    </ConfigProvider>
+    <React.StrictMode>
+        <StylesProvider injectFirst>
+            <ThemeProvider theme={theme}>
+                <Provider store={store}>
+                    <CssBaseline />
+                    <App />
+                </Provider>
+            </ThemeProvider>
+        </StylesProvider>
+    </React.StrictMode>
 );
 ReactDOM.render(content, document.getElementById("root"));
 

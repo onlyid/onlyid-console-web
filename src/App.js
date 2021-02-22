@@ -1,23 +1,22 @@
 import React, { Suspense } from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Layout from "components/Layout";
 import OAuthCallback from "pages/OAuthCallback";
 import AliPayCallback from "pages/AliPayCallback";
-import { Spin } from "antd";
+import { CircularProgress } from "@material-ui/core";
 
-const UserPool = React.lazy(() => import("pages/UserPool"));
-const OrgManage = React.lazy(() => import("pages/OrgManage"));
-const AppManage = React.lazy(() => import("pages/AppManage"));
-const ResManage = React.lazy(() => import("pages/ResManage"));
-const RoleManage = React.lazy(() => import("pages/RoleManage"));
 const Statistic = React.lazy(() => import("pages/Statistic"));
-const AuditLog = React.lazy(() => import("pages/AuditLog"));
-const Admin = React.lazy(() => import("pages/Admin"));
-const Message = React.lazy(() => import("pages/Message"));
+const Application = React.lazy(() => import("pages/Application"));
+const OtpRecord = React.lazy(() => import("pages/OtpRecord"));
+const User = React.lazy(() => import("pages/User"));
+const Permission = React.lazy(() => import("pages/Permission"));
+const BehaviorLog = React.lazy(() => import("pages/BehaviorLog"));
+const Tenant = React.lazy(() => import("pages/Tenant"));
+const MyMessage = React.lazy(() => import("pages/MyMessage"));
 
 const loading = (
     <div style={{ textAlign: "center", padding: "100px 0" }}>
-        <Spin size="large" />
+        <CircularProgress />
     </div>
 );
 
@@ -27,21 +26,6 @@ function App() {
             <Layout>
                 <Suspense fallback={loading}>
                     <Switch>
-                        <Route path="/user-pool">
-                            <UserPool />
-                        </Route>
-                        <Route path="/org-manage">
-                            <OrgManage />
-                        </Route>
-                        <Route path="/app-manage">
-                            <AppManage />
-                        </Route>
-                        <Route path="/res-manage">
-                            <ResManage />
-                        </Route>
-                        <Route path="/role-manage">
-                            <RoleManage />
-                        </Route>
                         <Route path="/oauth-callback">
                             <OAuthCallback />
                         </Route>
@@ -51,17 +35,29 @@ function App() {
                         <Route path="/statistics">
                             <Statistic />
                         </Route>
-                        <Route path="/audit-logs">
-                            <AuditLog />
+                        <Route path="/applications">
+                            <Application />
                         </Route>
-                        <Route path="/admin">
-                            <Admin />
+                        <Route path="/otp-records">
+                            <OtpRecord />
                         </Route>
-                        <Route path="/messages">
-                            <Message />
+                        <Route path="/users">
+                            <User />
+                        </Route>
+                        <Route path="/permissions">
+                            <Permission />
+                        </Route>
+                        <Route path="/behavior-logs">
+                            <BehaviorLog />
+                        </Route>
+                        <Route path="/tenant">
+                            <Tenant />
+                        </Route>
+                        <Route path="/my-messages">
+                            <MyMessage />
                         </Route>
                         <Route path="/">
-                            <Redirect to="/app-manage" />
+                            <Redirect to="/statistics" />
                         </Route>
                     </Switch>
                 </Suspense>

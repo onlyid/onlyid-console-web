@@ -13,12 +13,11 @@
 
 .box1bg {
     background-color: #001529;
-    border-bottom: 1px solid #eee;
 }
 
 .box1 {
     width: 1200px;
-    padding: 0 20px 0 15px;
+    padding: 0 15px;
     margin: 0 auto;
     color: white;
 
@@ -28,8 +27,30 @@
 }
 
 .menu {
-    border-bottom: none;
-    font-size: 15px;
+    display: flex;
+    list-style: none;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.menu :global a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    height: 46px;
+    line-height: 46px;
+    display: inline-block;
+    padding: 0 20px;
+}
+
+.menu :global a.active {
+    background-color: #3f51b5;
+    color: rgba(255, 255, 255, 1);
+    font-weight: bold;
+}
+
+.menu.disabled :global a {
+    pointer-events: none;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .right {
@@ -37,41 +58,48 @@
     align-items: center;
 }
 
-.rightIcon {
-    font-size: 18px;
+.rightIconButton:hover {
+    background-color: #222;
+}
+
+.rightIconButton :global .MuiSvgIcon-root {
     color: rgba(255, 255, 255, 0.7);
-    cursor: pointer;
-}
-
-.rightIcon:hover {
-    color: white;
-}
-
-.rightIcon:not(:first-child) {
-    margin-left: 20px;
+    font-size: 20px;
 }
 
 .rightAccount {
     display: flex;
     align-items: center;
-    margin-left: 30px;
-    cursor: default;
-    padding: 5px 0;
-    opacity: 0.8;
+    margin-left: 20px;
+    cursor: pointer;
+    height: 46px;
+    line-height: 46px;
+    padding: 5px;
+    opacity: 0.9;
 }
 
 .rightAccount:hover {
-    opacity: 1;
+    background-color: #222;
 }
 
 .accountName {
     margin-left: 10px;
     display: inline-block;
-    max-width: 100px;
+    max-width: 65px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     color: #eee;
+    font-size: 13px;
+}
+
+.dropDown :global .MuiListItemIcon-root {
+    min-width: 40px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.dropDown :global .material-icons {
+    font-size: 20px;
 }
 
 .box2bg {

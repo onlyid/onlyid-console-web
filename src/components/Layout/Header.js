@@ -1,26 +1,25 @@
 import React, { PureComponent } from "react";
-import { Badge, Icon, Menu, Tooltip } from "antd";
 import styles from "./index.module.css";
 import { ReactComponent as Logo } from "assets/logo.svg";
-import { withRouter } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import RightAccount from "./RightAccount";
 import { connect } from "react-redux";
 import MessageBox from "./MessageBox";
 import http from "my/http";
 import { eventEmitter } from "my/utils";
-
-const { Item } = Menu;
+import classNames from "classnames";
+import { Badge, IconButton, Tooltip } from "@material-ui/core";
+import { Help as HelpIcon, Notifications as NotificationsIcon } from "@material-ui/icons";
 
 const MENU_DATA = [
-    { title: "用户池", key: "user-pool" },
-    { title: "组织机构", key: "org-manage" },
-    { title: "应用管理", key: "app-manage" },
-    { title: "权限管理", key: "res-manage" },
-    { title: "角色管理", key: "role-manage" },
-    { title: "统计数据", key: "statistics" },
-    { title: "审计日志", key: "audit-logs" },
-    { title: "系统设置", key: "admin", hidden: true },
-    { title: "站内信", key: "messages", hidden: true }
+    { title: "统计概览", key: "statistics" },
+    { title: "应用管理", key: "applications" },
+    { title: "OTP记录", key: "otp-records" },
+    { title: "用户管理", key: "users" },
+    { title: "权限管理", key: "permissions" },
+    { title: "行为日志", key: "behavior-logs" },
+    { title: "租户设置", key: "tenant", hidden: true },
+    { title: "站内信", key: "my-messages", hidden: true }
 ];
 
 class Header extends PureComponent {
@@ -56,12 +55,6 @@ class Header extends PureComponent {
         dispatch({ type: "message/save", payload: { unreadCount: unread, total } });
     };
 
-    onMenuClick = ({ key }) => {
-        const { history } = this.props;
-        this.setState({ menuCurrent: key });
-        history.push("/" + key);
-    };
-
     showDrawer = () => {
         this.setState({ drawerVisible: true });
     };
@@ -84,42 +77,40 @@ class Header extends PureComponent {
                 <div className={styles.box1bg}>
                     <div className={styles.box1}>
                         <Tooltip title="打开官网">
-                            <a href="https://www.onlyid.net" target="_blank">
+                            <a
+                                href="https://www.onlyid.net"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 <Logo
-                                    style={{ fill: "#e8e8e8", width: 80, verticalAlign: "middle" }}
+                                    style={{ fill: "#ddd", width: 75, verticalAlign: "middle" }}
                                 />
                             </a>
                         </Tooltip>
-                        <Menu
-                            onClick={this.onMenuClick}
-                            selectedKeys={[menuCurrent]}
-                            mode="horizontal"
-                            className={styles.menu}
-                            theme="dark"
+                        <ul
+                            className={classNames(styles.menu, {
+                                [styles.disabled]: tenantExpired
+                            })}
                         >
                             {MENU_DATA.filter(item => !item.hidden).map(item => (
-                                <Item key={item.key} disabled={tenantExpired}>
-                                    {item.title}
-                                </Item>
+                                <li key={item.key}>
+                                    <NavLink to={`/${item.key}`}>{item.title}</NavLink>
+                                </li>
                             ))}
-                        </Menu>
+                        </ul>
                         <div className={styles.right}>
-                            <Tooltip title="文档">
-                                <a
-                                    href="https://www.onlyid.net/home/docs"
-                                    target="_blank"
-                                    className={styles.rightIcon}
-                                >
-                                    <Icon type="question-circle" />
-                                </a>
-                            </Tooltip>
-                            <Badge
-                                count={unreadCount}
-                                className={styles.rightIcon}
+                            <IconButton color="inherit" className={styles.rightIconButton}>
+                                <HelpIcon />
+                            </IconButton>
+                            <IconButton
+                                color="inherit"
+                                className={styles.rightIconButton}
                                 onClick={this.showDrawer}
                             >
-                                <Icon type="bell" />
-                            </Badge>
+                                <Badge badgeContent={unreadCount}>
+                                    <NotificationsIcon />
+                                </Badge>
+                            </IconButton>
                             <RightAccount />
                         </div>
                     </div>
