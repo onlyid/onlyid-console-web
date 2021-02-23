@@ -10,6 +10,7 @@ import { eventEmitter } from "my/utils";
 import classNames from "classnames";
 import { Badge, IconButton, Tooltip } from "@material-ui/core";
 import { Help as HelpIcon, Notifications as NotificationsIcon } from "@material-ui/icons";
+import HelpDialog from "./HelpDialog";
 
 const MENU_DATA = [
     { title: "统计概览", key: "statistics" },
@@ -25,7 +26,8 @@ const MENU_DATA = [
 class Header extends PureComponent {
     state = {
         menuCurrent: null,
-        drawerVisible: false
+        drawerVisible: false,
+        dialogVisible: false
     };
 
     componentDidMount() {
@@ -63,8 +65,16 @@ class Header extends PureComponent {
         this.setState({ drawerVisible: false });
     };
 
+    showDialog = () => {
+        this.setState({ dialogVisible: true });
+    };
+
+    closeDialog = () => {
+        this.setState({ dialogVisible: false });
+    };
+
     render() {
-        const { menuCurrent, drawerVisible } = this.state;
+        const { menuCurrent, drawerVisible, dialogVisible } = this.state;
         const {
             admin: { tenantExpired },
             message: { unreadCount }
@@ -99,7 +109,11 @@ class Header extends PureComponent {
                             ))}
                         </ul>
                         <div className={styles.right}>
-                            <IconButton color="inherit" className={styles.rightIconButton}>
+                            <IconButton
+                                color="inherit"
+                                className={styles.rightIconButton}
+                                onClick={this.showDialog}
+                            >
                                 <HelpIcon />
                             </IconButton>
                             <IconButton
@@ -124,6 +138,7 @@ class Header extends PureComponent {
                         <div id="headerRight" />
                     </div>
                 </div>
+                <HelpDialog onClose={this.closeDialog} visible={dialogVisible} />
                 <MessageBox onClose={this.closeDrawer} visible={drawerVisible} />
             </div>
         );

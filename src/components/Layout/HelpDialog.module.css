@@ -1,0 +1,31 @@
+.content :global .material-icons {
+    vertical-align: -20%;
+}
+
+.content h3 {
+    font-size: 16px;
+}
+
+.content a {
+    font-size: 15px;
+}
+
+.contactBox {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact {
+    color: #f50057;
+    font-size: 15px;
+}
+
+.closeButton {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    color: #7f7f7f;
+}
