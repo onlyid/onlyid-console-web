@@ -2,6 +2,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 400px;
+    padding: 15px 20px;
+    font-size: 18px;
+    border-bottom: 1px solid #eee;
+    font-weight: 500;
+}
+
+.closeButton {
+    position: absolute;
+    right: 6px;
+    color: #7f7f7f;
 }
 
 .item {
@@ -19,6 +30,7 @@
     justify-content: space-between;
     height: 24px;
     align-items: center;
+    color: rgba(0, 0, 0, 0.65);
 }
 
 .item .markRead {
@@ -38,7 +50,6 @@
 }
 
 .itemTitle {
-    color: rgba(0, 0, 0, 0.85);
     margin-bottom: 0;
     margin-top: 0.5em;
 }

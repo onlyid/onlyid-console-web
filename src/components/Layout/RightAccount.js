@@ -4,7 +4,7 @@ import styles from "./index.module.css";
 import http from "my/http";
 import { eventEmitter } from "my/utils";
 import { Link } from "react-router-dom";
-import { ListItemIcon, ListItemText, Menu, MenuItem } from "@material-ui/core";
+import { ButtonBase, ListItemIcon, ListItemText, Menu, MenuItem } from "@material-ui/core";
 
 const HOME_URL = "https://www.onlyid.net/home";
 
@@ -38,10 +38,10 @@ class RightAccount extends PureComponent {
 
         return (
             <>
-                <div className={styles.rightAccount} onClick={this.openMenu}>
+                <ButtonBase className={styles.rightAccount} onClick={this.openMenu}>
                     <Avatar url={userInfo.avatarUrl} width={30} />
                     <span className={styles.accountName}>{userInfo.nickname}</span>
-                </div>
+                </ButtonBase>
                 <Menu
                     anchorEl={anchorEl}
                     anchorOrigin={{ vertical: "bottom", horizontal: "center" }}

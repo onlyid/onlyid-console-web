@@ -121,7 +121,7 @@ class Header extends PureComponent {
                                 className={styles.rightIconButton}
                                 onClick={this.showDrawer}
                             >
-                                <Badge badgeContent={unreadCount}>
+                                <Badge badgeContent={unreadCount} color="secondary">
                                     <NotificationsIcon />
                                 </Badge>
                             </IconButton>
@@ -132,7 +132,9 @@ class Header extends PureComponent {
                 <div className={styles.box2bg}>
                     <div className={styles.box2}>
                         <div className={styles.left1}>
-                            <span style={{ fontSize: 18 }}>{item && item.title}</span>
+                            <span style={{ fontSize: 18, fontWeight: 500 }}>
+                                {item && item.title}
+                            </span>
                             <div id="headerLeft" />
                         </div>
                         <div id="headerRight" />

@@ -1,12 +1,14 @@
 import React, { PureComponent } from "react";
-import { Button, Empty, Drawer } from "antd";
+import { Button, Drawer, IconButton } from "@material-ui/core";
 import http from "my/http";
 import moment from "moment";
-import { DATE_TIME_FORMAT, CATEGORY_TEXT } from "my/constants";
+import { CATEGORY_TEXT, DATE_TIME_FORMAT } from "my/constants";
 import styles from "./MessageBox.module.css";
 import { eventEmitter } from "my/utils";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { Close as CloseIcon } from "@material-ui/icons";
+import Empty from "components/Empty";
 
 class Item extends PureComponent {
     onClick = event => {
@@ -28,9 +30,9 @@ class Item extends PureComponent {
                     </span>
                     <Button
                         className={styles.markRead}
-                        type="link"
                         size="small"
                         onClick={this.onClick}
+                        color="primary"
                     >
                         标记已读
                     </Button>
@@ -105,27 +107,23 @@ class MessageBox extends PureComponent {
         const drawerTitle = (
             <div className={styles.drawerTitle}>
                 <span>站内信</span>
-                <div style={{ marginRight: 20 }}>
-                    <Button type="link" size="small" onClick={() => this.go("/admin/notification")}>
+                <div style={{ marginRight: 22 }}>
+                    <Button onClick={() => this.go("/admin/notification")} color="primary">
                         通知设置
                     </Button>
-                    <Button type="link" size="small" onClick={() => this.go("/messages")}>
+                    <Button onClick={() => this.go("/my-messages")} color="primary">
                         查看更多
                     </Button>
                 </div>
+                <IconButton className={styles.closeButton} onClick={onClose}>
+                    <CloseIcon />
+                </IconButton>
             </div>
         );
 
         return (
-            <Drawer
-                title={drawerTitle}
-                placement="right"
-                onClose={onClose}
-                visible={visible}
-                width="400"
-                destroyOnClose
-                bodyStyle={{ padding: 0 }}
-            >
+            <Drawer anchor="right" open={visible} onClose={onClose}>
+                {drawerTitle}
                 <List onItemClick={id => this.onItemClick(id)} />
             </Drawer>
         );
