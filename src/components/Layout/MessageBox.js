@@ -98,7 +98,7 @@ class MessageBox extends PureComponent {
         const { dispatch } = this.props;
 
         dispatch({ type: "message/save", payload: { selectedKey: id } });
-        this.go("/messages");
+        this.go("/my-messages");
     };
 
     render() {
@@ -107,8 +107,8 @@ class MessageBox extends PureComponent {
         const drawerTitle = (
             <div className={styles.drawerTitle}>
                 <span>站内信</span>
-                <div style={{ marginRight: 22 }}>
-                    <Button onClick={() => this.go("/admin/notification")} color="primary">
+                <div style={{ marginRight: 24 }}>
+                    <Button onClick={() => this.go("/tenant/notification")} color="primary">
                         通知设置
                     </Button>
                     <Button onClick={() => this.go("/my-messages")} color="primary">

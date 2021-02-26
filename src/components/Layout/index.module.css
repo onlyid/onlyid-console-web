@@ -2,20 +2,16 @@
     padding-top: 100px;
 }
 
-.header {
+.headerBg {
     top: 0;
     left: 0;
     position: fixed;
     width: 100%;
-    background-color: white;
     z-index: 2;
-}
-
-.box1bg {
     background-color: #001529;
 }
 
-.box1 {
+.header {
     width: 1200px;
     padding: 0 15px;
     margin: 0 auto;
@@ -45,7 +41,7 @@
 .menu :global a.active {
     background-color: #3f51b5;
     color: rgba(255, 255, 255, 1);
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .menu.disabled :global a {
@@ -102,22 +98,6 @@
     font-size: 20px;
 }
 
-.box2bg {
-    border-bottom: 1px solid #eee;
-    box-shadow: 0 1px 4px #eee;
-}
-
-.box2 {
-    width: 1200px;
-    padding: 0 20px;
-    margin: 0 auto;
-    height: 46px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
 .content {
     width: 1200px;
     padding: 20px;
@@ -129,13 +109,4 @@
     font-size: 13px;
     margin-bottom: 20px;
     text-align: center;
-}
-
-.left1 {
-    display: flex;
-    align-items: center;
-}
-
-:global(#headerLeft) {
-    margin-left: 10px;
 }
