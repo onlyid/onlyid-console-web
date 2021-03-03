@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import Avatar from "components/Avatar";
-import styles from "./index.module.css";
+import styles from "./RightAccount.module.css";
 import http from "my/http";
 import { eventEmitter } from "my/utils";
 import { Link } from "react-router-dom";

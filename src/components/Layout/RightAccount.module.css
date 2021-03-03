@@ -1,0 +1,32 @@
+.rightAccount {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    cursor: pointer;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 5px;
+}
+
+.rightAccount:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.accountName {
+    margin-left: 10px;
+    display: inline-block;
+    max-width: 65px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 13px;
+}
+
+.dropDown :global .MuiListItemIcon-root {
+    min-width: 40px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.dropDown :global .material-icons {
+    font-size: 20px;
+}

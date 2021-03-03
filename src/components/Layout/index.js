@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import moment from "moment";
 import { loginUrl } from "my/http";
+import LeftDrawer from "./LeftDrawer";
 
 class Layout extends PureComponent {
     componentDidMount() {
@@ -22,7 +23,7 @@ class Layout extends PureComponent {
 
         if (moment(tenantInfo.expireDate) < moment()) {
             dispatch({ type: "admin/save", payload: { tenantExpired: true } });
-            history.replace("/admin/renewal");
+            history.replace("/tenant/renewal");
         }
     }
 
@@ -32,12 +33,10 @@ class Layout extends PureComponent {
         return (
             <div className={styles.layout}>
                 <Header />
-                <div className={styles.content}>{children}</div>
-                <div className={styles.footer}>
-                    &copy; 2015 - {new Date().getFullYear()}
-                    <span style={{ marginLeft: 20, marginRight: 20 }}>深圳市友全科技有限公司</span>
-                    All rights reserved.
-                </div>
+                <LeftDrawer />
+                <main className={styles.main}>
+                    <div className={styles.content}>{children}</div>
+                </main>
             </div>
         );
     }

@@ -1,0 +1,20 @@
+.root {
+    z-index: 1201;
+}
+
+.toolbar {
+    justify-content: space-between;
+}
+
+.rightBox {
+    display: flex;
+    align-items: center;
+}
+
+.iconButton:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.iconButton :global .MuiSvgIcon-root {
+    font-size: 20px;
+}

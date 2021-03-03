@@ -1,25 +1,14 @@
 import React, { PureComponent } from "react";
-import styles from "./index.module.css";
+import { AppBar, Badge, IconButton, Toolbar, Tooltip } from "@material-ui/core";
 import { ReactComponent as Logo } from "assets/logo.svg";
-import { NavLink } from "react-router-dom";
-import RightAccount from "./RightAccount";
-import { connect } from "react-redux";
-import MessageBox from "./MessageBox";
-import http from "my/http";
-import { eventEmitter } from "my/utils";
-import classNames from "classnames";
-import { Badge, IconButton, Tooltip } from "@material-ui/core";
+import styles from "./Header.module.css";
 import { Help as HelpIcon, Notifications as NotificationsIcon } from "@material-ui/icons";
+import RightAccount from "./RightAccount";
 import HelpDialog from "./HelpDialog";
-
-const MENU_DATA = [
-    { title: "统计概览", key: "statistics" },
-    { title: "应用管理", key: "applications" },
-    { title: "OTP记录", key: "otp-records" },
-    { title: "用户管理", key: "users" },
-    { title: "权限管理", key: "permissions" },
-    { title: "行为日志", key: "behavior-logs" }
-];
+import MessageBox from "./MessageBox";
+import { eventEmitter } from "my/utils";
+import http from "my/http";
+import { connect } from "react-redux";
 
 class Header extends PureComponent {
     state = {
@@ -61,40 +50,28 @@ class Header extends PureComponent {
     render() {
         const { drawerVisible, dialogVisible } = this.state;
         const {
-            admin: { tenantExpired },
             message: { unreadCount }
         } = this.props;
 
         return (
-            <header className={styles.headerBg}>
-                <div className={styles.header}>
+            <AppBar className={styles.root}>
+                <Toolbar variant="dense" className={styles.toolbar}>
                     <Tooltip title="打开官网">
                         <a href="https://www.onlyid.net" target="_blank" rel="noopener noreferrer">
-                            <Logo style={{ fill: "#ddd", width: 75, verticalAlign: "middle" }} />
+                            <Logo style={{ fill: "#fff", width: 75, verticalAlign: "middle" }} />
                         </a>
                     </Tooltip>
-                    <ul
-                        className={classNames(styles.menu, {
-                            [styles.disabled]: tenantExpired
-                        })}
-                    >
-                        {MENU_DATA.map(item => (
-                            <li key={item.key}>
-                                <NavLink to={`/${item.key}`}>{item.title}</NavLink>
-                            </li>
-                        ))}
-                    </ul>
-                    <div className={styles.right}>
+                    <div className={styles.rightBox}>
                         <IconButton
                             color="inherit"
-                            className={styles.rightIconButton}
+                            className={styles.iconButton}
                             onClick={this.showDialog}
                         >
                             <HelpIcon />
                         </IconButton>
                         <IconButton
                             color="inherit"
-                            className={styles.rightIconButton}
+                            className={styles.iconButton}
                             onClick={this.showDrawer}
                         >
                             <Badge badgeContent={unreadCount} color="secondary">
@@ -103,12 +80,12 @@ class Header extends PureComponent {
                         </IconButton>
                         <RightAccount />
                     </div>
-                </div>
+                </Toolbar>
                 <HelpDialog onClose={this.closeDialog} visible={dialogVisible} />
                 <MessageBox onClose={this.closeDrawer} visible={drawerVisible} />
-            </header>
+            </AppBar>
         );
     }
 }
 
-export default connect(({ admin, message }) => ({ admin, message }))(Header);
+export default connect(({ message }) => ({ message }))(Header);
