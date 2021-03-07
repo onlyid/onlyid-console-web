@@ -1,43 +1,18 @@
 import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { Empty } from "antd";
 import styles from "./index.module.css";
-import App from "./App";
-import AppMenu1 from "components/AppMenu";
-
-const AppMenu = connect(
-    state => ({ selectedKey: state.statistic.selectedKey }),
-    dispatch => ({ savePayload: payload => dispatch({ type: "statistic/save", payload }) })
-)(AppMenu1);
+import Otp from "./Otp";
+import User from "./User";
 
 class Statistic extends PureComponent {
-    state = {
-        showEmpty: false
-    };
-
     render() {
-        const { showEmpty } = this.state;
-
         return (
             <div className={styles.root}>
-                {showEmpty ? (
-                    <div className="emptyBox">
-                        <Empty description="暂无应用，请到应用管理页新建" />
-                    </div>
-                ) : (
-                    <>
-                        <div>
-                            <AppMenu
-                                type="statistic"
-                                onShowEmptyChange={showEmpty => this.setState({ showEmpty })}
-                            />
-                        </div>
-                        <App />
-                    </>
-                )}
+                <h1>统计概览</h1>
+                <Otp />
+                <User />
             </div>
         );
     }
 }
 
-export default connect(({ statistic }) => ({ statistic }))(Statistic);
+export default Statistic;

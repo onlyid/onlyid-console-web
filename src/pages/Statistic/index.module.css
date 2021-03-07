@@ -1,27 +1,117 @@
 .root {
-    display: flex;
-    justify-content: space-between;
     padding-bottom: 20px;
 }
 
-.otpSentTotal {
-    margin-top: 20px;
-}
-
-.otpSentTotal span {
-    color: #1890ff;
-    font-size: 16px;
-}
-
 .chart {
-    background-color: white;
+    margin-top: 30px;
 }
 
-.recentButtonBox {
-    text-align: right;
-    font-size: 13px;
+.chart > div {
+    height: 450px;
 }
 
-.recentButtonBox :global .ant-btn-sm {
+.summary {
+    margin-top: 35px;
+}
+
+.summary .otpTotalCount {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.summary .otpTotalCount > span {
+    color: #3f51b5;
+    font-size: 21px;
+}
+
+.summary .countBox {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgb(224, 224, 224);
+    border-bottom: 1px solid rgb(224, 224, 224);
+    padding: 14px 0;
+}
+
+.latest {
+    margin-top: 35px;
+}
+
+.latest .table1 {
+    border-top: 1px solid rgb(224, 224, 224);
+}
+
+.latest .table1 :global .MuiTableHead-root .MuiTableCell-root {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-weight: normal;
+    background-color: #fbfbfb;
+}
+
+.latest .table1 :global .MuiTableBody-root .MuiTableCell-root {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.latest .table1 .otpThead :global .MuiTableCell-root {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.latest .table1 .otpContent {
     font-size: 13px;
+    width: 260px;
+}
+
+.latest .table1 .userAvatar {
+    font-size: 0;
+}
+
+.latest .table1 .clientName {
+    border-left: 1px solid rgb(224, 224, 224);
+    padding-left: 32px;
+}
+
+.emptyBox {
+    text-align: center;
+    padding: 32px 0;
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+
+.titleWithSelect {
+    margin-top: 45px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.titleWithSelect h2 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 6px;
+    margin: 0;
+}
+
+.titleWithSelect :global .MuiFormControl-root {
+    width: 160px;
+}
+
+.titleWithSelect :global .MuiInputAdornment-positionStart {
+    margin-right: 16px;
+}
+
+.titleWithSelect :global .MuiFormControl-root + .MuiFormControl-root {
+    margin-left: 35px;
+}
+
+.countItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countItem .count {
+    padding: 8px 0;
+    font-size: 21px;
+}
+
+.countItem .days {
+    color: rgba(0, 0, 0, 0.5);
 }
