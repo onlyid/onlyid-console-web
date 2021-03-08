@@ -32,7 +32,9 @@ export default function({ title, clientId, days, type, onChange, typeList }) {
                         startAdornment={<InputAdornment position="start">类型</InputAdornment>}
                     >
                         {typeList.map(type => (
-                            <MenuItem value={type.value}>{type.label}</MenuItem>
+                            <MenuItem key={type.value} value={type.value}>
+                                {type.label}
+                            </MenuItem>
                         ))}
                     </Select>
                 </FormControl>

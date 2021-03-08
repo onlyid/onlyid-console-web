@@ -46,7 +46,7 @@ class Latest extends PureComponent {
                             <TableCell>手机号</TableCell>
                             <TableCell>邮箱</TableCell>
                             <TableCell>性别</TableCell>
-                            <TableCell className={styles.clientName}>登录应用</TableCell>
+                            <TableCell className={styles.borderLeft}>登录应用</TableCell>
                             <TableCell>登录时间</TableCell>
                         </TableRow>
                     </TableHead>
@@ -60,7 +60,12 @@ class Latest extends PureComponent {
                                 <TableCell>{item.mobile || "-"}</TableCell>
                                 <TableCell>{item.email || "-"}</TableCell>
                                 <TableCell>{GENDER_TEXT[item.gender] || "-"}</TableCell>
-                                <TableCell className={styles.clientName}>
+                                <TableCell className={styles.borderLeft}>
+                                    <img
+                                        src={item.clientIconUrl}
+                                        alt="icon"
+                                        className={styles.clientIcon}
+                                    />
                                     {item.clientName}
                                 </TableCell>
                                 <TableCell>
