@@ -1,0 +1,23 @@
+.root {
+    margin-top: 35px;
+    border-bottom: 1px solid #ddd;
+    min-height: 44px;
+}
+
+.root :global .MuiTabs-indicator {
+    opacity: 0.9;
+}
+
+.root :global .MuiTab-root {
+    min-height: 44px;
+}
+
+.root :global .MuiTab-root + .MuiTab-root {
+    margin-left: 25px;
+}
+
+@media (min-width: 600px) {
+    .root :global .MuiTab-root {
+        min-width: 0;
+    }
+}

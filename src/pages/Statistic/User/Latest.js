@@ -1,11 +1,11 @@
 import React, { PureComponent } from "react";
 import http from "my/http";
 import { Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
-import styles from "../index.module.css";
+import styles from "../Latest.module.css";
 import moment from "moment";
 import { DATE_TIME_FORMAT, GENDER_TEXT } from "my/constants";
 import Empty from "components/Empty";
-import Avatar from "../../../components/Avatar";
+import Avatar from "components/Avatar";
 
 class Latest extends PureComponent {
     state = {
@@ -36,13 +36,12 @@ class Latest extends PureComponent {
         const { type } = this.props;
 
         return (
-            <div className={styles.latest}>
+            <div className={styles.root}>
                 <h3>最近{type === "new" ? "新增" : "活跃"}</h3>
                 <Table className={styles.table1}>
                     <TableHead>
                         <TableRow>
-                            <TableCell>头像</TableCell>
-                            <TableCell>昵称</TableCell>
+                            <TableCell>{type === "new" ? "新增" : "活跃"}用户</TableCell>
                             <TableCell>手机号</TableCell>
                             <TableCell>邮箱</TableCell>
                             <TableCell>性别</TableCell>
@@ -53,20 +52,25 @@ class Latest extends PureComponent {
                     <TableBody>
                         {list.map(item => (
                             <TableRow key={item.id + item.loginDate}>
-                                <TableCell className={styles.userAvatar}>
-                                    <Avatar url={item.avatarUrl} width={40} height={40} />
+                                <TableCell>
+                                    <div className={styles.userBox}>
+                                        <Avatar
+                                            url={item.avatarUrl}
+                                            width={40}
+                                            height={40}
+                                            style={{ marginRight: 15 }}
+                                        />
+                                        {item.nickname}
+                                    </div>
                                 </TableCell>
-                                <TableCell>{item.nickname}</TableCell>
                                 <TableCell>{item.mobile || "-"}</TableCell>
                                 <TableCell>{item.email || "-"}</TableCell>
                                 <TableCell>{GENDER_TEXT[item.gender] || "-"}</TableCell>
                                 <TableCell className={styles.borderLeft}>
-                                    <img
-                                        src={item.clientIconUrl}
-                                        alt="icon"
-                                        className={styles.clientIcon}
-                                    />
-                                    {item.clientName}
+                                    <div className={styles.clientBox}>
+                                        <img src={item.clientIconUrl} alt="icon" />
+                                        {item.clientName}
+                                    </div>
                                 </TableCell>
                                 <TableCell>
                                     {moment(item.loginDate).format(DATE_TIME_FORMAT)}

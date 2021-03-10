@@ -1,0 +1,38 @@
+.backButton:global(.MuiButton-root) {
+    line-height: normal;
+}
+
+.header {
+    display: flex;
+    margin-top: 20px;
+}
+
+.header label {
+    cursor: pointer;
+}
+
+.header img {
+    width: 60px;
+    border-radius: 4px;
+    margin-right: 20px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.header ul {
+    display: flex;
+    list-style: none;
+    margin: 10px 0 0;
+    padding: 0;
+    align-items: center;
+}
+
+.header ul li:not(:first-of-type) {
+    margin-left: 25px;
+}
+
+.header ul li > span:first-of-type {
+    color: #7f7f7f;
+}

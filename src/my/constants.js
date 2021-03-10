@@ -77,12 +77,6 @@ export const DATE_TIME_FORMAT = "YYYY-MM-DD HH:mm:ss";
 export const DATE_FORMAT = "YYYY-MM-DD";
 export const DATE_TIME_FORMAT_SHORT = "MM-DD HH:mm:ss";
 
-export const ACTIVE_TYPE_TEXT = {
-    SIGN_IN: "登录",
-    SIGN_UP: "注册",
-    RESET_PASSWORD: "重置密码"
-};
-
 export const AUTH_TYPE_TEXT = {
     PASSWORD: "密码",
     OTP: "验证码",

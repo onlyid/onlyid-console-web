@@ -4,16 +4,8 @@ const defaultUserPool = {
     selectedKey: null
 };
 
-const defaultOrgManage = {
-    orgNodes: [],
-    showEmpty: false,
-    selectedKey: null,
-    selectedType: null,
-    showUser: false
-};
-
-const defaultAppManage = {
-    selectedKey: null
+const defaultApplication = {
+    currentTab: "basic"
 };
 
 const defaultResManage = {
@@ -30,9 +22,7 @@ const defaultRoleManage = {
     groupId: null // groupId有值 则当前选中的是role 否则选中的是role group
 };
 
-const defaultStatistic = {
-    selectedKey: null
-};
+const defaultStatistic = {};
 
 const defaultAuditLog = {
     selectedKey: null
@@ -59,22 +49,11 @@ function userPool(state = defaultUserPool, action) {
     }
 }
 
-function orgManage(state = defaultOrgManage, action) {
+function application(state = defaultApplication, action) {
     const { type, payload } = action;
 
     switch (type) {
-        case "orgManage/save":
-            return { ...state, ...payload };
-        default:
-            return state;
-    }
-}
-
-function appManage(state = defaultAppManage, action) {
-    const { type, payload } = action;
-
-    switch (type) {
-        case "appManage/save":
+        case "application":
             return { ...state, ...payload };
         default:
             return state;
@@ -107,7 +86,7 @@ function statistic(state = defaultStatistic, action) {
     const { type, payload } = action;
 
     switch (type) {
-        case "statistic/save":
+        case "statistic":
             return { ...state, ...payload };
         default:
             return state;
@@ -149,8 +128,7 @@ function message(state = defaultMessage, action) {
 
 export default combineReducers({
     userPool,
-    orgManage,
-    appManage,
+    application,
     resManage,
     roleManage,
     statistic,

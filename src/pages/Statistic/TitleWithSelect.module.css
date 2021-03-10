@@ -1,0 +1,23 @@
+.root {
+    margin-top: 45px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.root h2 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 6px;
+    margin: 0;
+}
+
+.root :global .MuiFormControl-root {
+    width: 160px;
+}
+
+.root :global .MuiInputAdornment-positionStart {
+    margin-right: 16px;
+}
+
+.root :global .MuiFormControl-root + .MuiFormControl-root {
+    margin-left: 35px;
+}

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import http from "my/http";
 import { Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
-import styles from "../index.module.css";
+import styles from "../Latest.module.css";
 import moment from "moment";
 import { DATE_TIME_FORMAT } from "my/constants";
 import SuccessStatus from "components/SuccessStatus";
@@ -36,7 +36,7 @@ class Latest extends PureComponent {
         const { list } = this.state;
 
         return (
-            <div className={styles.latest}>
+            <div className={styles.root}>
                 <h3>最近发送</h3>
                 <Table className={styles.table1}>
                     <TableHead className={classNames({ [styles.otpThead]: list.length })}>

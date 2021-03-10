@@ -1,11 +1,11 @@
 import React from "react";
-import styles from "./index.module.css";
+import styles from "./TitleWithSelect.module.css";
 import ClientSelect from "./ClientSelect";
 import { FormControl, InputAdornment, MenuItem, Select } from "@material-ui/core";
 
 export default function({ title, clientId, days, type, onChange, typeList }) {
     return (
-        <div className={styles.titleWithSelect}>
+        <div className={styles.root}>
             <h2>{title}</h2>
             <div>
                 <ClientSelect

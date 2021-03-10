@@ -1,105 +1,110 @@
-@import "~antd/dist/antd.css";
-
 body {
-    background-color: #fdfdfd;
-}
-
-/* reset antd start */
-.ant-drawer-title {
-    font-weight: normal;
-}
-
-.ant-drawer-body {
-    max-height: calc(100% - 55px);
-    overflow: auto;
-}
-
-.ant-descriptions-item-label {
-    color: rgba(0, 0, 0, 0.6);
-}
-
-.ant-descriptions-item-content {
-    color: rgba(0, 0, 0, 0.85);
-}
-
-.ant-table-thead > tr > th {
-    font-weight: normal;
-    padding: 10px 16px;
-}
-
-.ant-table {
-    border: 1px solid #e8e8e8;
     background-color: white;
 }
 
-.ant-table > .ant-table-content .ant-table-row:last-child td {
-    border-bottom: none;
+p {
+    line-height: 1.5;
 }
 
-.ant-table-placeholder {
-    border-bottom: none;
-}
-/* reset antd end */
-
-.emptyBox {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 50vh;
+h1 {
+    font-size: 22px;
+    font-weight: 500;
 }
 
-.buttonPlain {
-    background-color: white;
-    color: rgba(0, 0, 0, 0.65);
-    border-color: #d9d9d9;
+h2 {
+    font-size: 18px;
+    font-weight: 500;
 }
 
-.uri {
-    word-break: break-all;
+h3 {
+    font-size: 15px;
+    font-weight: 500;
 }
 
-.treeMenu {
-    width: 310px;
-    min-height: 600px;
-    max-height: 800px;
-
-    display: flex;
-    flex-direction: column;
+/* reset mui start */
+.MuiTooltip-tooltip {
+    font-size: 12px;
 }
 
-.treeMenu .ant-tree {
-    margin-top: 10px;
-    width: 100%;
-    overflow: auto;
-    border: 1px solid #e8e8e8;
-    border-radius: 4px;
-    background-color: white;
-
-    flex-grow: 1;
+.MuiTypography-h6 {
+    font-size: 18px;
 }
 
-.treeMenu .ant-tree .ant-tree-title {
-    margin-left: 5px;
+.MuiTypography-body1 {
+    font-size: 14px;
 }
 
-.treeMenu .ant-tree .material-icons {
-    font-size: 20px;
-    vertical-align: -5px;
+.MuiInputBase-root {
+    font-size: 14px;
 }
 
-.tip {
+.MuiInputBase-root.Mui-disabled {
+    background-color: #fafafa;
+}
+
+.MuiMenuItem-root {
+    font-size: 14px;
+}
+
+.MuiTab-root {
+    text-transform: none;
+}
+
+.MuiOutlinedInput-input {
+    padding: 14px;
+}
+
+.MuiOutlinedInput-inputMultiline {
+    padding: 0;
+}
+/* reset mui end */
+
+.mainActionBox {
+    float: right;
+    margin-top: -2px;
+}
+
+.tipBox {
+    margin-top: 30px;
+}
+
+.tipBox p {
     font-size: 13px;
     color: #7f7f7f;
-    margin-bottom: 0;
+    margin-bottom: 8px;
 }
 
-.ulTip {
+.tipBox ol {
     margin: 0;
-    padding: 0;
-    list-style: none;
+    padding-left: 2em;
+    font-size: 13px;
+    color: #7f7f7f;
+}
+
+.tipBox ol li {
+    line-height: 1.5em;
+    height: 1.5em;
 }
 
 pre[class*="language-"] {
     background-color: #f7f8f9;
+}
+
+.inputEndButton {
+    height: 32px;
+    padding-left: 8px;
+    padding-right: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+}
+
+.inputEndButton + .inputEndButton {
+    margin-left: 4px;
+}
+
+.inputEndButton > .material-icons {
+    font-size: 16px;
+    color: #3f51b5;
 }

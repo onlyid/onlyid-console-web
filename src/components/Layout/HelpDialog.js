@@ -63,9 +63,11 @@ export default function({ visible, onClose }) {
                     <span className={styles.contact}>15521312099</span>，
                     <span style={{ fontWeight: 500 }}>7x24小时随时响应确保服务稳定运行</span>。
                 </p>
-                <p className="tip" style={{ marginBottom: 12 }}>
-                    提示：唯ID不使用工单系统，请通过上述方式与我们联系，服务响应更及时，更快速解决问题。
-                </p>
+                <div className="tipBox" style={{ margin: "1em 0" }}>
+                    <p>
+                        提示：唯ID不使用工单系统，请通过上述方式与我们联系，服务响应更及时，更快速解决问题。
+                    </p>
+                </div>
             </DialogContent>
         </Dialog>
     );

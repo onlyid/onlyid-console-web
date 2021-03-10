@@ -1,0 +1,36 @@
+.root {
+    margin-top: 25px;
+    display: flex;
+}
+
+.root:first-of-type {
+    margin-top: 40px;
+}
+
+.root > label {
+    width: 200px;
+    text-align: right;
+    margin-right: 20px;
+    flex-shrink: 0;
+    height: 45px;
+    line-height: 45px;
+}
+
+label.radioGroup {
+    height: 42px;
+    line-height: 42px;
+}
+
+label.required:after {
+    display: inline-block;
+    margin-left: 4px;
+    color: #f44336;
+    font-size: 14px;
+    line-height: 1;
+    content: "*";
+    font-family: SimSun, sans-serif;
+}
+
+.root :global .MuiFormGroup-row .MuiFormControlLabel-root {
+    margin-right: 25px;
+}

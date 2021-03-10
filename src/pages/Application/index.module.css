@@ -1,7 +1,13 @@
-.appManage {
-    display: flex;
-    justify-content: space-between;
+.root {
     padding-bottom: 20px;
+}
+
+.clientId {
+    border-radius: 3px;
+    padding: 5px 10px;
+    font-family: monospace;
+    font-size: 14px;
+    background-color: #f9f9f9;
 }
 
 .uploadBox i {
