@@ -1,0 +1,217 @@
+import React, { PureComponent } from "react";
+import http from "my/http";
+import { withRouter } from "react-router-dom";
+import InputBox from "components/InputBox";
+import {
+    Button,
+    FormControl,
+    FormControlLabel,
+    FormHelperText,
+    MenuItem,
+    Radio,
+    RadioGroup,
+    Select,
+    Snackbar
+} from "@material-ui/core";
+import {
+    OTP_EXPIRE_TEXT,
+    OTP_FAIL_TEXT,
+    OTP_LENGTH_TEXT,
+    OTP_TEMPLATE_TEXT,
+    OTP_TYPE_TEXT
+} from "my/constants";
+import styles from "../index.module.css";
+import { Alert } from "@material-ui/lab";
+
+class Otp extends PureComponent {
+    state = {
+        values: {},
+        toastOpen: false
+    };
+
+    componentDidMount() {
+        this.initData();
+    }
+
+    initData = async () => {
+        const { match } = this.props;
+
+        const values = await http.get(`clients/${match.params.clientId}/otp-config`);
+        this.setState({ values });
+    };
+
+    onChange = ({ target }) => {
+        this.setState(({ values }) => ({ values: { ...values, [target.name]: target.value } }));
+    };
+
+    onSubmit = async () => {
+        const { match } = this.props;
+        const { values } = this.state;
+
+        await http.put(`clients/${match.params.clientId}/otp-config`, values);
+
+        this.setState({ toastOpen: true });
+    };
+
+    render() {
+        const { values, toastOpen } = this.state;
+
+        return (
+            <>
+                <form className={styles.otpForm}>
+                    <InputBox label="验证码长度" radioGroup>
+                        <FormControl fullWidth variant="outlined">
+                            <RadioGroup
+                                row
+                                id="length"
+                                value={values.length ? String(values.length) : ""}
+                                onChange={this.onChange}
+                            >
+                                {Object.keys(OTP_LENGTH_TEXT).map(key => (
+                                    <FormControlLabel
+                                        value={key}
+                                        key={key}
+                                        control={<Radio name="length" color="primary" />}
+                                        label={OTP_LENGTH_TEXT[key]}
+                                    />
+                                ))}
+                            </RadioGroup>
+                        </FormControl>
+                    </InputBox>
+                    <InputBox label="验证码类型" radioGroup>
+                        <FormControl fullWidth variant="outlined">
+                            <RadioGroup
+                                row
+                                id="type"
+                                value={values.type || ""}
+                                onChange={this.onChange}
+                            >
+                                {Object.keys(OTP_TYPE_TEXT).map(key => (
+                                    <FormControlLabel
+                                        value={key}
+                                        key={key}
+                                        control={<Radio name="type" color="primary" />}
+                                        label={OTP_TYPE_TEXT[key]}
+                                    />
+                                ))}
+                            </RadioGroup>
+                        </FormControl>
+                    </InputBox>
+                    <InputBox label="验证码有效期" radioGroup>
+                        <FormControl fullWidth variant="outlined">
+                            <RadioGroup
+                                row
+                                id="expireMin"
+                                value={values.expireMin ? String(values.expireMin) : ""}
+                                onChange={this.onChange}
+                            >
+                                {Object.keys(OTP_EXPIRE_TEXT).map(key => (
+                                    <FormControlLabel
+                                        value={key}
+                                        key={key}
+                                        control={<Radio name="expireMin" color="primary" />}
+                                        label={OTP_EXPIRE_TEXT[key]}
+                                    />
+                                ))}
+                            </RadioGroup>
+                        </FormControl>
+                    </InputBox>
+                    <InputBox label="最多失败次数" radioGroup>
+                        <FormControl fullWidth variant="outlined">
+                            <RadioGroup
+                                row
+                                id="maxFailCount"
+                                value={values.maxFailCount ? String(values.maxFailCount) : ""}
+                                onChange={this.onChange}
+                            >
+                                {Object.keys(OTP_FAIL_TEXT).map(key => (
+                                    <FormControlLabel
+                                        value={key}
+                                        key={key}
+                                        control={<Radio name="maxFailCount" color="primary" />}
+                                        label={OTP_FAIL_TEXT[key]}
+                                    />
+                                ))}
+                            </RadioGroup>
+                            <FormHelperText>
+                                当某条验证码校验失败次数达到该值后，标记验证码失效，后续校验都直接返回失败，不再尝试校验。
+                            </FormHelperText>
+                        </FormControl>
+                    </InputBox>
+                    <InputBox label="验证码模板">
+                        <FormControl fullWidth variant="outlined">
+                            <Select
+                                id="template"
+                                name="template"
+                                value={values.template ? String(values.template) : ""}
+                                onChange={this.onChange}
+                                variant="outlined"
+                            >
+                                {Object.keys(OTP_TEMPLATE_TEXT).map(key => (
+                                    <MenuItem key={key} value={key}>
+                                        {OTP_TEMPLATE_TEXT[key]}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                            <FormHelperText>
+                                APP指代你的应用名，X是有效期，Y是验证码，发送时会替换成具体的值。
+                            </FormHelperText>
+                        </FormControl>
+                    </InputBox>
+                    <InputBox label="是否重用" radioGroup>
+                        <FormControl fullWidth variant="outlined">
+                            <RadioGroup
+                                row
+                                id="reuse"
+                                value={values.reuse !== undefined ? String(values.reuse) : ""}
+                                onChange={this.onChange}
+                            >
+                                <FormControlLabel
+                                    value="true"
+                                    control={<Radio name="reuse" color="primary" />}
+                                    label="是（推荐）"
+                                />
+                                <FormControlLabel
+                                    value="false"
+                                    control={<Radio name="reuse" color="primary" />}
+                                    label="否"
+                                />
+                            </RadioGroup>
+                            <FormHelperText>
+                                当发送给某用户的一条验证码未过期时再发送一条，会重用前一条验证码，并更新有效期，可以避免用户在短时间收到多条不一样的验证码。
+                            </FormHelperText>
+                        </FormControl>
+                    </InputBox>
+                    <InputBox>
+                        <div style={{ marginTop: 5 }}>
+                            <Button variant="contained" color="primary" onClick={this.onSubmit}>
+                                保 存
+                            </Button>
+                        </div>
+                    </InputBox>
+                </form>
+                <div className="tipBox">
+                    <p>提示：</p>
+                    <ol>
+                        <li>
+                            在发送单条验证码时，也可以直接通过API传参的方式自定义，且优先级更高，请参阅使用OTP的相关文档。
+                        </li>
+                    </ol>
+                </div>
+                <Snackbar
+                    open={toastOpen}
+                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                    onClose={() => this.setState({ toastOpen: false })}
+                    autoHideDuration={2000}
+                    ClickAwayListenerProps={{ mouseEvent: false }}
+                >
+                    <Alert elevation={1} severity="success">
+                        保存成功
+                    </Alert>
+                </Snackbar>
+            </>
+        );
+    }
+}
+
+export default withRouter(Otp);

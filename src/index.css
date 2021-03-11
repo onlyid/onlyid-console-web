@@ -57,6 +57,10 @@ h3 {
 .MuiOutlinedInput-inputMultiline {
     padding: 0;
 }
+
+.MuiFormHelperText-root {
+    font-size: 13px;
+}
 /* reset mui end */
 
 .mainActionBox {
