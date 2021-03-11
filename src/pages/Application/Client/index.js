@@ -44,8 +44,8 @@ class Client extends PureComponent {
         this.setState({ toastOpen: false });
     };
 
-    onClientChange = client => {
-        this.setState({ client });
+    onClientChange = values => {
+        this.setState(({ client }) => ({ client: { ...client, ...values } }));
     };
 
     render() {
@@ -58,7 +58,7 @@ class Client extends PureComponent {
                 content = <Otp />;
                 break;
             case "oauth":
-                content = <OAuth client={client} />;
+                content = <OAuth client={client} onChange={this.onClientChange} />;
                 break;
             case "danger":
                 content = <Danger />;
