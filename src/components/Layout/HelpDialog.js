@@ -1,16 +1,14 @@
 import React from "react";
-import { Dialog, DialogContent, DialogTitle, IconButton, Link } from "@material-ui/core";
+import { Dialog, DialogContent, DialogTitle, Link } from "@material-ui/core";
 import styles from "./HelpDialog.module.css";
-import { Close as CloseIcon } from "@material-ui/icons";
+import DialogClose from "components/DialogClose";
 
 export default function({ visible, onClose }) {
     return (
         <Dialog open={visible} onClose={onClose}>
             <DialogTitle>
                 需要帮助？
-                <IconButton className={styles.closeButton} onClick={onClose}>
-                    <CloseIcon />
-                </IconButton>
+                <DialogClose onClose={onClose} />
             </DialogTitle>
             <DialogContent className={styles.content}>
                 <p style={{ marginTop: 0 }}>

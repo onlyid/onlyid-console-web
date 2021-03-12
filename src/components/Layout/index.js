@@ -6,8 +6,20 @@ import { connect } from "react-redux";
 import moment from "moment";
 import { loginUrl } from "my/http";
 import LeftDrawer from "./LeftDrawer";
+import { Alert } from "@material-ui/lab";
+import { Snackbar } from "@material-ui/core";
+import { eventEmitter } from "my/utils";
 
 class Layout extends PureComponent {
+    state = {
+        toast: {
+            open: false,
+            text: "",
+            severity: "success",
+            timeout: 4000
+        }
+    };
+
     componentDidMount() {
         const { history, dispatch, location } = this.props;
 
@@ -25,10 +37,28 @@ class Layout extends PureComponent {
             dispatch({ type: "admin/save", payload: { tenantExpired: true } });
             history.replace("/tenant/renewal");
         }
+
+        eventEmitter.on("app/openToast", this.openToast);
     }
+
+    componentWillUnmount() {
+        eventEmitter.off("app/openToast", this.openToast);
+    }
+
+    openToast = toast => {
+        this.setState({ toast: { open: true, ...toast } });
+    };
+
+    closeToast = () => {
+        // 关闭的时候重置状态，但text不能变，否则会闪一下
+        this.setState(({ toast: { text } }) => ({
+            toast: { open: false, severity: "success", timeout: 4000, text }
+        }));
+    };
 
     render() {
         const { children } = this.props;
+        const { toast } = this.state;
 
         return (
             <div className={styles.layout}>
@@ -37,6 +67,17 @@ class Layout extends PureComponent {
                 <main className={styles.main}>
                     <div className={styles.content}>{children}</div>
                 </main>
+                <Snackbar
+                    open={toast.open}
+                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                    onClose={this.closeToast}
+                    autoHideDuration={toast.timeout}
+                    ClickAwayListenerProps={{ mouseEvent: false }}
+                >
+                    <Alert elevation={1} severity={toast.severity}>
+                        {toast.text}
+                    </Alert>
+                </Snackbar>
             </div>
         );
     }

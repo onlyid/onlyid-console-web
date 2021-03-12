@@ -54,6 +54,10 @@ h3 {
     padding: 14px;
 }
 
+.MuiOutlinedInput-multiline {
+    padding: 14px;
+}
+
 .MuiOutlinedInput-inputMultiline {
     padding: 0;
 }

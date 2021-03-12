@@ -6,17 +6,16 @@ import { withRouter } from "react-router-dom";
 import { CLIENT_TYPE_TEXT } from "my/constants";
 import styles from "../index.module.css";
 import mainTabs from "components/MainTabs.module.css";
-import { Snackbar, Tab, Tabs } from "@material-ui/core";
+import { Tab, Tabs } from "@material-ui/core";
 import Basic from "./Basic";
 import Otp from "./Otp";
 import OAuth from "./OAuth";
 import Danger from "./Danger";
-import { Alert } from "@material-ui/lab";
+import { eventEmitter } from "my/utils";
 
 class Client extends PureComponent {
     state = {
-        client: {},
-        toastOpen: false
+        client: {}
     };
 
     componentDidMount() {
@@ -37,11 +36,8 @@ class Client extends PureComponent {
     onUpload = async filename => {
         const { match } = this.props;
         const { iconUrl } = await http.put(`clients/${match.params.clientId}/icon`, { filename });
-        this.setState(({ client }) => ({ client: { ...client, iconUrl }, toastOpen: true }));
-    };
-
-    closeToast = () => {
-        this.setState({ toastOpen: false });
+        this.setState(({ client }) => ({ client: { ...client, iconUrl } }));
+        eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
     };
 
     onClientChange = values => {
@@ -49,7 +45,7 @@ class Client extends PureComponent {
     };
 
     render() {
-        const { client, toastOpen } = this.state;
+        const { client } = this.state;
         const { application } = this.props;
 
         let content;
@@ -61,7 +57,7 @@ class Client extends PureComponent {
                 content = <OAuth client={client} onChange={this.onClientChange} />;
                 break;
             case "danger":
-                content = <Danger />;
+                content = <Danger onChange={this.onClientChange} />;
                 break;
             default:
                 content = <Basic client={client} onChange={this.onClientChange} />;
@@ -99,17 +95,6 @@ class Client extends PureComponent {
                     <Tab label="危险设置" value="danger" />
                 </Tabs>
                 {content}
-                <Snackbar
-                    open={toastOpen}
-                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                    onClose={this.closeToast}
-                    autoHideDuration={2000}
-                    ClickAwayListenerProps={{ mouseEvent: false }}
-                >
-                    <Alert elevation={1} severity="success">
-                        保存成功
-                    </Alert>
-                </Snackbar>
             </div>
         );
     }

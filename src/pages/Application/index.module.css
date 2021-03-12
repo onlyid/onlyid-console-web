@@ -10,6 +10,10 @@
     background-color: #f9f9f9;
 }
 
+.otpForm :global .MuiFormGroup-row .MuiFormControlLabel-root {
+    width: 195px;
+}
+
 .uploadBox i {
     font-size: 80px;
     color: #bbb;
@@ -21,20 +25,6 @@
     border-radius: 4px;
     cursor: pointer;
     width: 80px;
-}
-
-.infoIcon {
-    border-radius: 4px;
-    width: 80px;
-}
-
-.inputWithButton {
-    margin-right: 20px;
-    width: 90%;
-}
-
-.uriBox:not(:first-child) {
-    margin-top: 10px;
 }
 
 .guideText {

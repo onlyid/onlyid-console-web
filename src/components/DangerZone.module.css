@@ -1,0 +1,31 @@
+.root {
+    margin-top: 40px;
+}
+
+.root ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.root li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+}
+
+.root li + li {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.root h3 {
+    color: #f50057;
+    margin: 0;
+}
+
+.root p {
+    color: #7f7f7f;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
