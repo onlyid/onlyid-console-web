@@ -1,27 +1,46 @@
-.root {
+.root.vertical {
+    margin-top: 20px;
+}
+
+.root.horizontal {
     margin-top: 25px;
     display: flex;
 }
 
-.root:first-of-type {
+.root.vertical:first-of-type {
+    margin-top: 0;
+}
+
+.root.horizontal:first-of-type {
     margin-top: 40px;
 }
 
 .root > label {
-    width: 200px;
-    text-align: right;
-    margin-right: 20px;
-    flex-shrink: 0;
     height: 45px;
     line-height: 45px;
 }
 
-label.radioGroup {
-    height: 42px;
-    line-height: 42px;
+.root.vertical > label {
+    display: block;
 }
 
-label.required:after {
+.root.horizontal > label {
+    text-align: right;
+    margin-right: 20px;
+    width: 0;
+    flex-grow: 1;
+}
+
+.root.vertical > div {
+    width: 100%;
+}
+
+.root.horizontal > div {
+    width: 0;
+    flex-grow: 4;
+}
+
+.root > label.required:after {
     display: inline-block;
     margin-left: 4px;
     color: #f44336;
@@ -33,4 +52,9 @@ label.required:after {
 
 .root :global .MuiFormGroup-row .MuiFormControlLabel-root {
     margin-right: 25px;
+}
+
+.root.horizontal > label.radioGroup {
+    height: 42px;
+    line-height: 42px;
 }

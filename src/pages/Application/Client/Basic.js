@@ -7,8 +7,7 @@ import {
     InputAdornment,
     OutlinedInput,
     Radio,
-    RadioGroup,
-    Snackbar
+    RadioGroup
 } from "@material-ui/core";
 import { CLIENT_TYPE_TEXT } from "my/constants";
 import CopyButton from "components/CopyButton";
@@ -16,7 +15,7 @@ import RevealButton from "components/RevealButton";
 import Validator from "async-validator";
 import http from "my/http";
 import InputBox from "components/InputBox";
-import { Alert } from "@material-ui/lab";
+import { eventEmitter } from "my/utils";
 
 const RULES = {
     name: [
@@ -33,8 +32,7 @@ class Basic extends PureComponent {
             description: { text: null, error: false }
         },
         values: {},
-        hiddenSecret: true,
-        toastOpen: false
+        hiddenSecret: true
     };
 
     componentDidMount() {
@@ -58,7 +56,7 @@ class Basic extends PureComponent {
         }
 
         await http.put("clients/" + client.id, values);
-        this.setState({ toastOpen: true });
+        eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
         onChange(values);
     };
 
@@ -91,12 +89,12 @@ class Basic extends PureComponent {
     };
 
     render() {
-        const { values, hiddenSecret, validation, toastOpen } = this.state;
+        const { values, hiddenSecret, validation } = this.state;
 
         return (
             <form>
                 <InputBox label="应用名称" required>
-                    <FormControl fullWidth error={validation.name.error} variant="outlined">
+                    <FormControl error={validation.name.error} variant="outlined">
                         <OutlinedInput
                             id="name"
                             onChange={this.onChange}
@@ -107,7 +105,7 @@ class Basic extends PureComponent {
                     </FormControl>
                 </InputBox>
                 <InputBox label="应用 ID">
-                    <FormControl fullWidth variant="outlined">
+                    <FormControl variant="outlined">
                         <OutlinedInput
                             id="id"
                             value={values.id || ""}
@@ -121,7 +119,7 @@ class Basic extends PureComponent {
                     </FormControl>
                 </InputBox>
                 <InputBox label="应用 Secret">
-                    <FormControl fullWidth variant="outlined">
+                    <FormControl variant="outlined">
                         <OutlinedInput
                             id="secret"
                             value={values.secret || ""}
@@ -141,7 +139,7 @@ class Basic extends PureComponent {
                     </FormControl>
                 </InputBox>
                 <InputBox label="应用类型" radioGroup>
-                    <FormControl fullWidth variant="outlined">
+                    <FormControl variant="outlined">
                         <RadioGroup
                             row
                             id="type"
@@ -160,7 +158,7 @@ class Basic extends PureComponent {
                     </FormControl>
                 </InputBox>
                 <InputBox label="应用描述">
-                    <FormControl fullWidth error={validation.description.error}>
+                    <FormControl error={validation.description.error} variant="outlined">
                         <OutlinedInput
                             id="description"
                             onChange={this.onChange}
@@ -179,17 +177,6 @@ class Basic extends PureComponent {
                         </Button>
                     </div>
                 </InputBox>
-                <Snackbar
-                    open={toastOpen}
-                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                    onClose={() => this.setState({ toastOpen: false })}
-                    autoHideDuration={2000}
-                    ClickAwayListenerProps={{ mouseEvent: false }}
-                >
-                    <Alert elevation={1} severity="success">
-                        保存成功
-                    </Alert>
-                </Snackbar>
             </form>
         );
     }

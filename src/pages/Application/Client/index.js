@@ -69,7 +69,7 @@ class Client extends PureComponent {
                     backText="返回应用列表"
                     imgUrl={client.iconUrl}
                     title={client.name}
-                    uploadTip="点击上传新Icon"
+                    uploadTip="上传新Icon，JPG/PNG格式，长宽 >= 256像素"
                     onUpload={this.onUpload}
                 >
                     <ul>

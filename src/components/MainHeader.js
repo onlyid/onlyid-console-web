@@ -4,6 +4,7 @@ import { Button, Tooltip } from "@material-ui/core";
 import styles from "./MainHeader.module.css";
 import { withRouter } from "react-router-dom";
 import http from "my/http";
+import { transformImage } from "my/utils";
 
 class MainHeader extends PureComponent {
     back = () => {
@@ -17,20 +18,7 @@ class MainHeader extends PureComponent {
 
         if (!files.length) return;
 
-        const file = files[0];
-
-        const { image } = await window.loadImage(file, {
-            orientation: true,
-            aspectRatio: 1,
-            canvas: true
-        });
-        const scaledImage = window.loadImage.scale(image, { maxWidth: 256, minWidth: 256 });
-
-        const blob = await new Promise(resolve => {
-            // 兼容IE11
-            if (scaledImage.toBlob) scaledImage.toBlob(resolve, file.type);
-            else resolve(scaledImage.msToBlob());
-        });
+        const { blob } = await transformImage(files[0]);
 
         const formData = new FormData();
         formData.append("file", blob);
@@ -57,12 +45,12 @@ class MainHeader extends PureComponent {
                             <>
                                 <input
                                     accept="image/jpeg,image/png"
-                                    id="upload-file"
+                                    id="upload"
                                     type="file"
                                     style={{ display: "none" }}
                                     onChange={this.onChange}
                                 />
-                                <label htmlFor="upload-file">
+                                <label htmlFor="upload">
                                     <Tooltip title={uploadTip}>
                                         <img src={imgUrl} alt="icon" />
                                     </Tooltip>

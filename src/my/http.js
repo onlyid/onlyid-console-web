@@ -1,5 +1,5 @@
 import axios from "axios";
-import { message } from "antd";
+import { eventEmitter } from "./utils";
 
 export const baseURL = "/api";
 export const loginUrl =
@@ -21,7 +21,7 @@ instance.interceptors.response.use(
         } else {
             errMsg = err.message;
         }
-        message.error(errMsg);
+        eventEmitter.emit("app/openToast", { text: errMsg, severity: "error" });
 
         return Promise.reject(err);
     }

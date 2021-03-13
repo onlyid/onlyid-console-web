@@ -12,12 +12,7 @@ import { eventEmitter } from "my/utils";
 
 class Layout extends PureComponent {
     state = {
-        toast: {
-            open: false,
-            text: "",
-            severity: "success",
-            timeout: 4000
-        }
+        toast: { open: false, text: "", severity: "", timeout: 0 }
     };
 
     componentDidMount() {
@@ -46,14 +41,11 @@ class Layout extends PureComponent {
     }
 
     openToast = toast => {
-        this.setState({ toast: { open: true, ...toast } });
+        this.setState({ toast: { open: true, severity: "success", timeout: 4000, ...toast } });
     };
 
     closeToast = () => {
-        // 关闭的时候重置状态，但text不能变，否则会闪一下
-        this.setState(({ toast: { text } }) => ({
-            toast: { open: false, severity: "success", timeout: 4000, text }
-        }));
+        this.setState(({ toast }) => ({ toast: { ...toast, open: false } }));
     };
 
     render() {

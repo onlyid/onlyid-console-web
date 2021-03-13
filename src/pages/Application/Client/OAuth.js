@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import InputBox from "components/InputBox";
-import { Button, FormControl, FormHelperText, OutlinedInput, Snackbar } from "@material-ui/core";
+import { Button, FormControl, FormHelperText, OutlinedInput } from "@material-ui/core";
 import Validator from "async-validator";
-import { Alert } from "@material-ui/lab";
 import http from "my/http";
+import { eventEmitter } from "my/utils";
 
 const RULES_APP = {
     packageName: { max: 50, message: "最多输入50字" },
@@ -21,10 +21,7 @@ class OAuth extends PureComponent {
         },
         packageName: "",
         bundleId: "",
-        redirectUris: "",
-        toastOpen: false,
-        toastText: "",
-        severity: ""
+        redirectUris: ""
     };
 
     componentDidMount() {
@@ -90,9 +87,8 @@ class OAuth extends PureComponent {
         let values;
         if (client.type === "APP") {
             if (!packageName && !bundleId) {
-                this.setState({
-                    toastOpen: true,
-                    toastText: "应用包名或Bundle ID至少填一项",
+                eventEmitter.emit("app/openToast", {
+                    text: "应用包名或Bundle ID至少填一项",
                     severity: "warning"
                 });
                 return;
@@ -115,20 +111,12 @@ class OAuth extends PureComponent {
         }
 
         await http.put(`clients/${client.id}/oauth-config`, values);
-        this.setState({ toastOpen: true, toastText: "保存成功", severity: "success" });
+        eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
         onChange(values);
     };
 
     render() {
-        const {
-            packageName,
-            bundleId,
-            redirectUris,
-            validation,
-            toastOpen,
-            toastText,
-            severity
-        } = this.state;
+        const { packageName, bundleId, redirectUris, validation } = this.state;
         const { client } = this.props;
 
         return (
@@ -195,17 +183,6 @@ class OAuth extends PureComponent {
                         </Button>
                     </div>
                 </InputBox>
-                <Snackbar
-                    open={toastOpen}
-                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                    onClose={() => this.setState({ toastOpen: false })}
-                    autoHideDuration={2000}
-                    ClickAwayListenerProps={{ mouseEvent: false }}
-                >
-                    <Alert elevation={1} severity={severity}>
-                        {toastText}
-                    </Alert>
-                </Snackbar>
             </form>
         );
     }

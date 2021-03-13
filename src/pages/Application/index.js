@@ -7,11 +7,15 @@ import ClientTable from "./ClientTable";
 import EmptyPage from "components/EmptyPage";
 import { Route, Switch, withRouter } from "react-router-dom";
 import Client from "./Client";
+import CreateDialog from "./CreateDialog";
+import GuideDialog from "./GuideDialog";
 
 class Index extends PureComponent {
     state = {
         list: [],
-        loading: true
+        loading: true,
+        createOpen: false,
+        guideOpen: false
     };
 
     componentDidMount() {
@@ -23,13 +27,44 @@ class Index extends PureComponent {
         this.setState({ list, loading: false });
     };
 
+    openCreate = () => {
+        this.setState({ createOpen: true });
+    };
+
+    cancelCreate = () => {
+        this.setState({ createOpen: false });
+    };
+
+    saveCreate = () => {
+        this.setState({ createOpen: false, loading: true, guideOpen: true });
+        this.initData();
+    };
+
+    closeGuide = () => {
+        this.setState({ guideOpen: false });
+    };
+
     render() {
-        const { list, loading } = this.state;
+        const { list, loading, createOpen, guideOpen } = this.state;
 
         const createNew = (
-            <Button variant="contained" color="primary" startIcon={<AddIcon />}>
-                新建应用
-            </Button>
+            <>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<AddIcon />}
+                    onClick={this.openCreate}
+                >
+                    新建应用
+                </Button>
+                <CreateDialog
+                    open={createOpen}
+                    onCancel={this.cancelCreate}
+                    onSave={this.saveCreate}
+                    key={Date()}
+                />
+                <GuideDialog open={guideOpen} onClose={this.closeGuide} />
+            </>
         );
 
         if (!list.length && !loading)

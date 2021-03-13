@@ -1,0 +1,40 @@
+.content {
+    width: 600px;
+}
+
+.section {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.starIcon {
+    color: #f57f17;
+    margin-right: 25px;
+    font-size: 30px;
+}
+
+.right p {
+    margin-top: 0;
+}
+
+.linkBox {
+    display: flex;
+    align-items: center;
+}
+
+.linkBox > div {
+    display: flex;
+    align-items: center;
+}
+
+.linkBox > div + div {
+    margin-left: 50px;
+}
+
+.linkBox :global .material-icons,
+.linkBox :global .iconfont {
+    font-size: 18px;
+    margin-right: 10px;
+    color: #3f51b5;
+}

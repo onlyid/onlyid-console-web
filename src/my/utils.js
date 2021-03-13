@@ -25,3 +25,20 @@ Storage.prototype.getObj = function(key) {
 Storage.prototype.setObj = function(key, value) {
     this.setItem(key, JSON.stringify(value));
 };
+
+export async function transformImage(file) {
+    const { image } = await window.loadImage(file, {
+        orientation: true,
+        aspectRatio: 1,
+        canvas: true
+    });
+    const scaledImage = window.loadImage.scale(image, { maxWidth: 256, minWidth: 256 });
+
+    const blob = await new Promise(resolve => {
+        // 兼容IE11
+        if (scaledImage.toBlob) scaledImage.toBlob(resolve, file.type);
+        else resolve(scaledImage.msToBlob());
+    });
+    const dataURL = scaledImage.toDataURL(file.type);
+    return { blob, dataURL };
+}
