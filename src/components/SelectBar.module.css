@@ -1,0 +1,23 @@
+.root:first-of-type {
+    margin-top: 40px;
+}
+
+.root {
+    margin-top: 15px;
+}
+
+.root :global .MuiFormControl-root {
+    width: 205px;
+}
+
+.root :global .MuiInputAdornment-positionStart {
+    margin-right: 20px;
+}
+
+.root :global .MuiFormControl-root + * {
+    margin-left: 45px;
+}
+
+.root :global .MuiButton-root + .MuiButton-root {
+    margin-left: 25px;
+}

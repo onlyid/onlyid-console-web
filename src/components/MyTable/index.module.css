@@ -1,0 +1,38 @@
+.root {
+    position: relative;
+}
+
+.root :global .MuiTableBody-root .MuiTableRow-root:hover {
+    background-color: #fbfbfb;
+}
+
+.loadingTable {
+    opacity: 0.7;
+}
+
+.pagination :global .MuiTablePagination-selectRoot {
+    margin-left: 0;
+}
+
+.pagination .actionBox {
+    flex-shrink: 0;
+    margin-left: 32px;
+}
+
+.pagination .actionBox :global .MuiInput-input {
+    width: 32px;
+    padding: 5px;
+    text-align: center;
+}
+
+.emptyBox {
+    text-align: center;
+    padding: 50px 0;
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+
+.loading {
+    position: absolute;
+    left: calc(50% - 20px);
+    top: 45%;
+}
