@@ -20,6 +20,7 @@ import SuccessStatus from "components/SuccessStatus";
 import http from "my/http";
 import MyTable from "components/MyTable";
 import selectBar from "components/SelectBar.module.css";
+import ExportDialog from "./ExportDialog";
 
 class OtpRecord extends PureComponent {
     state = {
@@ -32,7 +33,8 @@ class OtpRecord extends PureComponent {
         current: 1,
         pageSize: 10,
         total: 0,
-        loading: true
+        loading: true,
+        exportOpen: false
     };
 
     componentDidMount() {
@@ -90,6 +92,10 @@ class OtpRecord extends PureComponent {
         this.setState({ current: 1 }, this.initData);
     };
 
+    toggleExport = () => {
+        this.setState(({ exportOpen }) => ({ exportOpen: !exportOpen }));
+    };
+
     render() {
         const {
             clientId,
@@ -101,7 +107,8 @@ class OtpRecord extends PureComponent {
             total,
             pageSize,
             current,
-            loading
+            loading,
+            exportOpen
         } = this.state;
 
         const pagination = { current, pageSize, total };
@@ -177,7 +184,7 @@ class OtpRecord extends PureComponent {
                     >
                         查询
                     </Button>
-                    <Button variant="contained" className="small">
+                    <Button variant="contained" className="small" onClick={this.toggleExport}>
                         导出数据
                     </Button>
                 </div>
@@ -225,6 +232,16 @@ class OtpRecord extends PureComponent {
                         ))}
                     </TableBody>
                 </MyTable>
+                <ExportDialog
+                    open={exportOpen}
+                    onClose={this.toggleExport}
+                    clientId={clientId}
+                    days={days}
+                    sendSuccess={sendSuccess}
+                    verifySuccess={verifySuccess}
+                    keyword={keyword}
+                    key={Date()}
+                />
             </div>
         );
     }

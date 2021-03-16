@@ -1,0 +1,30 @@
+.ul1 {
+    margin: 0 0 10px 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+
+.ul1 li {
+    width: 170px;
+}
+
+.ul1 li + li {
+    margin-left: 10px;
+}
+
+.ul1 li > span {
+    color: #7f7f7f;
+}
+
+.downloadBox {
+    margin-top: 30px;
+}
+
+.downloadBox p {
+    margin-bottom: 10px;
+}
+
+.downloadBox a {
+    word-break: break-all;
+}
