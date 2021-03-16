@@ -26,7 +26,7 @@ class Summary extends PureComponent {
     initData = async () => {
         const { clientId, days } = this.props;
         const params = {};
-        if (clientId !== -1) params.clientId = clientId;
+        if (clientId !== "all") params.clientId = clientId;
         const { totalCount } = await http.get("statistics/otp/total-count", { params });
 
         params.days = 1;

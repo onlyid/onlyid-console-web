@@ -6,7 +6,7 @@ import Latest from "./Latest";
 
 class User extends PureComponent {
     state = {
-        clientId: -1,
+        clientId: "all",
         days: 30,
         type: "new"
     };

@@ -25,7 +25,7 @@ class Latest extends PureComponent {
         const { clientId, type } = this.props;
 
         const params = { type };
-        if (clientId !== -1) params.clientId = clientId;
+        if (clientId !== "all") params.clientId = clientId;
 
         const list = await http.get("statistics/users", { params });
         this.setState({ list });

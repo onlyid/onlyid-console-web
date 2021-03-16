@@ -25,8 +25,8 @@ class Latest extends PureComponent {
     initData = async () => {
         const { clientId } = this.props;
 
-        const params = { current: 1, pageSize: 5 };
-        if (clientId !== -1) params.clientId = clientId;
+        const params = { current: 1, pageSize: 5, days: 90 };
+        if (clientId !== "all") params.clientId = clientId;
 
         const { list } = await http.get("otp", { params });
         this.setState({ list });

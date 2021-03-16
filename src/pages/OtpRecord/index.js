@@ -23,10 +23,10 @@ import selectBar from "components/SelectBar.module.css";
 
 class OtpRecord extends PureComponent {
     state = {
-        clientId: -1,
+        clientId: "all",
         days: 7,
-        sendStatus: "all",
-        verifyStatus: "all",
+        sendSuccess: "all",
+        verifySuccess: "all",
         keyword: "",
         list: [],
         current: 1,
@@ -41,12 +41,20 @@ class OtpRecord extends PureComponent {
 
     initData = async () => {
         this.setState({ loading: true });
-        const { clientId, days, sendStatus, verifyStatus, keyword, current, pageSize } = this.state;
+        const {
+            clientId,
+            days,
+            sendSuccess,
+            verifySuccess,
+            keyword,
+            current,
+            pageSize
+        } = this.state;
 
         const params = { current, pageSize, keyword, days };
-        if (clientId !== -1) params.clientId = clientId;
-        if (sendStatus !== "all") params.sendStatus = sendStatus;
-        if (verifyStatus !== "all") params.verifyStatus = verifyStatus;
+        if (clientId !== "all") params.clientId = clientId;
+        if (sendSuccess !== "all") params.sendSuccess = sendSuccess;
+        if (verifySuccess !== "all") params.verifySuccess = verifySuccess;
 
         const { list, total } = await http.get("otp", { params });
         this.setState({ list, total, loading: false });
@@ -63,10 +71,10 @@ class OtpRecord extends PureComponent {
                 key = "days";
                 break;
             case "send-select":
-                key = "sendStatus";
+                key = "sendSuccess";
                 break;
             case "verify-select":
-                key = "verifyStatus";
+                key = "verifySuccess";
                 break;
             default:
                 key = target.name;
@@ -78,12 +86,16 @@ class OtpRecord extends PureComponent {
         this.setState({ pageSize, current }, this.initData);
     };
 
+    onSearch = () => {
+        this.setState({ current: 1 }, this.initData);
+    };
+
     render() {
         const {
             clientId,
             days,
-            sendStatus,
-            verifyStatus,
+            sendSuccess,
+            verifySuccess,
             keyword,
             list,
             total,
@@ -118,7 +130,7 @@ class OtpRecord extends PureComponent {
                     <FormControl>
                         <Select
                             name="send-select"
-                            value={sendStatus}
+                            value={sendSuccess}
                             onChange={this.onChange}
                             startAdornment={
                                 <InputAdornment position="start">发送状态</InputAdornment>
@@ -132,7 +144,7 @@ class OtpRecord extends PureComponent {
                     <FormControl>
                         <Select
                             name="verify-select"
-                            value={verifyStatus}
+                            value={verifySuccess}
                             onChange={this.onChange}
                             startAdornment={
                                 <InputAdornment position="start">校验状态</InputAdornment>
@@ -161,7 +173,7 @@ class OtpRecord extends PureComponent {
                         variant="contained"
                         className="small"
                         startIcon={<span className="material-icons">search</span>}
-                        onClick={this.initData}
+                        onClick={this.onSearch}
                     >
                         查询
                     </Button>

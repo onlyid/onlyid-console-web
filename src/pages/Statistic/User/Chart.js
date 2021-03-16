@@ -20,7 +20,7 @@ class Chart extends PureComponent {
     initData = async () => {
         const { clientId, days, type } = this.props;
         const params = { days, type };
-        if (clientId !== -1) params.clientId = clientId;
+        if (clientId !== "all") params.clientId = clientId;
         const list = await http.get("statistics/users/group-by-date", {
             params
         });

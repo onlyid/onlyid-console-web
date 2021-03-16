@@ -21,7 +21,7 @@ class ClientSelect extends PureComponent {
         const { value, onChange } = this.props;
 
         const menuItems = [
-            <MenuItem key={-1} value={-1}>
+            <MenuItem key="all" value="all">
                 全部应用
             </MenuItem>
         ];

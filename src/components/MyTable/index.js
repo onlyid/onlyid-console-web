@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import styles from "./index.module.css";
-import { CircularProgress, Table } from "@material-ui/core";
+import { CircularProgress, Table, TableCell, TableFooter, TableRow } from "@material-ui/core";
 import Empty from "../Empty";
 import Pagination from "./Pagination";
 import classNames from "classnames";
@@ -19,10 +19,21 @@ export default class extends PureComponent {
     render() {
         const { children, length, loading, pagination, className } = this.props;
 
+        const emptyRows = length && length < 5 ? 5 - length : 0;
+
         return (
             <div className={styles.root}>
                 <div className={classNames({ [styles.loadingTable]: loading })}>
-                    <Table className={className}>{children}</Table>
+                    <Table className={className}>
+                        {children}
+                        {emptyRows > 0 && (
+                            <TableFooter>
+                                <TableRow style={{ height: 55 * emptyRows }}>
+                                    <TableCell colSpan={1000} />
+                                </TableRow>
+                            </TableFooter>
+                        )}
+                    </Table>
                     {length ? (
                         <Pagination
                             count={pagination.total}
