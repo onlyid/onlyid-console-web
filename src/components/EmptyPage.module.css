@@ -5,7 +5,7 @@
     margin-top: 5vh;
 }
 
-.root :global .material-icons {
+.root > span:global(.material-icons) {
     font-size: 100px;
     color: #3f51b5;
     opacity: 0.2;
@@ -13,4 +13,5 @@
 
 .tip {
     color: #7f7f7f;
+    margin-bottom: 20px;
 }

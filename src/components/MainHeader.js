@@ -18,7 +18,10 @@ class MainHeader extends PureComponent {
 
         if (!files.length) return;
 
-        const { blob } = await transformImage(files[0]);
+        const file = files[0];
+        e.target.value = null;
+
+        const { blob } = await transformImage(file);
 
         const formData = new FormData();
         formData.append("file", blob);

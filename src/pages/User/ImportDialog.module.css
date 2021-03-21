@@ -1,0 +1,12 @@
+.ol1 {
+    margin: 0;
+    padding-left: 2em;
+}
+
+.ol1 li {
+    line-height: 1.5;
+}
+
+.ol1 li + li {
+    margin-top: 10px;
+}

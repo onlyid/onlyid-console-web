@@ -58,7 +58,7 @@ export default class extends PureComponent {
                     导出数据
                     <DialogClose onClose={onClose} />
                 </DialogTitle>
-                <DialogContent>
+                <DialogContent style={{ width: 600 }}>
                     <p style={{ marginTop: 0 }}>筛选条件：</p>
                     <ul className={styles.ul1}>
                         <li>

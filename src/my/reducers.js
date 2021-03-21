@@ -1,8 +1,6 @@
 import { combineReducers } from "redux";
 
-const defaultUserPool = {
-    selectedKey: null
-};
+const defaultUser = {};
 
 const defaultApplication = {
     currentTab: "basic"
@@ -38,11 +36,11 @@ const defaultMessage = {
     total: 0
 };
 
-function userPool(state = defaultUserPool, action) {
+function user(state = defaultUser, action) {
     const { type, payload } = action;
 
     switch (type) {
-        case "userPool/save":
+        case "user":
             return { ...state, ...payload };
         default:
             return state;
@@ -127,7 +125,7 @@ function message(state = defaultMessage, action) {
 }
 
 export default combineReducers({
-    userPool,
+    user,
     application,
     resManage,
     roleManage,
