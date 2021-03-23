@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Link } from "@material-ui/core";
 import DialogClose from "components/DialogClose";
-import styles from "./ImportDialog.module.css";
+import styles from "./index.module.css";
 import ParamTable from "components/ParamTable";
 import http from "my/http";
 
@@ -76,31 +76,36 @@ export default class extends PureComponent {
             const param = [
                 {
                     name: "avatarUrl",
-                    type: "可选，字符串",
+                    type: "否，字符串",
                     desc: "头像URL，JPG/PNG格式，建议长宽 >= 256像素"
                 },
-                { name: "nickname", type: "必填，字符串", desc: "昵称，要 <= 20个字符" },
-                { name: "mobile", type: "可选，字符串", desc: "手机号，11位中国大陆手机号码" },
+                { name: "nickname", type: "是，字符串", desc: "昵称，要 <= 20字符" },
+                { name: "mobile", type: "否，字符串", desc: "手机号，11位中国大陆手机号码" },
                 {
                     name: "email",
-                    type: "可选，字符串",
+                    type: "否，字符串",
                     desc: "邮箱，注意：手机号和邮箱至少要填一项"
                 },
                 {
                     name: "gender",
-                    type: "可选，枚举字符串",
+                    type: "否，枚举字符串",
                     desc: "性别，可选值：MALE、FEMALE、OTHER，分别代表男性、女性、其他"
                 },
-                { name: "birthday", type: "可选，时间字符串", desc: "出生日期，格式：YYYY-MM-DD" },
+                { name: "birthDate", type: "否，时间字符串", desc: "出生日期，格式：YYYY-MM-DD" },
                 {
-                    name: "location",
-                    type: "可选，字符串",
-                    desc: "地理位置，4个直辖市和澳门、香港精确到区，其他省份精确到市"
+                    name: "province",
+                    type: "否，字符串",
+                    desc: "所在省份，包括直辖市和香港、澳门"
+                },
+                {
+                    name: "city",
+                    type: "否，字符串",
+                    desc: "所在城市，包括直辖市和香港、澳门的区（如朝阳区）"
                 },
                 {
                     name: "bio",
-                    type: "可选，字符串",
-                    desc: "用户简介，要 <= 250字符"
+                    type: "否，字符串",
+                    desc: "用户简介，要 <= 200字符"
                 }
             ];
 
@@ -124,8 +129,9 @@ export default class extends PureComponent {
     "mobile": "18588000000",
     "email": null,
     "gender": null,
-    "birthday": "1999-09-09",
-    "location": "广西壮族自治区 玉林市",
+    "birthDate": "1999-09-09",
+    "province": "广西壮族自治区",
+    "city": "玉林市",
     "bio": null
 }]`}
                             </code>
@@ -137,7 +143,7 @@ export default class extends PureComponent {
                                     用户头像会上传到唯ID的服务器，在经过处理后会生成新的avatarUrl。
                                 </li>
                                 <li>
-                                    用户首次使用导入的账号时，唯ID会引导用户验证手机号/邮箱合法性并设置登录密码（称为激活账号）。
+                                    用户首次使用导入的账号时，唯ID会引导用户验证手机号/邮箱并设置登录密码（称为激活账号）。
                                 </li>
                                 <li>
                                     单次导入用户数量不能超过一万，对于规模较大的应用迁移到唯ID，请直接联系我们。

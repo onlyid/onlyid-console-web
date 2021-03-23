@@ -14,11 +14,7 @@ const RULE_URL = { type: "url", message: "存在不合法的url" };
 
 class OAuth extends PureComponent {
     state = {
-        validation: {
-            packageName: { text: null, error: false },
-            bundleId: { text: null, error: false },
-            redirectUris: { text: null, error: false }
-        },
+        validation: { packageName: {}, bundleId: {}, redirectUris: {} },
         packageName: "",
         bundleId: "",
         redirectUris: ""
@@ -44,22 +40,14 @@ class OAuth extends PureComponent {
 
     validateField = async ({ target: { id: key, value } }) => {
         const { validation } = this.state;
-        const { client } = this.props;
+        const validator = new Validator({ [key]: RULES_APP[key] });
         try {
-            if (client.type === "APP") {
-                const validator = new Validator({ [key]: RULES_APP[key] });
-                await validator.validate({ [key]: value }, { first: true });
-            } else {
-                await this.validateUris(this.getUriArray(value));
-            }
-            validation[key].text = null;
-            validation[key].error = false;
+            await validator.validate({ [key]: value }, { first: true });
+            validation[key] = { text: null, error: false };
         } catch ({ errors }) {
-            validation[key].text = errors[0].message;
-            validation[key].error = true;
-        } finally {
-            this.setState({ validation: { ...validation } });
+            validation[key] = { text: errors[0].message, error: true };
         }
+        this.setState({ validation: { ...validation } });
     };
 
     getUriArray = value =>
@@ -82,22 +70,25 @@ class OAuth extends PureComponent {
     };
 
     onSubmit = async () => {
-        const { packageName, bundleId, redirectUris } = this.state;
+        const { packageName, bundleId, redirectUris, validation } = this.state;
         const { client, onChange } = this.props;
         let values;
         if (client.type === "APP") {
             if (!packageName && !bundleId) {
                 eventEmitter.emit("app/openToast", {
-                    text: "应用包名或Bundle ID至少填一项",
+                    text: "应用包名和Bundle ID至少要填一项",
                     severity: "warning"
                 });
                 return;
             }
+
             const validator = new Validator(RULES_APP);
             try {
-                await validator.validate({ packageName, bundleId }, { first: true });
-            } catch (e) {
-                return;
+                await validator.validate({ packageName, bundleId }, { firstFields: true });
+            } catch ({ errors }) {
+                for (const e of errors) validation[e.field] = { text: e.message, error: true };
+
+                return this.setState({ validation: { ...validation } });
             }
             values = { packageName, bundleId };
         } else {
@@ -164,7 +155,9 @@ class OAuth extends PureComponent {
                             <OutlinedInput
                                 id="redirectUris"
                                 onChange={this.onChange}
-                                onBlur={this.validateField}
+                                onBlur={({ target }) =>
+                                    this.validateUris(this.getUriArray(target.value))
+                                }
                                 value={redirectUris}
                                 multiline
                                 rows={5}

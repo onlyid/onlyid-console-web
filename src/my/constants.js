@@ -30,7 +30,7 @@ export const GENDER_TEXT = {
     OTHER: "其他"
 };
 
-export const IMG_UPLOAD_TIP = "JPG/PNG格式、不小于256像素";
+export const IMG_UPLOAD_TIP = "JPG/PNG格式，长宽 >= 256像素";
 
 export const REG_EXP = {
     mobile: /^1\d{10}$/

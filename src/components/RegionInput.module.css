@@ -1,0 +1,9 @@
+.list1 {
+    padding-bottom: 0;
+    max-height: 50vh;
+    overflow-y: scroll;
+}
+
+.item1 {
+    min-width: 15rem;
+}

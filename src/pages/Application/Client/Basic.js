@@ -20,17 +20,14 @@ import { eventEmitter } from "my/utils";
 const RULES = {
     name: [
         { required: true, message: "请输入" },
-        { max: 50, message: "最多输入50字" }
+        { max: 20, message: "最多输入20字" }
     ],
-    description: [{ max: 150, message: "最多输入150字" }]
+    description: { max: 200, message: "最多输入200字" }
 };
 
 class Basic extends PureComponent {
     state = {
-        validation: {
-            name: { text: null, error: false },
-            description: { text: null, error: false }
-        },
+        validation: { name: {}, description: {} },
         values: {},
         hiddenSecret: true
     };
@@ -46,13 +43,15 @@ class Basic extends PureComponent {
     }
 
     onSubmit = async () => {
-        const { values } = this.state;
+        const { values, validation } = this.state;
         const { client, onChange } = this.props;
-        const validator = new Validator(RULES);
+
         try {
-            await validator.validate(values, { first: true });
-        } catch (e) {
-            return;
+            await new Validator(RULES).validate(values, { firstFields: true });
+        } catch ({ errors }) {
+            for (const e of errors) validation[e.field] = { text: e.message, error: true };
+
+            return this.setState({ validation: { ...validation } });
         }
 
         await http.put("clients/" + client.id, values);
@@ -75,17 +74,12 @@ class Basic extends PureComponent {
     validateField = async ({ target: { id: key, value } }) => {
         const { validation } = this.state;
         try {
-            const validator = new Validator({ [key]: RULES[key] });
-            await validator.validate({ [key]: value }, { first: true });
-
-            validation[key].text = null;
-            validation[key].error = false;
+            await new Validator({ [key]: RULES[key] }).validate({ [key]: value }, { first: true });
+            validation[key] = { text: null, error: false };
         } catch ({ errors }) {
-            validation[key].text = errors[0].message;
-            validation[key].error = true;
-        } finally {
-            this.setState({ validation: { ...validation } });
+            validation[key] = { text: errors[0].message, error: true };
         }
+        this.setState({ validation: { ...validation } });
     };
 
     render() {
@@ -116,6 +110,7 @@ class Basic extends PureComponent {
                                 </InputAdornment>
                             }
                         />
+                        <FormHelperText />
                     </FormControl>
                 </InputBox>
                 <InputBox label="应用 Secret">
@@ -136,6 +131,7 @@ class Basic extends PureComponent {
                                 </InputAdornment>
                             }
                         />
+                        <FormHelperText />
                     </FormControl>
                 </InputBox>
                 <InputBox label="应用类型" radioGroup>

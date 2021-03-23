@@ -10,11 +10,12 @@ import {
     FormHelperText,
     OutlinedInput,
     Radio,
-    RadioGroup
+    RadioGroup,
+    Tooltip
 } from "@material-ui/core";
 import DialogClose from "components/DialogClose";
 import InputBox from "components/InputBox";
-import { CLIENT_TYPE_TEXT } from "my/constants";
+import { CLIENT_TYPE_TEXT, IMG_UPLOAD_TIP } from "my/constants";
 import styles from "./CreateDialog.module.css";
 import Validator from "async-validator";
 import { eventEmitter, transformImage } from "my/utils";
@@ -23,30 +24,28 @@ import http from "my/http";
 const RULES = {
     name: [
         { required: true, message: "请输入" },
-        { max: 50, message: "最多输入50字" }
+        { max: 20, message: "最多输入20字" }
     ],
     type: { required: true, message: "请选择" },
-    description: { max: 150, message: "最多输入150字" }
+    description: { max: 200, message: "最多输入200字" }
 };
 
 export default class extends PureComponent {
     state = {
-        validation: {
-            name: { text: null, error: false },
-            type: { text: null, error: false },
-            description: { text: null, error: false }
-        },
+        validation: { name: {}, type: {}, description: {} },
         values: {},
         iconDataUrl: null,
         filename: null
     };
 
-    onUploadChange = async e => {
-        const { files } = e.target;
+    onUploadChange = async ({ target }) => {
+        const { files } = target;
 
         if (!files.length) return;
 
-        const { blob, dataURL } = await transformImage(files[0]);
+        const file = files[0];
+        target.value = null;
+        const { blob, dataURL } = await transformImage(file);
 
         const formData = new FormData();
         formData.append("file", blob);
@@ -67,17 +66,12 @@ export default class extends PureComponent {
     validateField = async ({ target: { id: key, value } }) => {
         const { validation } = this.state;
         try {
-            const validator = new Validator({ [key]: RULES[key] });
-            await validator.validate({ [key]: value }, { first: true });
-
-            validation[key].text = null;
-            validation[key].error = false;
+            await new Validator({ [key]: RULES[key] }).validate({ [key]: value }, { first: true });
+            validation[key] = { text: null, error: false };
         } catch ({ errors }) {
-            validation[key].text = errors[0].message;
-            validation[key].error = true;
-        } finally {
-            this.setState({ validation: { ...validation } });
+            validation[key] = { text: errors[0].message, error: true };
         }
+        this.setState({ validation: { ...validation } });
     };
 
     submit = async () => {
@@ -89,17 +83,12 @@ export default class extends PureComponent {
             return;
         }
 
-        const validator = new Validator(RULES);
         try {
-            await validator.validate(values, { firstFields: true });
-            // 这里validation不用消除error
+            await new Validator(RULES).validate(values, { firstFields: true });
         } catch ({ errors }) {
-            for (const err of errors) {
-                validation[err.field].text = err.message;
-                validation[err.field].error = true;
-            }
-            this.setState({ validation: { ...validation } });
-            return;
+            for (const e of errors) validation[e.field] = { text: e.message, error: true };
+
+            return this.setState({ validation: { ...validation } });
         }
 
         values.filename = filename;
@@ -127,14 +116,16 @@ export default class extends PureComponent {
                                 type="file"
                                 onChange={this.onUploadChange}
                             />
-                            <label htmlFor="upload">
-                                {iconDataUrl ? (
-                                    <img src={iconDataUrl} alt="icon" />
-                                ) : (
-                                    <span className="material-icons">blur_on</span>
-                                )}
-                                <span className={styles.uploadTip}>点击上传</span>
-                            </label>
+                            <Tooltip title={IMG_UPLOAD_TIP} placement="right">
+                                <label htmlFor="upload">
+                                    {iconDataUrl ? (
+                                        <img src={iconDataUrl} alt="icon" />
+                                    ) : (
+                                        <span className="material-icons">blur_on</span>
+                                    )}
+                                    <span className={styles.uploadTip}>点击上传</span>
+                                </label>
+                            </Tooltip>
                         </div>
                     </InputBox>
                     <InputBox label="应用名称" required vertical>

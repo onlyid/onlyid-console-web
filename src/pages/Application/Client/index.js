@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import MainHeader from "components/MainHeader";
 import http from "my/http";
 import { withRouter } from "react-router-dom";
-import { CLIENT_TYPE_TEXT } from "my/constants";
+import { CLIENT_TYPE_TEXT, IMG_UPLOAD_TIP } from "my/constants";
 import styles from "../index.module.css";
 import mainTabs from "components/MainTabs.module.css";
 import { Tab, Tabs } from "@material-ui/core";
@@ -69,7 +69,7 @@ class Client extends PureComponent {
                     backText="返回应用列表"
                     imgUrl={client.iconUrl}
                     title={client.name}
-                    uploadTip="上传新Icon，JPG/PNG格式，长宽 >= 256像素"
+                    uploadTip={`上传新Icon，${IMG_UPLOAD_TIP}`}
                     onUpload={this.onUpload}
                 >
                     <ul>

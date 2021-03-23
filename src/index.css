@@ -114,7 +114,10 @@ h3 {
 
 .tipBox ol li {
     line-height: 1.5em;
-    height: 1.5em;
+}
+
+.tipBox ol li + li {
+    margin-top: 2px;
 }
 
 pre[class*="language-"] {
