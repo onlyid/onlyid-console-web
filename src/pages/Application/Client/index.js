@@ -24,7 +24,7 @@ class Client extends PureComponent {
 
     initData = async () => {
         const { match } = this.props;
-        const client = await http.get(`clients/${match.params.clientId}`);
+        const client = await http.get(`clients/${match.params.id}`);
         this.setState({ client });
     };
 
@@ -35,7 +35,7 @@ class Client extends PureComponent {
 
     onUpload = async filename => {
         const { match } = this.props;
-        const { iconUrl } = await http.put(`clients/${match.params.clientId}/icon`, { filename });
+        const { iconUrl } = await http.put(`clients/${match.params.id}/icon`, { filename });
         this.setState(({ client }) => ({ client: { ...client, iconUrl } }));
         eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
     };

@@ -81,7 +81,7 @@ export default class extends PureComponent {
         const { validation } = this.state;
         try {
             await new Validator({ [key]: RULES[key] }).validate({ [key]: value }, { first: true });
-            validation[key] = { text: null, error: false };
+            validation[key] = {};
         } catch ({ errors }) {
             validation[key] = { text: errors[0].message, error: true };
         }

@@ -34,7 +34,7 @@ class Otp extends PureComponent {
     initData = async () => {
         const { match } = this.props;
 
-        const values = await http.get(`clients/${match.params.clientId}/otp-config`);
+        const values = await http.get(`clients/${match.params.id}/otp-config`);
         this.setState({ values });
     };
 
@@ -46,7 +46,7 @@ class Otp extends PureComponent {
         const { match } = this.props;
         const { values } = this.state;
 
-        await http.put(`clients/${match.params.clientId}/otp-config`, values);
+        await http.put(`clients/${match.params.id}/otp-config`, values);
 
         eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
     };

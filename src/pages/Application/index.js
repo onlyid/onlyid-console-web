@@ -92,7 +92,7 @@ class Application extends PureComponent {
         return (
             <div className={styles.root}>
                 <Switch>
-                    <Route path={`${match.path}/:clientId`}>
+                    <Route path={`${match.path}/:id`}>
                         <Client />
                     </Route>
                     <Route path={match.path}>
