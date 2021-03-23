@@ -43,7 +43,7 @@ class OAuth extends PureComponent {
         const validator = new Validator({ [key]: RULES_APP[key] });
         try {
             await validator.validate({ [key]: value }, { first: true });
-            validation[key] = { text: null, error: false };
+            validation[key] = {};
         } catch ({ errors }) {
             validation[key] = { text: errors[0].message, error: true };
         }
@@ -57,15 +57,26 @@ class OAuth extends PureComponent {
             .filter(item => item);
 
     validateUris = async uris => {
+        const { validation } = this.state;
+
         if (!uris.length) {
-            const err = new Error();
-            err.errors = [{ message: "请输入" }];
-            throw err;
+            validation.redirectUris = { text: "请输入", error: true };
+            this.setState({ validation: { ...validation } });
+            return false;
         }
 
         const validator = new Validator({ item: RULE_URL });
-        for (const item of uris) {
-            await validator.validate({ item }, { first: true });
+        try {
+            for (const item of uris) {
+                await validator.validate({ item }, { first: true });
+            }
+            validation.redirectUris = {};
+            return true;
+        } catch ({ errors }) {
+            validation.redirectUris = { text: errors[0].message, error: true };
+            return false;
+        } finally {
+            this.setState({ validation: { ...validation } });
         }
     };
 
@@ -93,11 +104,8 @@ class OAuth extends PureComponent {
             values = { packageName, bundleId };
         } else {
             const uris = this.getUriArray(redirectUris);
-            try {
-                await this.validateUris(uris);
-            } catch (e) {
-                return;
-            }
+            if (!(await this.validateUris(uris))) return;
+
             values = { redirectUris: uris };
         }
 

@@ -140,7 +140,7 @@ export default class extends PureComponent {
                         <p>新建用户主要用于：</p>
                         <ol className={styles.ol1}>
                             <li>
-                                应用迁移到唯ID，使用批量导入功能导入大部分用户后，有少量用户因各种原因无法自动导入，需手工新建处理。
+                                应用迁移到唯ID，使用批量导入功能迁移大部分用户后，有少量用户因各种原因无法自动导入，需手工新建处理。
                             </li>
                             <li>
                                 应用已接入SSO，偶尔有新用户因各种原因（如老年人不会打字）无法在认证中心完成注册，可协助用户新建账号。
@@ -150,7 +150,7 @@ export default class extends PureComponent {
                     <DialogActions>
                         <Button onClick={onCancel}>取 消</Button>
                         <Button onClick={this.next} color="primary">
-                            明白了，继续新建
+                            继续新建
                         </Button>
                     </DialogActions>
                 </Dialog>

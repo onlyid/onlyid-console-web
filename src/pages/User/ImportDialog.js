@@ -67,7 +67,7 @@ export default class extends PureComponent {
                     <DialogActions>
                         <Button onClick={onCancel}>取 消</Button>
                         <Button onClick={this.next} color="primary">
-                            明白了，继续导入
+                            继续导入
                         </Button>
                     </DialogActions>
                 </Dialog>

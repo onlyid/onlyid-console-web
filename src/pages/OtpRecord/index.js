@@ -118,7 +118,7 @@ class OtpRecord extends PureComponent {
                 <h1>OTP记录</h1>
                 <p>
                     查看最近的OTP发送、校验记录。
-                    <span style={{ color: "#7f7f7f" }}>（仅保留三个月数据）</span>
+                    <span style={{ color: "#7f7f7f" }}>（保留三个月数据）</span>
                 </p>
                 <div className={selectBar.root}>
                     <ClientSelect value={clientId} onChange={this.onClientChange} />

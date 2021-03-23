@@ -8,7 +8,7 @@ export default function({ open, onClose }) {
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>
-                帮助引导
+                接入引导
                 <DialogClose onClose={onClose} />
             </DialogTitle>
             <DialogContent className={styles.content}>
