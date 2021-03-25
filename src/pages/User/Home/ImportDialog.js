@@ -151,7 +151,7 @@ export default class extends PureComponent {
                             </ol>
                         </div>
                     </DialogContent>
-                    <DialogActions key={Date()}>
+                    <DialogActions key="0">
                         <Button onClick={onCancel}>取 消</Button>
                         <input
                             id="upload"

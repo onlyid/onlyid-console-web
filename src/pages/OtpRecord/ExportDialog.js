@@ -59,6 +59,16 @@ export default class extends PureComponent {
                     <DialogClose onClose={onClose} />
                 </DialogTitle>
                 <DialogContent style={{ width: 600 }}>
+                    {fileUrl && (
+                        <div className={styles.downloadBox}>
+                            <p>
+                                <span style={{ color: "#4caf50" }}>导出成功</span>，下载地址：
+                            </p>
+                            <Link href={fileUrl} target="_blank">
+                                {fileUrl}
+                            </Link>
+                        </div>
+                    )}
                     <p style={{ marginTop: 0 }}>筛选条件：</p>
                     <ul className={styles.ul1}>
                         <li>
@@ -84,16 +94,6 @@ export default class extends PureComponent {
                             {keyword || "-"}
                         </li>
                     </ul>
-                    {fileUrl && (
-                        <div className={styles.downloadBox}>
-                            <p>
-                                <span style={{ color: "#4caf50" }}>导出成功</span>，下载地址：
-                            </p>
-                            <Link href={fileUrl} target="_blank">
-                                {fileUrl}
-                            </Link>
-                        </div>
-                    )}
                     <div className="tipBox">
                         <p>提示：</p>
                         <ol>

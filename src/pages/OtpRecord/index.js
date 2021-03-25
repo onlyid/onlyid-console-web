@@ -182,7 +182,7 @@ class OtpRecord extends PureComponent {
                         startIcon={<span className="material-icons">search</span>}
                         onClick={this.onSearch}
                     >
-                        查询
+                        查 询
                     </Button>
                     <Button variant="contained" className="small" onClick={this.toggleExport}>
                         导出数据

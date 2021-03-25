@@ -86,10 +86,8 @@ class OAuth extends PureComponent {
         let values;
         if (client.type === "APP") {
             if (!packageName && !bundleId) {
-                eventEmitter.emit("app/openToast", {
-                    text: "应用包名和Bundle ID至少要填一项",
-                    severity: "warning"
-                });
+                const text = "应用包名和Bundle ID至少要填一项";
+                eventEmitter.emit("app/openToast", { text, severity: "warning" });
                 return;
             }
 

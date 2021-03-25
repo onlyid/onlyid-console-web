@@ -10,7 +10,7 @@ import Client from "./Client";
 import CreateDialog from "./CreateDialog";
 import GuideDialog from "./GuideDialog";
 
-class Index extends PureComponent {
+class Home extends PureComponent {
     state = {
         list: [],
         loading: true,
@@ -85,7 +85,7 @@ class Index extends PureComponent {
     }
 }
 
-class Application extends PureComponent {
+class Index extends PureComponent {
     render() {
         const { match } = this.props;
 
@@ -96,7 +96,7 @@ class Application extends PureComponent {
                         <Client />
                     </Route>
                     <Route path={match.path}>
-                        <Index />
+                        <Home />
                     </Route>
                 </Switch>
             </div>
@@ -104,4 +104,4 @@ class Application extends PureComponent {
     }
 }
 
-export default withRouter(Application);
+export default withRouter(Index);

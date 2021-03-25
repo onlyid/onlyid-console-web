@@ -18,10 +18,11 @@
 }
 
 .downloadBox {
-    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .downloadBox p {
+    margin-top: 0;
     margin-bottom: 10px;
 }
 
