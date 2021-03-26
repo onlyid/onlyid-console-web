@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
 
-const defaultUser = {};
+const defaultUser = {
+    currentTab: "basic"
+};
 
 const defaultApplication = {
     currentTab: "basic"
@@ -20,8 +22,6 @@ const defaultRoleManage = {
     groupId: null // groupId有值 则当前选中的是role 否则选中的是role group
 };
 
-const defaultStatistic = {};
-
 const defaultAuditLog = {
     selectedKey: null
 };
@@ -36,26 +36,16 @@ const defaultMessage = {
     total: 0
 };
 
-function user(state = defaultUser, action) {
-    const { type, payload } = action;
+function user(state = defaultUser, { type, ...rest }) {
+    if (type === "user") return { ...state, ...rest };
 
-    switch (type) {
-        case "user":
-            return { ...state, ...payload };
-        default:
-            return state;
-    }
+    return state;
 }
 
-function application(state = defaultApplication, action) {
-    const { type, payload } = action;
+function application(state = defaultApplication, { type, ...rest }) {
+    if (type === "application") return { ...state, ...rest };
 
-    switch (type) {
-        case "application":
-            return { ...state, ...payload };
-        default:
-            return state;
-    }
+    return state;
 }
 
 function resManage(state = defaultResManage, action) {
@@ -74,17 +64,6 @@ function roleManage(state = defaultRoleManage, action) {
 
     switch (type) {
         case "roleManage/save":
-            return { ...state, ...payload };
-        default:
-            return state;
-    }
-}
-
-function statistic(state = defaultStatistic, action) {
-    const { type, payload } = action;
-
-    switch (type) {
-        case "statistic":
             return { ...state, ...payload };
         default:
             return state;
@@ -129,7 +108,6 @@ export default combineReducers({
     application,
     resManage,
     roleManage,
-    statistic,
     auditLog,
     admin,
     message

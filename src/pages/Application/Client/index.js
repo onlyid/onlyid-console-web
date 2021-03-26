@@ -64,7 +64,7 @@ class Client extends PureComponent {
         }
 
         return (
-            <div>
+            <>
                 <MainHeader
                     backText="返回应用列表"
                     imgUrl={client.iconUrl}
@@ -89,13 +89,13 @@ class Client extends PureComponent {
                     indicatorColor="primary"
                     className={mainTabs.root}
                 >
-                    <Tab label="基础设置" value="basic" />
+                    <Tab label="应用详情" value="basic" />
                     <Tab label="OTP 验证码设置" value="otp" />
                     <Tab label="SSO OAuth 设置" value="oauth" />
                     <Tab label="危险设置" value="danger" />
                 </Tabs>
                 {content}
-            </div>
+            </>
         );
     }
 }

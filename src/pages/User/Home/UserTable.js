@@ -14,9 +14,10 @@ import {
     TableRow
 } from "@material-ui/core";
 import moment from "moment";
-import { DATE_TIME_FORMAT, GENDER_TEXT } from "my/constants";
+import { DATE_TIME_FORMAT } from "my/constants";
 import MyTable from "components/MyTable";
 import Avatar from "components/Avatar";
+import GenderSymbol from "components/GenderSymbol";
 
 class UserTable extends PureComponent {
     state = {
@@ -167,7 +168,9 @@ class UserTable extends PureComponent {
                                 </TableCell>
                                 <TableCell>{item.mobile || "-"}</TableCell>
                                 <TableCell>{item.email || "-"}</TableCell>
-                                <TableCell>{GENDER_TEXT[item.gender] || "-"}</TableCell>
+                                <TableCell>
+                                    <GenderSymbol gender={item.gender} dense />
+                                </TableCell>
                                 <TableCell align="center">
                                     <IconButton onClick={event => this.openMenu(event, item.id)}>
                                         <span className="material-icons">more_horiz</span>
@@ -189,7 +192,28 @@ class UserTable extends PureComponent {
                     className={styles.dropDown}
                 >
                     <MenuItem onClick={() => this.go("basic")}>
-                        <ListItemText>基础设置</ListItemText>
+                        <ListItemText>账号详情</ListItemText>
+                    </MenuItem>
+                    <MenuItem onClick={() => this.go("extra")}>
+                        <ListItemText>附加信息</ListItemText>
+                    </MenuItem>
+                    <MenuItem onClick={() => this.go("json")}>
+                        <ListItemText>预览 JSON</ListItemText>
+                    </MenuItem>
+                    <MenuItem onClick={() => this.go("app")}>
+                        <ListItemText>授权应用</ListItemText>
+                    </MenuItem>
+                    <MenuItem onClick={() => this.go("log")}>
+                        <ListItemText>登录历史</ListItemText>
+                    </MenuItem>
+                    <MenuItem onClick={() => this.go("role")}>
+                        <ListItemText>关联角色</ListItemText>
+                    </MenuItem>
+                    <MenuItem onClick={() => this.go("permission")}>
+                        <ListItemText>合并权限</ListItemText>
+                    </MenuItem>
+                    <MenuItem onClick={() => this.go("danger")}>
+                        <ListItemText>危险设置</ListItemText>
                     </MenuItem>
                 </Menu>
             </>

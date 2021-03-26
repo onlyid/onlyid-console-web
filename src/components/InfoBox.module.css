@@ -1,0 +1,22 @@
+.root {
+    border-bottom: 1px solid #eee;
+    display: flex;
+    padding: 20px 0;
+}
+
+.root:last-of-type {
+    border-bottom: none;
+}
+
+.root > label {
+    color: #7f7f7f;
+    text-align: right;
+    margin-right: 20px;
+    width: 0;
+    flex-grow: 1;
+}
+
+.root > span {
+    width: 0;
+    flex-grow: 4;
+}

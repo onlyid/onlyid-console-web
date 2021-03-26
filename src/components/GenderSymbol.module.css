@@ -1,0 +1,9 @@
+.root :global .material-icons {
+    vertical-align: -25%;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+.root.dense :global .material-icons {
+    margin-left: 0;
+}

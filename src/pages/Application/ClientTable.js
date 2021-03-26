@@ -36,7 +36,7 @@ class ClientTable extends PureComponent {
         const { history, match, dispatch } = this.props;
         const { clientId } = this.state;
 
-        dispatch({ type: "application", payload: { currentTab: tab } });
+        dispatch({ type: "application", currentTab: tab });
         history.push(`${match.url}/${clientId}`);
     };
 
@@ -106,7 +106,7 @@ class ClientTable extends PureComponent {
                     className={styles.dropDown}
                 >
                     <MenuItem onClick={() => this.go("basic")}>
-                        <ListItemText>基础设置</ListItemText>
+                        <ListItemText>应用详情</ListItemText>
                     </MenuItem>
                     <MenuItem onClick={() => this.go("otp")}>
                         <ListItemText>OTP 验证码设置</ListItemText>

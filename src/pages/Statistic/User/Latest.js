@@ -3,9 +3,10 @@ import http from "my/http";
 import { Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
 import styles from "../Latest.module.css";
 import moment from "moment";
-import { DATE_TIME_FORMAT, GENDER_TEXT } from "my/constants";
+import { DATE_TIME_FORMAT } from "my/constants";
 import Empty from "components/Empty";
 import Avatar from "components/Avatar";
+import GenderSymbol from "components/GenderSymbol";
 
 class Latest extends PureComponent {
     state = {
@@ -65,7 +66,9 @@ class Latest extends PureComponent {
                                 </TableCell>
                                 <TableCell>{item.mobile || "-"}</TableCell>
                                 <TableCell>{item.email || "-"}</TableCell>
-                                <TableCell>{GENDER_TEXT[item.gender] || "-"}</TableCell>
+                                <TableCell>
+                                    <GenderSymbol gender={item.gender} dense />
+                                </TableCell>
                                 <TableCell className={styles.borderLeft}>
                                     <div className={styles.clientBox}>
                                         <img src={item.clientIconUrl} alt="icon" />
