@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./TitleWithSelect.module.css";
+import styles from "./TitleAndSelect.module.css";
 import ClientSelect from "components/ClientSelect";
 import { FormControl, InputAdornment, MenuItem, Select } from "@material-ui/core";
 

@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import TitleWithSelect from "../TitleWithSelect";
+import TitleAndSelect from "../TitleAndSelect";
 import Chart from "./Chart";
 import Summary from "./Summary";
 import Latest from "./Latest";
@@ -26,7 +26,7 @@ class Otp extends PureComponent {
 
         return (
             <>
-                <TitleWithSelect
+                <TitleAndSelect
                     title="OTP 最近发送验证码"
                     clientId={clientId}
                     days={days}

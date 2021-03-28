@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import TitleWithSelect from "../TitleWithSelect";
+import TitleAndSelect from "../TitleAndSelect";
 import Chart from "./Chart";
 import Summary from "./Summary";
 import Latest from "./Latest";
@@ -25,7 +25,7 @@ class User extends PureComponent {
 
         return (
             <>
-                <TitleWithSelect
+                <TitleAndSelect
                     title="SSO 最近 新增 / 活跃 用户"
                     clientId={clientId}
                     days={days}
