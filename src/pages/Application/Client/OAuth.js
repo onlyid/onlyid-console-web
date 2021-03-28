@@ -82,7 +82,7 @@ class OAuth extends PureComponent {
 
     onSubmit = async () => {
         const { packageName, bundleId, redirectUris, validation } = this.state;
-        const { client, onChange } = this.props;
+        const { client, onSave } = this.props;
         let values;
         if (client.type === "APP") {
             if (!packageName && !bundleId) {
@@ -109,7 +109,7 @@ class OAuth extends PureComponent {
 
         await http.put(`clients/${client.id}/oauth-config`, values);
         eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
-        onChange(values);
+        onSave();
     };
 
     render() {

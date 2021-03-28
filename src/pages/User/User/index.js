@@ -44,10 +44,6 @@ class User extends PureComponent {
         eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
     };
 
-    onUserChange = values => {
-        this.setState(({ user }) => ({ user: { ...user, ...values } }));
-    };
-
     render() {
         const { user } = this.state;
         const {
@@ -78,7 +74,7 @@ class User extends PureComponent {
                 content = <Danger />;
                 break;
             default:
-                content = <Basic user={user} onChange={this.onUserChange} />;
+                content = <Basic user={user} onSave={this.initData} />;
         }
 
         return (

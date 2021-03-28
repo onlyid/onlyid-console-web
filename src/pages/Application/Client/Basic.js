@@ -44,7 +44,7 @@ class Basic extends PureComponent {
 
     onSubmit = async () => {
         const { values, validation } = this.state;
-        const { client, onChange } = this.props;
+        const { client, onSave } = this.props;
 
         try {
             await new Validator(RULES).validate(values, { firstFields: true });
@@ -56,7 +56,7 @@ class Basic extends PureComponent {
 
         await http.put("clients/" + client.id, values);
         eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
-        onChange(values);
+        onSave();
     };
 
     toggleHideSecret = () => {

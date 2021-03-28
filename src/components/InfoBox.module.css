@@ -9,7 +9,7 @@
 }
 
 .root > label {
-    color: #7f7f7f;
+    color: rgba(0, 0, 0, 0.6);
     text-align: right;
     margin-right: 20px;
     width: 0;

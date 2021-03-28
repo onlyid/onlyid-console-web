@@ -101,7 +101,10 @@ export default class extends PureComponent {
                             <li style={{ color: "#ff9800" }}>
                                 仅限导出最近三个月的记录，如需要，请及时导出对应月份数据。
                             </li>
-                            <li>下载地址默认点击在线预览，请使用右键 "另存为" 下载文件。</li>
+                            <li>
+                                JSON文件在某些浏览器默认点击在线预览，请使用右键 "另存为"
+                                触发文件下载。
+                            </li>
                         </ol>
                     </div>
                 </DialogContent>

@@ -30,7 +30,7 @@ class Client extends PureComponent {
 
     onTabChange = (event, value) => {
         const { dispatch } = this.props;
-        dispatch({ type: "application", payload: { currentTab: value } });
+        dispatch({ type: "application", currentTab: value });
     };
 
     onUpload = async filename => {
@@ -38,10 +38,6 @@ class Client extends PureComponent {
         const { iconUrl } = await http.put(`clients/${match.params.id}/icon`, { filename });
         this.setState(({ client }) => ({ client: { ...client, iconUrl } }));
         eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
-    };
-
-    onClientChange = values => {
-        this.setState(({ client }) => ({ client: { ...client, ...values } }));
     };
 
     render() {
@@ -54,13 +50,13 @@ class Client extends PureComponent {
                 content = <Otp />;
                 break;
             case "oauth":
-                content = <OAuth client={client} onChange={this.onClientChange} />;
+                content = <OAuth client={client} onSave={this.initData} />;
                 break;
             case "danger":
-                content = <Danger onChange={this.onClientChange} />;
+                content = <Danger onSave={this.initData} />;
                 break;
             default:
-                content = <Basic client={client} onChange={this.onClientChange} />;
+                content = <Basic client={client} onSave={this.initData} />;
         }
 
         return (

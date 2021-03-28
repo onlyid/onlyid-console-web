@@ -26,7 +26,7 @@ class Danger extends PureComponent {
                 params: { clientId }
             },
             history,
-            onChange
+            onSave
         } = this.props;
         const { operation } = this.state;
 
@@ -36,9 +36,9 @@ class Danger extends PureComponent {
             toastText = "删除成功";
             history.goBack();
         } else {
-            const { secret } = await http.put(`clients/${clientId}/secret`);
+            await http.put(`clients/${clientId}/secret`);
             toastText = "重置成功";
-            onChange({ secret });
+            onSave();
         }
         this.closeDialog();
         eventEmitter.emit("app/openToast", { text: toastText, timeout: 2000 });

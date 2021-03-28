@@ -60,7 +60,7 @@ class Basic extends PureComponent {
 
     onSubmit = async () => {
         const { values, region, birthDate, validation } = this.state;
-        const { onChange, user } = this.props;
+        const { onSave, user } = this.props;
 
         try {
             await new Validator(RULES).validate(values, { firstFields: true });
@@ -81,20 +81,15 @@ class Basic extends PureComponent {
         if (region) {
             values.province = region[0];
             values.city = region[1];
-        } else {
-            values.province = null;
-            values.city = null;
         }
 
         if (birthDate) {
             values.birthDate = birthDate.format(DATE_FORMAT);
-        } else {
-            values.birthDate = null;
         }
 
         await http.put("users/" + user.id, values);
         eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
-        onChange(values);
+        onSave();
     };
 
     onChange = ({ target }) => {
