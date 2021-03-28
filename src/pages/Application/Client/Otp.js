@@ -19,7 +19,7 @@ import {
     OTP_TEMPLATE_TEXT,
     OTP_TYPE_TEXT
 } from "my/constants";
-import styles from "../index.module.css";
+import styles from "./index.module.css";
 import { eventEmitter } from "my/utils";
 
 class Otp extends PureComponent {

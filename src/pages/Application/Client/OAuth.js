@@ -170,7 +170,7 @@ class OAuth extends PureComponent {
                             />
                             <FormHelperText>{validation.redirectUris.text}</FormHelperText>
                             <FormHelperText error={false}>
-                                用户登录后，只允许重定向到这里指定的网址，以保证安全性；你可以用分号分隔多个网址（一般用于不同环境，如测试环境）；必须以http://或https://开头。
+                                用户登录后，只允许重定向到这里指定的网址，以保证安全性；可以用分号分隔多个网址（一般用于不同环境，如测试环境）；必须以http://或https://开头。
                             </FormHelperText>
                         </FormControl>
                     </InputBox>

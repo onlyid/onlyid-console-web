@@ -4,7 +4,7 @@ import MainHeader from "components/MainHeader";
 import http from "my/http";
 import { withRouter } from "react-router-dom";
 import { CLIENT_TYPE_TEXT, IMG_UPLOAD_TIP } from "my/constants";
-import styles from "../index.module.css";
+import styles from "./index.module.css";
 import mainTabs from "components/MainTabs.module.css";
 import { Tab, Tabs } from "@material-ui/core";
 import Basic from "./Basic";
