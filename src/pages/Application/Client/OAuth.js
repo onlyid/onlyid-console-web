@@ -121,11 +121,7 @@ class OAuth extends PureComponent {
                 {client.type === "APP" ? (
                     <>
                         <InputBox label="Android 应用包名">
-                            <FormControl
-                                fullWidth
-                                error={validation.packageName.error}
-                                variant="outlined"
-                            >
+                            <FormControl error={validation.packageName.error} variant="outlined">
                                 <OutlinedInput
                                     id="packageName"
                                     onChange={this.onChange}
@@ -136,11 +132,7 @@ class OAuth extends PureComponent {
                             </FormControl>
                         </InputBox>
                         <InputBox label="iOS Bundle ID">
-                            <FormControl
-                                fullWidth
-                                error={validation.bundleId.error}
-                                variant="outlined"
-                            >
+                            <FormControl error={validation.bundleId.error} variant="outlined">
                                 <OutlinedInput
                                     id="bundleId"
                                     onChange={this.onChange}
@@ -153,11 +145,7 @@ class OAuth extends PureComponent {
                     </>
                 ) : (
                     <InputBox label="应用回调 URI" required>
-                        <FormControl
-                            fullWidth
-                            error={validation.redirectUris.error}
-                            variant="outlined"
-                        >
+                        <FormControl error={validation.redirectUris.error} variant="outlined">
                             <OutlinedInput
                                 id="redirectUris"
                                 onChange={this.onChange}

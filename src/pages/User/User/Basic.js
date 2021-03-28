@@ -203,7 +203,7 @@ class Basic extends PureComponent {
                 </InputBox>
                 <InputBox label="用户地区">
                     <RegionInput
-                        value={region}
+                        value={region || ""}
                         onChange={value => this.setState({ region: value })}
                     />
                 </InputBox>

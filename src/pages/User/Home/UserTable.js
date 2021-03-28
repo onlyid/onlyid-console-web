@@ -37,7 +37,7 @@ class UserTable extends PureComponent {
         const { history, match, dispatch } = this.props;
         const { id } = this.state;
 
-        dispatch({ type: "user", payload: { currentTab: tab } });
+        dispatch({ type: "user", currentTab: tab });
         history.push(`${match.url}/${id}`);
     };
 
