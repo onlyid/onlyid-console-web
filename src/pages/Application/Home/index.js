@@ -76,7 +76,7 @@ export default class extends PureComponent {
                 <div className="mainActionBox">{createNew}</div>
                 <h1>应用管理</h1>
                 <p>新建一个应用来使用唯ID的认证产品。</p>
-                <ClientTable list={list} />
+                <ClientTable list={list} loading={loading} />
             </>
         );
     }

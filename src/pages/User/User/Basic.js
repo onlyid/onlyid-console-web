@@ -115,7 +115,8 @@ class Basic extends PureComponent {
         const { values, validation, region, birthDate } = this.state;
         const { user } = this.props;
 
-        if (user.activated) return <Info user={user} />;
+        // 初始化时也展示info
+        if (user.activated === undefined || user.activated) return <Info user={user} />;
 
         return (
             <form>

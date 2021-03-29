@@ -11,7 +11,7 @@ import mainTabs from "components/MainTabs.module.css";
 import Basic from "./Basic";
 import Extra from "./Extra";
 import Json from "./Json";
-import App from "./App";
+import ClientTable from "./ClientTable";
 import Log from "./Log";
 import Role from "./Role";
 import Permission from "./Permission";
@@ -58,8 +58,8 @@ class User extends PureComponent {
             case "json":
                 content = <Json />;
                 break;
-            case "app":
-                content = <App />;
+            case "client":
+                content = <ClientTable />;
                 break;
             case "log":
                 content = <Log />;
@@ -116,7 +116,7 @@ class User extends PureComponent {
                     <Tab label="账号详情" value="basic" />
                     <Tab label="附加信息" value="extra" />
                     <Tab label="预览 JSON" value="json" />
-                    <Tab label="授权应用" value="app" />
+                    <Tab label="授权应用" value="client" />
                     <Tab label="登录历史" value="log" />
                     <Tab label="关联角色" value="role" />
                     <Tab label="合并权限" value="permission" />

@@ -5,7 +5,6 @@ import {
     ListItemText,
     Menu,
     MenuItem,
-    Table,
     TableBody,
     TableCell,
     TableHead,
@@ -17,6 +16,7 @@ import moment from "moment";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import CopyButton from "components/CopyButton";
+import MyTable from "components/MyTable";
 
 class ClientTable extends PureComponent {
     state = {
@@ -46,12 +46,12 @@ class ClientTable extends PureComponent {
     };
 
     render() {
-        const { list } = this.props;
+        const { list, loading } = this.props;
         const { anchorEl } = this.state;
 
         return (
             <>
-                <Table className={styles.root}>
+                <MyTable length={list.length} loading={loading} className={styles.root}>
                     <TableHead>
                         <TableRow>
                             <TableCell>应用</TableCell>
@@ -94,7 +94,7 @@ class ClientTable extends PureComponent {
                             </TableRow>
                         ))}
                     </TableBody>
-                </Table>
+                </MyTable>
                 <Menu
                     anchorEl={anchorEl}
                     anchorOrigin={{ vertical: "bottom", horizontal: "center" }}

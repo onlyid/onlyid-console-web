@@ -34,7 +34,7 @@ export default class extends PureComponent {
                             </TableFooter>
                         )}
                     </Table>
-                    {length ? (
+                    {length > 0 && pagination && (
                         <Pagination
                             count={pagination.total}
                             rowsPerPage={pagination.pageSize}
@@ -42,7 +42,8 @@ export default class extends PureComponent {
                             onChangePage={this.onChangePage}
                             onChangeRowsPerPage={this.onChangeRowsPerPage}
                         />
-                    ) : (
+                    )}
+                    {!length && (
                         <div className={styles.emptyBox}>
                             <Empty simple description="暂无数据" />
                         </div>
