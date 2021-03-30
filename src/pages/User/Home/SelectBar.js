@@ -40,8 +40,8 @@ export default function({
                                     <InputAdornment position="start">排序</InputAdornment>
                                 }
                             >
-                                <MenuItem value="new">最近新增</MenuItem>
-                                <MenuItem value="active">最近活跃</MenuItem>
+                                <MenuItem value="firstDate">最近新增</MenuItem>
+                                <MenuItem value="lastDate">最近活跃</MenuItem>
                             </Select>
                         </FormControl>
                     </>

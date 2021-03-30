@@ -18,11 +18,12 @@ class Home extends PureComponent {
         keyword: "",
         type: "sso",
         clientId: "all",
-        orderBy: "new",
+        orderBy: "firstDate",
         activated: "all",
         loading: true,
         showEmpty: false,
-        actualType: "sso"
+        realType: "sso",
+        realOrderBy: "firstDate"
     };
 
     componentDidMount() {
@@ -60,7 +61,7 @@ class Home extends PureComponent {
 
         const { list, total } = await http.get(url, { params });
 
-        this.setState({ list, total, loading: false, actualType: type });
+        this.setState({ list, total, loading: false, realType: type, realOrderBy: orderBy });
 
         return total;
     };
@@ -139,7 +140,8 @@ class Home extends PureComponent {
             current,
             pageSize,
             total,
-            actualType
+            realType,
+            realOrderBy
         } = this.state;
 
         const dialogs = (
@@ -189,15 +191,16 @@ class Home extends PureComponent {
                     onSearch={this.onSearch}
                 />
                 <UserTable
-                    type={actualType}
+                    type={realType}
                     list={list}
                     loading={loading}
                     current={current}
                     pageSize={pageSize}
                     total={total}
                     onPaginationChange={this.onPaginationChange}
+                    orderBy={realOrderBy}
                 />
-                <div className="tipBox">
+                <div className="tipBox" style={{ marginTop: 20 }}>
                     <p>提示：</p>
                     <ol>
                         <li>

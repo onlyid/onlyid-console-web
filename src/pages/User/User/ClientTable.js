@@ -36,10 +36,12 @@ class ClientTable extends PureComponent {
                     <TableHead>
                         <TableRow>
                             <TableCell>应用</TableCell>
+                            <TableCell className={styles.borderLeft}>首次登录IP</TableCell>
+                            <TableCell>首次登录地点</TableCell>
                             <TableCell>首次登录时间</TableCell>
-                            <TableCell>最近登录时间</TableCell>
-                            <TableCell>最近登录IP</TableCell>
+                            <TableCell className={styles.borderLeft}>最近登录IP</TableCell>
                             <TableCell>最近登录地点</TableCell>
+                            <TableCell>最近登录时间</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -51,16 +53,24 @@ class ClientTable extends PureComponent {
                                         {item.name}
                                     </div>
                                 </TableCell>
-                                <TableCell>
-                                    {moment(item.linkDate).format(DATE_TIME_FORMAT)}
+                                <TableCell className={styles.borderLeft}>
+                                    {item.firstIp || "-"}
                                 </TableCell>
-                                <TableCell>
+                                <TableCell>{item.firstLocation || "-"}</TableCell>
+                                <TableCell style={{ width: 120 }}>
+                                    {item.firstDate
+                                        ? moment(item.firstDate).format(DATE_TIME_FORMAT)
+                                        : "-"}
+                                </TableCell>
+                                <TableCell className={styles.borderLeft}>
+                                    {item.lastIp || "-"}
+                                </TableCell>
+                                <TableCell>{item.lastLocation || "-"}</TableCell>
+                                <TableCell style={{ width: 120 }}>
                                     {item.lastDate
                                         ? moment(item.lastDate).format(DATE_TIME_FORMAT)
                                         : "-"}
                                 </TableCell>
-                                <TableCell>{item.lastIp || "-"}</TableCell>
-                                <TableCell>{item.lastLocation || "-"}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

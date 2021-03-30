@@ -47,7 +47,7 @@ class UserTable extends PureComponent {
     };
 
     tableBody = item => {
-        const { type } = this.props;
+        const { type, orderBy } = this.props;
 
         if (type === "sso")
             return (
@@ -58,7 +58,11 @@ class UserTable extends PureComponent {
                             {item.clientName}
                         </div>
                     </TableCell>
-                    <TableCell>{moment(item.loginDate).format(DATE_TIME_FORMAT)}</TableCell>
+                    <TableCell>
+                        {orderBy === "firstDate"
+                            ? moment(item.firstDate).format(DATE_TIME_FORMAT)
+                            : moment(item.lastDate).format(DATE_TIME_FORMAT)}
+                    </TableCell>
                 </>
             );
 
@@ -81,7 +85,7 @@ class UserTable extends PureComponent {
         return (
             <>
                 <TableCell className={styles.borderLeft}>
-                    {moment(item.addDate).format(DATE_TIME_FORMAT)}
+                    {moment(item.blockDate).format(DATE_TIME_FORMAT)}
                 </TableCell>
                 {item.expireDate ? (
                     <TableCell>

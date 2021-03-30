@@ -76,7 +76,9 @@ class Latest extends PureComponent {
                                     </div>
                                 </TableCell>
                                 <TableCell>
-                                    {moment(item.loginDate).format(DATE_TIME_FORMAT)}
+                                    {type === "new"
+                                        ? moment(item.firstDate).format(DATE_TIME_FORMAT)
+                                        : moment(item.lastDate).format(DATE_TIME_FORMAT)}
                                 </TableCell>
                             </TableRow>
                         ))}
