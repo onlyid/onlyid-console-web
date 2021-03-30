@@ -1,7 +1,21 @@
 import { combineReducers } from "redux";
 
 const defaultUser = {
-    currentTab: "basic"
+    currentTab: "basic",
+    // home
+    list: [],
+    current: 1,
+    pageSize: 10,
+    total: 0,
+    keyword: "",
+    type1: "sso",
+    clientId: "all",
+    orderBy: "firstDate",
+    activated: "all",
+    loading: true,
+    showEmpty: false,
+    realType: "sso",
+    realOrderBy: "firstDate"
 };
 
 const defaultApplication = {

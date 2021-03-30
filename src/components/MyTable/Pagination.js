@@ -8,6 +8,11 @@ class Actions extends PureComponent {
         inputValue: 1
     };
 
+    componentDidMount() {
+        const { page } = this.props;
+        if (page !== 0) this.setState({ inputValue: page + 1 });
+    }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         const { page } = this.props;
         if (page !== prevProps.page) this.setState({ inputValue: page + 1 });
@@ -29,7 +34,6 @@ class Actions extends PureComponent {
             default:
                 // last
                 newPage = Math.ceil(count / rowsPerPage) - 1;
-                break;
         }
         onChangePage(event, newPage);
         this.setState({ inputValue: newPage + 1 });

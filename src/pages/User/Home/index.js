@@ -6,53 +6,51 @@ import MainActionBox from "./MainActionBox";
 import SelectBar from "./SelectBar";
 import http from "my/http";
 import UserTable from "./UserTable";
+import { connect } from "react-redux";
 
 class Home extends PureComponent {
     state = {
         importOpen: false,
-        createOpen: false,
-        list: [],
-        current: 1,
-        pageSize: 10,
-        total: 0,
-        keyword: "",
-        type: "sso",
-        clientId: "all",
-        orderBy: "firstDate",
-        activated: "all",
-        loading: true,
-        showEmpty: false,
-        realType: "sso",
-        realOrderBy: "firstDate"
+        createOpen: false
     };
 
     componentDidMount() {
-        this.initDataTwice();
+        const {
+            user: { list }
+        } = this.props;
+
+        // 如果是返回 则初始化一次即可
+        if (list.length) this.initData();
+        else this.initDataTwice();
     }
 
     initDataTwice = async () => {
-        const total = await this.initData();
+        let total = await this.initData();
         if (total > 0) return;
 
-        this.setState({ type: "import" }, async () => {
-            const total = await this.initData();
-            if (total > 0) return;
+        const { dispatch } = this.props;
+        await dispatch({ type: "user", type1: "import" });
 
-            this.setState({ showEmpty: true });
-        });
+        total = await this.initData();
+        if (total > 0) return;
+
+        dispatch({ type: "user", showEmpty: true });
     };
 
     initData = async () => {
-        this.setState({ loading: true });
+        const { dispatch } = this.props;
+        dispatch({ type: "user", loading: true });
 
-        const { current, pageSize, keyword, type, clientId, orderBy, activated } = this.state;
+        const {
+            user: { current, pageSize, keyword, type1, clientId, orderBy, activated }
+        } = this.props;
 
         const params = { current, pageSize, keyword };
         let url = "users";
-        if (type === "sso") {
+        if (type1 === "sso") {
             params.orderBy = orderBy;
             if (clientId !== "all") params.clientId = clientId;
-        } else if (type === "import") {
+        } else if (type1 === "import") {
             url += "/import";
             if (activated !== "all") params.activated = activated;
         } else {
@@ -61,7 +59,14 @@ class Home extends PureComponent {
 
         const { list, total } = await http.get(url, { params });
 
-        this.setState({ list, total, loading: false, realType: type, realOrderBy: orderBy });
+        dispatch({
+            type: "user",
+            list,
+            total,
+            loading: false,
+            realType: type1,
+            realOrderBy: orderBy
+        });
 
         return total;
     };
@@ -84,26 +89,31 @@ class Home extends PureComponent {
         this.initImportData();
     };
 
-    initImportData = () => {
-        const state = {
+    initImportData = async () => {
+        const { dispatch } = this.props;
+        await dispatch({
+            type: "user",
             current: 1,
             keyword: "",
-            type: "import",
+            type1: "import",
             activated: "all",
             showEmpty: false
-        };
-        this.setState(state, this.initData);
+        });
+        this.initData();
     };
 
     onClientChange = clientId => {
-        this.setState({ clientId });
+        const { dispatch } = this.props;
+        dispatch({ type: "user", clientId });
     };
 
     onChange = ({ target }) => {
+        const { dispatch } = this.props;
+
         let key;
         switch (target.name) {
             case "type-select":
-                key = "type";
+                key = "type1";
                 break;
             case "order-by-select":
                 key = "orderBy";
@@ -114,35 +124,42 @@ class Home extends PureComponent {
             default:
                 key = target.name;
         }
-        this.setState({ [key]: target.value });
+        dispatch({ type: "user", [key]: target.value });
     };
 
-    onSearch = () => {
-        this.setState({ current: 1 }, this.initData);
+    onSearch = async () => {
+        const { dispatch } = this.props;
+
+        await dispatch({ type: "user", current: 1 });
+        this.initData();
     };
 
-    onPaginationChange = ({ pageSize, current }) => {
-        this.setState({ pageSize, current }, this.initData);
+    onPaginationChange = async ({ pageSize, current }) => {
+        const { dispatch } = this.props;
+
+        await dispatch({ type: "user", pageSize, current });
+        this.initData();
     };
 
     render() {
+        const { importOpen, createOpen } = this.state;
         const {
-            importOpen,
-            createOpen,
-            showEmpty,
-            type,
-            clientId,
-            orderBy,
-            activated,
-            keyword,
-            list,
-            loading,
-            current,
-            pageSize,
-            total,
-            realType,
-            realOrderBy
-        } = this.state;
+            user: {
+                showEmpty,
+                type1,
+                clientId,
+                orderBy,
+                activated,
+                keyword,
+                list,
+                loading,
+                current,
+                pageSize,
+                total,
+                realType,
+                realOrderBy
+            }
+        } = this.props;
 
         const dialogs = (
             <>
@@ -181,7 +198,7 @@ class Home extends PureComponent {
                     简单快捷地管理你的用户，如查看应用新增用户、查看用户登录历史和屏蔽用户登录应用等等。
                 </p>
                 <SelectBar
-                    type={type}
+                    type={type1}
                     clientId={clientId}
                     orderBy={orderBy}
                     activated={activated}
@@ -222,4 +239,4 @@ class Home extends PureComponent {
     }
 }
 
-export default Home;
+export default connect(({ user }) => ({ user }))(Home);
