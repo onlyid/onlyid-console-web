@@ -77,16 +77,11 @@ export const DATE_TIME_FORMAT = "YYYY-MM-DD HH:mm:ss";
 export const DATE_FORMAT = "YYYY-MM-DD";
 export const DATE_TIME_FORMAT_SHORT = "MM-DD HH:mm:ss";
 
-export const AUTH_TYPE_TEXT = {
+export const AUTH_METHOD = {
     PASSWORD: "密码",
     OTP: "验证码",
-    SCAN: "扫二维码",
+    QR_CODE: "二维码",
     SSO: "保持登录"
-};
-
-export const CHANNEL_TEXT = {
-    SSO: "SSO",
-    OTP: "OTP"
 };
 
 export const CATEGORY_TEXT = {

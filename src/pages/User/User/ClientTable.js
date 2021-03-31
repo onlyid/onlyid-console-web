@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import styles from "./ClientTable.module.css";
+import styles from "./Table.module.css";
 import MyTable from "components/MyTable";
 import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
 import moment from "moment";
@@ -32,7 +32,7 @@ class ClientTable extends PureComponent {
                 <p style={{ marginTop: 30 }}>
                     用户授权的应用列表，这些应用可以访问该用户的账号数据。
                 </p>
-                <MyTable length={list.length} loading={loading} className={styles.clientTable}>
+                <MyTable length={list.length} loading={loading} className={styles.table1}>
                     <TableHead>
                         <TableRow>
                             <TableCell>应用</TableCell>

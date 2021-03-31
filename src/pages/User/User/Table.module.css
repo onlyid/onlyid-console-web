@@ -1,16 +1,16 @@
-.clientTable {
+.table1 {
     margin-top: 20px;
     border-top: 1px solid rgb(224, 224, 224);
 }
 
-.clientTable :global .MuiTableHead-root .MuiTableCell-root {
+.table1 :global .MuiTableHead-root .MuiTableCell-root {
     padding-top: 12px;
     padding-bottom: 12px;
     font-weight: normal;
     background-color: #fbfbfb;
 }
 
-.clientTable :global .MuiTableBody-root .MuiTableCell-root {
+.table1 :global .MuiTableBody-root .MuiTableCell-root {
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -29,4 +29,10 @@
 
 .borderLeft {
     border-left: 1px solid rgb(224, 224, 224);
+    padding-left: 20px;
+}
+
+.smallBox {
+    font-size: 13px;
+    max-width: 160px;
 }
