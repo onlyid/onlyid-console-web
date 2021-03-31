@@ -25,7 +25,7 @@
 }
 
 .root p {
-    color: #7f7f7f;
+    color: rgba(0, 0, 0, 0.54);
     margin-top: 10px;
     margin-bottom: 0;
 }

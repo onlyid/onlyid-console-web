@@ -71,7 +71,7 @@ class User extends PureComponent {
                 content = <Permission />;
                 break;
             case "danger":
-                content = <Danger />;
+                content = <Danger activated={user.activated} />;
                 break;
             default:
                 content = <Basic user={user} onSave={this.initData} />;

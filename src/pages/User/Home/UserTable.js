@@ -18,6 +18,7 @@ import { DATE_TIME_FORMAT } from "my/constants";
 import MyTable from "components/MyTable";
 import Avatar from "components/Avatar";
 import GenderSymbol from "components/GenderSymbol";
+import DateCountDown from "components/DateCountDown";
 
 class UserTable extends PureComponent {
     state = {
@@ -91,11 +92,7 @@ class UserTable extends PureComponent {
                     <TableCell>
                         {moment(item.expireDate).format(DATE_TIME_FORMAT)}
                         <br />
-                        剩余{" "}
-                        <span style={{ color: "#f50057" }}>
-                            {moment(item.expireDate).diff(moment(), "days")}
-                        </span>{" "}
-                        天{" "}
+                        <DateCountDown date={item.expireDate} />
                     </TableCell>
                 ) : (
                     <TableCell>-</TableCell>
