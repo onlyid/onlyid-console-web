@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import styles from "./index.module.css";
+import styles from "./UserTable.module.css";
 import {
     IconButton,
     Link,
@@ -124,8 +124,8 @@ class UserTable extends PureComponent {
         else {
             tableHead = (
                 <>
-                    <TableCell className={styles.borderLeft}>添加时间</TableCell>
-                    <TableCell>移出时间</TableCell>
+                    <TableCell className={styles.borderLeft}>屏蔽时间</TableCell>
+                    <TableCell>解除时间</TableCell>
                 </>
             );
         }

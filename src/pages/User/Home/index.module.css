@@ -18,33 +18,15 @@
     cursor: pointer;
 }
 
-.table1 {
-    margin-top: 25px;
+.downloadBox {
+    margin-bottom: 30px;
 }
 
-.table1 :global .MuiTableBody-root .MuiTableCell-root {
-    padding-top: 8px;
-    padding-bottom: 8px;
+.downloadBox p {
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 
-.table1 .borderLeft {
-    border-left: 1px solid rgb(224, 224, 224);
-    padding-left: 32px;
-}
-
-.table1 .userBox,
-.table1 .clientBox {
-    max-width: 160px;
-    display: flex;
-    align-items: center;
-}
-
-.table1 .clientBox > img {
-    border-radius: 4px;
-    width: 40px;
-    margin-right: 15px;
-}
-
-.dropDown :global .MuiListItem-root {
-    min-width: 150px;
+.downloadBox a {
+    word-break: break-all;
 }

@@ -15,8 +15,7 @@ export default class extends PureComponent {
     };
 
     next = () => {
-        this.setState({ step: 2 });
-        setTimeout(() => window.Prism.highlightAll(), 0);
+        this.setState({ step: 2 }, () => window.Prism.highlightAll());
     };
 
     onChange = async e => {

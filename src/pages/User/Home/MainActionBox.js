@@ -45,7 +45,7 @@ export default class extends PureComponent {
                         <ListItemText>单个新建</ListItemText>
                     </MenuItem>
                     <MenuItem onClick={onExport}>
-                        <ListItemText>导出数据</ListItemText>
+                        <ListItemText>全量导出</ListItemText>
                     </MenuItem>
                 </Menu>
             </div>

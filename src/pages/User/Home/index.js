@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import ImportDialog from "./ImportDialog";
 import CreateDialog from "./CreateDialog";
+import ExportDialog from "./ExportDialog";
 import MyEmptyPage from "./MyEmptyPage";
 import MainActionBox from "./MainActionBox";
 import SelectBar from "./SelectBar";
@@ -11,7 +12,8 @@ import { connect } from "react-redux";
 class Home extends PureComponent {
     state = {
         importOpen: false,
-        createOpen: false
+        createOpen: false,
+        exportOpen: false
     };
 
     componentDidMount() {
@@ -69,6 +71,10 @@ class Home extends PureComponent {
         });
 
         return total;
+    };
+
+    toggleExport = () => {
+        this.setState(({ exportOpen }) => ({ exportOpen: !exportOpen }));
     };
 
     toggleImport = () => {
@@ -142,7 +148,7 @@ class Home extends PureComponent {
     };
 
     render() {
-        const { importOpen, createOpen } = this.state;
+        const { importOpen, createOpen, exportOpen } = this.state;
         const {
             user: {
                 showEmpty,
@@ -191,7 +197,7 @@ class Home extends PureComponent {
                 <MainActionBox
                     onCreate={this.toggleCreate}
                     onImport={this.toggleImport}
-                    onExport={null}
+                    onExport={this.toggleExport}
                 />
                 <h1>用户管理</h1>
                 <p>
@@ -234,6 +240,7 @@ class Home extends PureComponent {
                     </ol>
                 </div>
                 {dialogs}
+                <ExportDialog open={exportOpen} onClose={this.toggleExport} key={Date() + "2"} />
             </>
         );
     }
