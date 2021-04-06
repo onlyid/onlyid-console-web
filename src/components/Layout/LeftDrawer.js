@@ -47,6 +47,12 @@ export default function() {
                     </ListItemIcon>
                     <ListItemText primary="权限管理" />
                 </Item>
+                <Item to="/roles">
+                    <ListItemIcon>
+                        <span className="material-icons">account_box</span>
+                    </ListItemIcon>
+                    <ListItemText primary="角色管理" />
+                </Item>
                 <Item to="/behavior-logs">
                     <ListItemIcon>
                         <span className="material-icons">receipt</span>

@@ -22,13 +22,6 @@ const defaultApplication = {
     currentTab: "basic"
 };
 
-const defaultResManage = {
-    resNodes: [],
-    selectedApp: null,
-    selectedKey: null,
-    showEmpty: false
-};
-
 const defaultRoleManage = {
     selectedApp: null,
     selectedKey: null,
@@ -60,17 +53,6 @@ function application(state = defaultApplication, { type, ...rest }) {
     if (type === "application") return { ...state, ...rest };
 
     return state;
-}
-
-function resManage(state = defaultResManage, action) {
-    const { type, payload } = action;
-
-    switch (type) {
-        case "resManage/save":
-            return { ...state, ...payload };
-        default:
-            return state;
-    }
 }
 
 function roleManage(state = defaultRoleManage, action) {
@@ -120,7 +102,6 @@ function message(state = defaultMessage, action) {
 export default combineReducers({
     user,
     application,
-    resManage,
     roleManage,
     auditLog,
     admin,

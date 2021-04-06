@@ -1,0 +1,61 @@
+.root {
+    display: flex;
+    align-items: center;
+}
+
+.root > span {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.root > button {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.root > button > img {
+    border-radius: 3px;
+    width: 35px;
+    margin-right: 10px;
+}
+
+.root > button > .clientName {
+    max-width: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.root > button:hover {
+    background-color: #eee;
+}
+
+.table1 {
+    width: 100%;
+}
+
+.table1 :global .MuiTableHead-root .MuiTableCell-root {
+    padding-top: 0;
+}
+
+.table1 :global .MuiTableBody-root .MuiTableCell-root {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.table1 :global .MuiTableBody-root .MuiTableRow-root:hover {
+    background-color: #fbfbfb;
+}
+
+.clientBox {
+    max-width: 200px;
+    display: flex;
+    align-items: center;
+}
+
+.clientBox > img {
+    border-radius: 4px;
+    width: 40px;
+    margin-right: 15px;
+}
