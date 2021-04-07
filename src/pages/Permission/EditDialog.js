@@ -1,10 +1,19 @@
 import React, { PureComponent } from "react";
-import { Button, FormControl, FormHelperText, OutlinedInput } from "@material-ui/core";
-import Validator from "async-validator";
-import styles from "./Add.module.css";
-import { Add as AddIcon } from "@material-ui/icons";
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    FormControl,
+    FormHelperText,
+    OutlinedInput
+} from "@material-ui/core";
+import DialogClose from "components/DialogClose";
+import InputBox from "components/InputBox";
 import { eventEmitter } from "my/utils";
 import http from "my/http";
+import Validator from "async-validator";
 
 const RULES = {
     resource: [
@@ -20,6 +29,14 @@ export default class extends PureComponent {
         validation: { resource: {}, operation: {}, description: {} },
         values: {}
     };
+
+    componentDidMount() {
+        const {
+            permission: { resource, operation, description }
+        } = this.props;
+
+        this.setState({ values: { resource, operation, description } });
+    }
 
     onChange = ({ target }) => {
         this.setState(({ values }) => ({ values: { ...values, [target.id]: target.value } }));
@@ -38,7 +55,7 @@ export default class extends PureComponent {
 
     submit = async () => {
         const { values, validation } = this.state;
-        const { onSave, clientId } = this.props;
+        const { onSave, permission } = this.props;
 
         try {
             await new Validator(RULES).validate(values, { firstFields: true });
@@ -48,23 +65,24 @@ export default class extends PureComponent {
             return this.setState({ validation: { ...validation } });
         }
 
-        await http.post("permissions", { ...values, clientId });
+        await http.put("permissions/" + permission.id, values);
         eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
-        this.setState({ values: {} });
         onSave();
     };
 
     render() {
+        const { open, onCancel } = this.props;
         const { validation, values } = this.state;
 
         return (
-            <>
-                <h2>添加权限</h2>
-                <p>定义应用需要使用的权限。</p>
-                <form className={styles.form1}>
-                    <div className={styles.inputBox}>
-                        <label className="required">资源</label>
-                        <FormControl error={validation.resource.error} variant="outlined" fullWidth>
+            <Dialog open={open}>
+                <DialogTitle>
+                    编辑权限
+                    <DialogClose onClose={onCancel} />
+                </DialogTitle>
+                <DialogContent style={{ width: 500 }}>
+                    <InputBox label="资源" required vertical>
+                        <FormControl error={validation.resource.error} variant="outlined">
                             <OutlinedInput
                                 id="resource"
                                 onChange={this.onChange}
@@ -74,14 +92,9 @@ export default class extends PureComponent {
                             />
                             <FormHelperText>{validation.resource.text}</FormHelperText>
                         </FormControl>
-                    </div>
-                    <div className={styles.inputBox}>
-                        <label>操作</label>
-                        <FormControl
-                            error={validation.operation.error}
-                            variant="outlined"
-                            fullWidth
-                        >
+                    </InputBox>
+                    <InputBox label="操作" vertical>
+                        <FormControl error={validation.operation.error} variant="outlined">
                             <OutlinedInput
                                 id="operation"
                                 onChange={this.onChange}
@@ -91,35 +104,28 @@ export default class extends PureComponent {
                             />
                             <FormHelperText>{validation.operation.text}</FormHelperText>
                         </FormControl>
-                    </div>
-                    <div className={styles.inputBox} style={{ flexGrow: 1.5 }}>
-                        <label>描述</label>
-                        <FormControl
-                            error={validation.description.error}
-                            variant="outlined"
-                            fullWidth
-                        >
+                    </InputBox>
+                    <InputBox label="描述" vertical>
+                        <FormControl error={validation.description.error} variant="outlined">
                             <OutlinedInput
                                 id="description"
                                 onChange={this.onChange}
                                 onBlur={this.validateField}
                                 value={values.description || ""}
+                                multiline
+                                rows={2}
                             />
                             <FormHelperText>{validation.description.text}</FormHelperText>
                         </FormControl>
-                    </div>
-                    <div style={{ marginTop: 35, marginLeft: 20 }}>
-                        <Button
-                            color="primary"
-                            variant="contained"
-                            startIcon={<AddIcon />}
-                            onClick={this.submit}
-                        >
-                            添 加
-                        </Button>
-                    </div>
-                </form>
-            </>
+                    </InputBox>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={onCancel}>取 消</Button>
+                    <Button onClick={this.submit} color="primary">
+                        保 存
+                    </Button>
+                </DialogActions>
+            </Dialog>
         );
     }
 }

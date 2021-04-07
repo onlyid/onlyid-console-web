@@ -52,7 +52,7 @@ class Latest extends PureComponent {
                     </TableHead>
                     <TableBody>
                         {list.map(item => (
-                            <TableRow key={item.id + item.loginDate}>
+                            <TableRow key={item.id + item.firstDate}>
                                 <TableCell>
                                     <div className={styles.userBox}>
                                         <Avatar
