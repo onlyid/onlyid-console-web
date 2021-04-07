@@ -1,3 +1,7 @@
 .root {
     padding-bottom: 20px;
 }
+
+.root h2 {
+    margin-top: 45px;
+}

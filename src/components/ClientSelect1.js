@@ -23,7 +23,7 @@ function SelectDialog({ open, onClose, loading, list, onSelect, mustSelect }) {
     };
 
     return (
-        <Dialog open={open} onClose={!mustSelect && onClose}>
+        <Dialog open={open} onClose={mustSelect ? null : onClose}>
             <DialogTitle>
                 选择应用
                 {!mustSelect && <DialogClose onClose={onClose} />}

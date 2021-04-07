@@ -1,0 +1,18 @@
+.form1 {
+    display: flex;
+    margin-top: 30px;
+}
+
+.inputBox {
+    width: 0;
+    flex-grow: 1;
+}
+
+.inputBox + .inputBox {
+    margin-left: 15px;
+}
+
+.inputBox label {
+    display: block;
+    padding-bottom: 10px;
+}

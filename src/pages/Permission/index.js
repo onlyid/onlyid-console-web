@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import styles from "./index.module.css";
 import ClientSelect1 from "components/ClientSelect1";
 import EmptyPage from "components/EmptyPage";
+import Add from "./Add";
 
 class Permission extends PureComponent {
     state = {
@@ -16,6 +17,8 @@ class Permission extends PureComponent {
     onShowEmpty = () => {
         this.setState({ showEmpty: true });
     };
+
+    onAdd = () => {};
 
     render() {
         const { client, showEmpty } = this.state;
@@ -40,6 +43,7 @@ class Permission extends PureComponent {
                 </div>
                 <h1>权限管理</h1>
                 <p>管理应用权限，简单又灵活。</p>
+                <Add clientId={client.id} onAdd={this.onAdd} />
             </div>
         );
     }

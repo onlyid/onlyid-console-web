@@ -40,16 +40,6 @@
     flex-grow: 4;
 }
 
-.root > label.required:after {
-    display: inline-block;
-    margin-left: 4px;
-    color: #f44336;
-    font-size: 14px;
-    line-height: 1;
-    content: "*";
-    font-family: SimSun, sans-serif;
-}
-
 .root :global .MuiFormGroup-row .MuiFormControlLabel-root {
     margin-right: 25px;
 }
