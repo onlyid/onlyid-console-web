@@ -8,10 +8,6 @@
     padding-bottom: 10px;
 }
 
-.root :global .MuiTableBody-root .MuiTableRow-root:hover {
-    background-color: #fbfbfb;
-}
-
 .clientBox {
     max-width: 160px;
     display: flex;

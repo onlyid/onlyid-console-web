@@ -20,6 +20,7 @@ export default class extends PureComponent {
     }
 
     initData = async () => {
+        this.setState({ loading: true });
         const list = await http.get("clients");
         this.setState({ list, loading: false });
     };
@@ -33,7 +34,7 @@ export default class extends PureComponent {
     };
 
     saveCreate = () => {
-        this.setState({ createOpen: false, loading: true, guideOpen: true });
+        this.setState({ createOpen: false, guideOpen: true });
         this.initData();
     };
 

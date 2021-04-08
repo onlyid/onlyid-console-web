@@ -22,11 +22,8 @@ const defaultApplication = {
     currentTab: "basic"
 };
 
-const defaultRoleManage = {
-    selectedApp: null,
-    selectedKey: null,
-    showEmpty: false,
-    groupId: null // groupId有值 则当前选中的是role 否则选中的是role group
+const defaultRole = {
+    currentTab: "basic"
 };
 
 const defaultAuditLog = {
@@ -55,15 +52,10 @@ function application(state = defaultApplication, { type, ...rest }) {
     return state;
 }
 
-function roleManage(state = defaultRoleManage, action) {
-    const { type, payload } = action;
+function role(state = defaultRole, { type, ...rest }) {
+    if (type === "role") return { ...state, ...rest };
 
-    switch (type) {
-        case "roleManage/save":
-            return { ...state, ...payload };
-        default:
-            return state;
-    }
+    return state;
 }
 
 function auditLog(state = defaultAuditLog, action) {
@@ -102,7 +94,7 @@ function message(state = defaultMessage, action) {
 export default combineReducers({
     user,
     application,
-    roleManage,
+    role,
     auditLog,
     admin,
     message
