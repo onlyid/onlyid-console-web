@@ -31,6 +31,27 @@ class MainHeader extends PureComponent {
 
     render() {
         const { backText, imgUrl, title, children, uploadTip } = this.props;
+
+        let icon = null;
+        if (uploadTip)
+            icon = (
+                <>
+                    <input
+                        accept="image/jpeg,image/png"
+                        id="upload"
+                        type="file"
+                        style={{ display: "none" }}
+                        onChange={this.onChange}
+                    />
+                    <label htmlFor="upload">
+                        <Tooltip title={uploadTip}>
+                            <img src={imgUrl} alt="icon" />
+                        </Tooltip>
+                    </label>
+                </>
+            );
+        else if (imgUrl) icon = <img src={imgUrl} alt="icon" />;
+
         return (
             <>
                 <Button
@@ -42,26 +63,7 @@ class MainHeader extends PureComponent {
                     {backText}
                 </Button>
                 <div className={styles.header}>
-                    <div>
-                        {uploadTip ? (
-                            <>
-                                <input
-                                    accept="image/jpeg,image/png"
-                                    id="upload"
-                                    type="file"
-                                    style={{ display: "none" }}
-                                    onChange={this.onChange}
-                                />
-                                <label htmlFor="upload">
-                                    <Tooltip title={uploadTip}>
-                                        <img src={imgUrl} alt="icon" />
-                                    </Tooltip>
-                                </label>
-                            </>
-                        ) : (
-                            <img src={imgUrl} alt="icon" />
-                        )}
-                    </div>
+                    <div>{icon}</div>
                     <div>
                         <h1>{title}</h1>
                         {children}

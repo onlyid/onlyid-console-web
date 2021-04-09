@@ -6,18 +6,27 @@ import { Button } from "@material-ui/core";
 import { Add as AddIcon } from "@material-ui/icons";
 import CreateDialog from "./CreateDialog";
 import RoleTable from "./RoleTable";
+import { connect } from "react-redux";
 
 class Home extends PureComponent {
     state = {
         showEmpty: false,
-        client: {},
         list: [],
         loading: true,
         createOpen: false
     };
 
+    componentDidMount() {
+        const {
+            role: { client }
+        } = this.props;
+        if (client.id) this.initData();
+    }
+
     initData = async () => {
-        const { client } = this.state;
+        const {
+            role: { client }
+        } = this.props;
         this.setState({ loading: true });
 
         const params = { clientId: client.id };
@@ -25,8 +34,10 @@ class Home extends PureComponent {
         this.setState({ list, loading: false });
     };
 
-    onSelect = client => {
-        this.setState({ client }, this.initData);
+    onSelect = async client => {
+        const { dispatch } = this.props;
+        await dispatch({ type: "role", client });
+        this.initData();
     };
 
     onShowEmpty = () => {
@@ -43,7 +54,10 @@ class Home extends PureComponent {
     };
 
     render() {
-        const { client, showEmpty, list, loading, createOpen } = this.state;
+        const {
+            role: { client }
+        } = this.props;
+        const { showEmpty, list, loading, createOpen } = this.state;
 
         if (showEmpty) {
             return (
@@ -87,4 +101,4 @@ class Home extends PureComponent {
     }
 }
 
-export default Home;
+export default connect(({ role }) => ({ role }))(Home);

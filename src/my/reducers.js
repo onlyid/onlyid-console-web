@@ -23,6 +23,7 @@ const defaultApplication = {
 };
 
 const defaultRole = {
+    client: {},
     currentTab: "basic"
 };
 
