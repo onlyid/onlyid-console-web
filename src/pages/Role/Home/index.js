@@ -6,7 +6,7 @@ import { Button } from "@material-ui/core";
 import { Add as AddIcon } from "@material-ui/icons";
 import CreateDialog from "./CreateDialog";
 import RoleTable from "./RoleTable";
-import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 class Home extends PureComponent {
     state = {
@@ -18,25 +18,23 @@ class Home extends PureComponent {
 
     componentDidMount() {
         const {
-            role: { client }
+            match: { params }
         } = this.props;
-        if (client.id) this.initData();
+        if (params.clientId) this.initData();
     }
 
     initData = async () => {
-        const {
-            role: { client }
-        } = this.props;
+        const { match } = this.props;
         this.setState({ loading: true });
 
-        const params = { clientId: client.id };
+        const params = { clientId: match.params.clientId };
         const list = await http.get("roles", { params });
         this.setState({ list, loading: false });
     };
 
-    onSelect = async client => {
-        const { dispatch } = this.props;
-        await dispatch({ type: "role", client });
+    onChange = async clientId => {
+        const { history, match } = this.props;
+        await history.replace(`${match.url}/${clientId}`);
         this.initData();
     };
 
@@ -55,7 +53,7 @@ class Home extends PureComponent {
 
     render() {
         const {
-            role: { client }
+            match: { params }
         } = this.props;
         const { showEmpty, list, loading, createOpen } = this.state;
 
@@ -73,8 +71,8 @@ class Home extends PureComponent {
             <>
                 <div className="mainActionBox">
                     <ClientSelect1
-                        client={client}
-                        onSelect={this.onSelect}
+                        value={params.clientId}
+                        onChange={this.onChange}
                         onShowEmpty={this.onShowEmpty}
                     />
                     <Button
@@ -94,11 +92,11 @@ class Home extends PureComponent {
                     onCancel={this.toggleCreate}
                     onSave={this.saveCreate}
                     key={Date()}
-                    clientId={client.id}
+                    clientId={params.clientId}
                 />
             </>
         );
     }
 }
 
-export default connect(({ role }) => ({ role }))(Home);
+export default withRouter(Home);

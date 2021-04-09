@@ -16,9 +16,9 @@ import { CLIENT_TYPE_TEXT } from "my/constants";
 import MyTable from "./MyTable";
 import DialogClose from "./DialogClose";
 
-function SelectDialog({ open, onClose, loading, list, onSelect, mustSelect }) {
+function SelectDialog({ open, onClose, loading, list, onChange, mustSelect }) {
     const onClick = item => {
-        onSelect(item);
+        onChange(item.id);
         onClose();
     };
 
@@ -38,7 +38,7 @@ function SelectDialog({ open, onClose, loading, list, onSelect, mustSelect }) {
                     </TableHead>
                     <TableBody>
                         {list.map(item => (
-                            <TableRow key={item.id}>
+                            <TableRow key={item.id} hover>
                                 <TableCell>
                                     <Link
                                         className={styles.clientBox}
@@ -71,13 +71,13 @@ export default class extends PureComponent {
     }
 
     initData = async () => {
-        const { onShowEmpty, client } = this.props;
+        const { onShowEmpty, value } = this.props;
 
         const list = await http.get("clients");
 
         if (list.length) {
             this.setState({ loading: false, list });
-            if (!client.id) this.toggleDialog();
+            if (!value) this.toggleDialog();
         } else {
             onShowEmpty();
         }
@@ -88,14 +88,16 @@ export default class extends PureComponent {
     };
 
     render() {
-        const { client, onSelect } = this.props;
+        const { value, onChange } = this.props;
         const { open, list, loading } = this.state;
+
+        const client = list.find(item => item.id === value);
 
         return (
             <>
                 <div className={styles.root}>
                     <span>应用：</span>
-                    {client.id ? (
+                    {client ? (
                         <ButtonBase onClick={this.toggleDialog}>
                             <img src={client.iconUrl} alt="icon" />
                             <span className={styles.clientName}>{client.name}</span>
@@ -107,10 +109,10 @@ export default class extends PureComponent {
                 <SelectDialog
                     list={list}
                     open={open}
-                    onSelect={onSelect}
+                    onChange={onChange}
                     loading={loading}
                     onClose={this.toggleDialog}
-                    mustSelect={!client.id}
+                    mustSelect={!client}
                 />
             </>
         );

@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactComponent as EmptyDefault } from "assets/empty-default.svg";
 import { ReactComponent as EmptySimple } from "assets/empty-simple.svg";
-import styles from "./index.module.css";
+import styles from "./Empty.module.css";
 import classNames from "classnames";
 
 export default function({ description, simple }) {

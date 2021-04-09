@@ -151,7 +151,7 @@ class UserTable extends PureComponent {
                     </TableHead>
                     <TableBody>
                         {list.map((item, index) => (
-                            <TableRow key={index}>
+                            <TableRow key={index} hover>
                                 <TableCell>
                                     <Link
                                         className={styles.userBox}

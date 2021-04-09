@@ -45,7 +45,7 @@ function App() {
                         <Route path="/users">
                             <User />
                         </Route>
-                        <Route path="/permissions">
+                        <Route path="/permissions/:clientId?">
                             <Permission />
                         </Route>
                         <Route path="/roles">

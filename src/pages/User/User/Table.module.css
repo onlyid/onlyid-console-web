@@ -1,13 +1,10 @@
 .table1 {
     margin-top: 20px;
-    border-top: 1px solid rgb(224, 224, 224);
 }
 
 .table1 :global .MuiTableHead-root .MuiTableCell-root {
     padding-top: 12px;
     padding-bottom: 12px;
-    font-weight: normal;
-    background-color: #fbfbfb;
 }
 
 .table1 :global .MuiTableBody-root .MuiTableCell-root {

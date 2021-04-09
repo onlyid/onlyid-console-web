@@ -33,7 +33,7 @@ export default function({ list, loading, current, pageSize, total, onPaginationC
             </TableHead>
             <TableBody>
                 {list.map(item => (
-                    <TableRow key={item.id}>
+                    <TableRow key={item.id} hover>
                         <TableCell>{item.recipient}</TableCell>
                         <TableCell>{item.code}</TableCell>
                         <TableCell className={styles.otpContent}>{item.content}</TableCell>

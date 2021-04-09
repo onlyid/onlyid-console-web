@@ -91,7 +91,7 @@ export default class extends PureComponent {
                     </TableHead>
                     <TableBody>
                         {list.map(item => (
-                            <TableRow key={item.id}>
+                            <TableRow key={item.id} hover>
                                 <TableCell className={styles.grayBox}>
                                     <span>{item.resource}</span>
                                 </TableCell>

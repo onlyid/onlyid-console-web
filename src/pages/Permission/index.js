@@ -6,26 +6,35 @@ import Add from "./Add";
 import Table from "./Table";
 import http from "my/http";
 import tipBox from "components/TipBox.module.css";
+import { withRouter } from "react-router-dom";
 
 class Permission extends PureComponent {
     state = {
         showEmpty: false,
-        client: {},
         list: [],
         loading: true
     };
 
+    componentDidMount() {
+        const {
+            match: { params }
+        } = this.props;
+        if (params.clientId) this.initData();
+    }
+
     initData = async () => {
-        const { client } = this.state;
+        const { match } = this.props;
         this.setState({ loading: true });
 
-        const params = { clientId: client.id };
+        const params = { clientId: match.params.clientId };
         const list = await http.get("permissions", { params });
         this.setState({ list, loading: false });
     };
 
-    onSelect = client => {
-        this.setState({ client }, this.initData);
+    onChange = async clientId => {
+        const { history, match } = this.props;
+        await history.replace(`${match.url}/${clientId}`);
+        this.initData();
     };
 
     onShowEmpty = () => {
@@ -33,7 +42,10 @@ class Permission extends PureComponent {
     };
 
     render() {
-        const { client, showEmpty, list, loading } = this.state;
+        const {
+            match: { params }
+        } = this.props;
+        const { showEmpty, list, loading } = this.state;
 
         if (showEmpty)
             return (
@@ -48,14 +60,14 @@ class Permission extends PureComponent {
             <div className={styles.root}>
                 <div className="mainActionBox">
                     <ClientSelect1
-                        client={client}
-                        onSelect={this.onSelect}
+                        value={params.clientId}
+                        onChange={this.onChange}
                         onShowEmpty={this.onShowEmpty}
                     />
                 </div>
                 <h1>权限管理</h1>
                 <p>简单灵活地管理你应用的权限。</p>
-                <Add clientId={client.id} onSave={this.initData} />
+                <Add clientId={params.clientId} onSave={this.initData} />
                 <Table list={list} loading={loading} onChange={this.initData} />
                 <div className={tipBox.root}>
                     <p>提示：</p>
@@ -76,4 +88,4 @@ class Permission extends PureComponent {
     }
 }
 
-export default Permission;
+export default withRouter(Permission);

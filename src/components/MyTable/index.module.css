@@ -2,10 +2,6 @@
     position: relative;
 }
 
-.root :global .MuiTableBody-root .MuiTableRow-root:hover {
-    background-color: #fbfbfb;
-}
-
 .loadingTable {
     opacity: 0.7;
 }

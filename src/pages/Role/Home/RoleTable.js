@@ -61,7 +61,7 @@ class RoleTable extends PureComponent {
                     </TableHead>
                     <TableBody>
                         {list.map(item => (
-                            <TableRow key={item.id}>
+                            <TableRow key={item.id} hover>
                                 <TableCell>
                                     <Link href="#" onClick={event => this.onClick(event, item.id)}>
                                         {item.name}

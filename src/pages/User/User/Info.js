@@ -23,7 +23,7 @@ export default function({ user }) {
                     {user.province ? user.province + " - " + user.city : "-"}
                 </InfoBox>
                 <InfoBox label="用户简介">{user.bio || "-"}</InfoBox>
-                <InfoBox label="账号创建日期">
+                <InfoBox label="账号创建时间">
                     {moment(user.createDate).format(DATE_TIME_FORMAT)}
                 </InfoBox>
             </Paper>

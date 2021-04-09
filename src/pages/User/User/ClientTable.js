@@ -46,7 +46,7 @@ class ClientTable extends PureComponent {
                     </TableHead>
                     <TableBody>
                         {list.map((item, index) => (
-                            <TableRow key={index}>
+                            <TableRow key={index} hover>
                                 <TableCell>
                                     <div className={styles.clientBox}>
                                         <img src={item.iconUrl} alt="icon" />

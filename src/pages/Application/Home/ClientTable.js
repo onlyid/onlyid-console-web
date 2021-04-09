@@ -63,7 +63,7 @@ class ClientTable extends PureComponent {
                     </TableHead>
                     <TableBody>
                         {list.map(item => (
-                            <TableRow key={item.id}>
+                            <TableRow key={item.id} hover>
                                 <TableCell>
                                     <Link
                                         className={styles.clientBox}
