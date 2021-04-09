@@ -102,6 +102,11 @@ h3 {
     margin-left: 20px;
 }
 
+.actionBox {
+    float: right;
+    margin-top: 22px;
+}
+
 pre[class*="language-"] {
     background-color: #f7f8f9;
 }

@@ -17,7 +17,9 @@ import MyTable from "./MyTable";
 import DialogClose from "./DialogClose";
 
 function SelectDialog({ open, onClose, loading, list, onChange, mustSelect }) {
-    const onClick = item => {
+    const onClick = (event, item) => {
+        event.preventDefault();
+
         onChange(item.id);
         onClose();
     };
@@ -43,7 +45,7 @@ function SelectDialog({ open, onClose, loading, list, onChange, mustSelect }) {
                                     <Link
                                         className={styles.clientBox}
                                         href="#"
-                                        onClick={() => onClick(item)}
+                                        onClick={event => onClick(event, item)}
                                     >
                                         <img src={item.iconUrl} alt="icon" />
                                         {item.name}
@@ -68,6 +70,12 @@ export default class extends PureComponent {
 
     componentDidMount() {
         this.initData();
+    }
+
+    // 修复 重复点击左侧菜单栏时路由参数消失 的bug
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const { value } = this.props;
+        if (prevProps.value !== value && !value) this.toggleDialog();
     }
 
     initData = async () => {

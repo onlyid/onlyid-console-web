@@ -40,7 +40,12 @@ class Layout extends PureComponent {
         eventEmitter.off("app/openToast", this.openToast);
     }
 
-    openToast = toast => {
+    openToast = async toast => {
+        const {
+            toast: { open }
+        } = this.state;
+        if (open) await this.closeToast();
+
         this.setState({ toast: { open: true, severity: "success", timeout: 4000, ...toast } });
     };
 

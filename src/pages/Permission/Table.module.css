@@ -1,7 +1,3 @@
-.table1 :global .MuiTableHead-root .MuiTableCell-root {
-    padding-bottom: 12px;
-}
-
 .table1 :global .MuiTableBody-root .MuiTableCell-root {
     padding-top: 8px;
     padding-bottom: 8px;

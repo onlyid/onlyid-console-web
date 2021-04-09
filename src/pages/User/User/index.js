@@ -118,7 +118,7 @@ class User extends PureComponent {
                     <Tab label="预览 JSON" value="json" />
                     <Tab label="授权应用" value="client" />
                     <Tab label="登录历史" value="log" />
-                    <Tab label="关联角色" value="role" />
+                    <Tab label="分配角色" value="role" />
                     <Tab label="合并权限" value="permission" />
                     <Tab label="危险设置" value="danger" />
                 </Tabs>

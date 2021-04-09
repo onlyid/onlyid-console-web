@@ -43,11 +43,11 @@ class Danger extends PureComponent {
                 </li>
                 <Dialog open={dialogOpen} onClose={this.toggleDialog}>
                     <DialogTitle>
-                        确认删除？
+                        删除角色
                         <DialogClose onClose={this.toggleDialog} />
                     </DialogTitle>
                     <DialogContent>
-                        <p style={{ margin: 0, minWidth: 400 }}>删除后不可恢复。</p>
+                        <p style={{ margin: 0, minWidth: 400 }}>删除后不可恢复，确定删除？</p>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.toggleDialog}>取 消</Button>

@@ -2,11 +2,6 @@
     margin-top: 20px;
 }
 
-.table1 :global .MuiTableHead-root .MuiTableCell-root {
-    padding-top: 12px;
-    padding-bottom: 12px;
-}
-
 .table1 :global .MuiTableBody-root .MuiTableCell-root {
     padding-top: 10px;
     padding-bottom: 10px;

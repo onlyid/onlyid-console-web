@@ -33,8 +33,8 @@ class Home extends PureComponent {
     };
 
     onChange = async clientId => {
-        const { history, match } = this.props;
-        await history.replace(`${match.url}/${clientId}`);
+        const { history } = this.props;
+        await history.replace(`/roles/${clientId}`);
         this.initData();
     };
 

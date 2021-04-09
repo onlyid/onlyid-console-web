@@ -49,12 +49,12 @@ class Danger extends PureComponent {
 
         let dialogTitle, dialogContent, dialogButtonText;
         if (operation === "delete") {
-            dialogTitle = "确认删除？";
-            dialogContent = "删除后不可恢复。";
+            dialogTitle = "删除应用";
+            dialogContent = "删除后不可恢复，确定删除？";
             dialogButtonText = "删 除";
         } else {
-            dialogTitle = "确认重置？";
-            dialogContent = "重置后不可还原。";
+            dialogTitle = "重置 Secret";
+            dialogContent = "重置后不可还原，确定重置？";
             dialogButtonText = "重 置";
         }
 

@@ -208,7 +208,7 @@ class UserTable extends PureComponent {
                         <ListItemText>登录历史</ListItemText>
                     </MenuItem>
                     <MenuItem onClick={() => this.go("role")}>
-                        <ListItemText>关联角色</ListItemText>
+                        <ListItemText>分配角色</ListItemText>
                     </MenuItem>
                     <MenuItem onClick={() => this.go("permission")}>
                         <ListItemText>合并权限</ListItemText>

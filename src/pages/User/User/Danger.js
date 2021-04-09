@@ -22,14 +22,14 @@ function RemoveDialog({ open, activated, onCancel, onRemove }) {
     return (
         <Dialog open={open} onClose={onCancel}>
             <DialogTitle>
-                确认移除？
+                移除用户
                 <DialogClose onClose={onCancel} />
             </DialogTitle>
             <DialogContent>
                 <p style={{ margin: 0, width: 400 }}>
                     {activated
-                        ? "移除不会删除用户账号，后续TA仍可以登录你（或其他开发者）的应用。如果想拒绝用户登录，应将其屏蔽加入黑名单。"
-                        : "该用户未激活，移除会删除用户账号，数据不可恢复。"}
+                        ? "移除用户不会删除用户账号，后续TA仍可以登录你（或其他开发者）的应用。如果想拒绝用户登录，应将其屏蔽加入黑名单。"
+                        : "该用户未激活，移除用户会删除用户账号，数据不可恢复。"}
                 </p>
             </DialogContent>
             <DialogActions>
@@ -58,15 +58,15 @@ class BlockDialog extends PureComponent {
         return (
             <Dialog open={open} onClose={onCancel}>
                 <DialogTitle>
-                    {blocked ? "确认解除？" : "确认屏蔽？"}
+                    {blocked ? "解除屏蔽" : "屏蔽用户"}
                     <DialogClose onClose={onCancel} />
                 </DialogTitle>
                 <DialogContent className={styles.blockDialog}>
                     {blocked ? (
-                        <p>解除屏蔽后，该用户就可以继续登录你名下的所有应用。</p>
+                        <p>解除屏蔽后，该用户就可以继续登录你名下的所有应用，确定解除？</p>
                     ) : (
                         <>
-                            <p>屏蔽后，该用户将不能登录你名下的所有应用。</p>
+                            <p>屏蔽后，该用户将不能登录你名下的所有应用，确定屏蔽？</p>
                             <FormControl style={{ marginTop: "1em" }}>
                                 <Select
                                     id="days-select"

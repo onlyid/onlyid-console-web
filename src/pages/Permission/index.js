@@ -32,8 +32,8 @@ class Permission extends PureComponent {
     };
 
     onChange = async clientId => {
-        const { history, match } = this.props;
-        await history.replace(`${match.url}/${clientId}`);
+        const { history } = this.props;
+        await history.replace(`/permissions/${clientId}`);
         this.initData();
     };
 
