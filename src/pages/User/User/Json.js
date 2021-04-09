@@ -3,6 +3,7 @@ import http from "my/http";
 import { Button } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 import { eventEmitter } from "my/utils";
+import tipBox from "components/TipBox.module.css";
 
 class Json extends PureComponent {
     state = {
@@ -61,7 +62,7 @@ class Json extends PureComponent {
                 >
                     复制
                 </Button>
-                <div className="tipBox">
+                <div className={tipBox.root}>
                     <p>提示：</p>
                     <ol>
                         <li>

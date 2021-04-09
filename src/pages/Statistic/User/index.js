@@ -3,6 +3,7 @@ import TitleAndSelect from "../TitleAndSelect";
 import Chart from "./Chart";
 import Summary from "./Summary";
 import Latest from "./Latest";
+import tipBox from "components/TipBox.module.css";
 
 class User extends PureComponent {
     state = {
@@ -37,7 +38,7 @@ class User extends PureComponent {
                 <Summary clientId={clientId} days={days} />
                 <Latest clientId={clientId} key="new" type="new" />
                 <Latest clientId={clientId} key="active" type="active" />
-                <div className="tipBox">
+                <div className={tipBox.root}>
                     <p>提示：</p>
                     <ol>
                         <li>

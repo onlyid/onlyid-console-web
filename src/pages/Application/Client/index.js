@@ -4,7 +4,6 @@ import MainHeader from "components/MainHeader";
 import http from "my/http";
 import { withRouter } from "react-router-dom";
 import { CLIENT_TYPE_TEXT, IMG_UPLOAD_TIP } from "my/constants";
-import styles from "./index.module.css";
 import mainTabs from "components/MainTabs.module.css";
 import { Tab, Tabs } from "@material-ui/core";
 import Basic from "./Basic";
@@ -71,7 +70,7 @@ class Client extends PureComponent {
                     <ul>
                         <li>
                             <span>ID：</span>
-                            <span className={styles.clientId}>{client.id}</span>
+                            <span className="spanId">{client.id}</span>
                         </li>
                         <li>
                             <span>类型：</span>

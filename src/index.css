@@ -102,31 +102,6 @@ h3 {
     margin-left: 20px;
 }
 
-.tipBox {
-    margin-top: 30px;
-}
-
-.tipBox p {
-    font-size: 13px;
-    color: #7f7f7f;
-    margin-bottom: 8px;
-}
-
-.tipBox ol {
-    margin: 0;
-    padding-left: 2em;
-    font-size: 13px;
-    color: #7f7f7f;
-}
-
-.tipBox ol li {
-    line-height: 1.5em;
-}
-
-.tipBox ol li + li {
-    margin-top: 2px;
-}
-
 pre[class*="language-"] {
     background-color: #f7f8f9;
 }
@@ -174,4 +149,12 @@ label.required:after {
     line-height: 1;
     content: "*";
     font-family: SimSun, sans-serif;
+}
+
+.spanId {
+    border-radius: 3px;
+    padding: 5px 10px;
+    font-family: monospace;
+    font-size: 14px;
+    background-color: #f9f9f9;
 }

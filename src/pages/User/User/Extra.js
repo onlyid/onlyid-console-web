@@ -7,6 +7,7 @@ import Validator from "async-validator";
 import { eventEmitter } from "my/utils";
 import moment from "moment";
 import { DATE_TIME_FORMAT } from "my/constants";
+import tipBox from "components/TipBox.module.css";
 
 const RULE = [
     {
@@ -119,7 +120,7 @@ class Extra extends PureComponent {
                         </Button>
                     </div>
                 </InputBox>
-                <div className="tipBox">
+                <div className={tipBox.root}>
                     <p>提示：</p>
                     <ol>
                         <li>

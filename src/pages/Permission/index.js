@@ -5,6 +5,7 @@ import EmptyPage from "components/EmptyPage";
 import Add from "./Add";
 import Table from "./Table";
 import http from "my/http";
+import tipBox from "components/TipBox.module.css";
 
 class Permission extends PureComponent {
     state = {
@@ -53,10 +54,10 @@ class Permission extends PureComponent {
                     />
                 </div>
                 <h1>权限管理</h1>
-                <p>管理应用权限，简单又灵活。</p>
+                <p>简单灵活地管理你应用的权限。</p>
                 <Add clientId={client.id} onSave={this.initData} />
                 <Table list={list} loading={loading} onChange={this.initData} />
-                <div className="tipBox">
+                <div className={tipBox.root}>
                     <p>提示：</p>
                     <ol>
                         <li>

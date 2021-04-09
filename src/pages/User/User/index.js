@@ -89,7 +89,7 @@ class User extends PureComponent {
                     <ul>
                         <li>
                             <span>ID：</span>
-                            <span className={styles.userId}>{user.id}</span>
+                            <span className="spanId">{user.id}</span>
                         </li>
                         <li>
                             <span>手机号：</span>

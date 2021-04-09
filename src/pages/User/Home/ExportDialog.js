@@ -16,6 +16,7 @@ import ClientSelect from "components/ClientSelect";
 import styles from "./index.module.css";
 import selectBar from "components/SelectBar.module.css";
 import http from "my/http";
+import tipBox from "components/TipBox.module.css";
 
 export default class extends PureComponent {
     state = {
@@ -117,7 +118,7 @@ export default class extends PureComponent {
                                 </Select>
                             </FormControl>
                         </div>
-                        <div className="tipBox">
+                        <div className={tipBox.root}>
                             <p>提示：</p>
                             <ol>
                                 <li>默认导出JSON格式文件，暂不可更改。</li>

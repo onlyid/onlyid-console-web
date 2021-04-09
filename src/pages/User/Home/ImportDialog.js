@@ -4,6 +4,7 @@ import DialogClose from "components/DialogClose";
 import styles from "./index.module.css";
 import ParamTable from "components/ParamTable";
 import http from "my/http";
+import tipBox from "components/TipBox.module.css";
 
 export default class extends PureComponent {
     state = {
@@ -135,7 +136,7 @@ export default class extends PureComponent {
 }]`}
                             </code>
                         </pre>
-                        <div className="tipBox">
+                        <div className={tipBox.root}>
                             <p>提示：</p>
                             <ol>
                                 <li>

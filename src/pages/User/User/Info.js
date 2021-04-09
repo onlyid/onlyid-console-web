@@ -4,6 +4,7 @@ import moment from "moment";
 import InfoBox from "components/InfoBox";
 import GenderSymbol from "components/GenderSymbol";
 import { Paper } from "@material-ui/core";
+import tipBox from "components/TipBox.module.css";
 
 export default function({ user }) {
     return (
@@ -26,7 +27,7 @@ export default function({ user }) {
                     {moment(user.createDate).format(DATE_TIME_FORMAT)}
                 </InfoBox>
             </Paper>
-            <div className="tipBox">
+            <div className={tipBox.root}>
                 <p>提示：</p>
                 <ol>
                     <li>该用户不是你创建的或者已经激活，你不能编辑。</li>

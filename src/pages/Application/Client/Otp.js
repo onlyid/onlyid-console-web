@@ -21,6 +21,7 @@ import {
 } from "my/constants";
 import styles from "./index.module.css";
 import { eventEmitter } from "my/utils";
+import tipBox from "components/TipBox.module.css";
 
 class Otp extends PureComponent {
     state = {
@@ -186,7 +187,7 @@ class Otp extends PureComponent {
                         </Button>
                     </div>
                 </InputBox>
-                <div className="tipBox">
+                <div className={tipBox.root}>
                     <p>提示：</p>
                     <ol>
                         <li>

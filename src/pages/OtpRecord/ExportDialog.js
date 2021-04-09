@@ -3,6 +3,7 @@ import DialogClose from "components/DialogClose";
 import React, { PureComponent } from "react";
 import http from "my/http";
 import styles from "./ExportDialog.module.css";
+import tipBox from "components/TipBox.module.css";
 
 export default class extends PureComponent {
     state = {
@@ -94,7 +95,7 @@ export default class extends PureComponent {
                             {keyword || "-"}
                         </li>
                     </ul>
-                    <div className="tipBox">
+                    <div className={tipBox.root}>
                         <p>提示：</p>
                         <ol>
                             <li>默认导出JSON格式文件，暂不可更改。</li>

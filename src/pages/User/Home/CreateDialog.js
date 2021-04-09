@@ -24,6 +24,7 @@ import RegionInput from "components/RegionInput";
 import { eventEmitter, transformImage } from "my/utils";
 import http from "my/http";
 import Validator from "async-validator";
+import tipBox from "components/TipBox.module.css";
 
 const RULES = {
     nickname: [
@@ -281,7 +282,7 @@ export default class extends PureComponent {
                                 <FormHelperText>{validation.bio.text}</FormHelperText>
                             </FormControl>
                         </InputBox>
-                        <div className="tipBox">
+                        <div className={tipBox.root}>
                             <p>提示：</p>
                             <ol>
                                 <li>

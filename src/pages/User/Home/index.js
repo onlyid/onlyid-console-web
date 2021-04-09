@@ -8,6 +8,7 @@ import SelectBar from "./SelectBar";
 import http from "my/http";
 import UserTable from "./UserTable";
 import { connect } from "react-redux";
+import tipBox from "components/TipBox.module.css";
 
 class Home extends PureComponent {
     state = {
@@ -223,7 +224,7 @@ class Home extends PureComponent {
                     onPaginationChange={this.onPaginationChange}
                     orderBy={realOrderBy}
                 />
-                <div className="tipBox" style={{ marginTop: 20 }}>
+                <div className={tipBox.root} style={{ marginTop: 20 }}>
                     <p>提示：</p>
                     <ol>
                         <li>
