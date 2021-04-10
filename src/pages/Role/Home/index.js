@@ -7,32 +7,37 @@ import CreateDialog from "./CreateDialog";
 import RoleTable from "./RoleTable";
 import selectBar from "components/SelectBar.module.css";
 import ClientSelect from "components/ClientSelect";
+import { connect } from "react-redux";
 
 class Home extends PureComponent {
     state = {
         showEmpty: false,
-        list: [],
-        current: 1,
-        pageSize: 10,
-        total: 0,
         loading: true,
-        createOpen: false,
-        clientId: "all"
+        createOpen: false
     };
 
     componentDidMount() {
-        this.initData(true);
+        const {
+            role: { list }
+        } = this.props;
+
+        // 如果是返回 不需要重设empty
+        this.initData(!list.length);
     }
 
     initData = async setEmpty => {
         this.setState({ loading: true });
-        const { current, pageSize, clientId } = this.state;
+        const {
+            dispatch,
+            role: { current, pageSize, clientId }
+        } = this.props;
 
         const params = { current, pageSize };
         if (clientId !== "all") params.clientId = clientId;
 
         const { list, total } = await http.get("roles", { params });
-        this.setState({ list, total, loading: false });
+        this.setState({ loading: false });
+        dispatch({ type: "role", list, total });
 
         if (setEmpty && !list.length) this.setState({ showEmpty: true });
     };
@@ -48,28 +53,27 @@ class Home extends PureComponent {
     };
 
     onClientChange = clientId => {
-        this.setState({ clientId });
+        const { dispatch } = this.props;
+        dispatch({ type: "role", clientId });
     };
 
-    onSearch = () => {
-        this.setState({ current: 1 }, this.initData);
+    onSearch = async () => {
+        const { dispatch } = this.props;
+        await dispatch({ type: "role", current: 1 });
+        this.initData();
     };
 
-    onPaginationChange = ({ pageSize, current }) => {
-        this.setState({ pageSize, current }, this.initData);
+    onPaginationChange = async ({ pageSize, current }) => {
+        const { dispatch } = this.props;
+        await dispatch({ type: "role", pageSize, current });
+        this.initData();
     };
 
     render() {
+        const { showEmpty, loading, createOpen } = this.state;
         const {
-            showEmpty,
-            list,
-            loading,
-            createOpen,
-            clientId,
-            current,
-            pageSize,
-            total
-        } = this.state;
+            role: { clientId, current, pageSize, total, list }
+        } = this.props;
 
         const createNew = (
             <>
@@ -128,4 +132,4 @@ class Home extends PureComponent {
     }
 }
 
-export default Home;
+export default connect(({ role }) => ({ role }))(Home);
