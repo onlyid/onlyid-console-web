@@ -17,7 +17,13 @@ class Permission extends PureComponent {
     };
 
     componentDidMount() {
-        this.initData();
+        const { clientId } = this.props;
+        if (clientId) this.initData();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const { clientId } = this.props;
+        if (clientId !== prevProps.clientId) this.initData();
     }
 
     initData = async () => {

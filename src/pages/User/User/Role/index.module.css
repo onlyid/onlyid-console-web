@@ -1,0 +1,40 @@
+.dialog {
+    min-width: 600px;
+}
+
+.dialog :global .MuiFormControl-root {
+    width: 200px;
+}
+
+.dialog :global .MuiInputAdornment-positionStart {
+    margin-right: 20px;
+}
+
+.dialog .table1 {
+    margin-top: 5px;
+}
+
+.table1 {
+    margin-top: 20px;
+}
+
+.table1 :global .MuiTableBody-root .MuiTableCell-root {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.table1 .name {
+    min-width: 150px;
+    max-width: 250px;
+}
+
+.table1 .description {
+    font-size: 13px;
+    min-width: 150px;
+    max-width: 250px;
+    word-break: break-all;
+}
+
+.table1 .clientName {
+    max-width: 160px;
+}
