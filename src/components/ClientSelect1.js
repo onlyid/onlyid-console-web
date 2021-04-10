@@ -72,12 +72,6 @@ export default class extends PureComponent {
         this.initData();
     }
 
-    // 修复 重复点击左侧菜单栏时路由参数消失 的bug
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        const { value } = this.props;
-        if (prevProps.value !== value && !value) this.toggleDialog();
-    }
-
     initData = async () => {
         const { onShowEmpty, value } = this.props;
 

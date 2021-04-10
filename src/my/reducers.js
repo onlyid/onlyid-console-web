@@ -22,6 +22,10 @@ const defaultApplication = {
     currentTab: "basic"
 };
 
+const defaultPermission = {
+    clientId: null
+};
+
 const defaultRole = {
     currentTab: "basic",
     // home
@@ -54,6 +58,12 @@ function user(state = defaultUser, { type, ...rest }) {
 
 function application(state = defaultApplication, { type, ...rest }) {
     if (type === "application") return { ...state, ...rest };
+
+    return state;
+}
+
+function permission(state = defaultPermission, { type, ...rest }) {
+    if (type === "permission") return { ...state, ...rest };
 
     return state;
 }
@@ -100,6 +110,7 @@ function message(state = defaultMessage, action) {
 export default combineReducers({
     user,
     application,
+    permission,
     role,
     auditLog,
     admin,
