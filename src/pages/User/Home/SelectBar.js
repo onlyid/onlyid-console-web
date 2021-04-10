@@ -14,7 +14,7 @@ export default function({
     onSearch
 }) {
     return (
-        <div>
+        <>
             <div className={selectBar.root}>
                 <FormControl>
                     <Select
@@ -83,6 +83,6 @@ export default function({
                     查 询
                 </Button>
             </div>
-        </div>
+        </>
     );
 }

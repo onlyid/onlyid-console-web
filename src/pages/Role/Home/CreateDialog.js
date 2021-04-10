@@ -7,30 +7,51 @@ import {
     DialogTitle,
     FormControl,
     FormHelperText,
-    OutlinedInput
+    MenuItem,
+    OutlinedInput,
+    Select
 } from "@material-ui/core";
 import DialogClose from "components/DialogClose";
 import InputBox from "components/InputBox";
 import Validator from "async-validator";
 import { eventEmitter } from "my/utils";
 import http from "my/http";
+import { Alert } from "@material-ui/lab";
 
 const RULES = {
     name: [
         { required: true, message: "请输入" },
         { max: 20, message: "最多输入20字" }
     ],
-    description: { max: 200, message: "最多输入200字" }
+    description: { max: 200, message: "最多输入200字" },
+    clientId: { required: true, message: "请选择" }
 };
 
 export default class extends PureComponent {
     state = {
-        validation: { name: {}, description: {} },
-        values: {}
+        validation: { name: {}, description: {}, clientId: {} },
+        values: {},
+        list: [],
+        noClientError: false
+    };
+
+    componentDidMount() {
+        this.initData();
+    }
+
+    initData = async () => {
+        const list = await http.get("clients");
+        this.setState({ list });
+
+        if (!list.length) this.setState({ noClientError: true });
     };
 
     onChange = ({ target }) => {
         this.setState(({ values }) => ({ values: { ...values, [target.id]: target.value } }));
+    };
+
+    onClientChange = ({ target }) => {
+        this.setState(({ values }) => ({ values: { ...values, clientId: target.value } }));
     };
 
     validateField = async ({ target: { id: key, value } }) => {
@@ -46,7 +67,7 @@ export default class extends PureComponent {
 
     submit = async () => {
         const { values, validation } = this.state;
-        const { onSave, clientId } = this.props;
+        const { onSave } = this.props;
 
         try {
             await new Validator(RULES).validate(values, { firstFields: true });
@@ -56,14 +77,14 @@ export default class extends PureComponent {
             return this.setState({ validation: { ...validation } });
         }
 
-        await http.post("roles", { ...values, clientId });
+        await http.post("roles", values);
         eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
         onSave();
     };
 
     render() {
         const { open, onCancel } = this.props;
-        const { validation, values } = this.state;
+        const { validation, values, list, noClientError } = this.state;
 
         return (
             <Dialog open={open}>
@@ -72,6 +93,11 @@ export default class extends PureComponent {
                     <DialogClose onClose={onCancel} />
                 </DialogTitle>
                 <DialogContent style={{ width: 600 }}>
+                    {noClientError && (
+                        <Alert severity="error" style={{ marginBottom: 15 }}>
+                            角色以应用维度划分，请先到应用管理新建应用
+                        </Alert>
+                    )}
                     <InputBox label="角色名称" required vertical>
                         <FormControl error={validation.name.error} variant="outlined">
                             <OutlinedInput
@@ -84,7 +110,7 @@ export default class extends PureComponent {
                         </FormControl>
                     </InputBox>
                     <InputBox label="应用描述" vertical>
-                        <FormControl error={validation.description.error}>
+                        <FormControl error={validation.description.error} variant="outlined">
                             <OutlinedInput
                                 id="description"
                                 onChange={this.onChange}
@@ -94,6 +120,23 @@ export default class extends PureComponent {
                                 rows={3}
                             />
                             <FormHelperText>{validation.description.text}</FormHelperText>
+                        </FormControl>
+                    </InputBox>
+                    <InputBox label="所属应用" vertical required>
+                        <FormControl error={validation.clientId.error} variant="outlined">
+                            <Select
+                                id="client-select"
+                                value={values.clientId || ""}
+                                onChange={this.onClientChange}
+                                variant="outlined"
+                            >
+                                {list.map(client => (
+                                    <MenuItem key={client.id} value={client.id}>
+                                        {client.name}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                            <FormHelperText>{validation.clientId.text}</FormHelperText>
                         </FormControl>
                     </InputBox>
                 </DialogContent>

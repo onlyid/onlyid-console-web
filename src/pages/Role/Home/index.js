@@ -1,45 +1,40 @@
 import React, { PureComponent } from "react";
-import ClientSelect1 from "components/ClientSelect1";
 import EmptyPage from "components/EmptyPage";
 import http from "my/http";
 import { Button } from "@material-ui/core";
 import { Add as AddIcon } from "@material-ui/icons";
 import CreateDialog from "./CreateDialog";
 import RoleTable from "./RoleTable";
-import { withRouter } from "react-router-dom";
+import selectBar from "components/SelectBar.module.css";
+import ClientSelect from "components/ClientSelect";
 
 class Home extends PureComponent {
     state = {
         showEmpty: false,
         list: [],
+        current: 1,
+        pageSize: 10,
+        total: 0,
         loading: true,
-        createOpen: false
+        createOpen: false,
+        clientId: "all"
     };
 
     componentDidMount() {
-        const {
-            match: { params }
-        } = this.props;
-        if (params.clientId) this.initData();
+        this.initData(true);
     }
 
-    initData = async () => {
-        const { match } = this.props;
+    initData = async setEmpty => {
         this.setState({ loading: true });
+        const { current, pageSize, clientId } = this.state;
 
-        const params = { clientId: match.params.clientId };
-        const list = await http.get("roles", { params });
-        this.setState({ list, loading: false });
-    };
+        const params = { current, pageSize };
+        if (clientId !== "all") params.clientId = clientId;
 
-    onChange = async clientId => {
-        const { history } = this.props;
-        await history.replace(`/roles/${clientId}`);
-        this.initData();
-    };
+        const { list, total } = await http.get("roles", { params });
+        this.setState({ list, total, loading: false });
 
-    onShowEmpty = () => {
-        this.setState({ showEmpty: true });
+        if (setEmpty && !list.length) this.setState({ showEmpty: true });
     };
 
     toggleCreate = () => {
@@ -49,54 +44,88 @@ class Home extends PureComponent {
     saveCreate = () => {
         this.toggleCreate();
         this.initData();
+        this.setState({ showEmpty: false });
+    };
+
+    onClientChange = clientId => {
+        this.setState({ clientId });
+    };
+
+    onSearch = () => {
+        this.setState({ current: 1 }, this.initData);
+    };
+
+    onPaginationChange = ({ pageSize, current }) => {
+        this.setState({ pageSize, current }, this.initData);
     };
 
     render() {
         const {
-            match: { params }
-        } = this.props;
-        const { showEmpty, list, loading, createOpen } = this.state;
+            showEmpty,
+            list,
+            loading,
+            createOpen,
+            clientId,
+            current,
+            pageSize,
+            total
+        } = this.state;
 
-        if (showEmpty) {
-            return (
-                <EmptyPage
-                    title="角色管理"
-                    icon="account_box"
-                    description="角色管理以应用为维度，请先到应用管理新建一个应用"
-                />
-            );
-        }
-
-        return (
+        const createNew = (
             <>
-                <div className="mainActionBox">
-                    <ClientSelect1
-                        value={params.clientId}
-                        onChange={this.onChange}
-                        onShowEmpty={this.onShowEmpty}
-                    />
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        startIcon={<AddIcon />}
-                        onClick={this.toggleCreate}
-                    >
-                        新建角色
-                    </Button>
-                </div>
-                <h1>角色管理</h1>
-                <p>管理应用的角色，角色是一系列权限的集合，可以分配给用户。</p>
-                <RoleTable list={list} loading={loading} />
+                <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<AddIcon />}
+                    onClick={this.toggleCreate}
+                >
+                    新建角色
+                </Button>
                 <CreateDialog
                     open={createOpen}
                     onCancel={this.toggleCreate}
                     onSave={this.saveCreate}
                     key={Date()}
-                    clientId={params.clientId}
+                />
+            </>
+        );
+
+        if (showEmpty) {
+            return (
+                <EmptyPage title="角色管理" icon="account_box" description="暂无角色，请新建">
+                    {createNew}
+                </EmptyPage>
+            );
+        }
+
+        return (
+            <>
+                <div className="mainActionBox">{createNew}</div>
+                <h1>角色管理</h1>
+                <p>管理应用的角色，角色是一系列权限的集合，可以分配给用户。</p>
+                <div className={selectBar.root}>
+                    <ClientSelect value={clientId} onChange={this.onClientChange} />
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        className="small"
+                        startIcon={<span className="material-icons">search</span>}
+                        onClick={this.onSearch}
+                    >
+                        查 询
+                    </Button>
+                </div>
+                <RoleTable
+                    list={list}
+                    loading={loading}
+                    current={current}
+                    pageSize={pageSize}
+                    total={total}
+                    onPaginationChange={this.onPaginationChange}
                 />
             </>
         );
     }
 }
 
-export default withRouter(Home);
+export default Home;

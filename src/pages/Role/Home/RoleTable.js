@@ -45,30 +45,42 @@ class RoleTable extends PureComponent {
     };
 
     render() {
-        const { list, loading } = this.props;
+        const { list, loading, current, pageSize, total, onPaginationChange } = this.props;
         const { anchorEl } = this.state;
+
+        const pagination = { current, pageSize, total };
 
         return (
             <>
-                <MyTable length={list.length} loading={loading} className={styles.root}>
+                <MyTable
+                    length={list.length}
+                    loading={loading}
+                    pagination={pagination}
+                    onPaginationChange={onPaginationChange}
+                    className={styles.root}
+                >
                     <TableHead>
                         <TableRow>
                             <TableCell>名称</TableCell>
                             <TableCell>描述</TableCell>
-                            <TableCell style={{ width: 200 }}>创建时间</TableCell>
+                            <TableCell>所属应用</TableCell>
+                            <TableCell>创建时间</TableCell>
                             <TableCell align="center">操作</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {list.map(item => (
                             <TableRow key={item.id} hover>
-                                <TableCell>
+                                <TableCell className={styles.name}>
                                     <Link href="#" onClick={event => this.onClick(event, item.id)}>
                                         {item.name}
                                     </Link>
                                 </TableCell>
                                 <TableCell className={styles.description}>
-                                    {item.description}
+                                    {item.description || "-"}
+                                </TableCell>
+                                <TableCell className={styles.clientName}>
+                                    {item.clientName}
                                 </TableCell>
                                 <TableCell>
                                     {moment(item.createDate).format(DATE_TIME_FORMAT)}

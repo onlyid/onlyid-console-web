@@ -1,18 +1,18 @@
 .root.vertical {
-    margin-top: 20px;
-}
-
-.root.horizontal {
-    margin-top: 25px;
-    display: flex;
-}
-
-.root.vertical:first-of-type {
     margin-top: 0;
 }
 
-.root.horizontal:first-of-type {
+.root.horizontal {
     margin-top: 40px;
+    display: flex;
+}
+
+.root.vertical ~ .root.vertical {
+    margin-top: 20px;
+}
+
+.root.horizontal ~ .root.horizontal {
+    margin-top: 25px;
 }
 
 .root > label {

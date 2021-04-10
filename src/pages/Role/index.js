@@ -11,10 +11,10 @@ class Index extends PureComponent {
         return (
             <div className={styles.root}>
                 <Switch>
-                    <Route path={`${match.path}/:clientId/:id`}>
+                    <Route path={`${match.path}/:id`}>
                         <Role />
                     </Route>
-                    <Route path={`${match.path}/:clientId?`}>
+                    <Route path={match.path}>
                         <Home />
                     </Route>
                 </Switch>

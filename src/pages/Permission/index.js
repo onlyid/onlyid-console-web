@@ -52,7 +52,7 @@ class Permission extends PureComponent {
                 <EmptyPage
                     title="权限管理"
                     icon="vpn_key"
-                    description="权限管理以应用为维度，请先到应用管理新建一个应用"
+                    description="权限以应用维度划分，请先到应用管理新建应用"
                 />
             );
 

@@ -6,14 +6,14 @@ import {
     DialogContent,
     DialogTitle,
     FormControl,
-    IconButton,
     Input,
-    InputAdornment
+    InputAdornment,
+    MenuItem,
+    Select
 } from "@material-ui/core";
 import DialogClose from "components/DialogClose";
 import styles from "./index.module.css";
 import { withRouter } from "react-router-dom";
-import { eventEmitter } from "my/utils";
 import Table from "./Table";
 
 class LinkDialog extends PureComponent {
@@ -23,7 +23,8 @@ class LinkDialog extends PureComponent {
         pageSize: 10,
         total: 0,
         keyword: "",
-        loading: true
+        loading: true,
+        type: "sso"
     };
 
     componentDidMount() {
@@ -33,17 +34,23 @@ class LinkDialog extends PureComponent {
     initData = async () => {
         this.setState({ loading: true });
 
-        const { match } = this.props;
-        const { current, pageSize, keyword } = this.state;
+        const { current, pageSize, keyword, type } = this.state;
         const params = {
             current,
             pageSize,
-            keyword,
-            clientId: match.params.clientId,
-            orderBy: "firstDate"
+            keyword
         };
 
-        const { list, total } = await http.get("users", { params });
+        let url = "users";
+        if (type === "sso") {
+            params.orderBy = "firstDate";
+        } else if (type === "import") {
+            url += "/import";
+        } else {
+            url += "/blacklist";
+        }
+
+        const { list, total } = await http.get(url, { params });
 
         this.setState({ list, total, loading: false });
     };
@@ -57,23 +64,12 @@ class LinkDialog extends PureComponent {
     };
 
     onChange = ({ target }) => {
-        this.setState({ keyword: target.value });
-    };
-
-    link = async id => {
-        const {
-            match: { params }
-        } = this.props;
-
-        const values = { roleId: params.id, clientId: params.clientId };
-        await http.post(`users/${id}/roles`, values);
-
-        eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
+        this.setState({ [target.name]: target.value });
     };
 
     render() {
-        const { list, current, pageSize, total, loading, keyword } = this.state;
-        const { open, onClose } = this.props;
+        const { list, current, pageSize, total, loading, keyword, type } = this.state;
+        const { open, onClose, onLink } = this.props;
 
         return (
             <Dialog open={open} onClose={onClose} maxWidth="lg">
@@ -84,8 +80,22 @@ class LinkDialog extends PureComponent {
                 <DialogContent className={styles.dialog}>
                     <div>
                         <FormControl>
+                            <Select
+                                name="type"
+                                value={type}
+                                onChange={this.onChange}
+                                startAdornment={
+                                    <InputAdornment position="start">类型</InputAdornment>
+                                }
+                            >
+                                <MenuItem value="sso">SSO 自然增长</MenuItem>
+                                <MenuItem value="import">手工导入/新建</MenuItem>
+                                <MenuItem value="blacklist">已屏蔽黑名单</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <FormControl style={{ marginLeft: 35 }}>
                             <Input
-                                id="keyword"
+                                name="keyword"
                                 onChange={this.onChange}
                                 value={keyword}
                                 startAdornment={
@@ -100,7 +110,7 @@ class LinkDialog extends PureComponent {
                             className="small"
                             startIcon={<span className="material-icons">search</span>}
                             onClick={this.onSearch}
-                            style={{ marginLeft: 30 }}
+                            style={{ marginLeft: 35 }}
                         >
                             查 询
                         </Button>
@@ -112,11 +122,8 @@ class LinkDialog extends PureComponent {
                         total={total}
                         loading={loading}
                         onPaginationChange={this.onPaginationChange}
-                        action={id => (
-                            <IconButton onClick={() => this.link(id)}>
-                                <span className="material-icons">add</span>
-                            </IconButton>
-                        )}
+                        onAction={onLink}
+                        inDialog
                     />
                 </DialogContent>
             </Dialog>

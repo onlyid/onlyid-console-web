@@ -3,16 +3,10 @@ import http from "my/http";
 import LinkDialog from "./LinkDialog";
 import { withRouter } from "react-router-dom";
 import { eventEmitter } from "my/utils";
-import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    IconButton
-} from "@material-ui/core";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@material-ui/core";
 import DialogClose from "components/DialogClose";
 import Table from "./Table";
+import tipBox from "components/TipBox.module.css";
 
 function DeleteDialog({ open, onDelete, onCancel }) {
     return (
@@ -44,6 +38,7 @@ class User extends PureComponent {
         total: 0,
         loading: true,
         linkOpen: false,
+        deleteOpen: false,
         deleteId: null
     };
 
@@ -94,6 +89,15 @@ class User extends PureComponent {
         this.closeDelete();
     };
 
+    onLink = async id => {
+        const { match, clientId } = this.props;
+
+        const params = { roleId: match.params.id, clientId };
+        await http.post(`users/${id}/roles`, params);
+
+        eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
+    };
+
     render() {
         const { list, current, pageSize, total, loading, linkOpen, deleteOpen } = this.state;
 
@@ -112,13 +116,17 @@ class User extends PureComponent {
                     total={total}
                     loading={loading}
                     onPaginationChange={this.onPaginationChange}
-                    action={id => (
-                        <IconButton onClick={() => this.openDelete(id)}>
-                            <span className="material-icons">delete</span>
-                        </IconButton>
-                    )}
+                    onAction={id => this.openDelete(id)}
                 />
-                <LinkDialog open={linkOpen} onClose={this.closeLink} />
+                <div className={tipBox.root}>
+                    <p>提示：</p>
+                    <ol>
+                        <li>
+                            给用户分配角色和为角色关联用户虽然叫法不同，但实际是同一个动作，都让用户拥有对应角色赋予的权限。
+                        </li>
+                    </ol>
+                </div>
+                <LinkDialog open={linkOpen} onClose={this.closeLink} onLink={this.onLink} />
                 <DeleteDialog
                     open={deleteOpen}
                     onDelete={this.onDelete}

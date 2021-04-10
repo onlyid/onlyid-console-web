@@ -1,8 +1,8 @@
-.root:first-of-type {
+.root {
     margin-top: 40px;
 }
 
-.root {
+.root ~ .root {
     margin-top: 15px;
 }
 

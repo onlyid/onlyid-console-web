@@ -29,7 +29,7 @@
     align-items: center;
 }
 
-.header ul li:not(:first-of-type) {
+.header ul li ~ li {
     margin-left: 25px;
 }
 

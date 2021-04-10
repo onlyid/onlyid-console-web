@@ -39,10 +39,10 @@ class Role extends PureComponent {
         let content;
         switch (currentTab) {
             case "permission":
-                content = <Permission />;
+                content = <Permission clientId={role.clientId} />;
                 break;
             case "user":
-                content = <User />;
+                content = <User clientId={role.clientId} />;
                 break;
             case "danger":
                 content = <Danger />;

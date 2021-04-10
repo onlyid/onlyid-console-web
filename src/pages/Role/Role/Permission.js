@@ -21,9 +21,9 @@ class Permission extends PureComponent {
     }
 
     initData = async () => {
-        const { match } = this.props;
+        const { clientId, match } = this.props;
 
-        let params = { clientId: match.params.clientId };
+        let params = { clientId };
         const list = await http.get("permissions", { params });
         params = { roleId: match.params.id };
         const checkedIds = await http.get("permissions/by-role", { params });
@@ -32,16 +32,11 @@ class Permission extends PureComponent {
     };
 
     onSubmit = async () => {
-        const {
-            match: { params }
-        } = this.props;
+        const { match, clientId } = this.props;
         const { checkedIds } = this.state;
 
-        const values = {
-            clientId: params.clientId,
-            permissions: checkedIds
-        };
-        await http.post(`roles/${params.id}/permissions`, values);
+        const params = { clientId, permissions: checkedIds };
+        await http.post(`roles/${match.params.id}/permissions`, params);
         eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
     };
 
@@ -73,7 +68,7 @@ class Permission extends PureComponent {
             );
         }
 
-        const indeterminate = checkedIds.length && checkedIds.length !== list.length;
+        const indeterminate = !!checkedIds.length && checkedIds.length !== list.length;
 
         return (
             <>
@@ -85,7 +80,7 @@ class Permission extends PureComponent {
                         <TableRow>
                             <TableCell padding="checkbox">
                                 <Checkbox
-                                    checked={checkedIds.length}
+                                    checked={!!checkedIds.length}
                                     indeterminate={indeterminate}
                                     onChange={this.onCheckAll}
                                 />
