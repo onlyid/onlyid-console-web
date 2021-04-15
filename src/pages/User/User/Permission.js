@@ -4,7 +4,7 @@ import http from "my/http";
 import styles from "./Permission.module.css";
 import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
 import MyTable from "components/MyTable";
-import tipBox from "../../../components/TipBox.module.css";
+import tipBox from "components/TipBox.module.css";
 
 class Permission extends PureComponent {
     state = {

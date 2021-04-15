@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import styles from "./index.module.css";
+import styles from "./Table.module.css";
 import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
 import MyTable from "components/MyTable";
 import Avatar from "components/Avatar";
@@ -74,7 +74,7 @@ export default class extends PureComponent {
                                     {item.clientName}
                                 </div>
                             </TableCell>
-                            <TableCell className={styles.description}>
+                            <TableCell className={styles.info}>
                                 {AUTH_METHOD[item.authMethod]}
                                 <br />
                                 {item.ip || "-"}
@@ -85,12 +85,7 @@ export default class extends PureComponent {
                             </TableCell>
                             <TableCell className={styles.status}>
                                 <SuccessStatus success={item.success} />
-                                {!item.success && (
-                                    <>
-                                        <br />
-                                        <span style={{ fontSize: 13 }}>{item.errMsg}</span>
-                                    </>
-                                )}
+                                {!item.success && <p>{item.errMsg}</p>}
                             </TableCell>
                             {this.noteCell(item)}
                         </TableRow>
