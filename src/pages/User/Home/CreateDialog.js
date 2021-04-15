@@ -65,7 +65,7 @@ export default class extends PureComponent {
 
         const formData = new FormData();
         formData.append("file", blob);
-        const { filename } = await http.post("img", formData);
+        const { filename } = await http.post("image", formData);
 
         this.setState({ filename, avatarUrl: dataURL });
     };

@@ -4,6 +4,7 @@ import http from "my/http";
 import styles from "./Permission.module.css";
 import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
 import MyTable from "components/MyTable";
+import tipBox from "../../../components/TipBox.module.css";
 
 class Permission extends PureComponent {
     state = {
@@ -77,6 +78,14 @@ class Permission extends PureComponent {
                         ))}
                     </TableBody>
                 </MyTable>
+                <div className={tipBox.root}>
+                    <p>提示：</p>
+                    <ol>
+                        <li>
+                            唯ID不支持直接给用户分配权限，请先给用户分配角色，再给角色分配权限，即可让用户拥有所需权限。
+                        </li>
+                    </ol>
+                </div>
             </>
         );
     }

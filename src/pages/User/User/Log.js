@@ -37,11 +37,22 @@ class Log extends PureComponent {
     };
 
     noteCell = item => {
-        let note;
-        if (item.signUp) note = "用户新注册账号";
-        else if (item.resetPassword) note = "用户重置了密码";
+        let list = [];
+        if (item.signUp) list.push("用户新注册账号");
+        if (item.resetPassword) list.push("用户重置了密码");
+        if (item.isNew) list.push("用户首次登录应用");
 
-        return <TableCell className={note && styles.smallBox}>{note || "-"}</TableCell>;
+        if (!list.length) return <TableCell>-</TableCell>;
+
+        return (
+            <TableCell className={styles.smallBox}>
+                {list.map((item, index) => (
+                    <p style={{ margin: "5px 0" }} key={index}>
+                        {item}
+                    </p>
+                ))}
+            </TableCell>
+        );
     };
 
     render() {

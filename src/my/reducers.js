@@ -36,10 +36,6 @@ const defaultRole = {
     list: []
 };
 
-const defaultAuditLog = {
-    selectedKey: null
-};
-
 const defaultAdmin = {
     tenantExpired: false
 };
@@ -74,17 +70,6 @@ function role(state = defaultRole, { type, ...rest }) {
     return state;
 }
 
-function auditLog(state = defaultAuditLog, action) {
-    const { type, payload } = action;
-
-    switch (type) {
-        case "auditLog/save":
-            return { ...state, ...payload };
-        default:
-            return state;
-    }
-}
-
 function admin(state = defaultAdmin, action) {
     const { type, payload } = action;
 
@@ -112,7 +97,6 @@ export default combineReducers({
     application,
     permission,
     role,
-    auditLog,
     admin,
     message
 });

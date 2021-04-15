@@ -70,7 +70,11 @@ class RegionInput extends PureComponent {
         return (
             <>
                 <FormControl onClick={this.toggleDialog} variant="outlined">
-                    <OutlinedInput id="region" value={value && value.join(" - ")} readOnly />
+                    <OutlinedInput
+                        id="region"
+                        value={(value && value.join(" - ")) || ""}
+                        readOnly
+                    />
                     <FormHelperText />
                 </FormControl>
                 <Dialog open={dialogVisible} onClose={this.toggleDialog}>

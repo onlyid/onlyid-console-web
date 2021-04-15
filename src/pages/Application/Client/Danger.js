@@ -22,9 +22,7 @@ class Danger extends PureComponent {
 
     onSubmit = async () => {
         const {
-            match: {
-                params: { clientId }
-            },
+            match: { params },
             history,
             onSave
         } = this.props;
@@ -32,11 +30,11 @@ class Danger extends PureComponent {
 
         let toastText;
         if (operation === "delete") {
-            await http.delete("clients/" + clientId);
+            await http.delete("clients/" + params.id);
             toastText = "删除成功";
             history.goBack();
         } else {
-            await http.put(`clients/${clientId}/secret`);
+            await http.put(`clients/${params.id}/secret`);
             toastText = "重置成功";
             onSave();
         }
