@@ -14,7 +14,9 @@ class Home extends PureComponent {
     state = {
         importOpen: false,
         createOpen: false,
-        exportOpen: false
+        exportOpen: false,
+        loading: true,
+        showEmpty: false
     };
 
     componentDidMount() {
@@ -37,12 +39,12 @@ class Home extends PureComponent {
         total = await this.initData();
         if (total > 0) return;
 
-        dispatch({ type: "user", showEmpty: true });
+        this.setState({ showEmpty: true });
     };
 
     initData = async () => {
         const { dispatch } = this.props;
-        dispatch({ type: "user", loading: true });
+        this.setState({ loading: true });
 
         const {
             user: { current, pageSize, keyword, type1, clientId, orderBy, activated }
@@ -61,17 +63,20 @@ class Home extends PureComponent {
         }
 
         const { list, total } = await http.get(url, { params });
-
-        dispatch({
-            type: "user",
-            list,
-            total,
-            loading: false,
-            realType: type1,
-            realOrderBy: orderBy
-        });
-
-        return total;
+        if (list.length || current === 1) {
+            dispatch({
+                type: "user",
+                list,
+                total,
+                realType: type1,
+                realOrderBy: orderBy
+            });
+            this.setState({ loading: false });
+            return total;
+        } else {
+            await dispatch({ type: "user", current: current - 1 });
+            this.initData();
+        }
     };
 
     toggleExport = () => {
@@ -103,9 +108,9 @@ class Home extends PureComponent {
             current: 1,
             keyword: "",
             type1: "import",
-            activated: "all",
-            showEmpty: false
+            activated: "all"
         });
+        this.setState({ showEmpty: false });
         this.initData();
     };
 
@@ -149,17 +154,15 @@ class Home extends PureComponent {
     };
 
     render() {
-        const { importOpen, createOpen, exportOpen } = this.state;
+        const { importOpen, createOpen, exportOpen, loading, showEmpty } = this.state;
         const {
             user: {
-                showEmpty,
                 type1,
                 clientId,
                 orderBy,
                 activated,
                 keyword,
                 list,
-                loading,
                 current,
                 pageSize,
                 total,

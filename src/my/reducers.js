@@ -12,8 +12,6 @@ const defaultUser = {
     clientId: "all",
     orderBy: "firstDate",
     activated: "all",
-    loading: true,
-    showEmpty: false,
     realType: "sso",
     realOrderBy: "firstDate"
 };

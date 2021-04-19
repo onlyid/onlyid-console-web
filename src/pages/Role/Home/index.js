@@ -36,10 +36,16 @@ class Home extends PureComponent {
         if (clientId !== "all") params.clientId = clientId;
 
         const { list, total } = await http.get("roles", { params });
-        this.setState({ loading: false });
-        dispatch({ type: "role", list, total });
 
-        if (setEmpty && !list.length) this.setState({ showEmpty: true });
+        if (list.length || current === 1) {
+            this.setState({ loading: false });
+            dispatch({ type: "role", list, total });
+
+            if (setEmpty && !list.length) this.setState({ showEmpty: true });
+        } else {
+            await dispatch({ type: "role", current: current - 1 });
+            this.initData();
+        }
     };
 
     toggleCreate = () => {
