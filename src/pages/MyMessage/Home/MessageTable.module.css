@@ -22,12 +22,6 @@
     color: inherit;
 }
 
-.level :global .material-icons {
-    vertical-align: -25%;
-    font-size: 20px;
-    margin-right: 5px;
-}
-
 .dropDown :global .MuiListItem-root {
     min-width: 150px;
 }

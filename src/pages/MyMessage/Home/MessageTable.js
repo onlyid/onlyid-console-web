@@ -24,6 +24,7 @@ import { withRouter } from "react-router-dom";
 import moment from "moment";
 import { DATE_TIME_FORMAT } from "my/constants";
 import DialogClose from "components/DialogClose";
+import LevelSymbol from "../LevelSymbol";
 
 class MessageTable extends PureComponent {
     state = {
@@ -122,28 +123,8 @@ class MessageTable extends PureComponent {
                                         .replace(/<h1[\s\S]+<\/h1>/, "")
                                         .replace(/<[\s\S]+?>/g, " ")}
                                 </TableCell>
-                                <TableCell className={styles.level}>
-                                    {item.important ? (
-                                        <>
-                                            <span
-                                                className="material-icons"
-                                                style={{ color: "#f44336" }}
-                                            >
-                                                flag
-                                            </span>
-                                            重要
-                                        </>
-                                    ) : (
-                                        <>
-                                            <span
-                                                className="material-icons"
-                                                style={{ color: "#2196f3" }}
-                                            >
-                                                info_outline
-                                            </span>
-                                            普通
-                                        </>
-                                    )}
+                                <TableCell>
+                                    <LevelSymbol important={item.important} />
                                 </TableCell>
                                 <TableCell>
                                     {moment(item.createDate).format(DATE_TIME_FORMAT)}
