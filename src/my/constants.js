@@ -57,11 +57,3 @@ export const AUTH_METHOD = {
     QR_CODE: "二维码",
     SSO: "保持登录"
 };
-
-export const CATEGORY_TEXT = {
-    PRODUCT: "产品消息",
-    WARN: "警告消息",
-    NEWS: "唯ID动态",
-    OTHER: "其他消息",
-    FINANCE: "财务消息"
-};

@@ -40,10 +40,15 @@ const defaultAdmin = {
     tenantExpired: false
 };
 
-const defaultMessage = {
-    selectedKey: null,
+const defaultMyMessage = {
     unreadCount: 0,
-    total: 0
+    totalCount: 0,
+    // home
+    list: [],
+    current: 1,
+    pageSize: 10,
+    total: 0,
+    keyword: ""
 };
 
 function user(state = defaultUser, { type, ...rest }) {
@@ -81,15 +86,10 @@ function admin(state = defaultAdmin, action) {
     }
 }
 
-function message(state = defaultMessage, action) {
-    const { type, payload } = action;
+function myMessage(state = defaultMyMessage, { type, ...rest }) {
+    if (type === "myMessage") return { ...state, ...rest };
 
-    switch (type) {
-        case "message/save":
-            return { ...state, ...payload };
-        default:
-            return state;
-    }
+    return state;
 }
 
 export default combineReducers({
@@ -98,5 +98,5 @@ export default combineReducers({
     permission,
     role,
     admin,
-    message
+    myMessage
 });

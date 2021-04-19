@@ -2,11 +2,10 @@ import React, { PureComponent } from "react";
 import { Button, Drawer, IconButton } from "@material-ui/core";
 import http from "my/http";
 import moment from "moment";
-import { CATEGORY_TEXT, DATE_TIME_FORMAT } from "my/constants";
+import { DATE_TIME_FORMAT } from "my/constants";
 import styles from "./MessageBox.module.css";
 import { eventEmitter } from "my/utils";
 import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
 import { Close as CloseIcon } from "@material-ui/icons";
 import Empty from "components/Empty";
 
@@ -24,7 +23,15 @@ class Item extends PureComponent {
         return (
             <div className={styles.item} {...restProps}>
                 <div className={styles.box1}>
-                    <span>{CATEGORY_TEXT[message.category]}</span>
+                    {message.important ? (
+                        <span className="material-icons" style={{ color: "#f44336" }}>
+                            flag
+                        </span>
+                    ) : (
+                        <span className="material-icons" style={{ color: "#2196f3" }}>
+                            info_outline
+                        </span>
+                    )}
                     <span className={styles.createDate}>
                         {moment(message.createDate).format(DATE_TIME_FORMAT)}
                     </span>
@@ -54,14 +61,14 @@ class List extends PureComponent {
     }
 
     initData = async () => {
-        const list = await http.get("messages/unread");
+        const list = await http.get("my-messages/unread");
         this.setState({ list, showEmpty: !list.length });
     };
 
     markRead = async id => {
-        await http.put(`messages/${id}/mark-read`);
+        await http.put(`my-messages/${id}/mark-read`);
         this.initData();
-        eventEmitter.emit("message/onMarkRead", id);
+        eventEmitter.emit("myMessage/countChange");
     };
 
     render() {
@@ -75,30 +82,33 @@ class List extends PureComponent {
                 </div>
             );
 
-        return list.map(item => (
-            <Item
-                message={item}
-                key={item.id}
-                markRead={() => this.markRead(item.id)}
-                onClick={() => onItemClick(item.id)}
-            />
-        ));
+        return (
+            <div className={styles.list}>
+                {list.map(item => (
+                    <Item
+                        message={item}
+                        key={item.id}
+                        markRead={() => this.markRead(item.id)}
+                        onClick={() => onItemClick(item.id)}
+                    />
+                ))}
+            </div>
+        );
     }
 }
 
 class MessageBox extends PureComponent {
-    go = route => {
+    goMessageHome = () => {
         const { history, onClose } = this.props;
 
-        history.push(route);
+        history.push("/my-messages");
         onClose();
     };
 
     onItemClick = id => {
-        const { dispatch } = this.props;
+        const { history } = this.props;
 
-        dispatch({ type: "message/save", payload: { selectedKey: id } });
-        this.go("/my-messages");
+        history.push(`/my-messages/${id}`);
     };
 
     render() {
@@ -106,12 +116,9 @@ class MessageBox extends PureComponent {
 
         const drawerTitle = (
             <div className={styles.drawerTitle}>
-                <span>站内信</span>
-                <div style={{ marginRight: 24 }}>
-                    <Button onClick={() => this.go("/tenant/notification")} color="primary">
-                        通知设置
-                    </Button>
-                    <Button onClick={() => this.go("/my-messages")} color="primary">
+                <h2>站内信</h2>
+                <div style={{ marginRight: 40 }}>
+                    <Button onClick={this.goMessageHome} color="primary">
                         查看更多
                     </Button>
                 </div>
@@ -130,4 +137,4 @@ class MessageBox extends PureComponent {
     }
 }
 
-export default connect()(withRouter(MessageBox));
+export default withRouter(MessageBox);

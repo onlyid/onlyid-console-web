@@ -20,15 +20,14 @@ class Header extends PureComponent {
         // 如果还在登录中，直接请求会报401，所以推迟一点
         setTimeout(this.getMessageCount, 2000);
 
-        eventEmitter.on("message/onMarkRead", this.getMessageCount);
-        eventEmitter.on("message/onDelete", this.getMessageCount);
+        eventEmitter.on("myMessage/countChange", this.getMessageCount);
     }
 
     getMessageCount = async () => {
         const { dispatch } = this.props;
 
-        const { unread, total } = await http.get("messages/count");
-        dispatch({ type: "message/save", payload: { unreadCount: unread, total } });
+        const { unreadCount, totalCount } = await http.get("my-messages/count");
+        dispatch({ type: "myMessage", unreadCount, totalCount });
     };
 
     showDrawer = () => {
@@ -50,7 +49,7 @@ class Header extends PureComponent {
     render() {
         const { drawerVisible, dialogVisible } = this.state;
         const {
-            message: { unreadCount }
+            myMessage: { unreadCount }
         } = this.props;
 
         return (
@@ -88,4 +87,4 @@ class Header extends PureComponent {
     }
 }
 
-export default connect(({ message }) => ({ message }))(Header);
+export default connect(({ myMessage }) => ({ myMessage }))(Header);

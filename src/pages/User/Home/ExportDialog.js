@@ -64,7 +64,10 @@ export default class extends PureComponent {
                     </DialogTitle>
                     <DialogContent style={{ width: 600 }}>
                         <p style={{ marginTop: 0 }}>
-                            如果你是准备迁出唯ID才全量导出用户，请再给我们一次机会。❤️
+                            如果你是准备迁出唯ID才全量导出用户，请再给我们一次机会。
+                            <span role="img" aria-label="heart">
+                                ❤️
+                            </span>
                         </p>
                         <p>
                             在使用唯ID产品上遇到任何问题、产品上有任何功能无法满足需求或者服务上有任何不满意的地方，都可以直接联系我们

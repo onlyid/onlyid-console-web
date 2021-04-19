@@ -4,15 +4,23 @@
     justify-content: space-between;
     width: 400px;
     padding: 15px 20px;
-    font-size: 18px;
     border-bottom: 1px solid #eee;
-    font-weight: 500;
+    flex-shrink: 0;
+}
+
+.drawerTitle h2 {
+    margin: 0;
 }
 
 .closeButton {
     position: absolute;
     right: 6px;
     color: #7f7f7f;
+}
+
+.list {
+    flex-grow: 1;
+    overflow-x: auto;
 }
 
 .item {
@@ -31,6 +39,11 @@
     height: 24px;
     align-items: center;
     color: rgba(0, 0, 0, 0.54);
+}
+
+.box1 :global .material-icons {
+    opacity: 0.9;
+    font-size: 20px;
 }
 
 .item .markRead {
