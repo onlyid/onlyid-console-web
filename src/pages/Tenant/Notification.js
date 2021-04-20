@@ -3,7 +3,7 @@ import { Checkbox, message } from "antd";
 import styles from "./index.module.css";
 import http from "my/http";
 
-class NotificationSetting extends PureComponent {
+class Notification extends PureComponent {
     state = {
         product: [],
         warn: [],
@@ -199,4 +199,4 @@ class NotificationSetting extends PureComponent {
     }
 }
 
-export default NotificationSetting;
+export default Notification;

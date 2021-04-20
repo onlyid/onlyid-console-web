@@ -62,9 +62,11 @@ class RightAccount extends PureComponent {
                     </MenuItem>
                     <MenuItem component={Link} to="/tenant/renewal">
                         <ListItemIcon>
-                            <span className="material-icons">credit_card</span>
+                            <span className="iconfont" style={{ fontSize: 18 }}>
+                                &#xe650;
+                            </span>
                         </ListItemIcon>
-                        <ListItemText>有效期和续费</ListItemText>
+                        <ListItemText>订阅续费</ListItemText>
                     </MenuItem>
                     <MenuItem component={Link} to="/tenant/notification">
                         <ListItemIcon>

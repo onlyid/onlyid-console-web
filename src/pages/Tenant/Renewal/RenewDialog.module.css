@@ -1,0 +1,45 @@
+.table1 {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.table1 td {
+    padding: 10px;
+}
+
+.table1 thead {
+    background-color: #fbfbfb;
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+}
+
+.table1 tbody {
+    border-bottom: 1px solid #eee;
+}
+
+.yearBox {
+    height: 42px;
+    line-height: 42px;
+}
+
+.yearBox :global .MuiFormGroup-row .MuiFormControlLabel-root {
+    width: 100px;
+}
+
+.fee {
+    margin-top: 30px;
+    text-align: right;
+}
+
+.fee span {
+    color: #e6a23c;
+    font-size: 24px;
+    margin: 0 5px;
+}
+
+.tip1 {
+    font-size: 13px;
+    color: #7f7f7f;
+    margin: 0;
+}

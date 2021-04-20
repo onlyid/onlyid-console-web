@@ -1,11 +1,10 @@
 import React, { PureComponent } from "react";
-import { message, Spin } from "antd";
 import { withRouter } from "react-router-dom";
 import qs from "qs";
 import http from "my/http";
 import { eventEmitter } from "my/utils";
-import { connect } from "react-redux";
 import moment from "moment";
+import { CircularProgress } from "@material-ui/core";
 
 class OAuthCallback extends PureComponent {
     componentDidMount() {
@@ -23,16 +22,15 @@ class OAuthCallback extends PureComponent {
     }
 
     login = async code => {
-        const { history, dispatch } = this.props;
+        const { history } = this.props;
         const { userInfo, tenantInfo } = await http.post("login", { code });
         localStorage.setObj("userInfo", userInfo);
         localStorage.setObj("tenantInfo", tenantInfo);
         eventEmitter.emit("app/login");
 
         if (moment(tenantInfo.expireDate) < moment()) {
-            history.replace("/admin/renewal");
-            message.warn("服务已到期，请续费");
-            dispatch({ type: "admin/save", payload: { tenantExpired: true } });
+            history.replace("/tenant/renewal");
+            eventEmitter.emit("app/openToast", { text: "服务已到期，请续费", severity: "warning" });
         } else {
             history.replace("/");
         }
@@ -41,10 +39,10 @@ class OAuthCallback extends PureComponent {
     render() {
         return (
             <div style={{ textAlign: "center", padding: "100px 0" }}>
-                <Spin size="large" />
+                <CircularProgress />
             </div>
         );
     }
 }
 
-export default connect()(withRouter(OAuthCallback));
+export default withRouter(OAuthCallback);
