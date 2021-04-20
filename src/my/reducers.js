@@ -34,10 +34,6 @@ const defaultRole = {
     list: []
 };
 
-const defaultAdmin = {
-    tenantExpired: false
-};
-
 const defaultMyMessage = {
     unreadCount: 0,
     totalCount: 0,
@@ -73,17 +69,6 @@ function role(state = defaultRole, { type, ...rest }) {
     return state;
 }
 
-function admin(state = defaultAdmin, action) {
-    const { type, payload } = action;
-
-    switch (type) {
-        case "admin/save":
-            return { ...state, ...payload };
-        default:
-            return state;
-    }
-}
-
 function myMessage(state = defaultMyMessage, { type, ...rest }) {
     if (type === "myMessage") return { ...state, ...rest };
 
@@ -95,6 +80,5 @@ export default combineReducers({
     application,
     permission,
     role,
-    admin,
     myMessage
 });

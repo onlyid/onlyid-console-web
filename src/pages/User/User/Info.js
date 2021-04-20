@@ -16,7 +16,7 @@ export default function({ user }) {
                 <InfoBox label="用户性别">
                     <GenderSymbol gender={user.gender} />
                 </InfoBox>
-                <InfoBox label="用户生日">
+                <InfoBox label="用户出生日期">
                     {user.birthDate ? moment(user.birthDate).format(DATE_FORMAT) : "-"}
                 </InfoBox>
                 <InfoBox label="用户地区">

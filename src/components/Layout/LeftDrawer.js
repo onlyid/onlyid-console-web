@@ -65,7 +65,7 @@ export default function() {
                     </ListItemIcon>
                     <ListItemText primary="站内信" />
                 </Item>
-                <Item to="/tenant/info">
+                <Item to="/tenant">
                     <ListItemIcon>
                         <span className="material-icons">settings</span>
                     </ListItemIcon>
