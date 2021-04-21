@@ -24,7 +24,7 @@ import { withRouter } from "react-router-dom";
 import moment from "moment";
 import { DATE_TIME_FORMAT } from "my/constants";
 import DialogClose from "components/DialogClose";
-import LevelSymbol from "../LevelSymbol";
+import LevelSymbol from "components/LevelSymbol";
 
 class MessageTable extends PureComponent {
     state = {

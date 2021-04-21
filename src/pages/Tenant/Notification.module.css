@@ -1,0 +1,26 @@
+.hr1 {
+    color: #eee;
+    border-top: none;
+    width: 500px;
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.ol1 li {
+    line-height: 1.5;
+}
+
+.box1 label {
+    display: inline-block;
+    height: 42px;
+    line-height: 42px;
+}
+
+.box1 :global .MuiFormControl-root {
+    margin-left: 20px;
+}
+
+.box1 :global .MuiFormControlLabel-root + .MuiFormControlLabel-root {
+    margin-left: 20px;
+}

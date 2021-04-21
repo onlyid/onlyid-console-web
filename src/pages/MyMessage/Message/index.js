@@ -3,7 +3,7 @@ import http from "my/http";
 import { eventEmitter } from "my/utils";
 import MainHeader from "components/MainHeader";
 import { withRouter } from "react-router-dom";
-import LevelSymbol from "../LevelSymbol";
+import LevelSymbol from "components/LevelSymbol";
 import moment from "moment";
 import { DATE_TIME_FORMAT } from "my/constants";
 import {

@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./index.module.css";
+import styles from "./LevelSymbol.module.css";
 
 export default function({ important }) {
     return (
-        <div className={styles.levelSymbol}>
+        <div className={styles.root}>
             {important ? (
                 <>
                     <span className="material-icons" style={{ color: "#f44336" }}>

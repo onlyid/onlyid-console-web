@@ -1,0 +1,9 @@
+.root {
+    display: inline-block;
+}
+
+.root :global .material-icons {
+    vertical-align: -25%;
+    font-size: 20px;
+    margin-right: 5px;
+}
