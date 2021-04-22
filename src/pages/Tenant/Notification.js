@@ -49,7 +49,6 @@ class Notification extends PureComponent {
                 <ol className={styles.ol1}>
                     <li>服务即将过期预警、服务已过期通知。</li>
                     <li>重大版本升级可能需开发者配合。</li>
-                    <li>重大版本上线可能导致服务抖动。</li>
                     <li>应用被举报或API请求异常导致服务暂停。</li>
                 </ol>
                 <p>一些常见的普通消息：</p>

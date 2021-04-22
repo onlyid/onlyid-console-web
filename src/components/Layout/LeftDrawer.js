@@ -16,6 +16,7 @@ function Item({ to, children }) {
 
 export default function() {
     const tenantInfo = localStorage.getObj("tenantInfo");
+    if (!tenantInfo) return null;
 
     return (
         <Drawer className={styles.root} variant="permanent">
