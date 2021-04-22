@@ -106,9 +106,10 @@ class MessageBox extends PureComponent {
     };
 
     onItemClick = id => {
-        const { history } = this.props;
+        const { history, onClose } = this.props;
 
         history.push(`/my-messages/${id}`);
+        onClose();
     };
 
     render() {
