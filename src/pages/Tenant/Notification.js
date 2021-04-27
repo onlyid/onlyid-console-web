@@ -62,9 +62,26 @@ class Notification extends PureComponent {
                     对于重要消息，通过站内信、邮件、短信同步发送；对于普通消息，可设置只发送站内信或同步发送三端：
                 </p>
                 <div className={styles.box1}>
+                    <label>发送站内信：</label>
+                    <FormControl>
+                        <RadioGroup row name="radioGroup1" value="all">
+                            <FormControlLabel
+                                value="all"
+                                control={<Radio color="primary" disabled />}
+                                label="所有消息"
+                            />
+                        </RadioGroup>
+                    </FormControl>
+                </div>
+                <div className={styles.box1}>
                     <label>发送邮件/短信：</label>
                     <FormControl>
-                        <RadioGroup row name="type" value={notifyNormal} onChange={this.onChange}>
+                        <RadioGroup
+                            row
+                            name="radioGroup2"
+                            value={notifyNormal}
+                            onChange={this.onChange}
+                        >
                             <FormControlLabel
                                 value="false"
                                 control={<Radio color="primary" />}

@@ -109,7 +109,7 @@ class Index extends PureComponent {
                         删除
                     </Button>
                 </div>
-                <MainHeader backText="返回消息列表" title="">
+                <MainHeader backText="返回上一页" title="">
                     <ul>
                         <li>
                             <span>级别：</span>
