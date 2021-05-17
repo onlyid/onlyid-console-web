@@ -18,9 +18,9 @@ instance.interceptors.response.use(
             }
 
             errMsg = err.response.data.error;
-        } else {
-            errMsg = err.message;
         }
+        if (!errMsg) errMsg = err.message;
+
         eventEmitter.emit("app/openToast", { text: errMsg, severity: "error" });
 
         return Promise.reject(err);
