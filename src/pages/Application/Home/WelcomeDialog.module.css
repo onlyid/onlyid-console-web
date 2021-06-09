@@ -1,0 +1,18 @@
+.ol1 {
+    margin: 0;
+    padding-left: 1em;
+}
+
+.ol1 li {
+    line-height: 1.5;
+}
+
+.ol1 li + li {
+    margin-top: 10px;
+}
+
+.ol1 li :global .MuiSvgIcon-root {
+    color: #7f7f7f;
+    font-size: 18px;
+    vertical-align: -15%;
+}

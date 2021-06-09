@@ -6,17 +6,24 @@ import EmptyPage from "components/EmptyPage";
 import CreateDialog from "./CreateDialog";
 import GuideDialog from "./GuideDialog";
 import ClientTable from "./ClientTable";
+import moment from "moment";
+import WelcomeDialog from "./WelcomeDialog";
 
 export default class extends PureComponent {
     state = {
         list: [],
         loading: true,
         createOpen: false,
-        guideOpen: false
+        guideOpen: false,
+        welcomeOpen: false
     };
 
     componentDidMount() {
         this.initData();
+
+        const tenantInfo = localStorage.getObj("tenantInfo");
+        if (moment(tenantInfo.createDate) > moment().subtract(5, "seconds"))
+            this.setState({ welcomeOpen: true });
     }
 
     initData = async () => {
@@ -42,8 +49,12 @@ export default class extends PureComponent {
         this.setState({ guideOpen: false });
     };
 
+    closeWelcome = () => {
+        this.setState({ welcomeOpen: false });
+    };
+
     render() {
-        const { list, loading, createOpen, guideOpen } = this.state;
+        const { list, loading, createOpen, guideOpen, welcomeOpen } = this.state;
 
         const createNew = (
             <>
@@ -69,6 +80,11 @@ export default class extends PureComponent {
             return (
                 <EmptyPage title="应用管理" icon="apps" description="暂无应用，请新建">
                     {createNew}
+                    <WelcomeDialog
+                        open={welcomeOpen}
+                        onClose={this.closeWelcome}
+                        onCreate={this.openCreate}
+                    />
                 </EmptyPage>
             );
 

@@ -31,6 +31,8 @@ class OAuthCallback extends PureComponent {
         if (moment(tenantInfo.expireDate) < moment()) {
             history.replace("/tenant/renewal");
             eventEmitter.emit("app/openToast", { text: "服务已到期，请续费", severity: "warning" });
+        } else if (moment(tenantInfo.createDate) > moment().subtract(5, "seconds")) {
+            history.replace("/applications");
         } else {
             history.replace("/");
         }
