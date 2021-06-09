@@ -79,7 +79,9 @@ class Index extends PureComponent {
         const { message, deleteOpen, prevId, nextId } = this.state;
         const userInfo = localStorage.getObj("userInfo");
 
-        const html = message.html.replace("#nickname#", userInfo.nickname);
+        const html = message.html
+            .replace("#nickname#", userInfo.nickname)
+            .replace(/<h1[\s\S]+<\/h1>/, "");
 
         return (
             <>
@@ -124,6 +126,7 @@ class Index extends PureComponent {
                     </ul>
                 </MainHeader>
                 <Paper className={styles.content} variant="outlined">
+                    <h1>{message.title}</h1>
                     <div dangerouslySetInnerHTML={{ __html: html }} />
                 </Paper>
                 <Dialog open={deleteOpen} onClose={this.toggleDelete}>

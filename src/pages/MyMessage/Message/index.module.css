@@ -3,3 +3,9 @@
     box-sizing: content-box;
     margin: 50px auto 0;
 }
+
+.content h1 {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 1em;
+}
