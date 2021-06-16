@@ -49,7 +49,7 @@ class Client extends PureComponent {
                 content = <Otp />;
                 break;
             case "oauth":
-                content = <OAuth client={client} onSave={this.initData} />;
+                content = <OAuth clientType={client.type} />;
                 break;
             case "danger":
                 content = <Danger onSave={this.initData} />;
