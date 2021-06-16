@@ -227,7 +227,7 @@ class OAuth extends PureComponent {
                                 />
                                 <FormHelperText>{validation.background.text}</FormHelperText>
                                 <FormHelperText error={false}>
-                                    支持background前缀的CSS属性，用分号分隔多行代码；图片背景（请自行host静态文件）建议使用半透明图片；纯色背景建议使用RGBA半透明颜色。
+                                    支持background前缀的CSS属性，用分号分隔多行代码；图片背景请自行host静态文件（必须是https），建议使用半透明图片。
                                     <Link href={previewUrl} target="_blank">
                                         预览
                                     </Link>
