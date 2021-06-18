@@ -12,13 +12,7 @@ import {
     RadioGroup,
     Select
 } from "@material-ui/core";
-import {
-    OTP_EXPIRE_TEXT,
-    OTP_FAIL_TEXT,
-    OTP_LENGTH_TEXT,
-    OTP_TEMPLATE_TEXT,
-    OTP_TYPE_TEXT
-} from "my/constants";
+import { OTP_EXPIRE_TEXT, OTP_FAIL_TEXT, OTP_LENGTH_TEXT, OTP_TEMPLATE_TEXT } from "my/constants";
 import styles from "./index.module.css";
 import { eventEmitter } from "my/utils";
 import tipBox from "components/TipBox.module.css";
@@ -71,25 +65,6 @@ class Otp extends PureComponent {
                                     key={key}
                                     control={<Radio name="length" color="primary" />}
                                     label={OTP_LENGTH_TEXT[key]}
-                                />
-                            ))}
-                        </RadioGroup>
-                    </FormControl>
-                </InputBox>
-                <InputBox label="验证码类型" radioGroup>
-                    <FormControl variant="outlined">
-                        <RadioGroup
-                            row
-                            id="type"
-                            value={values.type || ""}
-                            onChange={this.onChange}
-                        >
-                            {Object.keys(OTP_TYPE_TEXT).map(key => (
-                                <FormControlLabel
-                                    value={key}
-                                    key={key}
-                                    control={<Radio name="type" color="primary" />}
-                                    label={OTP_TYPE_TEXT[key]}
                                 />
                             ))}
                         </RadioGroup>

@@ -16,12 +16,6 @@ export const CLIENT_TYPE_TEXT = {
     OTHER: "其他"
 };
 
-export const OTP_TYPE_TEXT = {
-    NUMBER: "随机 数字（推荐）",
-    NUMBER_LETTER_LOWERCASE: "随机 数字 + 小写字母",
-    NUMBER_LETTER: "随机 数字 + 大小写字母"
-};
-
 export const OTP_LENGTH_TEXT = {
     4: "4位",
     6: "6位（推荐）",
