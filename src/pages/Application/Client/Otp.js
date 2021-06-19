@@ -7,12 +7,10 @@ import {
     FormControl,
     FormControlLabel,
     FormHelperText,
-    MenuItem,
     Radio,
-    RadioGroup,
-    Select
+    RadioGroup
 } from "@material-ui/core";
-import { OTP_EXPIRE_TEXT, OTP_FAIL_TEXT, OTP_LENGTH_TEXT, OTP_TEMPLATE_TEXT } from "my/constants";
+import { OTP_EXPIRE_TEXT, OTP_FAIL_TEXT, OTP_LENGTH_TEXT } from "my/constants";
 import styles from "./index.module.css";
 import { eventEmitter } from "my/utils";
 import tipBox from "components/TipBox.module.css";
@@ -108,26 +106,6 @@ class Otp extends PureComponent {
                         </RadioGroup>
                         <FormHelperText>
                             当某条验证码校验失败次数达到该值后，标记验证码失效，后续校验都直接返回失败，不再尝试校验。
-                        </FormHelperText>
-                    </FormControl>
-                </InputBox>
-                <InputBox label="验证码模板">
-                    <FormControl variant="outlined">
-                        <Select
-                            id="template"
-                            name="template"
-                            value={values.template ? String(values.template) : ""}
-                            onChange={this.onChange}
-                            variant="outlined"
-                        >
-                            {Object.keys(OTP_TEMPLATE_TEXT).map(key => (
-                                <MenuItem key={key} value={key}>
-                                    {OTP_TEMPLATE_TEXT[key]}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                        <FormHelperText>
-                            APP指代你的应用名，X是有效期，Y是验证码，发送时会替换成具体的值。
                         </FormHelperText>
                     </FormControl>
                 </InputBox>

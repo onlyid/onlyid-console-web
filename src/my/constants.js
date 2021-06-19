@@ -34,13 +34,6 @@ export const OTP_FAIL_TEXT = {
     20: "20次"
 };
 
-export const OTP_TEMPLATE_TEXT = {
-    383959: "APP的验证码为：Y，该验证码X分钟内有效，请勿泄露于他人",
-    383106: "(Y)APP验证码。工作人员不会向您索要，请勿向任何人泄露，以免造成账户或资金损失",
-    383105: "您的验证码是：Y。此验证码用于[APP]，有效期X分钟",
-    383087: "(Y)APP验证码，X分钟内有效"
-};
-
 export const DATE_TIME_FORMAT = "YYYY-MM-DD HH:mm:ss";
 export const DATE_FORMAT = "YYYY-MM-DD";
 
