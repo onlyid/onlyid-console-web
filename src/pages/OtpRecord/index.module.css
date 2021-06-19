@@ -6,17 +6,7 @@
     margin-top: 25px;
 }
 
-.table1 :global .MuiTableBody-root .MuiTableCell-root {
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-
 .table1 .otpThead :global .MuiTableCell-root {
     padding-top: 4px;
     padding-bottom: 4px;
-}
-
-.table1 .otpContent {
-    font-size: 13px;
-    width: 260px;
 }
