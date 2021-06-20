@@ -16,7 +16,6 @@ import {
 import moment from "moment";
 import { DATE_TIME_FORMAT } from "my/constants";
 import MyTable from "components/MyTable";
-import Avatar from "components/Avatar";
 import GenderSymbol from "components/GenderSymbol";
 import DateCountDown from "components/DateCountDown";
 
@@ -158,12 +157,7 @@ class UserTable extends PureComponent {
                                         href="#"
                                         onClick={event => this.onClick(event, item.id)}
                                     >
-                                        <Avatar
-                                            url={item.avatarUrl}
-                                            width={40}
-                                            height={40}
-                                            style={{ marginRight: 15 }}
-                                        />
+                                        <img src={item.avatarUrl} alt="avatar" />
                                         {item.nickname}
                                     </Link>
                                 </TableCell>

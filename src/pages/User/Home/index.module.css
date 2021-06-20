@@ -11,7 +11,14 @@
     margin-top: 10px;
 }
 
-.uploadTip {
+.uploadLabel > img {
+    border-radius: 5%;
+    vertical-align: middle;
+    cursor: pointer;
+    width: 80px;
+}
+
+.uploadLabel > span {
     font-size: 13px;
     color: #7f7f7f;
     margin-left: 10px;

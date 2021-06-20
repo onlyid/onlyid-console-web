@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import Avatar from "components/Avatar";
 import styles from "./RightAccount.module.css";
 import http from "my/http";
 import { eventEmitter } from "my/utils";
@@ -38,9 +37,9 @@ class RightAccount extends PureComponent {
 
         return (
             <>
-                <ButtonBase className={styles.rightAccount} onClick={this.openMenu}>
-                    <Avatar url={userInfo.avatarUrl} width={30} />
-                    <span className={styles.accountName}>{userInfo.nickname}</span>
+                <ButtonBase className={styles.root} onClick={this.openMenu}>
+                    <img src={userInfo.avatarUrl} alt="avatar" />
+                    <span>{userInfo.nickname}</span>
                 </ButtonBase>
                 <Menu
                     anchorEl={anchorEl}

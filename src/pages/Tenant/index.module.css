@@ -19,3 +19,9 @@
 .infoBox > div {
     border-bottom: none;
 }
+
+.avatar {
+    width: 80px;
+    border-radius: 5%;
+    vertical-align: middle;
+}

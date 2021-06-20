@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./index.module.css";
 import { IconButton, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
-import Avatar from "components/Avatar";
 import GenderSymbol from "components/GenderSymbol";
 import MyTable from "components/MyTable";
 import moment from "moment";
@@ -42,12 +41,7 @@ export default function({
                     <TableRow key={index} hover>
                         <TableCell>
                             <div className={styles.userBox}>
-                                <Avatar
-                                    url={item.avatarUrl}
-                                    width={40}
-                                    height={40}
-                                    style={{ marginRight: 15 }}
-                                />
+                                <img src={item.avatarUrl} alt="avatar" />
                                 {item.nickname}
                             </div>
                         </TableCell>

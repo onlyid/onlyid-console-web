@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import { DATE_FORMAT, DATE_TIME_FORMAT } from "my/constants";
-import Avatar from "components/Avatar";
 import styles from "./index.module.css";
 import http from "my/http";
 import moment from "moment";
@@ -33,7 +32,7 @@ class Info extends PureComponent {
             <>
                 <div className={styles.infoBox}>
                     <InfoBox label="头像">
-                        <Avatar url={userInfo.avatarUrl} />
+                        <img src={userInfo.avatarUrl} alt="avatar" className={styles.avatar} />
                     </InfoBox>
                     <InfoBox label="昵称">{userInfo.nickname}</InfoBox>
                     <InfoBox label="手机号">{userInfo.mobile || "-"}</InfoBox>

@@ -5,7 +5,6 @@ import styles from "../Latest.module.css";
 import moment from "moment";
 import { DATE_TIME_FORMAT } from "my/constants";
 import Empty from "components/Empty";
-import Avatar from "components/Avatar";
 import GenderSymbol from "components/GenderSymbol";
 
 class Latest extends PureComponent {
@@ -55,12 +54,7 @@ class Latest extends PureComponent {
                             <TableRow key={item.id + item.firstDate}>
                                 <TableCell>
                                     <div className={styles.userBox}>
-                                        <Avatar
-                                            url={item.avatarUrl}
-                                            width={40}
-                                            height={40}
-                                            style={{ marginRight: 15 }}
-                                        />
+                                        <img src={item.avatarUrl} alt="avatar" />
                                         {item.nickname}
                                     </div>
                                 </TableCell>

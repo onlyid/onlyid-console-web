@@ -1,4 +1,4 @@
-.rightAccount {
+.root {
     display: flex;
     align-items: center;
     margin-left: 20px;
@@ -8,11 +8,16 @@
     padding: 0 5px;
 }
 
-.rightAccount:hover {
+.root:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.accountName {
+.root > img {
+    width: 30px;
+    border-radius: 5%;
+}
+
+.root > span {
     margin-left: 10px;
     display: inline-block;
     max-width: 65px;

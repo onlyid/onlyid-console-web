@@ -17,7 +17,6 @@ import DialogClose from "components/DialogClose";
 import InputBox from "components/InputBox";
 import { DATE_FORMAT, GENDER_TEXT, IMG_UPLOAD_TIP, REG_EXP } from "my/constants";
 import styles from "./index.module.css";
-import Avatar from "components/Avatar";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 import RegionInput from "components/RegionInput";
@@ -25,6 +24,7 @@ import { eventEmitter, transformImage } from "my/utils";
 import http from "my/http";
 import Validator from "async-validator";
 import tipBox from "components/TipBox.module.css";
+import defaultAvatar from "assets/default-avatar.svg";
 
 const RULES = {
     nickname: [
@@ -174,9 +174,9 @@ export default class extends PureComponent {
                                     style={{ display: "none" }}
                                 />
                                 <Tooltip title={IMG_UPLOAD_TIP} placement="right">
-                                    <label htmlFor="upload">
-                                        <Avatar url={avatarUrl} style={{ cursor: "pointer" }} />
-                                        <span className={styles.uploadTip}>点击上传</span>
+                                    <label htmlFor="upload" className={styles.uploadLabel}>
+                                        <img src={avatarUrl || defaultAvatar} alt="avatar" />
+                                        <span>点击上传</span>
                                     </label>
                                 </Tooltip>
                             </div>

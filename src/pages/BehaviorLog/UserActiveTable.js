@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import styles from "./Table.module.css";
 import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
 import MyTable from "components/MyTable";
-import Avatar from "components/Avatar";
 import moment from "moment";
 import { AUTH_METHOD, DATE_TIME_FORMAT } from "my/constants";
 import SuccessStatus from "components/SuccessStatus";
@@ -53,12 +52,7 @@ export default class extends PureComponent {
                         <TableRow key={item.id} hover>
                             <TableCell>
                                 <div className={styles.userBox}>
-                                    <Avatar
-                                        url={item.userAvatarUrl}
-                                        width={40}
-                                        height={40}
-                                        style={{ marginRight: 15 }}
-                                    />
+                                    <img src={item.userAvatarUrl} alt="avatar" />
                                     <span>
                                         {item.userNickname}
                                         <br />
