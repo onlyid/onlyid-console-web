@@ -35,7 +35,8 @@ export default class extends PureComponent {
         validation: { name: {}, type: {}, description: {} },
         values: {},
         iconDataUrl: null,
-        filename: null
+        filename: null,
+        iconRequiredVisible: false
     };
 
     onUploadChange = async ({ target }) => {
@@ -51,7 +52,7 @@ export default class extends PureComponent {
         formData.append("file", blob);
         const { filename } = await http.post("image", formData);
 
-        this.setState({ filename, iconDataUrl: dataURL });
+        this.setState({ filename, iconDataUrl: dataURL, iconRequiredVisible: false });
     };
 
     onChange = ({ target }) => {
@@ -79,7 +80,7 @@ export default class extends PureComponent {
         const { onSave } = this.props;
 
         if (!filename) {
-            eventEmitter.emit("app/openToast", { text: "请上传应用Icon", severity: "error" });
+            this.setState({ iconRequiredVisible: true });
             return;
         }
 
@@ -99,7 +100,7 @@ export default class extends PureComponent {
 
     render() {
         const { open, onCancel } = this.props;
-        const { validation, values, iconDataUrl } = this.state;
+        const { validation, values, iconDataUrl, iconRequiredVisible } = this.state;
 
         return (
             <Dialog open={open}>
@@ -126,6 +127,9 @@ export default class extends PureComponent {
                                     <span className={styles.uploadTip}>点击上传</span>
                                 </label>
                             </Tooltip>
+                            {iconRequiredVisible && (
+                                <FormHelperText error>请上传应用Icon</FormHelperText>
+                            )}
                         </div>
                     </InputBox>
                     <InputBox label="应用名称" required vertical>

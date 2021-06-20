@@ -7,10 +7,12 @@
 }
 
 .uploadBox :global .material-icons {
-    font-size: 80px;
+    font-size: 78px;
     color: #bbb;
     cursor: pointer;
     vertical-align: middle;
+    border: 1px dashed #d9d9d9;
+    border-radius: 5%;
 }
 
 .uploadBox img {

@@ -24,7 +24,6 @@ import { eventEmitter, transformImage } from "my/utils";
 import http from "my/http";
 import Validator from "async-validator";
 import tipBox from "components/TipBox.module.css";
-import defaultAvatar from "assets/default-avatar.svg";
 
 const RULES = {
     nickname: [
@@ -47,7 +46,8 @@ export default class extends PureComponent {
         filename: null,
         region: null,
         birthDate: null,
-        step: 1
+        step: 1,
+        avatarRequiredVisible: false
     };
 
     next = () => {
@@ -67,7 +67,7 @@ export default class extends PureComponent {
         formData.append("file", blob);
         const { filename } = await http.post("image", formData);
 
-        this.setState({ filename, avatarUrl: dataURL });
+        this.setState({ filename, avatarUrl: dataURL, avatarRequiredVisible: false });
     };
 
     onChange = ({ target }) => {
@@ -92,6 +92,11 @@ export default class extends PureComponent {
     submit = async () => {
         const { values, filename, region, birthDate, validation } = this.state;
         const { onSave } = this.props;
+
+        if (!filename) {
+            this.setState({ avatarRequiredVisible: true });
+            return;
+        }
 
         try {
             await new Validator(RULES).validate(values, { firstFields: true });
@@ -124,7 +129,15 @@ export default class extends PureComponent {
 
     render() {
         const { open, onCancel } = this.props;
-        const { validation, values, avatarUrl, step, region, birthDate } = this.state;
+        const {
+            validation,
+            values,
+            avatarUrl,
+            step,
+            region,
+            birthDate,
+            avatarRequiredVisible
+        } = this.state;
 
         if (step === 1)
             return (
@@ -175,10 +188,17 @@ export default class extends PureComponent {
                                 />
                                 <Tooltip title={IMG_UPLOAD_TIP} placement="right">
                                     <label htmlFor="upload" className={styles.uploadLabel}>
-                                        <img src={avatarUrl || defaultAvatar} alt="avatar" />
-                                        <span>点击上传</span>
+                                        {avatarUrl ? (
+                                            <img src={avatarUrl} alt="avatar" />
+                                        ) : (
+                                            <span className="material-icons">person</span>
+                                        )}
+                                        <span className={styles.uploadTip}>点击上传</span>
                                     </label>
                                 </Tooltip>
+                                {avatarRequiredVisible && (
+                                    <FormHelperText error>请上传用户头像</FormHelperText>
+                                )}
                             </div>
                         </InputBox>
                         <InputBox label="用户昵称" required vertical>
