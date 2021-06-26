@@ -18,7 +18,12 @@ import { zhCN } from "@material-ui/core/locale";
 moment.locale("zh-cn");
 
 const store = createStore(reducers);
-const theme = createMuiTheme({ zhCN });
+const theme = createMuiTheme({
+    zhCN,
+    typography: {
+        fontFamily: ["Roboto", "Noto Sans SC", "sans-serif"].join(",")
+    }
+});
 
 const content = (
     <React.StrictMode>
