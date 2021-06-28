@@ -17,7 +17,7 @@
     border-radius: 5%;
 }
 
-.root > span {
+.nickname {
     margin-left: 10px;
     display: inline-block;
     max-width: 65px;

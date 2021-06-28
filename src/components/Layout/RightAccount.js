@@ -39,7 +39,7 @@ class RightAccount extends PureComponent {
             <>
                 <ButtonBase className={styles.root} onClick={this.openMenu}>
                     <img src={userInfo.avatarUrl} alt="avatar" />
-                    <span>{userInfo.nickname}</span>
+                    <span className={styles.nickname}>{userInfo.nickname}</span>
                 </ButtonBase>
                 <Menu
                     anchorEl={anchorEl}
