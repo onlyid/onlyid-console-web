@@ -6,7 +6,6 @@ import moment from "moment";
 import { DATE_TIME_FORMAT } from "my/constants";
 import SuccessStatus from "components/SuccessStatus";
 import Empty from "components/Empty";
-import classNames from "classnames";
 
 class Latest extends PureComponent {
     state = {
@@ -39,16 +38,23 @@ class Latest extends PureComponent {
             <div className={styles.root}>
                 <h3>最近发送</h3>
                 <Table className={styles.table1}>
-                    <TableHead className={classNames({ [styles.otpThead]: list.length })}>
+                    <TableHead className={styles.otpThead}>
                         <TableRow>
                             <TableCell>接收人</TableCell>
                             <TableCell>验证码</TableCell>
-                            <TableCell>发送内容</TableCell>
                             <TableCell>创建时间</TableCell>
                             <TableCell>过期时间</TableCell>
                             <TableCell>发送状态</TableCell>
-                            <TableCell>校验失败次数</TableCell>
-                            <TableCell>最多失败次数</TableCell>
+                            <TableCell>
+                                当前
+                                <br />
+                                失败次数
+                            </TableCell>
+                            <TableCell>
+                                最多
+                                <br />
+                                失败次数
+                            </TableCell>
                             <TableCell>校验状态</TableCell>
                         </TableRow>
                     </TableHead>
@@ -57,7 +63,6 @@ class Latest extends PureComponent {
                             <TableRow key={item.id}>
                                 <TableCell>{item.recipient}</TableCell>
                                 <TableCell>{item.code}</TableCell>
-                                <TableCell className={styles.otpContent}>{item.content}</TableCell>
                                 <TableCell>
                                     {moment(item.createDate).format(DATE_TIME_FORMAT)}
                                 </TableCell>

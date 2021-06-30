@@ -13,11 +13,6 @@
     background-color: #fbfbfb;
 }
 
-.table1 :global .MuiTableBody-root .MuiTableCell-root {
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-
 .table1 .borderLeft {
     border-left: 1px solid rgb(224, 224, 224);
     padding-left: 32px;
@@ -28,9 +23,9 @@
     padding-bottom: 4px;
 }
 
-.table1 .otpContent {
-    font-size: 13px;
-    width: 260px;
+.table1 .userBody :global .MuiTableCell-root {
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .table1 .userBox,

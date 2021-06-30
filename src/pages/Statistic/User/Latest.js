@@ -49,7 +49,7 @@ class Latest extends PureComponent {
                             <TableCell>登录时间</TableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody>
+                    <TableBody className={styles.userBody}>
                         {list.map(item => (
                             <TableRow key={item.id + item.firstDate}>
                                 <TableCell>

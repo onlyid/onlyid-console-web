@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./index.module.css";
 import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
-import classNames from "classnames";
 import moment from "moment";
 import { DATE_TIME_FORMAT } from "my/constants";
 import SuccessStatus from "components/SuccessStatus";
@@ -18,15 +17,23 @@ export default function({ list, loading, current, pageSize, total, onPaginationC
             pagination={pagination}
             onPaginationChange={onPaginationChange}
         >
-            <TableHead className={classNames({ [styles.otpThead]: list.length })}>
+            <TableHead className={styles.otpThead}>
                 <TableRow>
                     <TableCell>接收人</TableCell>
                     <TableCell>验证码</TableCell>
                     <TableCell>创建时间</TableCell>
                     <TableCell>过期时间</TableCell>
                     <TableCell>发送状态</TableCell>
-                    <TableCell style={{ width: 80 }}>校验失败次数</TableCell>
-                    <TableCell style={{ width: 80 }}>最多失败次数</TableCell>
+                    <TableCell>
+                        当前
+                        <br />
+                        失败次数
+                    </TableCell>
+                    <TableCell>
+                        最多
+                        <br />
+                        失败次数
+                    </TableCell>
                     <TableCell>校验状态</TableCell>
                 </TableRow>
             </TableHead>
