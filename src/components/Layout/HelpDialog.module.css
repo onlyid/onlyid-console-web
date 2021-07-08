@@ -1,4 +1,4 @@
-.content :global .material-icons {
+.content h3 :global .material-icons {
     vertical-align: -20%;
     font-size: 20px;
     margin-right: 5px;
@@ -6,9 +6,6 @@
 
 .content h3 {
     margin-top: 25px;
-}
-
-.content a {
 }
 
 .content ul {
@@ -20,5 +17,26 @@
 }
 
 .contact {
-    color: #f50057;
+    font-size: 15px;
+}
+
+.mailTo {
+    text-decoration: none;
+    color: inherit;
+}
+
+.qrCode {
+    font-size: 17px;
+    vertical-align: -20%;
+}
+
+.popper1 {
+    pointer-events: none;
+    z-index: 1301;
+}
+
+.popper1 img {
+    width: 13.5rem;
+    height: 13.5rem;
+    display: block;
 }

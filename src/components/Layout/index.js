@@ -11,7 +11,7 @@ import { eventEmitter } from "my/utils";
 
 class Layout extends PureComponent {
     state = {
-        toast: { open: false, text: "", severity: "", timeout: 0 }
+        toast: { open: false, text: "", severity: "", timeout: 0 },
     };
 
     componentDidMount() {
@@ -38,9 +38,9 @@ class Layout extends PureComponent {
         eventEmitter.off("app/openToast", this.openToast);
     }
 
-    openToast = async toast => {
+    openToast = async (toast) => {
         const {
-            toast: { open }
+            toast: { open },
         } = this.state;
         if (open) await this.closeToast();
 

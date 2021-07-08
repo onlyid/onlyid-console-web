@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 class Header extends PureComponent {
     state = {
         drawerVisible: false,
-        dialogVisible: false
+        dialogVisible: false,
     };
 
     componentDidMount() {
@@ -49,7 +49,7 @@ class Header extends PureComponent {
     render() {
         const { drawerVisible, dialogVisible } = this.state;
         const {
-            myMessage: { unreadCount }
+            myMessage: { unreadCount },
         } = this.props;
 
         return (
