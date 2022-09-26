@@ -15,6 +15,11 @@ export default class extends PureComponent {
     componentDidMount() {
         this.initData();
     }
+    
+    componentDidUpdate(prevProps) {
+        const { open } = this.props;
+        if (open && !prevProps.open) this.setState({ fileUrl: "", loading: false });
+    }
 
     initData = async () => {
         const list = await http.get("clients");

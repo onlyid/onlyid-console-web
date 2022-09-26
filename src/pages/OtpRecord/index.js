@@ -128,7 +128,6 @@ class OtpRecord extends PureComponent {
                     sendSuccess={sendSuccess}
                     verifySuccess={verifySuccess}
                     keyword={keyword}
-                    key={Date()}
                 />
             </div>
         );
