@@ -26,15 +26,8 @@ class OtpRecord extends PureComponent {
 
     initData = async () => {
         this.setState({ loading: true });
-        const {
-            clientId,
-            days,
-            sendSuccess,
-            verifySuccess,
-            keyword,
-            current,
-            pageSize
-        } = this.state;
+        const { clientId, days, sendSuccess, verifySuccess, keyword, current, pageSize } =
+            this.state;
 
         const params = { current, pageSize, keyword, days };
         if (clientId !== "all") params.clientId = clientId;
@@ -45,7 +38,7 @@ class OtpRecord extends PureComponent {
         this.setState({ list, total, loading: false });
     };
 
-    onClientChange = clientId => {
+    onClientChange = (clientId) => {
         this.setState({ clientId });
     };
 

@@ -15,7 +15,7 @@ export default class extends PureComponent {
     componentDidMount() {
         this.initData();
     }
-    
+
     componentDidUpdate(prevProps) {
         const { open } = this.props;
         if (open && !prevProps.open) this.setState({ fileUrl: "", loading: false });
@@ -40,7 +40,7 @@ export default class extends PureComponent {
         this.setState({ fileUrl, loading: false });
     };
 
-    getStatusText = success => {
+    getStatusText = (success) => {
         switch (success) {
             case "all":
                 return "查看全部";
@@ -56,7 +56,7 @@ export default class extends PureComponent {
         const { list, fileUrl, loading } = this.state;
 
         const clientName =
-            clientId === "all" ? "全部应用" : `${list.find(item => item.id === clientId).name}`;
+            clientId === "all" ? "全部应用" : `${list.find((item) => item.id === clientId).name}`;
 
         return (
             <Dialog open={open} onClose={onClose}>
