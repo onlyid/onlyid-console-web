@@ -32,7 +32,7 @@ class Client extends PureComponent {
         dispatch({ type: "application", currentTab: value });
     };
 
-    onUpload = async filename => {
+    onUpload = async (filename) => {
         const { match } = this.props;
         const { iconUrl } = await http.put(`clients/${match.params.id}/icon`, { filename });
         this.setState(({ client }) => ({ client: { ...client, iconUrl } }));
