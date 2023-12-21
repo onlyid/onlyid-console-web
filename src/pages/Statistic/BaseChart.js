@@ -40,7 +40,7 @@ class BaseChart extends PureComponent {
     /**
      * 补齐空项 转换成count数组
      */
-    formatData = list => {
+    formatData = (list) => {
         const { days } = this.props;
 
         const date = new Date();
@@ -72,7 +72,7 @@ class BaseChart extends PureComponent {
         return countArr;
     };
 
-    showChart = countArr => {
+    showChart = (countArr) => {
         const { days, name } = this.props;
 
         const xAxisData = [];

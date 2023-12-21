@@ -8,8 +8,8 @@ export const loginUrl =
 const instance = axios.create({ baseURL });
 
 instance.interceptors.response.use(
-    res => res.data,
-    err => {
+    (res) => res.data,
+    (err) => {
         let errMsg;
         if (err.response) {
             if (err.response.status === 401) {

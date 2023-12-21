@@ -31,7 +31,7 @@ class Chart extends PureComponent {
         const { list } = this.state;
         const { typeList, type, days } = this.props;
 
-        const name = typeList.find(item => item.value === type).label;
+        const name = typeList.find((item) => item.value === type).label;
 
         return <BaseChart days={days} list={list} name={name} />;
     }

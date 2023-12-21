@@ -26,7 +26,7 @@ class ClientSelect extends PureComponent {
             </MenuItem>
         ];
         menuItems.push(
-            list.map(client => (
+            list.map((client) => (
                 <MenuItem key={client.id} value={client.id}>
                     {client.name}
                 </MenuItem>

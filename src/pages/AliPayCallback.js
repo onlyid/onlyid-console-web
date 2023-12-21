@@ -20,7 +20,7 @@ class AliPayCallback extends PureComponent {
         this.checkRenew(query["out_trade_no"]);
     }
 
-    checkRenew = async chargeId => {
+    checkRenew = async (chargeId) => {
         const { history } = this.props;
 
         try {

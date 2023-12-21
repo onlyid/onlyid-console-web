@@ -21,7 +21,7 @@ class OAuthCallback extends PureComponent {
         this.login(query.code);
     }
 
-    login = async code => {
+    login = async (code) => {
         const { history } = this.props;
         const { userInfo, tenantInfo } = await http.post("login", { code });
         localStorage.setObj("userInfo", userInfo);

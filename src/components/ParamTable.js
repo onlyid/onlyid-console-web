@@ -20,7 +20,7 @@ export default class extends PureComponent {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map(item => (
+                    {data.map((item) => (
                         <tr key={item.name}>
                             <td className={styles.c1}>{item.name}</td>
                             <td className={styles.c2}>{item.type}</td>

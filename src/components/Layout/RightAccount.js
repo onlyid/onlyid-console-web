@@ -22,7 +22,7 @@ class RightAccount extends PureComponent {
         window.location.replace(HOME_URL);
     };
 
-    openMenu = event => {
+    openMenu = (event) => {
         this.setState({ anchorEl: event.currentTarget });
     };
 
