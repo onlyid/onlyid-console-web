@@ -47,12 +47,6 @@ export default function LeftDrawer() {
                             </ListItemIcon>
                             <ListItemText primary="用户管理" />
                         </Item>
-                        <Item to="/permissions">
-                            <ListItemIcon>
-                                <span className="material-icons">vpn_key</span>
-                            </ListItemIcon>
-                            <ListItemText primary="权限管理" />
-                        </Item>
                         <Item to="/roles">
                             <ListItemIcon>
                                 <span className="material-icons">account_box</span>

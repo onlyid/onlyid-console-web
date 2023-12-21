@@ -78,7 +78,7 @@ export default class OperationTable extends PureComponent {
                                     {!item.success && <p>{item.errMsg}</p>}
                                 </TableCell>
                                 <TableCell className={styles.type}>
-                                    {item.type === "CONSOLE" ? "控制台" : "Open API"}
+                                    {item.type === "CONSOLE" ? "控制台" : "OpenAPI"}
                                 </TableCell>
                             </TableRow>
                         ))}

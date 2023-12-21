@@ -93,7 +93,7 @@ class BehaviorLog extends PureComponent {
             <div className={styles.root}>
                 <h1>行为日志</h1>
                 <p>
-                    查看用户登录日志和开发者操作日志（控制台和Open API）。
+                    查看用户登录日志和开发者操作日志（控制台和OpenAPI）。
                     <span style={{ color: "#7f7f7f" }}>（保留三个月数据）</span>
                 </p>
                 <SelectBar

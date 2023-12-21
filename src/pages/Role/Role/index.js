@@ -7,7 +7,6 @@ import mainTabs from "components/MainTabs.module.css";
 import { Tab, Tabs } from "@material-ui/core";
 import Basic from "./Basic";
 import Danger from "./Danger";
-import Permission from "./Permission";
 import User from "./User";
 
 class Role extends PureComponent {
@@ -38,9 +37,6 @@ class Role extends PureComponent {
 
         let content;
         switch (currentTab) {
-            case "permission":
-                content = <Permission clientId={role.clientId} />;
-                break;
             case "user":
                 content = <User clientId={role.clientId} />;
                 break;
@@ -68,7 +64,6 @@ class Role extends PureComponent {
                     className={mainTabs.root}
                 >
                     <Tab label="角色详情" value="basic" />
-                    <Tab label="分配权限" value="permission" />
                     <Tab label="关联用户" value="user" />
                     <Tab label="危险设置" value="danger" />
                 </Tabs>

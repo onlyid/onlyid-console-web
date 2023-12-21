@@ -180,9 +180,6 @@ class UserTable extends PureComponent {
                     <MenuItem onClick={() => this.go("role")}>
                         <ListItemText>分配角色</ListItemText>
                     </MenuItem>
-                    <MenuItem onClick={() => this.go("permission")}>
-                        <ListItemText>合并权限</ListItemText>
-                    </MenuItem>
                     <MenuItem onClick={() => this.go("danger")}>
                         <ListItemText>危险设置</ListItemText>
                     </MenuItem>

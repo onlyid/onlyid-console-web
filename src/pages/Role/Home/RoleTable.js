@@ -110,9 +110,6 @@ class RoleTable extends PureComponent {
                     <MenuItem onClick={() => this.go("basic")}>
                         <ListItemText>角色详情</ListItemText>
                     </MenuItem>
-                    <MenuItem onClick={() => this.go("permission")}>
-                        <ListItemText>分配权限</ListItemText>
-                    </MenuItem>
                     <MenuItem onClick={() => this.go("user")}>
                         <ListItemText>关联用户</ListItemText>
                     </MenuItem>

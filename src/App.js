@@ -9,7 +9,6 @@ const Statistic = React.lazy(() => import("pages/Statistic"));
 const Application = React.lazy(() => import("pages/Application"));
 const OtpRecord = React.lazy(() => import("pages/OtpRecord"));
 const User = React.lazy(() => import("pages/User"));
-const Permission = React.lazy(() => import("pages/Permission"));
 const Role = React.lazy(() => import("pages/Role"));
 const BehaviorLog = React.lazy(() => import("pages/BehaviorLog"));
 const Tenant = React.lazy(() => import("pages/Tenant"));
@@ -44,9 +43,6 @@ function App() {
                         </Route>
                         <Route path="/users">
                             <User />
-                        </Route>
-                        <Route path="/permissions/:clientId?">
-                            <Permission />
                         </Route>
                         <Route path="/roles">
                             <Role />
