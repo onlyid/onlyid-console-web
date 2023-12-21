@@ -31,7 +31,7 @@ class RoleTable extends PureComponent {
         this.setState({ anchorEl: null });
     };
 
-    go = tab => {
+    go = (tab) => {
         const { history, match, dispatch } = this.props;
         const { roleId } = this.state;
 
@@ -69,10 +69,13 @@ class RoleTable extends PureComponent {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {list.map(item => (
+                        {list.map((item) => (
                             <TableRow key={item.id} hover>
                                 <TableCell className={styles.name}>
-                                    <Link href="#" onClick={event => this.onClick(event, item.id)}>
+                                    <Link
+                                        href="#"
+                                        onClick={(event) => this.onClick(event, item.id)}
+                                    >
                                         {item.name}
                                     </Link>
                                 </TableCell>
@@ -86,7 +89,7 @@ class RoleTable extends PureComponent {
                                     {moment(item.createDate).format(DATE_TIME_FORMAT)}
                                 </TableCell>
                                 <TableCell align="center">
-                                    <IconButton onClick={event => this.openMenu(event, item.id)}>
+                                    <IconButton onClick={(event) => this.openMenu(event, item.id)}>
                                         <span className="material-icons">more_horiz</span>
                                     </IconButton>
                                 </TableCell>

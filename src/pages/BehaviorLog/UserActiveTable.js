@@ -6,8 +6,8 @@ import moment from "moment";
 import { AUTH_METHOD, DATE_TIME_FORMAT } from "my/constants";
 import SuccessStatus from "components/SuccessStatus";
 
-export default class extends PureComponent {
-    noteCell = item => {
+export default class UserActiveTable extends PureComponent {
+    noteCell = (item) => {
         let list = [];
         if (item.signUp) list.push("用户新注册账号");
         if (item.resetPassword) list.push("用户重置了密码");
@@ -48,7 +48,7 @@ export default class extends PureComponent {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {list.map(item => (
+                    {list.map((item) => (
                         <TableRow key={item.id} hover>
                             <TableCell>
                                 <div className={styles.userBox}>

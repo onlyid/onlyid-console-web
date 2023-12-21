@@ -3,7 +3,7 @@ import styles from "./GenderSymbol.module.css";
 import { GENDER_TEXT } from "my/constants";
 import classNames from "classnames";
 
-export default function({ gender, dense }) {
+export default function GenderSymbol({ gender, dense }) {
     if (!gender) return "-";
 
     let icon;

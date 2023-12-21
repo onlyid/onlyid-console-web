@@ -28,10 +28,10 @@ class Summary extends PureComponent {
         const { totalCount } = await http.get("statistics/users/total-count", { params });
 
         params.days = 1;
-        const {
-            active: yesterdayActive,
-            new: yesterdayNew
-        } = await http.get("statistics/users/summary", { params });
+        const { active: yesterdayActive, new: yesterdayNew } = await http.get(
+            "statistics/users/summary",
+            { params }
+        );
 
         params.days = days;
         const { active: periodActive, new: periodNew } = await http.get(

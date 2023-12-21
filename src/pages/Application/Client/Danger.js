@@ -12,7 +12,7 @@ class Danger extends PureComponent {
         operation: ""
     };
 
-    confirm = operation => {
+    confirm = (operation) => {
         this.setState({ dialogOpen: true, operation });
     };
 

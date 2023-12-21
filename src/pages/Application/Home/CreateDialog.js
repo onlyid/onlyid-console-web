@@ -30,7 +30,7 @@ const RULES = {
     description: { max: 200, message: "最多输入200字" }
 };
 
-export default class extends PureComponent {
+export default class CreateDialog extends PureComponent {
     state = {
         validation: { name: {}, type: {}, description: {} },
         values: {},
@@ -151,7 +151,7 @@ export default class extends PureComponent {
                                 value={values.type || ""}
                                 onChange={this.onTypeChange}
                             >
-                                {Object.keys(CLIENT_TYPE_TEXT).map(key => (
+                                {Object.keys(CLIENT_TYPE_TEXT).map((key) => (
                                     <FormControlLabel
                                         value={key}
                                         key={key}

@@ -6,7 +6,7 @@ import { Button, TableBody, TableCell, TableHead, TableRow } from "@material-ui/
 import moment from "moment";
 import { DATE_TIME_FORMAT } from "my/constants";
 
-export default class extends PureComponent {
+export default class ChargeTable extends PureComponent {
     state = {
         list: [],
         loading: true
@@ -22,7 +22,7 @@ export default class extends PureComponent {
         this.setState({ list, loading: false });
     };
 
-    statusCell = item => {
+    statusCell = (item) => {
         if (item.paid) return <span style={{ color: "#4caf50" }}>已支付</span>;
 
         if (moment(item.expireDate).isBefore(moment())) return <span>已过期</span>;
@@ -30,7 +30,7 @@ export default class extends PureComponent {
         return <span style={{ color: "#f50057" }}>未支付</span>;
     };
 
-    actionCell = item => {
+    actionCell = (item) => {
         if (item.paid || moment(item.expireDate).isBefore(moment())) return "-";
 
         return (
@@ -62,7 +62,7 @@ export default class extends PureComponent {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {list.map(item => (
+                    {list.map((item) => (
                         <TableRow key={item.id} hover>
                             <TableCell style={{ minWidth: 100 }}>{item.id}</TableCell>
                             <TableCell style={{ minWidth: 100 }}>{item.year + " 年"}</TableCell>

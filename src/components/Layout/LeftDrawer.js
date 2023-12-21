@@ -14,7 +14,7 @@ function Item({ to, children }) {
     );
 }
 
-export default function() {
+export default function LeftDrawer() {
     const tenantInfo = localStorage.getObj("tenantInfo");
     if (!tenantInfo) return null;
 

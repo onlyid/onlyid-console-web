@@ -4,7 +4,7 @@ import DialogClose from "components/DialogClose";
 import styles from "./GuideDialog.module.css";
 import classNames from "classnames";
 
-export default function({ open, onClose }) {
+export default function GuideDialog({ open, onClose }) {
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>

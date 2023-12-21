@@ -6,7 +6,7 @@ import MomentUtils from "@date-io/moment";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import moment from "moment";
 
-export default function({
+export default function SelectBar({
     type,
     clientId,
     lteDate,
@@ -18,7 +18,7 @@ export default function({
     onChange,
     onSearch
 }) {
-    const shouldDisableDate = date => moment().diff(date, "day") > 90;
+    const shouldDisableDate = (date) => moment().diff(date, "day") > 90;
 
     return (
         <>
@@ -66,7 +66,7 @@ export default function({
                         name="gte-date"
                         format="YYYY-MM-DD"
                         value={gteDate}
-                        onChange={value => onDateChange("gteDate", value)}
+                        onChange={(value) => onDateChange("gteDate", value)}
                         disableFuture
                         disableToolbar
                         clearable
@@ -88,7 +88,7 @@ export default function({
                         name="lte-date"
                         format="YYYY-MM-DD"
                         value={lteDate}
-                        onChange={value => onDateChange("lteDate", value)}
+                        onChange={(value) => onDateChange("lteDate", value)}
                         disableFuture
                         disableToolbar
                         clearable

@@ -4,7 +4,7 @@ import { ReactComponent as EmptySimple } from "assets/empty-simple.svg";
 import styles from "./Empty.module.css";
 import classNames from "classnames";
 
-export default function({ description, simple }) {
+export default function Empty({ description, simple }) {
     return (
         <div className={classNames(styles.root, { [styles.simple]: simple })}>
             {simple ? <EmptySimple /> : <EmptyDefault />}

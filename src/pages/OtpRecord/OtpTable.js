@@ -6,7 +6,7 @@ import { DATE_TIME_FORMAT } from "my/constants";
 import SuccessStatus from "components/SuccessStatus";
 import MyTable from "components/MyTable";
 
-export default function({ list, loading, current, pageSize, total, onPaginationChange }) {
+export default function OtpTable({ list, loading, current, pageSize, total, onPaginationChange }) {
     const pagination = { current, pageSize, total };
 
     return (
@@ -38,7 +38,7 @@ export default function({ list, loading, current, pageSize, total, onPaginationC
                 </TableRow>
             </TableHead>
             <TableBody>
-                {list.map(item => (
+                {list.map((item) => (
                     <TableRow key={item.id} hover>
                         <TableCell>{item.recipient}</TableCell>
                         <TableCell>{item.code}</TableCell>

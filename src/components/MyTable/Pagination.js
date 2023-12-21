@@ -39,7 +39,7 @@ class Actions extends PureComponent {
         this.setState({ inputValue: newPage + 1 });
     };
 
-    onKeyUp = event => {
+    onKeyUp = (event) => {
         const { inputValue } = this.state;
         const { page, count, rowsPerPage, onChangePage } = this.props;
 
@@ -74,14 +74,14 @@ class Actions extends PureComponent {
         return (
             <div className={styles.actionBox}>
                 <IconButton
-                    onClick={event => this.onClick(event, "first")}
+                    onClick={(event) => this.onClick(event, "first")}
                     disabled={page === 0}
                     title="第一页"
                 >
                     <FirstPage />
                 </IconButton>
                 <IconButton
-                    onClick={event => this.onClick(event, "prev")}
+                    onClick={(event) => this.onClick(event, "prev")}
                     disabled={page === 0}
                     title="上一页"
                 >
@@ -95,14 +95,14 @@ class Actions extends PureComponent {
                 />{" "}
                 / {maxPage + 1} 页
                 <IconButton
-                    onClick={event => this.onClick(event, "next")}
+                    onClick={(event) => this.onClick(event, "next")}
                     disabled={page >= maxPage}
                     title="下一页"
                 >
                     <KeyboardArrowRight />
                 </IconButton>
                 <IconButton
-                    onClick={event => this.onClick(event, "last")}
+                    onClick={(event) => this.onClick(event, "last")}
                     disabled={page >= maxPage}
                     title="最后一页"
                 >
@@ -113,7 +113,13 @@ class Actions extends PureComponent {
     }
 }
 
-export default function({ count, rowsPerPage, page, onChangePage, onChangeRowsPerPage }) {
+export default function Pagination({
+    count,
+    rowsPerPage,
+    page,
+    onChangePage,
+    onChangeRowsPerPage
+}) {
     return (
         <TablePagination
             component="div"

@@ -57,7 +57,7 @@ class Otp extends PureComponent {
                             value={values.length ? String(values.length) : ""}
                             onChange={this.onChange}
                         >
-                            {Object.keys(OTP_LENGTH_TEXT).map(key => (
+                            {Object.keys(OTP_LENGTH_TEXT).map((key) => (
                                 <FormControlLabel
                                     value={key}
                                     key={key}
@@ -76,7 +76,7 @@ class Otp extends PureComponent {
                             value={values.expireMin ? String(values.expireMin) : ""}
                             onChange={this.onChange}
                         >
-                            {Object.keys(OTP_EXPIRE_TEXT).map(key => (
+                            {Object.keys(OTP_EXPIRE_TEXT).map((key) => (
                                 <FormControlLabel
                                     value={key}
                                     key={key}
@@ -95,7 +95,7 @@ class Otp extends PureComponent {
                             value={values.maxFailCount ? String(values.maxFailCount) : ""}
                             onChange={this.onChange}
                         >
-                            {Object.keys(OTP_FAIL_TEXT).map(key => (
+                            {Object.keys(OTP_FAIL_TEXT).map((key) => (
                                 <FormControlLabel
                                     value={key}
                                     key={key}

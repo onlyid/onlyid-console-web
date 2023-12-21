@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 
-export default function({ date }) {
+export default function DateCountDown({ date }) {
     let unit, count;
     count = moment(date).diff(moment(), "hour");
     if (count > 24) {

@@ -10,7 +10,7 @@ import { Close as CloseIcon } from "@material-ui/icons";
 import Empty from "components/Empty";
 
 class Item extends PureComponent {
-    onClick = event => {
+    onClick = (event) => {
         event.stopPropagation();
 
         const { markRead } = this.props;
@@ -65,7 +65,7 @@ class List extends PureComponent {
         this.setState({ list, showEmpty: !list.length });
     };
 
-    markRead = async id => {
+    markRead = async (id) => {
         await http.put(`my-messages/${id}/mark-read`);
         this.initData();
         eventEmitter.emit("myMessage/countChange");
@@ -84,7 +84,7 @@ class List extends PureComponent {
 
         return (
             <div className={styles.list}>
-                {list.map(item => (
+                {list.map((item) => (
                     <Item
                         message={item}
                         key={item.id}
@@ -105,7 +105,7 @@ class MessageBox extends PureComponent {
         onClose();
     };
 
-    onItemClick = id => {
+    onItemClick = (id) => {
         const { history, onClose } = this.props;
 
         history.push(`/my-messages/${id}`);
@@ -132,7 +132,7 @@ class MessageBox extends PureComponent {
         return (
             <Drawer anchor="right" open={visible} onClose={onClose}>
                 {drawerTitle}
-                <List onItemClick={id => this.onItemClick(id)} />
+                <List onItemClick={(id) => this.onItemClick(id)} />
             </Drawer>
         );
     }

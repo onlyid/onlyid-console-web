@@ -23,12 +23,7 @@ h3 {
 
 @font-face {
     font-family: "iconfont"; /* project id 545468 */
-    src: url("//at.alicdn.com/t/font_545468_m9c4l6t65fp.eot");
-    src: url("//at.alicdn.com/t/font_545468_m9c4l6t65fp.eot?#iefix") format("embedded-opentype"),
-        url("//at.alicdn.com/t/font_545468_m9c4l6t65fp.woff2") format("woff2"),
-        url("//at.alicdn.com/t/font_545468_m9c4l6t65fp.woff") format("woff"),
-        url("//at.alicdn.com/t/font_545468_m9c4l6t65fp.ttf") format("truetype"),
-        url("//at.alicdn.com/t/font_545468_m9c4l6t65fp.svg#iconfont") format("svg");
+    src: url("https://at.alicdn.com/t/font_545468_uxcwqgt1mw.woff2?t=1622972228087") format("woff2");
 }
 
 .iconfont {
@@ -44,10 +39,8 @@ h3 {
     font-family: "Material Icons";
     font-style: normal;
     font-weight: 400;
-    src: url(https://cdn.jsdelivr.net/npm/material-icons@1.13.1/iconfont/material-icons.woff2)
-            format("woff2"),
-        url(https://cdn.jsdelivr.net/npm/material-icons@1.13.1/iconfont/material-icons.woff)
-            format("woff");
+    src: url(https://fastly.jsdelivr.net/npm/material-icons@1.13.1/iconfont/material-icons.woff2)
+        format("woff2");
 }
 
 .material-icons {

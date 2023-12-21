@@ -76,7 +76,7 @@ class Role extends PureComponent {
         this.initData();
     };
 
-    openDelete = deleteId => {
+    openDelete = (deleteId) => {
         this.setState({ deleteOpen: true, deleteId });
     };
 
@@ -125,7 +125,7 @@ class Role extends PureComponent {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {list.map(item => (
+                        {list.map((item) => (
                             <TableRow key={item.id} hover>
                                 <TableCell className={styles.name}>{item.name}</TableCell>
                                 <TableCell className={styles.description}>

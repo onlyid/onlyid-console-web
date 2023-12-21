@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function({ success }) {
+export default function SuccessStatus({ success }) {
     if (success == null) return "-";
 
     return success ? (

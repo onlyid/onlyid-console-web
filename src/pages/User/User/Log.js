@@ -36,7 +36,7 @@ class Log extends PureComponent {
         this.setState({ pageSize, current }, this.initData);
     };
 
-    noteCell = item => {
+    noteCell = (item) => {
         let list = [];
         if (item.signUp) list.push("用户新注册账号");
         if (item.resetPassword) list.push("用户重置了密码");

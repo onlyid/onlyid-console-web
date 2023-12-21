@@ -5,7 +5,7 @@ import http from "my/http";
 import styles from "./ExportDialog.module.css";
 import tipBox from "components/TipBox.module.css";
 
-export default class extends PureComponent {
+export default class ExportDialog extends PureComponent {
     state = {
         list: [],
         fileUrl: "",

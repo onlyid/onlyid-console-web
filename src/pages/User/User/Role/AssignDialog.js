@@ -50,7 +50,7 @@ class AssignDialog extends PureComponent {
         this.setState({ current: 1 }, this.initData);
     };
 
-    onClientChange = clientId => {
+    onClientChange = (clientId) => {
         this.setState({ clientId });
     };
 
@@ -96,7 +96,7 @@ class AssignDialog extends PureComponent {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {list.map(item => (
+                            {list.map((item) => (
                                 <TableRow key={item.id} hover>
                                     <TableCell className={styles.name}>{item.name}</TableCell>
                                     <TableCell className={styles.description}>

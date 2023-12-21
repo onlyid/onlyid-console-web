@@ -5,13 +5,13 @@ import Empty from "../Empty";
 import Pagination from "./Pagination";
 import classNames from "classnames";
 
-export default class extends PureComponent {
+export default class MyTable extends PureComponent {
     onChangePage = (event, page) => {
         const { onPaginationChange, pagination } = this.props;
         onPaginationChange({ pageSize: pagination.pageSize, current: page + 1 });
     };
 
-    onChangeRowsPerPage = event => {
+    onChangeRowsPerPage = (event) => {
         const { onPaginationChange } = this.props;
         onPaginationChange({ pageSize: event.target.value, current: 1 });
     };

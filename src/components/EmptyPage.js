@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./EmptyPage.module.css";
 
-export default function({ title, icon, description, children }) {
+export default function EmptyPage({ title, icon, description, children }) {
     return (
         <div className={styles.root}>
             <h1>{title}</h1>

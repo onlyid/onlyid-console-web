@@ -32,7 +32,7 @@ class ClientTable extends PureComponent {
         this.setState({ anchorEl: null });
     };
 
-    go = tab => {
+    go = (tab) => {
         const { history, match, dispatch } = this.props;
         const { clientId } = this.state;
 
@@ -62,13 +62,13 @@ class ClientTable extends PureComponent {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {list.map(item => (
+                        {list.map((item) => (
                             <TableRow key={item.id} hover>
                                 <TableCell>
                                     <Link
                                         className={styles.clientBox}
                                         href="#"
-                                        onClick={event => this.onClick(event, item.id)}
+                                        onClick={(event) => this.onClick(event, item.id)}
                                     >
                                         <img src={item.iconUrl} alt="icon" />
                                         {item.name}
@@ -87,7 +87,7 @@ class ClientTable extends PureComponent {
                                     {moment(item.createDate).format(DATE_TIME_FORMAT)}
                                 </TableCell>
                                 <TableCell align="center">
-                                    <IconButton onClick={event => this.openMenu(event, item.id)}>
+                                    <IconButton onClick={(event) => this.openMenu(event, item.id)}>
                                         <span className="material-icons">more_horiz</span>
                                     </IconButton>
                                 </TableCell>

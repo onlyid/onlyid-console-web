@@ -71,7 +71,7 @@ class User extends PureComponent {
         this.initData();
     };
 
-    openDelete = deleteId => {
+    openDelete = (deleteId) => {
         this.setState({ deleteOpen: true, deleteId });
     };
 
@@ -89,7 +89,7 @@ class User extends PureComponent {
         this.closeDelete();
     };
 
-    onLink = async id => {
+    onLink = async (id) => {
         const { match, clientId } = this.props;
 
         const params = { roleId: match.params.id, clientId };
@@ -116,7 +116,7 @@ class User extends PureComponent {
                     total={total}
                     loading={loading}
                     onPaginationChange={this.onPaginationChange}
-                    onAction={id => this.openDelete(id)}
+                    onAction={(id) => this.openDelete(id)}
                 />
                 <div className={tipBox.root}>
                     <p>提示：</p>

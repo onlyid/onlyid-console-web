@@ -58,7 +58,7 @@ class Permission extends PureComponent {
     onCheckAll = ({ target: { checked } }) => {
         const { list } = this.state;
 
-        const checkedIds = checked ? list.map(item => item.id) : [];
+        const checkedIds = checked ? list.map((item) => item.id) : [];
 
         this.setState({ checkedIds });
     };
@@ -98,12 +98,12 @@ class Permission extends PureComponent {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {list.map(item => (
+                        {list.map((item) => (
                             <TableRow key={item.id} selected={checkedIds.includes(item.id)} hover>
                                 <TableCell padding="checkbox">
                                     <Checkbox
                                         checked={checkedIds.includes(item.id)}
-                                        onChange={event => this.onCheck(event, item.id)}
+                                        onChange={(event) => this.onCheck(event, item.id)}
                                     />
                                 </TableCell>
                                 <TableCell className={styles.grayBox}>

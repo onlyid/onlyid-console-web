@@ -6,7 +6,7 @@ import moment from "moment";
 import { DATE_TIME_FORMAT } from "my/constants";
 import SuccessStatus from "components/SuccessStatus";
 
-export default class extends PureComponent {
+export default class OperationTable extends PureComponent {
     state = {
         anchorEl: null,
         description: ""
@@ -54,12 +54,12 @@ export default class extends PureComponent {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {list.map(item => (
+                        {list.map((item) => (
                             <TableRow key={item.id} hover>
                                 <TableCell className={styles.operation}>{item.operation}</TableCell>
                                 <TableCell
                                     className={styles.description}
-                                    onClick={event => this.openDesc(event, item.description)}
+                                    onClick={(event) => this.openDesc(event, item.description)}
                                 >
                                     {item.description || "-"}
                                 </TableCell>

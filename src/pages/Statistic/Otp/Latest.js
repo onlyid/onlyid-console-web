@@ -59,7 +59,7 @@ class Latest extends PureComponent {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {list.map(item => (
+                        {list.map((item) => (
                             <TableRow key={item.id}>
                                 <TableCell>{item.recipient}</TableCell>
                                 <TableCell>{item.code}</TableCell>

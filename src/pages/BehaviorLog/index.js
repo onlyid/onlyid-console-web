@@ -30,16 +30,8 @@ class BehaviorLog extends PureComponent {
 
     initData = async () => {
         this.setState({ loading: true });
-        const {
-            clientId,
-            keyword,
-            current,
-            pageSize,
-            gteDate,
-            lteDate,
-            success,
-            type
-        } = this.state;
+        const { clientId, keyword, current, pageSize, gteDate, lteDate, success, type } =
+            this.state;
 
         const params = {
             current,
@@ -61,7 +53,7 @@ class BehaviorLog extends PureComponent {
         this.setState({ list, total, loading: false, realType: type });
     };
 
-    onClientChange = clientId => {
+    onClientChange = (clientId) => {
         this.setState({ clientId });
     };
 

@@ -1,7 +1,7 @@
 import { Tooltip } from "@material-ui/core";
 import React from "react";
 
-export default function({ tip, hidden, toggle }) {
+export default function RevealButton({ tip, hidden, toggle }) {
     return (
         <Tooltip title={tip}>
             <div className="inputEndButton" onClick={toggle}>

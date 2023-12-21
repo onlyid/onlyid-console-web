@@ -142,7 +142,7 @@ class Basic extends PureComponent {
                             value={values.type || ""}
                             onChange={this.onTypeChange}
                         >
-                            {Object.keys(CLIENT_TYPE_TEXT).map(key => (
+                            {Object.keys(CLIENT_TYPE_TEXT).map((key) => (
                                 <FormControlLabel
                                     value={key}
                                     key={key}

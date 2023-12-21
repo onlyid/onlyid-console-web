@@ -6,7 +6,7 @@ import MyTable from "components/MyTable";
 import moment from "moment";
 import { DATE_TIME_FORMAT } from "my/constants";
 
-export default function({
+export default function Table({
     list,
     current,
     pageSize,

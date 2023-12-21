@@ -25,7 +25,7 @@ class Home extends PureComponent {
         this.initData(!list.length);
     }
 
-    initData = async setEmpty => {
+    initData = async (setEmpty) => {
         this.setState({ loading: true });
         const {
             dispatch,
@@ -58,7 +58,7 @@ class Home extends PureComponent {
         this.setState({ showEmpty: false });
     };
 
-    onClientChange = clientId => {
+    onClientChange = (clientId) => {
         const { dispatch } = this.props;
         dispatch({ type: "role", clientId });
     };

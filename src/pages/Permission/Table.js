@@ -46,14 +46,14 @@ function DeleteDialog({ open, onDelete, onCancel, id }) {
     );
 }
 
-export default class extends PureComponent {
+export default class Table extends PureComponent {
     state = {
         deleteOpen: false,
         editOpen: false,
         permission: {}
     };
 
-    openDelete = permission => {
+    openDelete = (permission) => {
         this.setState({ deleteOpen: true, permission });
     };
 
@@ -61,7 +61,7 @@ export default class extends PureComponent {
         this.setState({ deleteOpen: false });
     };
 
-    openEdit = permission => {
+    openEdit = (permission) => {
         this.setState({ editOpen: true, permission });
     };
 
@@ -90,7 +90,7 @@ export default class extends PureComponent {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {list.map(item => (
+                        {list.map((item) => (
                             <TableRow key={item.id} hover>
                                 <TableCell className={styles.grayBox}>
                                     <span>{item.resource}</span>

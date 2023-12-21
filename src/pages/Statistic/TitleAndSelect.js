@@ -3,14 +3,14 @@ import styles from "./TitleAndSelect.module.css";
 import ClientSelect from "components/ClientSelect";
 import { FormControl, InputAdornment, MenuItem, Select } from "@material-ui/core";
 
-export default function({ title, clientId, days, type, onChange, typeList }) {
+export default function TitleAndSelect({ title, clientId, days, type, onChange, typeList }) {
     return (
         <div className={styles.root}>
             <h2>{title}</h2>
             <div>
                 <ClientSelect
                     value={clientId}
-                    onChange={clientId => onChange("clientId", clientId)}
+                    onChange={(clientId) => onChange("clientId", clientId)}
                 />
                 <FormControl>
                     <Select
@@ -31,7 +31,7 @@ export default function({ title, clientId, days, type, onChange, typeList }) {
                         onChange={({ target: { value } }) => onChange("type", value)}
                         startAdornment={<InputAdornment position="start">类型</InputAdornment>}
                     >
-                        {typeList.map(type => (
+                        {typeList.map((type) => (
                             <MenuItem key={type.value} value={type.value}>
                                 {type.label}
                             </MenuItem>

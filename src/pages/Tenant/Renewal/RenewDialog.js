@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 import DialogClose from "components/DialogClose";
 
-export default class extends PureComponent {
+export default class RenewDialog extends PureComponent {
     state = {
         year: "2"
     };
@@ -28,7 +28,7 @@ export default class extends PureComponent {
         document.forms[0].submit();
     };
 
-    onChange = e => {
+    onChange = (e) => {
         this.setState({ year: e.target.value });
     };
 

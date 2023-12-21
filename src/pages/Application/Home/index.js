@@ -9,7 +9,7 @@ import ClientTable from "./ClientTable";
 import moment from "moment";
 import WelcomeDialog from "./WelcomeDialog";
 
-export default class extends PureComponent {
+export default class Home extends PureComponent {
     state = {
         list: [],
         loading: true,

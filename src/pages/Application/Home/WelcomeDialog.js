@@ -4,7 +4,7 @@ import DialogClose from "components/DialogClose";
 import styles from "./WelcomeDialog.module.css";
 import { Help as HelpIcon } from "@material-ui/icons";
 
-export default function({ open, onClose, onCreate }) {
+export default function WelcomeDialog({ open, onClose, onCreate }) {
     const create = () => {
         onCreate();
         onClose();

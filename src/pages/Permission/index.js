@@ -33,7 +33,7 @@ class Permission extends PureComponent {
         this.setState({ list, loading: false });
     };
 
-    onChange = async clientId => {
+    onChange = async (clientId) => {
         const { dispatch } = this.props;
         await dispatch({ type: "permission", clientId });
         this.initData();

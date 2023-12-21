@@ -39,13 +39,13 @@ function SelectDialog({ open, onClose, loading, list, onChange, mustSelect }) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {list.map(item => (
+                        {list.map((item) => (
                             <TableRow key={item.id} hover>
                                 <TableCell>
                                     <Link
                                         className={styles.clientBox}
                                         href="#"
-                                        onClick={event => onClick(event, item)}
+                                        onClick={(event) => onClick(event, item)}
                                     >
                                         <img src={item.iconUrl} alt="icon" />
                                         {item.name}
@@ -61,7 +61,7 @@ function SelectDialog({ open, onClose, loading, list, onChange, mustSelect }) {
     );
 }
 
-export default class extends PureComponent {
+export default class ClientSelect1 extends PureComponent {
     state = {
         open: false,
         list: [],
@@ -93,7 +93,7 @@ export default class extends PureComponent {
         const { value, onChange } = this.props;
         const { open, list, loading } = this.state;
 
-        const client = list.find(item => item.id === value);
+        const client = list.find((item) => item.id === value);
 
         return (
             <>

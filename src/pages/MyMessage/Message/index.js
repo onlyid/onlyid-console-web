@@ -68,7 +68,7 @@ class Index extends PureComponent {
         history.goBack();
     };
 
-    go = async type => {
+    go = async (type) => {
         const id = type === "prev" ? this.state.prevId : this.state.nextId;
         const { history } = this.props;
         await history.replace("/my-messages/" + id);

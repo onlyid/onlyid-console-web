@@ -48,7 +48,7 @@ class MessageTable extends PureComponent {
         await http.put(`my-messages/${id}/mark-read`);
         eventEmitter.emit("myMessage/countChange");
 
-        list.find(item => item.id === id).isRead = true;
+        list.find((item) => item.id === id).isRead = true;
         this.forceUpdate();
     };
 
@@ -105,14 +105,17 @@ class MessageTable extends PureComponent {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {list.map(item => (
+                        {list.map((item) => (
                             <TableRow
                                 key={item.id}
                                 hover
                                 className={classNames({ [styles.isRead]: item.isRead })}
                             >
                                 <TableCell className={styles.title}>
-                                    <Link href="#" onClick={event => this.onClick(event, item.id)}>
+                                    <Link
+                                        href="#"
+                                        onClick={(event) => this.onClick(event, item.id)}
+                                    >
                                         {item.title}
                                     </Link>
                                 </TableCell>
@@ -130,7 +133,7 @@ class MessageTable extends PureComponent {
                                     {moment(item.createDate).format(DATE_TIME_FORMAT)}
                                 </TableCell>
                                 <TableCell align="center">
-                                    <IconButton onClick={event => this.openMenu(event, item.id)}>
+                                    <IconButton onClick={(event) => this.openMenu(event, item.id)}>
                                         <span className="material-icons">more_horiz</span>
                                     </IconButton>
                                 </TableCell>

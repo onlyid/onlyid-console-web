@@ -27,7 +27,7 @@ const RULES = {
     clientId: { required: true, message: "请选择" }
 };
 
-export default class extends PureComponent {
+export default class CreateDialog extends PureComponent {
     state = {
         validation: { name: {}, description: {}, clientId: {} },
         values: {},
@@ -130,7 +130,7 @@ export default class extends PureComponent {
                                 onChange={this.onClientChange}
                                 variant="outlined"
                             >
-                                {list.map(client => (
+                                {list.map((client) => (
                                     <MenuItem key={client.id} value={client.id}>
                                         {client.name}
                                     </MenuItem>

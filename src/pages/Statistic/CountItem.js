@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./index.module.css";
 
-export default function({ title, days, count }) {
+export default function CountItem({ title, days, count }) {
     return (
         <div className={styles.countItem}>
             <span>{title}</span>

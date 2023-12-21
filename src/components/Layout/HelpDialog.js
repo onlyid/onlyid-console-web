@@ -6,9 +6,9 @@ import tipBox from "components/TipBox.module.css";
 import weChat155 from "assets/wechat-155.jpeg";
 import classNames from "classnames";
 
-export default class extends PureComponent {
+export default class HelpDialog extends PureComponent {
     state = {
-        anchorEl: null,
+        anchorEl: null
     };
 
     showWeChat = (e) => {
