@@ -18,7 +18,7 @@ import { eventEmitter } from "my/utils";
 import DateCountDown from "components/DateCountDown";
 import styles from "./index.module.css";
 
-function RemoveDialog({ open, activated, onCancel, onRemove }) {
+function RemoveDialog({ open, onCancel, onRemove }) {
     return (
         <Dialog open={open} onClose={onCancel}>
             <DialogTitle>
@@ -27,9 +27,7 @@ function RemoveDialog({ open, activated, onCancel, onRemove }) {
             </DialogTitle>
             <DialogContent>
                 <p style={{ margin: 0, width: 400 }}>
-                    {activated
-                        ? "移除用户不会删除用户账号，后续TA仍可以登录你（或其他开发者）的应用。如果想拒绝用户登录，应将其屏蔽加入黑名单。"
-                        : "该用户未激活，移除用户会删除用户账号，数据不可恢复。"}
+                    移除用户不会删除用户账号，后续TA仍可以登录你（或其他开发者）的应用。如果想拒绝用户登录，应将其屏蔽加入黑名单。
                 </p>
             </DialogContent>
             <DialogActions>
@@ -131,7 +129,7 @@ class Danger extends PureComponent {
         history.goBack();
     };
 
-    onSubmit = async days => {
+    onSubmit = async (days) => {
         const { match } = this.props;
         const { blocked } = this.state;
 
@@ -150,7 +148,6 @@ class Danger extends PureComponent {
     };
 
     render() {
-        const { activated } = this.props;
         const { removeOpen, blockOpen, blocked, expireDate } = this.state;
 
         return (
@@ -158,9 +155,7 @@ class Danger extends PureComponent {
                 <li>
                     <div>
                         <h3>移除用户</h3>
-                        <p>
-                            将用户从用户池移除，但不删除用户账号（除非该用户由你导入/新建且未激活）。
-                        </p>
+                        <p>解除用户和你名下所有应用的关联，该操作不会删除用户的账号。</p>
                     </div>
                     <Button variant="contained" color="secondary" onClick={this.toggleRemove}>
                         移 除
@@ -194,7 +189,6 @@ class Danger extends PureComponent {
                 </li>
                 <RemoveDialog
                     open={removeOpen}
-                    activated={activated}
                     onCancel={this.toggleRemove}
                     onRemove={this.onRemove}
                 />

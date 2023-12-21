@@ -2,13 +2,10 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import http from "my/http";
-import { eventEmitter } from "my/utils";
 import MainHeader from "components/MainHeader";
-import { IMG_UPLOAD_TIP } from "my/constants";
-import styles from "./index.module.css";
 import { Tab, Tabs } from "@material-ui/core";
 import mainTabs from "components/MainTabs.module.css";
-import Basic from "./Basic";
+import Info from "./Info";
 import Extra from "./Extra";
 import Json from "./Json";
 import ClientTable from "./ClientTable";
@@ -35,13 +32,6 @@ class User extends PureComponent {
     onTabChange = (event, value) => {
         const { dispatch } = this.props;
         dispatch({ type: "user", currentTab: value });
-    };
-
-    onUpload = async filename => {
-        const { match } = this.props;
-        const { avatarUrl } = await http.put(`users/${match.params.id}/avatar`, { filename });
-        this.setState(({ user }) => ({ user: { ...user, avatarUrl } }));
-        eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
     };
 
     render() {
@@ -71,21 +61,15 @@ class User extends PureComponent {
                 content = <Permission />;
                 break;
             case "danger":
-                content = <Danger activated={user.activated} />;
+                content = <Danger />;
                 break;
             default:
-                content = <Basic user={user} onSave={this.initData} />;
+                content = <Info user={user} />;
         }
 
         return (
             <>
-                <MainHeader
-                    backText="返回用户列表"
-                    imgUrl={user.avatarUrl}
-                    title={user.nickname}
-                    uploadTip={!user.activated && `上传新头像，${IMG_UPLOAD_TIP}`}
-                    onUpload={this.onUpload}
-                >
+                <MainHeader backText="返回用户列表" imgUrl={user.avatarUrl} title={user.nickname}>
                     <ul>
                         <li>
                             <span>ID：</span>
@@ -99,12 +83,6 @@ class User extends PureComponent {
                             <span>邮箱：</span>
                             <span>{user.email || "-"}</span>
                         </li>
-                        {!user.activated && (
-                            <li>
-                                <span />
-                                <span className={styles.notActivated}>用户未激活</span>
-                            </li>
-                        )}
                     </ul>
                 </MainHeader>
                 <Tabs

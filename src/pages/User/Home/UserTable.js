@@ -33,7 +33,7 @@ class UserTable extends PureComponent {
         this.setState({ anchorEl: null });
     };
 
-    go = tab => {
+    go = (tab) => {
         const { history, match, dispatch } = this.props;
         const { id } = this.state;
 
@@ -46,7 +46,7 @@ class UserTable extends PureComponent {
         this.setState({ id }, () => this.go("basic"));
     };
 
-    tableBody = item => {
+    tableBody = (item) => {
         const { type, orderBy } = this.props;
 
         if (type === "sso")
@@ -62,22 +62,6 @@ class UserTable extends PureComponent {
                         {orderBy === "firstDate"
                             ? moment(item.firstDate).format(DATE_TIME_FORMAT)
                             : moment(item.lastDate).format(DATE_TIME_FORMAT)}
-                    </TableCell>
-                </>
-            );
-
-        if (type === "import")
-            return (
-                <>
-                    <TableCell className={styles.borderLeft}>
-                        {moment(item.importDate).format(DATE_TIME_FORMAT)}
-                    </TableCell>
-                    <TableCell>
-                        {item.activated ? (
-                            <span style={{ color: "#4caf50" }}>已激活</span>
-                        ) : (
-                            <span style={{ color: "#ff9800" }}>未激活</span>
-                        )}
                     </TableCell>
                 </>
             );
@@ -113,21 +97,13 @@ class UserTable extends PureComponent {
                     <TableCell>登录时间</TableCell>
                 </>
             );
-        else if (type === "import")
-            tableHead = (
-                <>
-                    <TableCell className={styles.borderLeft}>创建时间</TableCell>
-                    <TableCell>激活状态</TableCell>
-                </>
-            );
-        else {
+        else
             tableHead = (
                 <>
                     <TableCell className={styles.borderLeft}>屏蔽时间</TableCell>
                     <TableCell>解除时间</TableCell>
                 </>
             );
-        }
 
         return (
             <>
@@ -155,7 +131,7 @@ class UserTable extends PureComponent {
                                     <Link
                                         className={styles.userBox}
                                         href="#"
-                                        onClick={event => this.onClick(event, item.id)}
+                                        onClick={(event) => this.onClick(event, item.id)}
                                     >
                                         <img src={item.avatarUrl} alt="avatar" />
                                         {item.nickname}
@@ -167,7 +143,7 @@ class UserTable extends PureComponent {
                                     <GenderSymbol gender={item.gender} dense />
                                 </TableCell>
                                 <TableCell align="center">
-                                    <IconButton onClick={event => this.openMenu(event, item.id)}>
+                                    <IconButton onClick={(event) => this.openMenu(event, item.id)}>
                                         <span className="material-icons">more_horiz</span>
                                     </IconButton>
                                 </TableCell>

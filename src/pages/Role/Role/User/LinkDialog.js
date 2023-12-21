@@ -44,8 +44,6 @@ class LinkDialog extends PureComponent {
         let url = "users";
         if (type === "sso") {
             params.orderBy = "firstDate";
-        } else if (type === "import") {
-            url += "/import";
         } else {
             url += "/blacklist";
         }
@@ -89,7 +87,6 @@ class LinkDialog extends PureComponent {
                                 }
                             >
                                 <MenuItem value="sso">SSO 自然增长</MenuItem>
-                                <MenuItem value="import">手工导入/新建</MenuItem>
                                 <MenuItem value="blacklist">已屏蔽黑名单</MenuItem>
                             </Select>
                         </FormControl>

@@ -6,7 +6,7 @@ import GenderSymbol from "components/GenderSymbol";
 import { Paper } from "@material-ui/core";
 import tipBox from "components/TipBox.module.css";
 
-export default function({ user }) {
+export default function Info({ user }) {
     return (
         <>
             <Paper variant="outlined" style={{ marginTop: 40 }}>
@@ -30,7 +30,7 @@ export default function({ user }) {
             <div className={tipBox.root}>
                 <p>提示：</p>
                 <ol>
-                    <li>该用户不是你创建的或者已经激活，你不能编辑。</li>
+                    <li>用户的账号信息属于用户所有，你不能修改。</li>
                 </ol>
             </div>
         </>

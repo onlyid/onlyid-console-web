@@ -3,11 +3,10 @@ import selectBar from "components/SelectBar.module.css";
 import { Button, FormControl, Input, InputAdornment, MenuItem, Select } from "@material-ui/core";
 import ClientSelect from "components/ClientSelect";
 
-export default function({
+export default function SelectBar({
     type,
     clientId,
     orderBy,
-    activated,
     keyword,
     onClientChange,
     onChange,
@@ -24,7 +23,6 @@ export default function({
                         startAdornment={<InputAdornment position="start">类型</InputAdornment>}
                     >
                         <MenuItem value="sso">SSO 自然增长</MenuItem>
-                        <MenuItem value="import">手工导入/新建</MenuItem>
                         <MenuItem value="blacklist">已屏蔽黑名单</MenuItem>
                     </Select>
                 </FormControl>
@@ -45,22 +43,6 @@ export default function({
                             </Select>
                         </FormControl>
                     </>
-                )}
-                {type === "import" && (
-                    <FormControl>
-                        <Select
-                            name="activated-select"
-                            value={activated}
-                            onChange={onChange}
-                            startAdornment={
-                                <InputAdornment position="start">激活状态</InputAdornment>
-                            }
-                        >
-                            <MenuItem value="all">查看全部</MenuItem>
-                            <MenuItem value="true">只看已激活</MenuItem>
-                            <MenuItem value="false">只看未激活</MenuItem>
-                        </Select>
-                    </FormControl>
                 )}
                 <FormControl>
                     <Input

@@ -1,10 +1,3 @@
-.notActivated {
-    border-radius: 3px;
-    padding: 5px 10px;
-    color: #ff9800;
-    background-color: rgba(255, 152, 0, 0.08);
-}
-
 .blockCountDown {
     color: rgba(0, 0, 0, 87);
     font-size: 14px;

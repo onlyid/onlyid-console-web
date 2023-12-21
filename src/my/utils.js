@@ -5,9 +5,7 @@ export const eventEmitter = new EventEmitter();
 export function getRandomValue(length = 32) {
     let s = "";
     while (s.length < length) {
-        s += Math.random()
-            .toString(36)
-            .substr(2);
+        s += Math.random().toString(36).substr(2);
     }
 
     // 可能超长 截取一下
@@ -15,14 +13,14 @@ export function getRandomValue(length = 32) {
     return s;
 }
 
-Storage.prototype.getObj = function(key) {
+Storage.prototype.getObj = function (key) {
     const s = this.getItem(key);
     if (!s) return null;
 
     return JSON.parse(s);
 };
 
-Storage.prototype.setObj = function(key, value) {
+Storage.prototype.setObj = function (key, value) {
     this.setItem(key, JSON.stringify(value));
 };
 
@@ -34,10 +32,8 @@ export async function transformImage(file) {
     });
     const scaledImage = window.loadImage.scale(image, { maxWidth: 256, minWidth: 256 });
 
-    const blob = await new Promise(resolve => {
-        // 兼容IE11
-        if (scaledImage.toBlob) scaledImage.toBlob(resolve, file.type);
-        else resolve(scaledImage.msToBlob());
+    const blob = await new Promise((resolve) => {
+        scaledImage.toBlob(resolve, file.type);
     });
     const dataURL = scaledImage.toDataURL(file.type);
     return { blob, dataURL };

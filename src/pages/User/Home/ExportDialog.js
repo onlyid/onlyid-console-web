@@ -18,7 +18,7 @@ import selectBar from "components/SelectBar.module.css";
 import http from "my/http";
 import tipBox from "components/TipBox.module.css";
 
-export default class extends PureComponent {
+export default class ExportDialog extends PureComponent {
     state = {
         step: 1,
         clientId: "all",
@@ -31,7 +31,7 @@ export default class extends PureComponent {
         this.setState({ step: 2 });
     };
 
-    onClientChange = clientId => {
+    onClientChange = (clientId) => {
         this.setState({ clientId });
     };
 
@@ -125,10 +125,6 @@ export default class extends PureComponent {
                             <p>提示：</p>
                             <ol>
                                 <li>默认导出JSON格式文件，暂不可更改。</li>
-                                <li>
-                                    仅导出 "SSO 自然增长"
-                                    类型的用户，不包括由你手工导入/新建以及已屏蔽黑名单用户。
-                                </li>
                                 <li style={{ color: "#ff9800" }}>
                                     导出数据不包含用户密码，请引导用户重新设置。
                                 </li>

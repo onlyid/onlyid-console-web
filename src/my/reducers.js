@@ -11,7 +11,6 @@ const defaultUser = {
     type1: "sso",
     clientId: "all",
     orderBy: "firstDate",
-    activated: "all",
     realType: "sso",
     realOrderBy: "firstDate"
 };

@@ -1,12 +1,12 @@
 import { Button, ListItemText, Menu, MenuItem } from "@material-ui/core";
 import React, { PureComponent } from "react";
 
-export default class extends PureComponent {
+export default class MainActionBox extends PureComponent {
     state = {
         anchorEl: null
     };
 
-    openMenu = event => {
+    openMenu = (event) => {
         this.setState({ anchorEl: event.currentTarget });
     };
 
@@ -16,7 +16,7 @@ export default class extends PureComponent {
 
     render() {
         const { anchorEl } = this.state;
-        const { onImport, onCreate, onExport } = this.props;
+        const { onExport } = this.props;
 
         return (
             <div className="mainActionBox">
@@ -38,12 +38,6 @@ export default class extends PureComponent {
                     autoFocus={false}
                     onClick={this.closeMenu}
                 >
-                    <MenuItem onClick={onImport}>
-                        <ListItemText>批量导入</ListItemText>
-                    </MenuItem>
-                    <MenuItem onClick={onCreate}>
-                        <ListItemText>单个新建</ListItemText>
-                    </MenuItem>
                     <MenuItem onClick={onExport}>
                         <ListItemText>全量导出</ListItemText>
                     </MenuItem>
