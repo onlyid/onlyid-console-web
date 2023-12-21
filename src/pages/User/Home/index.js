@@ -40,7 +40,9 @@ class Home extends PureComponent {
             dispatch({ type: "user", list, total, realType: type1, realOrderBy: orderBy });
             this.setState({ loading: false });
 
-            if (!list.length && type1 !== "blacklist") this.setState({ showEmpty: true });
+            // 当所有筛选条件不生效，列表仍然为空，那么就展示空页
+            if (!list.length && type1 === "sso" && clientId === "all" && !keyword)
+                this.setState({ showEmpty: true });
         } else {
             await dispatch({ type: "user", current: current - 1 });
             this.initData();
