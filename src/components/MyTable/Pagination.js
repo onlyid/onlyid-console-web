@@ -19,7 +19,7 @@ class Actions extends PureComponent {
     }
 
     onClick = (event, type) => {
-        const { page, onChangePage, count, rowsPerPage } = this.props;
+        const { page, onPageChange, count, rowsPerPage } = this.props;
         let newPage;
         switch (type) {
             case "first":
@@ -35,13 +35,13 @@ class Actions extends PureComponent {
                 // last
                 newPage = Math.ceil(count / rowsPerPage) - 1;
         }
-        onChangePage(event, newPage);
+        onPageChange(event, newPage);
         this.setState({ inputValue: newPage + 1 });
     };
 
     onKeyUp = (event) => {
         const { inputValue } = this.state;
-        const { page, count, rowsPerPage, onChangePage } = this.props;
+        const { page, count, rowsPerPage, onPageChange } = this.props;
 
         if (event.key !== "Enter") return;
 
@@ -58,7 +58,7 @@ class Actions extends PureComponent {
         if (value > maxPage) value = maxPage;
 
         this.setState({ inputValue: value + 1 });
-        onChangePage(event, value);
+        onPageChange(event, value);
     };
 
     onChange = ({ target: { value } }) => {
@@ -117,8 +117,8 @@ export default function Pagination({
     count,
     rowsPerPage,
     page,
-    onChangePage,
-    onChangeRowsPerPage
+    onPageChange,
+    onRowsPerPageChange
 }) {
     return (
         <TablePagination
@@ -126,11 +126,11 @@ export default function Pagination({
             count={count}
             rowsPerPage={rowsPerPage}
             page={page}
-            onChangePage={onChangePage}
-            onChangeRowsPerPage={onChangeRowsPerPage}
+            onPageChange={onPageChange}
+            onRowsPerPageChange={onRowsPerPageChange}
             ActionsComponent={Actions}
             labelRowsPerPage="每页条数："
-            labelDisplayedRows={({ from, to, count }) => `共 ${count} 条`}
+            labelDisplayedRows={({ count }) => `共 ${count} 条`}
             className={styles.pagination}
         />
     );

@@ -119,9 +119,7 @@ class Home extends PureComponent {
             <>
                 <MainActionBox onExport={this.toggleExport} />
                 <h1>用户管理</h1>
-                <p>
-                    简单快捷地管理你的用户，如查看应用新增用户、查看用户登录历史和屏蔽用户登录应用等等。
-                </p>
+                <p>简单快捷地管理你的用户，如查看应用新增用户、屏蔽用户登录应用等。</p>
                 <SelectBar
                     type={type1}
                     clientId={clientId}

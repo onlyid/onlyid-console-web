@@ -66,8 +66,7 @@ class Json extends PureComponent {
                     <p>提示：</p>
                     <ol>
                         <li>
-                            本页展示你的应用使用Open
-                            API获取到的用户信息，其中extra字段是用户附加信息。
+                            本页展示你的应用使用OpenAPI获取到的用户信息，其中extra字段是用户附加信息。
                         </li>
                         <li>
                             当需要唯一标识用户时，应使用id字段。用户id跨租户统一：同一个用户的id在你的应用和在其他开发者的应用是一样的。

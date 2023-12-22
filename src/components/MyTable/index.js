@@ -6,12 +6,12 @@ import Pagination from "./Pagination";
 import classNames from "classnames";
 
 export default class MyTable extends PureComponent {
-    onChangePage = (event, page) => {
+    onPageChange = (event, page) => {
         const { onPaginationChange, pagination } = this.props;
         onPaginationChange({ pageSize: pagination.pageSize, current: page + 1 });
     };
 
-    onChangeRowsPerPage = (event) => {
+    onRowsPerPageChange = (event) => {
         const { onPaginationChange } = this.props;
         onPaginationChange({ pageSize: event.target.value, current: 1 });
     };
@@ -39,8 +39,8 @@ export default class MyTable extends PureComponent {
                             count={pagination.total}
                             rowsPerPage={pagination.pageSize}
                             page={pagination.current - 1}
-                            onChangePage={this.onChangePage}
-                            onChangeRowsPerPage={this.onChangeRowsPerPage}
+                            onPageChange={this.onPageChange}
+                            onRowsPerPageChange={this.onRowsPerPageChange}
                         />
                     )}
                     {!length && (

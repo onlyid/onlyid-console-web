@@ -9,7 +9,6 @@ import Info from "./Info";
 import Extra from "./Extra";
 import Json from "./Json";
 import ClientTable from "./ClientTable";
-import Log from "./Log";
 import Role from "./Role";
 import Danger from "./Danger";
 
@@ -50,9 +49,6 @@ class User extends PureComponent {
             case "client":
                 content = <ClientTable />;
                 break;
-            case "log":
-                content = <Log />;
-                break;
             case "role":
                 content = <Role />;
                 break;
@@ -91,7 +87,6 @@ class User extends PureComponent {
                     <Tab label="附加信息" value="extra" />
                     <Tab label="预览 JSON" value="json" />
                     <Tab label="授权应用" value="client" />
-                    <Tab label="登录历史" value="log" />
                     <Tab label="分配角色" value="role" />
                     <Tab label="危险设置" value="danger" />
                 </Tabs>

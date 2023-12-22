@@ -205,7 +205,7 @@ class OAuth extends PureComponent {
                                 />
                                 <FormHelperText>{validation.redirectUris.text}</FormHelperText>
                                 <FormHelperText error={false}>
-                                    用户登录后，只允许重定向到这里指定的网址，以保证安全性；可以用分号分隔多个网址（一般用于不同环境，如测试环境）；必须以http://或https://开头。
+                                    用户登录后，只允许重定向到这里指定的网址，以保证安全性；可以用分号分隔多个网址（一般用于区分开发环境和生产环境）。
                                 </FormHelperText>
                             </FormControl>
                         </InputBox>
@@ -222,7 +222,7 @@ class OAuth extends PureComponent {
                                 />
                                 <FormHelperText>{validation.background.text}</FormHelperText>
                                 <FormHelperText error={false}>
-                                    支持background前缀的CSS属性，用分号分隔多行代码；图片背景请自行host静态文件（必须是https），建议使用半透明图片。
+                                    支持background前缀的CSS属性，用分号分隔多行代码；图片请自行host静态文件（必须是https），建议使用半透明图片。
                                     <Link href={previewUrl} target="_blank">
                                         预览
                                     </Link>
@@ -275,7 +275,7 @@ class OAuth extends PureComponent {
                             OAuth登录页之前曾提供主题样式和显示界面的自定义，这些选项已在2021年6月版本全部移除。
                         </li>
                         <li>
-                            单个应用对登录页过多的自定义，会让用户疑惑不解甚至怀疑是假冒网站，唯ID未来也没有引入更多自定义选项（比如主题色自定义）的计划。
+                            单个应用对登录页过多的自定义，会让用户疑惑不解甚至怀疑是假冒网站，唯ID未来也没有引入更多自定义选项的计划。
                         </li>
                     </ol>
                 </div>

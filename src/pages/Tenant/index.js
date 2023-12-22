@@ -23,7 +23,7 @@ class Tenant extends PureComponent {
             <div className={styles.root}>
                 <h1>租户设置</h1>
                 <Tabs
-                    value={currentTab}
+                    value={currentTab || "info"}
                     onChange={this.onTabChange}
                     indicatorColor="primary"
                     className={mainTabs.root}
