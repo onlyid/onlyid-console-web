@@ -1,5 +1,5 @@
-.backButton:global(.MuiButton-root) {
-    line-height: normal;
+.backButton {
+    margin-left: -5px;
 }
 
 .header {

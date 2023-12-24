@@ -7,6 +7,7 @@ import http from "my/http";
 import UserTable from "./UserTable";
 import { connect } from "react-redux";
 import tipBox from "components/TipBox.module.css";
+import { withRouter } from "react-router-dom";
 
 class Home extends PureComponent {
     state = {
@@ -20,29 +21,21 @@ class Home extends PureComponent {
     }
 
     initData = async () => {
-        const { dispatch } = this.props;
+        const { dispatch, user } = this.props;
+        const { current, pageSize, keyword, clientId, orderBy } = user;
+
         this.setState({ loading: true });
 
-        const { user } = this.props;
-        const { current, pageSize, keyword, type1, clientId, orderBy } = user;
+        const params = { current, pageSize, keyword, orderBy };
+        if (clientId !== "all") params.clientId = clientId;
 
-        const params = { current, pageSize, keyword };
-        let url = "users";
-        if (type1 === "sso") {
-            params.orderBy = orderBy;
-            if (clientId !== "all") params.clientId = clientId;
-        } else {
-            url += "/blacklist";
-        }
-
-        const { list, total } = await http.get(url, { params });
+        const { list, total } = await http.get("users", { params });
         if (list.length || current === 1) {
-            dispatch({ type: "user", list, total, realType: type1, realOrderBy: orderBy });
+            dispatch({ type: "user", list, total, realOrderBy: orderBy });
             this.setState({ loading: false });
 
-            // 当所有筛选条件不生效，列表仍然为空，那么就展示空页
-            if (!list.length && type1 === "sso" && clientId === "all" && !keyword)
-                this.setState({ showEmpty: true });
+            // 当筛选条件不生效，列表仍然为空，那么就展示空页
+            if (!list.length && clientId === "all" && !keyword) this.setState({ showEmpty: true });
         } else {
             await dispatch({ type: "user", current: current - 1 });
             this.initData();
@@ -53,6 +46,11 @@ class Home extends PureComponent {
         this.setState(({ exportOpen }) => ({ exportOpen: !exportOpen }));
     };
 
+    goBlacklist = () => {
+        const { history, match } = this.props;
+        history.push(`${match.url}/blacklist`);
+    };
+
     onClientChange = (clientId) => {
         const { dispatch } = this.props;
         dispatch({ type: "user", clientId });
@@ -60,19 +58,7 @@ class Home extends PureComponent {
 
     onChange = ({ target }) => {
         const { dispatch } = this.props;
-
-        let key;
-        switch (target.name) {
-            case "type-select":
-                key = "type1";
-                break;
-            case "order-by-select":
-                key = "orderBy";
-                break;
-            default:
-                key = target.name;
-        }
-        dispatch({ type: "user", [key]: target.value });
+        dispatch({ type: "user", [target.name]: target.value });
     };
 
     onSearch = async () => {
@@ -91,20 +77,8 @@ class Home extends PureComponent {
 
     render() {
         const { exportOpen, loading, showEmpty } = this.state;
-        const {
-            user: {
-                type1,
-                clientId,
-                orderBy,
-                keyword,
-                list,
-                current,
-                pageSize,
-                total,
-                realType,
-                realOrderBy
-            }
-        } = this.props;
+        const { user } = this.props;
+        const { clientId, orderBy, keyword, list, current, pageSize, total, realOrderBy } = user;
 
         if (showEmpty)
             return (
@@ -117,11 +91,10 @@ class Home extends PureComponent {
 
         return (
             <>
-                <MainActionBox onExport={this.toggleExport} />
+                <MainActionBox onExport={this.toggleExport} goBlacklist={this.goBlacklist} />
                 <h1>用户管理</h1>
-                <p>简单快捷地管理你的用户，如查看应用新增用户、屏蔽用户登录应用等。</p>
+                <p>简单快捷地管理你的用户，如查看应用新增用户、禁止恶意用户登录等。</p>
                 <SelectBar
-                    type={type1}
                     clientId={clientId}
                     orderBy={orderBy}
                     keyword={keyword}
@@ -130,7 +103,6 @@ class Home extends PureComponent {
                     onSearch={this.onSearch}
                 />
                 <UserTable
-                    type={realType}
                     list={list}
                     loading={loading}
                     current={current}
@@ -157,4 +129,4 @@ class Home extends PureComponent {
     }
 }
 
-export default connect(({ user }) => ({ user }))(Home);
+export default connect(({ user }) => ({ user }))(withRouter(Home));

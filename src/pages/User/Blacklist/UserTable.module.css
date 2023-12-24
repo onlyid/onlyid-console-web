@@ -3,29 +3,22 @@
 }
 
 .table1 :global .MuiTableBody-root .MuiTableCell-root {
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
-.borderLeft {
-    border-left: 1px solid rgb(224, 224, 224);
+.paddingLeft {
     padding-left: 32px;
 }
 
-.userBox,
-.clientBox {
+.userBox {
     max-width: 160px;
     display: flex;
     align-items: center;
 }
 
-.clientBox > img,
 .userBox > img {
     border-radius: 5%;
     width: 40px;
     margin-right: 15px;
-}
-
-.dropDown :global .MuiListItem-root {
-    min-width: 150px;
 }

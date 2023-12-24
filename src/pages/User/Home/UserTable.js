@@ -17,7 +17,6 @@ import moment from "moment";
 import { DATE_TIME_FORMAT } from "my/constants";
 import MyTable from "components/MyTable";
 import GenderSymbol from "components/GenderSymbol";
-import DateCountDown from "components/DateCountDown";
 
 class UserTable extends PureComponent {
     state = {
@@ -46,64 +45,10 @@ class UserTable extends PureComponent {
         this.setState({ id }, () => this.go("basic"));
     };
 
-    tableBody = (item) => {
-        const { type, orderBy } = this.props;
-
-        if (type === "sso")
-            return (
-                <>
-                    <TableCell className={styles.borderLeft}>
-                        <div className={styles.clientBox}>
-                            <img src={item.clientIconUrl} alt="icon" />
-                            {item.clientName}
-                        </div>
-                    </TableCell>
-                    <TableCell>
-                        {orderBy === "firstDate"
-                            ? moment(item.firstDate).format(DATE_TIME_FORMAT)
-                            : moment(item.lastDate).format(DATE_TIME_FORMAT)}
-                    </TableCell>
-                </>
-            );
-
-        return (
-            <>
-                <TableCell className={styles.borderLeft}>
-                    {moment(item.blockDate).format(DATE_TIME_FORMAT)}
-                </TableCell>
-                {item.expireDate ? (
-                    <TableCell>
-                        {moment(item.expireDate).format(DATE_TIME_FORMAT)}
-                        <br />
-                        <DateCountDown date={item.expireDate} />
-                    </TableCell>
-                ) : (
-                    <TableCell>-</TableCell>
-                )}
-            </>
-        );
-    };
-
     render() {
-        const { type, list, loading, current, pageSize, total, onPaginationChange } = this.props;
+        const { list, loading, current, pageSize, total, onPaginationChange, orderBy } = this.props;
         const { anchorEl } = this.state;
         const pagination = { current, pageSize, total };
-
-        let tableHead;
-        if (type === "sso")
-            tableHead = (
-                <>
-                    <TableCell className={styles.borderLeft}>登录应用</TableCell>
-                    <TableCell>登录时间</TableCell>
-                </>
-            );
-        else
-            tableHead = (
-                <>
-                    <TableCell className={styles.borderLeft}>屏蔽时间</TableCell>
-                    <TableCell>解除时间</TableCell>
-                </>
-            );
 
         return (
             <>
@@ -121,7 +66,8 @@ class UserTable extends PureComponent {
                             <TableCell>邮箱</TableCell>
                             <TableCell>性别</TableCell>
                             <TableCell align="center">操作</TableCell>
-                            {tableHead}
+                            <TableCell className={styles.borderLeft}>登录应用</TableCell>
+                            <TableCell>登录时间</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -147,7 +93,17 @@ class UserTable extends PureComponent {
                                         <span className="material-icons">more_horiz</span>
                                     </IconButton>
                                 </TableCell>
-                                {this.tableBody(item)}
+                                <TableCell className={styles.borderLeft}>
+                                    <div className={styles.clientBox}>
+                                        <img src={item.clientIconUrl} alt="icon" />
+                                        {item.clientName}
+                                    </div>
+                                </TableCell>
+                                <TableCell>
+                                    {orderBy === "firstDate"
+                                        ? moment(item.firstDate).format(DATE_TIME_FORMAT)
+                                        : moment(item.lastDate).format(DATE_TIME_FORMAT)}
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

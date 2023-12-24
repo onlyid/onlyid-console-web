@@ -112,7 +112,7 @@ class Home extends PureComponent {
             <>
                 <div className="mainActionBox">{createNew}</div>
                 <h1>角色管理</h1>
-                <p>管理应用的角色，角色是一系列权限的集合，可以分配给用户。</p>
+                <p>角色是一系列权限的集合，可以分配给用户。</p>
                 <div className={selectBar.root}>
                     <ClientSelect value={clientId} onChange={this.onClientChange} />
                     <Button

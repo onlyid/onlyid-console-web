@@ -8,19 +8,19 @@ const defaultUser = {
     pageSize: 10,
     total: 0,
     keyword: "",
-    type1: "sso",
     clientId: "all",
     orderBy: "firstDate",
-    realType: "sso",
-    realOrderBy: "firstDate"
+    realOrderBy: "firstDate",
+    // blacklist
+    bl_list: [],
+    bl_current: 1,
+    bl_pageSize: 10,
+    bl_total: 0,
+    bl_keyword: ""
 };
 
 const defaultApplication = {
     currentTab: "basic"
-};
-
-const defaultPermission = {
-    clientId: null
 };
 
 const defaultRole = {
@@ -46,38 +46,27 @@ const defaultMyMessage = {
 
 function user(state = defaultUser, { type, ...rest }) {
     if (type === "user") return { ...state, ...rest };
-
-    return state;
+    else return state;
 }
 
 function application(state = defaultApplication, { type, ...rest }) {
     if (type === "application") return { ...state, ...rest };
-
-    return state;
-}
-
-function permission(state = defaultPermission, { type, ...rest }) {
-    if (type === "permission") return { ...state, ...rest };
-
-    return state;
+    else return state;
 }
 
 function role(state = defaultRole, { type, ...rest }) {
     if (type === "role") return { ...state, ...rest };
-
-    return state;
+    else return state;
 }
 
 function myMessage(state = defaultMyMessage, { type, ...rest }) {
     if (type === "myMessage") return { ...state, ...rest };
-
-    return state;
+    else return state;
 }
 
 export default combineReducers({
     user,
     application,
-    permission,
     role,
     myMessage
 });

@@ -1,13 +1,12 @@
 import React from "react";
 import styles from "./GenderSymbol.module.css";
 import { GENDER_TEXT } from "my/constants";
-import classNames from "classnames";
+import cn from "classnames";
 
 export default function GenderSymbol({ gender, dense }) {
-    if (!gender) return "-";
+    if (!gender) return <span>-</span>;
 
     let icon;
-
     switch (gender) {
         case "MALE":
             icon = (
@@ -28,7 +27,7 @@ export default function GenderSymbol({ gender, dense }) {
     }
 
     return (
-        <span className={classNames(styles.root, { [styles.dense]: dense })}>
+        <span className={cn(styles.root, { [styles.dense]: dense })}>
             {GENDER_TEXT[gender]} {icon}
         </span>
     );
