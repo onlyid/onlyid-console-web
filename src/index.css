@@ -39,7 +39,7 @@ h3 {
     font-family: "Material Icons";
     font-style: normal;
     font-weight: 400;
-    src: url(https://fastly.jsdelivr.net/npm/material-icons@1.13.1/iconfont/material-icons.woff2)
+    src: url(https://registry.npmmirror.com/material-icons/1.13.1/files/iconfont/material-icons.woff2)
         format("woff2");
 }
 

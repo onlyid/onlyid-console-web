@@ -7,11 +7,11 @@
     display: flex;
 }
 
-.root.vertical ~ .root.vertical {
+.root.vertical + .root.vertical {
     margin-top: 20px;
 }
 
-.root.horizontal ~ .root.horizontal {
+.root.horizontal + .root.horizontal {
     margin-top: 25px;
 }
 

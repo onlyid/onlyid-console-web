@@ -27,7 +27,7 @@ class User extends PureComponent {
         return (
             <>
                 <TitleAndSelect
-                    title="SSO 最近 新增 / 活跃 用户"
+                    title="最近新增/活跃用户"
                     clientId={clientId}
                     days={days}
                     type={type}

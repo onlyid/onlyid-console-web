@@ -28,7 +28,7 @@ class Otp extends PureComponent {
         return (
             <>
                 <TitleAndSelect
-                    title="OTP 最近发送验证码"
+                    title="最近发送验证码"
                     clientId={clientId}
                     days={days}
                     type={type}

@@ -6,8 +6,8 @@
 
 .root h2 {
     border-bottom: 1px solid #ddd;
-    padding-bottom: 6px;
-    margin: 0;
+    padding-bottom: 5px;
+    margin: 0 0 2px;
 }
 
 .root :global .MuiFormControl-root {
