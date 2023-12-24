@@ -4,8 +4,6 @@ import http from "my/http";
 import SelectBar from "./SelectBar";
 import OperationTable from "./OperationTable";
 import UserActiveTable from "./UserActiveTable";
-import moment from "moment";
-import { DATE_FORMAT } from "my/constants";
 import tipBox from "components/TipBox.module.css";
 import { FormControl, InputAdornment, MenuItem, Select } from "@material-ui/core";
 
@@ -19,8 +17,8 @@ class BehaviorLog extends PureComponent {
         type: "userActive",
         keyword: "",
         clientId: "all",
-        gteDate: null,
-        lteDate: null,
+        gteDate: "",
+        lteDate: "",
         success: "all"
     };
 
@@ -33,17 +31,11 @@ class BehaviorLog extends PureComponent {
         const { clientId, keyword, current, pageSize, gteDate, lteDate, success, type } =
             this.state;
 
-        const params = {
-            current,
-            pageSize,
-            keyword
-        };
+        const params = { current, pageSize, keyword };
         if (clientId !== "all") params.clientId = clientId;
         if (success !== "all") params.success = success;
-        if (gteDate) {
-            params.gteDate = moment(gteDate).format(DATE_FORMAT);
-            params.lteDate = moment(lteDate).format(DATE_FORMAT);
-        }
+        if (gteDate) params.gteDate = gteDate;
+        if (lteDate) params.lteDate = lteDate;
 
         let url = "logs/";
         if (type === "userActive") url += "user-active";
@@ -55,10 +47,6 @@ class BehaviorLog extends PureComponent {
 
     onClientChange = (clientId) => {
         this.setState({ clientId });
-    };
-
-    onDateChange = (key, value) => {
-        this.setState({ [key]: value });
     };
 
     onChange = ({ target }) => {
@@ -129,7 +117,6 @@ class BehaviorLog extends PureComponent {
                     success={success}
                     keyword={keyword}
                     onClientChange={this.onClientChange}
-                    onDateChange={this.onDateChange}
                     onChange={this.onChange}
                     onSearch={this.onSearch}
                 />

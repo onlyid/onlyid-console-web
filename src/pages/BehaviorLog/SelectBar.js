@@ -2,8 +2,7 @@ import React from "react";
 import selectBar from "components/SelectBar.module.css";
 import ClientSelect from "components/ClientSelect";
 import { Button, FormControl, Input, InputAdornment, MenuItem, Select } from "@material-ui/core";
-import MomentUtils from "@date-io/moment";
-import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import { DATE_FORMAT } from "my/constants";
 import moment from "moment";
 
 export default function SelectBar({
@@ -14,11 +13,11 @@ export default function SelectBar({
     success,
     keyword,
     onClientChange,
-    onDateChange,
     onChange,
     onSearch
 }) {
-    const shouldDisableDate = (date) => moment().diff(date, "day") > 90;
+    const minDate = moment().subtract(90, "days").format(DATE_FORMAT);
+    const maxDate = moment().format(DATE_FORMAT);
 
     return (
         <>
@@ -47,50 +46,28 @@ export default function SelectBar({
                 </FormControl>
             </div>
             <div className={selectBar.root}>
-                <MuiPickersUtilsProvider utils={MomentUtils}>
-                    <DatePicker
-                        clearLabel="清 空"
-                        cancelLabel="取 消"
-                        okLabel={null}
-                        name="gte-date"
-                        format="YYYY-MM-DD"
+                <FormControl>
+                    <Input
+                        name="gteDate"
+                        onChange={onChange}
                         value={gteDate}
-                        onChange={(value) => onDateChange("gteDate", value)}
-                        disableFuture
-                        disableToolbar
-                        clearable
-                        autoOk
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">开始时间</InputAdornment>
-                            ),
-                            placeholder: "请选择"
-                        }}
-                        shouldDisableDate={shouldDisableDate}
+                        type="date"
+                        inputProps={{ min: minDate, max: maxDate }}
+                        startAdornment={<InputAdornment position="start">开始时间</InputAdornment>}
+                        placeholder="请选择"
                     />
-                </MuiPickersUtilsProvider>
-                <MuiPickersUtilsProvider utils={MomentUtils}>
-                    <DatePicker
-                        clearLabel="清 空"
-                        cancelLabel="取 消"
-                        okLabel={null}
-                        name="lte-date"
-                        format="YYYY-MM-DD"
+                </FormControl>
+                <FormControl>
+                    <Input
+                        name="lteDate"
+                        onChange={onChange}
                         value={lteDate}
-                        onChange={(value) => onDateChange("lteDate", value)}
-                        disableFuture
-                        disableToolbar
-                        clearable
-                        autoOk
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">结束时间</InputAdornment>
-                            ),
-                            placeholder: "请选择"
-                        }}
-                        shouldDisableDate={shouldDisableDate}
+                        type="date"
+                        inputProps={{ min: minDate, max: maxDate }}
+                        startAdornment={<InputAdornment position="start">结束时间</InputAdornment>}
+                        placeholder="请选择"
                     />
-                </MuiPickersUtilsProvider>
+                </FormControl>
                 <Button
                     color="primary"
                     variant="contained"
