@@ -7,6 +7,7 @@ import UserActiveTable from "./UserActiveTable";
 import moment from "moment";
 import { DATE_FORMAT } from "my/constants";
 import tipBox from "components/TipBox.module.css";
+import { FormControl, InputAdornment, MenuItem, Select } from "@material-ui/core";
 
 class BehaviorLog extends PureComponent {
     state = {
@@ -16,7 +17,6 @@ class BehaviorLog extends PureComponent {
         total: 0,
         loading: true,
         type: "userActive",
-        realType: "userActive",
         keyword: "",
         clientId: "all",
         gteDate: null,
@@ -50,7 +50,7 @@ class BehaviorLog extends PureComponent {
         else url += "operation";
 
         const { list, total } = await http.get(url, { params });
-        this.setState({ list, total, loading: false, realType: type });
+        this.setState({ list, total, loading: false });
     };
 
     onClientChange = (clientId) => {
@@ -73,6 +73,21 @@ class BehaviorLog extends PureComponent {
         this.setState({ pageSize, current }, this.initData);
     };
 
+    onTypeChange = ({ target }) => {
+        // 重置所有筛选条件
+        const state = {
+            type: target.value,
+            current: 1,
+            pageSize: 10,
+            keyword: "",
+            clientId: "all",
+            gteDate: null,
+            lteDate: null,
+            success: "all"
+        };
+        this.setState(state, this.initData);
+    };
+
     render() {
         const {
             clientId,
@@ -85,12 +100,22 @@ class BehaviorLog extends PureComponent {
             loading,
             current,
             pageSize,
-            total,
-            realType
+            total
         } = this.state;
 
         return (
             <div className={styles.root}>
+                <FormControl className={styles.logTypeSelect}>
+                    <Select
+                        name="type"
+                        value={type}
+                        onChange={this.onTypeChange}
+                        startAdornment={<InputAdornment position="start">日志类型</InputAdornment>}
+                    >
+                        <MenuItem value="userActive">用户登录</MenuItem>
+                        <MenuItem value="operation">开发者操作</MenuItem>
+                    </Select>
+                </FormControl>
                 <h1>行为日志</h1>
                 <p>
                     查看用户登录日志和开发者操作日志（控制台和OpenAPI）。
@@ -108,7 +133,7 @@ class BehaviorLog extends PureComponent {
                     onChange={this.onChange}
                     onSearch={this.onSearch}
                 />
-                {realType === "userActive" ? (
+                {type === "userActive" ? (
                     <UserActiveTable
                         list={list}
                         loading={loading}
@@ -134,8 +159,7 @@ class BehaviorLog extends PureComponent {
                             用户登录日志只记录通过SSO完成的登录，对于通过OTP验证码完成的认证，不认为是正式的登录，不会记录。
                         </li>
                         <li>
-                            为了节省磁盘空间，控制台日志不会记录查询操作，而Open
-                            API日志则会完整记录所有调用请求。
+                            为了节省磁盘空间，控制台日志不会记录查询操作，而OpenAPI日志则会完整记录所有调用请求。
                         </li>
                     </ol>
                 </div>

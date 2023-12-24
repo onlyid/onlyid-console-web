@@ -23,17 +23,6 @@ export default function SelectBar({
     return (
         <>
             <div className={selectBar.root}>
-                <FormControl>
-                    <Select
-                        name="type"
-                        value={type}
-                        onChange={onChange}
-                        startAdornment={<InputAdornment position="start">类型</InputAdornment>}
-                    >
-                        <MenuItem value="userActive">用户登录</MenuItem>
-                        <MenuItem value="operation">开发者操作</MenuItem>
-                    </Select>
-                </FormControl>
                 <ClientSelect value={clientId} onChange={onClientChange} />
                 <FormControl>
                     <Select
