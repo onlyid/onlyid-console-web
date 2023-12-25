@@ -7,9 +7,7 @@ import {
     DialogTitle,
     FormControl,
     Input,
-    InputAdornment,
-    MenuItem,
-    Select
+    InputAdornment
 } from "@material-ui/core";
 import DialogClose from "components/DialogClose";
 import styles from "./index.module.css";
@@ -23,8 +21,7 @@ class LinkDialog extends PureComponent {
         pageSize: 10,
         total: 0,
         keyword: "",
-        loading: true,
-        type: "sso"
+        loading: true
     };
 
     componentDidMount() {
@@ -34,21 +31,10 @@ class LinkDialog extends PureComponent {
     initData = async () => {
         this.setState({ loading: true });
 
-        const { current, pageSize, keyword, type } = this.state;
-        const params = {
-            current,
-            pageSize,
-            keyword
-        };
+        const { current, pageSize, keyword } = this.state;
 
-        let url = "users";
-        if (type === "sso") {
-            params.orderBy = "firstDate";
-        } else {
-            url += "/blacklist";
-        }
-
-        const { list, total } = await http.get(url, { params });
+        const params = { current, pageSize, keyword, orderBy: "firstDate" };
+        const { list, total } = await http.get("users", { params });
 
         this.setState({ list, total, loading: false });
     };
@@ -66,7 +52,7 @@ class LinkDialog extends PureComponent {
     };
 
     render() {
-        const { list, current, pageSize, total, loading, keyword, type } = this.state;
+        const { list, current, pageSize, total, loading, keyword } = this.state;
         const { open, onClose, onLink } = this.props;
 
         return (
@@ -78,19 +64,6 @@ class LinkDialog extends PureComponent {
                 <DialogContent className={styles.dialog}>
                     <div>
                         <FormControl>
-                            <Select
-                                name="type"
-                                value={type}
-                                onChange={this.onChange}
-                                startAdornment={
-                                    <InputAdornment position="start">类型</InputAdornment>
-                                }
-                            >
-                                <MenuItem value="sso">SSO 自然增长</MenuItem>
-                                <MenuItem value="blacklist">已屏蔽黑名单</MenuItem>
-                            </Select>
-                        </FormControl>
-                        <FormControl style={{ marginLeft: 35 }}>
                             <Input
                                 name="keyword"
                                 onChange={this.onChange}

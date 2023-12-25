@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import styles from "./Table.module.css";
+import styles from "./ClientTable.module.css";
 import MyTable from "components/MyTable";
 import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
 import moment from "moment";
