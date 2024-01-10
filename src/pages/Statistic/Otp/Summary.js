@@ -5,7 +5,6 @@ import styles from "../index.module.css";
 
 class Summary extends PureComponent {
     state = {
-        totalCount: 0,
         yesterdayRequest: 0,
         yesterdaySendSuccess: 0,
         yesterdayVerifySuccess: 0,
@@ -27,7 +26,6 @@ class Summary extends PureComponent {
         const { clientId, days } = this.props;
         const params = {};
         if (clientId !== "all") params.clientId = clientId;
-        const { totalCount } = await http.get("statistics/otp/total-count", { params });
 
         params.days = 1;
         const {
@@ -44,7 +42,6 @@ class Summary extends PureComponent {
         } = await http.get("statistics/otp/summary", { params });
 
         this.setState({
-            totalCount,
             yesterdayRequest,
             yesterdaySendSuccess,
             yesterdayVerifySuccess,
@@ -56,7 +53,6 @@ class Summary extends PureComponent {
 
     render() {
         const {
-            totalCount,
             yesterdayRequest,
             yesterdaySendSuccess,
             yesterdayVerifySuccess,
@@ -68,15 +64,7 @@ class Summary extends PureComponent {
 
         return (
             <div className={styles.summary}>
-                <h3>
-                    汇总数据
-                    <span className={styles.otpTotalCount}>
-                        （已累计为你发送验证码
-                        <span> {totalCount} </span>
-                        条，节省费用
-                        <span> {(totalCount * 0.05).toFixed(1)} </span>元）
-                    </span>
-                </h3>
+                <h3>汇总数据</h3>
                 <div className={styles.countBox}>
                     <CountItem title="请求发送" days="昨天" count={yesterdayRequest} />
                     <CountItem title="发送成功" days="昨天" count={yesterdaySendSuccess} />

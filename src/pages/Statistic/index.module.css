@@ -23,16 +23,6 @@
     margin-top: 35px;
 }
 
-.summary .otpTotalCount {
-    font-size: 14px;
-    font-weight: normal;
-}
-
-.summary .otpTotalCount > span {
-    color: #f50057;
-    font-size: 18px;
-}
-
 .summary .countBox {
     display: flex;
     justify-content: space-between;
