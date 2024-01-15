@@ -23,16 +23,6 @@ const defaultApplication = {
     currentTab: "basic"
 };
 
-const defaultRole = {
-    currentTab: "basic",
-    // home
-    current: 1,
-    pageSize: 10,
-    total: 0,
-    clientId: "all",
-    list: []
-};
-
 const defaultMyMessage = {
     unreadCount: 0,
     totalCount: 0,
@@ -54,11 +44,6 @@ function application(state = defaultApplication, { type, ...rest }) {
     else return state;
 }
 
-function role(state = defaultRole, { type, ...rest }) {
-    if (type === "role") return { ...state, ...rest };
-    else return state;
-}
-
 function myMessage(state = defaultMyMessage, { type, ...rest }) {
     if (type === "myMessage") return { ...state, ...rest };
     else return state;
@@ -67,6 +52,5 @@ function myMessage(state = defaultMyMessage, { type, ...rest }) {
 export default combineReducers({
     user,
     application,
-    role,
     myMessage
 });
