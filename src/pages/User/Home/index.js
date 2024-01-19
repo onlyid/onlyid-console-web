@@ -83,7 +83,7 @@ class Home extends PureComponent {
         if (showEmpty)
             return (
                 <EmptyPage
-                    title="用户管理"
+                    title="用户列表"
                     icon="person"
                     description="暂无用户；应用接入SSO后，登录的用户会出现在本页"
                 />
@@ -92,8 +92,8 @@ class Home extends PureComponent {
         return (
             <>
                 <MainActionBox onExport={this.toggleExport} goBlacklist={this.goBlacklist} />
-                <h1>用户管理</h1>
-                <p>简单快捷地管理你的用户，如查看应用新增用户、禁止恶意用户登录等。</p>
+                <h1>用户列表</h1>
+                <p>提供基础的用户管理功能，如查看应用新增用户、禁止恶意用户登录等。</p>
                 <SelectBar
                     clientId={clientId}
                     orderBy={orderBy}

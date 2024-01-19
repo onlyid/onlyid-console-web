@@ -45,7 +45,7 @@ export default function LeftDrawer() {
                             <ListItemIcon>
                                 <span className="material-icons">person</span>
                             </ListItemIcon>
-                            <ListItemText primary="用户管理" />
+                            <ListItemText primary="用户列表" />
                         </Item>
                         <Item to="/behavior-logs">
                             <ListItemIcon>
