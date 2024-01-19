@@ -6,7 +6,6 @@ import MainHeader from "components/MainHeader";
 import { Tab, Tabs } from "@material-ui/core";
 import mainTabs from "components/MainTabs.module.css";
 import Info from "./Info";
-import Extra from "./Extra";
 import Json from "./Json";
 import ClientTable from "./ClientTable";
 import Danger from "./Danger";
@@ -39,9 +38,6 @@ class User extends PureComponent {
 
         let content;
         switch (currentTab) {
-            case "extra":
-                content = <Extra />;
-                break;
             case "json":
                 content = <Json />;
                 break;
@@ -80,7 +76,6 @@ class User extends PureComponent {
                     className={mainTabs.root}
                 >
                     <Tab label="账号详情" value="basic" />
-                    <Tab label="附加信息" value="extra" />
                     <Tab label="预览 JSON" value="json" />
                     <Tab label="授权应用" value="client" />
                     <Tab label="危险设置" value="danger" />

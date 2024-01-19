@@ -121,9 +121,6 @@ class UserTable extends PureComponent {
                     <MenuItem onClick={() => this.go("basic")}>
                         <ListItemText>账号详情</ListItemText>
                     </MenuItem>
-                    <MenuItem onClick={() => this.go("extra")}>
-                        <ListItemText>附加信息</ListItemText>
-                    </MenuItem>
                     <MenuItem onClick={() => this.go("json")}>
                         <ListItemText>预览 JSON</ListItemText>
                     </MenuItem>
