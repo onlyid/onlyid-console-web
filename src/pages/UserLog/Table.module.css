@@ -39,31 +39,3 @@
     font-size: 13px;
     margin: 5px 0 0;
 }
-
-.note {
-    font-size: 13px;
-    max-width: 200px;
-}
-
-.operation {
-    max-width: 200px;
-}
-
-.description {
-    max-width: 200px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    cursor: pointer;
-    user-select: none;
-}
-
-.clientName {
-    max-width: 140px;
-}
-
-.descBox {
-    width: 400px;
-    padding: 5px 20px;
-    word-break: break-all;
-}

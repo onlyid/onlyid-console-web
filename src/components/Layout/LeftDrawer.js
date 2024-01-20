@@ -47,11 +47,11 @@ export default function LeftDrawer() {
                             </ListItemIcon>
                             <ListItemText primary="用户列表" />
                         </Item>
-                        <Item to="/behavior-logs">
+                        <Item to="/user-logs">
                             <ListItemIcon>
                                 <span className="material-icons">receipt</span>
                             </ListItemIcon>
-                            <ListItemText primary="行为日志" />
+                            <ListItemText primary="用户日志" />
                         </Item>
                         <Item to="/my-messages">
                             <ListItemIcon>

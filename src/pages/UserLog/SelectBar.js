@@ -6,7 +6,6 @@ import { DATE_FORMAT } from "my/constants";
 import moment from "moment";
 
 export default function SelectBar({
-    type,
     clientId,
     lteDate,
     gteDate,
@@ -41,7 +40,7 @@ export default function SelectBar({
                         onChange={onChange}
                         value={keyword}
                         startAdornment={<InputAdornment position="start">搜索</InputAdornment>}
-                        placeholder={type === "userActive" ? "昵称、手机号、邮箱" : "操作、描述"}
+                        placeholder="昵称、手机号、邮箱"
                     />
                 </FormControl>
             </div>

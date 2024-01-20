@@ -36,10 +36,3 @@ export const OTP_FAIL_TEXT = {
 
 export const DATE_TIME_FORMAT = "YYYY-MM-DD HH:mm:ss";
 export const DATE_FORMAT = "YYYY-MM-DD";
-
-export const AUTH_METHOD = {
-    PASSWORD: "密码",
-    OTP: "验证码",
-    QR_CODE: "二维码",
-    SSO: "保持登录"
-};

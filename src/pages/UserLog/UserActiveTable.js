@@ -3,29 +3,10 @@ import styles from "./Table.module.css";
 import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
 import MyTable from "components/MyTable";
 import moment from "moment";
-import { AUTH_METHOD, DATE_TIME_FORMAT } from "my/constants";
+import { DATE_TIME_FORMAT } from "my/constants";
 import SuccessStatus from "components/SuccessStatus";
 
 export default class UserActiveTable extends PureComponent {
-    noteCell = (item) => {
-        let list = [];
-        if (item.signUp) list.push("用户新注册账号");
-        if (item.resetPassword) list.push("用户重置了密码");
-        if (item.isNew) list.push("用户首次登录应用");
-
-        if (!list.length) return <TableCell>-</TableCell>;
-
-        return (
-            <TableCell className={styles.note}>
-                {list.map((item, index) => (
-                    <p style={{ margin: "5px 0" }} key={index}>
-                        {item}
-                    </p>
-                ))}
-            </TableCell>
-        );
-    };
-
     render() {
         const { list, loading, current, pageSize, total, onPaginationChange } = this.props;
         const pagination = { current, pageSize, total };
@@ -42,9 +23,8 @@ export default class UserActiveTable extends PureComponent {
                     <TableRow>
                         <TableCell>用户</TableCell>
                         <TableCell>登录应用</TableCell>
-                        <TableCell>方式、IP、地点、时间</TableCell>
+                        <TableCell>IP、地点、时间</TableCell>
                         <TableCell>状态、错误信息</TableCell>
-                        <TableCell>备注</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -69,8 +49,6 @@ export default class UserActiveTable extends PureComponent {
                                 </div>
                             </TableCell>
                             <TableCell className={styles.info}>
-                                {AUTH_METHOD[item.authMethod]}
-                                <br />
                                 {item.ip || "-"}
                                 <br />
                                 {item.location || "-"}
@@ -81,7 +59,6 @@ export default class UserActiveTable extends PureComponent {
                                 <SuccessStatus success={item.success} />
                                 {!item.success && <p>{item.errMsg}</p>}
                             </TableCell>
-                            {this.noteCell(item)}
                         </TableRow>
                     ))}
                 </TableBody>

@@ -9,7 +9,7 @@ const Statistic = React.lazy(() => import("pages/Statistic"));
 const Application = React.lazy(() => import("pages/Application"));
 const OtpRecord = React.lazy(() => import("pages/OtpRecord"));
 const User = React.lazy(() => import("pages/User"));
-const BehaviorLog = React.lazy(() => import("pages/BehaviorLog"));
+const UserLog = React.lazy(() => import("pages/UserLog"));
 const Tenant = React.lazy(() => import("pages/Tenant"));
 const MyMessage = React.lazy(() => import("pages/MyMessage"));
 
@@ -43,8 +43,8 @@ function App() {
                         <Route path="/users">
                             <User />
                         </Route>
-                        <Route path="/behavior-logs">
-                            <BehaviorLog />
+                        <Route path="/user-logs">
+                            <UserLog />
                         </Route>
                         <Route path="/tenant">
                             <Tenant />
