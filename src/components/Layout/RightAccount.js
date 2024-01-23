@@ -48,10 +48,10 @@ class RightAccount extends PureComponent {
                     getContentAnchorEl={null}
                     open={Boolean(anchorEl)}
                     onClose={this.closeMenu}
+                    onClick={this.closeMenu}
                     autoFocus={false}
                     className={styles.dropDown}
                     disableScrollLock
-                    onClick={this.closeMenu}
                 >
                     <MenuItem component={Link} to="/tenant/info">
                         <ListItemIcon>

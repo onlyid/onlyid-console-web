@@ -16,7 +16,7 @@ export default class MainActionBox extends PureComponent {
 
     render() {
         const { anchorEl } = this.state;
-        const { onExport, goBlacklist } = this.props;
+        const { goBlacklist } = this.props;
 
         return (
             <div className="mainActionBox">
@@ -35,14 +35,11 @@ export default class MainActionBox extends PureComponent {
                     getContentAnchorEl={null}
                     open={Boolean(anchorEl)}
                     onClose={this.closeMenu}
-                    autoFocus={false}
                     onClick={this.closeMenu}
+                    autoFocus={false}
                 >
                     <MenuItem onClick={goBlacklist}>
                         <ListItemText>用户黑名单</ListItemText>
-                    </MenuItem>
-                    <MenuItem onClick={onExport}>
-                        <ListItemText>全量导出</ListItemText>
                     </MenuItem>
                 </Menu>
             </div>

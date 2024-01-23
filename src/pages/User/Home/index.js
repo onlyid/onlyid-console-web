@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import ExportDialog from "./ExportDialog";
 import EmptyPage from "components/EmptyPage";
 import MainActionBox from "./MainActionBox";
 import SelectBar from "./SelectBar";
@@ -11,7 +10,6 @@ import { withRouter } from "react-router-dom";
 
 class Home extends PureComponent {
     state = {
-        exportOpen: false,
         loading: true,
         showEmpty: false
     };
@@ -40,10 +38,6 @@ class Home extends PureComponent {
             await dispatch({ type: "user", current: current - 1 });
             this.initData();
         }
-    };
-
-    toggleExport = () => {
-        this.setState(({ exportOpen }) => ({ exportOpen: !exportOpen }));
     };
 
     goBlacklist = () => {
@@ -76,7 +70,7 @@ class Home extends PureComponent {
     };
 
     render() {
-        const { exportOpen, loading, showEmpty } = this.state;
+        const { loading, showEmpty } = this.state;
         const { user } = this.props;
         const { clientId, orderBy, keyword, list, current, pageSize, total, realOrderBy } = user;
 
@@ -91,7 +85,7 @@ class Home extends PureComponent {
 
         return (
             <>
-                <MainActionBox onExport={this.toggleExport} goBlacklist={this.goBlacklist} />
+                <MainActionBox goBlacklist={this.goBlacklist} />
                 <h1>用户列表</h1>
                 <p>提供基础的用户管理功能，如查看应用新增用户、禁止恶意用户登录等。</p>
                 <SelectBar
@@ -123,7 +117,6 @@ class Home extends PureComponent {
                         </li>
                     </ol>
                 </div>
-                <ExportDialog open={exportOpen} onClose={this.toggleExport} key={Date()} />
             </>
         );
     }
