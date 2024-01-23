@@ -32,7 +32,7 @@ export default class UserActiveTable extends PureComponent {
                         <TableRow key={item.id} hover>
                             <TableCell>
                                 <div className={styles.userBox}>
-                                    <img src={item.userAvatarUrl} alt="avatar" />
+                                    <img src={item.userAvatar} alt="avatar" />
                                     <span>
                                         {item.userNickname}
                                         <br />

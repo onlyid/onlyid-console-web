@@ -32,7 +32,7 @@ class Info extends PureComponent {
             <>
                 <div className={styles.infoBox}>
                     <InfoBox label="头像">
-                        <img src={userInfo.avatarUrl} alt="avatar" className={styles.avatar} />
+                        <img src={userInfo.avatar} alt="avatar" className={styles.avatar} />
                     </InfoBox>
                     <InfoBox label="昵称">{userInfo.nickname}</InfoBox>
                     <InfoBox label="手机号">{userInfo.mobile || "-"}</InfoBox>
@@ -46,7 +46,6 @@ class Info extends PureComponent {
                     <InfoBox label="地区">
                         {userInfo.province ? userInfo.province + " - " + userInfo.city : "-"}
                     </InfoBox>
-                    <InfoBox label="简介">{userInfo.bio || "-"}</InfoBox>
                 </div>
                 <hr className={styles.hr1} />
                 <div className={styles.infoBox}>

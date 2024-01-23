@@ -53,7 +53,7 @@ class User extends PureComponent {
 
         return (
             <>
-                <MainHeader backText="返回用户列表" imgUrl={user.avatarUrl} title={user.nickname}>
+                <MainHeader backText="返回用户列表" imgUrl={user.avatar} title={user.nickname}>
                     <ul>
                         <li>
                             <span>ID：</span>

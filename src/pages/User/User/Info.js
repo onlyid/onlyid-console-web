@@ -1,5 +1,5 @@
 import React from "react";
-import { DATE_FORMAT, DATE_TIME_FORMAT } from "my/constants";
+import { DATE_FORMAT } from "my/constants";
 import moment from "moment";
 import InfoBox from "components/InfoBox";
 import GenderSymbol from "components/GenderSymbol";
@@ -21,10 +21,6 @@ export default function Info({ user }) {
                 </InfoBox>
                 <InfoBox label="用户地区">
                     {user.province ? user.province + " - " + user.city : "-"}
-                </InfoBox>
-                <InfoBox label="用户简介">{user.bio || "-"}</InfoBox>
-                <InfoBox label="账号创建时间">
-                    {moment(user.createDate).format(DATE_TIME_FORMAT)}
                 </InfoBox>
             </Paper>
             <div className={tipBox.root}>

@@ -54,7 +54,7 @@ class Latest extends PureComponent {
                             <TableRow key={item.id + item.firstDate}>
                                 <TableCell>
                                     <div className={styles.userBox}>
-                                        <img src={item.avatarUrl} alt="avatar" />
+                                        <img src={item.avatar} alt="avatar" />
                                         {item.nickname}
                                     </div>
                                 </TableCell>

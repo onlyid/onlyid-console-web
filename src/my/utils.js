@@ -25,11 +25,7 @@ Storage.prototype.setObj = function (key, value) {
 };
 
 export async function transformImage(file) {
-    const { image } = await window.loadImage(file, {
-        orientation: true,
-        aspectRatio: 1,
-        canvas: true
-    });
+    const { image } = await window.loadImage(file, { orientation: true, aspectRatio: 1 });
     const scaledImage = window.loadImage.scale(image, { maxWidth: 256, minWidth: 256 });
 
     const blob = await new Promise((resolve) => {

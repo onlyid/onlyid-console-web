@@ -79,7 +79,7 @@ class UserTable extends PureComponent {
                                         href="#"
                                         onClick={(event) => this.onClick(event, item.id)}
                                     >
-                                        <img src={item.avatarUrl} alt="avatar" />
+                                        <img src={item.avatar} alt="avatar" />
                                         {item.nickname}
                                     </Link>
                                 </TableCell>
