@@ -14,7 +14,7 @@ class UserTable extends PureComponent {
 
         const { history, dispatch } = this.props;
         dispatch({ type: "user", currentTab: "danger" });
-        history.push(id);
+        history.push(id, { fromBlacklist: true });
     };
 
     render() {

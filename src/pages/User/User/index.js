@@ -33,7 +33,8 @@ class User extends PureComponent {
     render() {
         const { user } = this.state;
         const {
-            user: { currentTab }
+            user: { currentTab },
+            location: { state }
         } = this.props;
 
         let content;
@@ -53,7 +54,11 @@ class User extends PureComponent {
 
         return (
             <>
-                <MainHeader backText="返回用户列表" imgUrl={user.avatar} title={user.nickname}>
+                <MainHeader
+                    backText={state && state.fromBlacklist ? "返回黑名单" : "返回用户列表"}
+                    imgUrl={user.avatar}
+                    title={user.nickname}
+                >
                     <ul>
                         <li>
                             <span>ID：</span>
