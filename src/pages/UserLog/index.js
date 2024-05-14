@@ -33,7 +33,7 @@ class UserLog extends PureComponent {
         if (gteDate) params.gteDate = gteDate;
         if (lteDate) params.lteDate = lteDate;
 
-        const { list, total } = await http.get("logs/user-active", { params });
+        const { list, total } = await http.get("user-logs", { params });
         this.setState({ list, total, loading: false });
     };
 
