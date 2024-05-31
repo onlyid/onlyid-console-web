@@ -1,6 +1,4 @@
 import React from "react";
-import { DATE_FORMAT } from "my/constants";
-import moment from "moment";
 import InfoBox from "components/InfoBox";
 import GenderSymbol from "components/GenderSymbol";
 import { Paper } from "@material-ui/core";
@@ -16,8 +14,8 @@ export default function Info({ user }) {
                 <InfoBox label="用户性别">
                     <GenderSymbol gender={user.gender} />
                 </InfoBox>
-                <InfoBox label="用户出生日期">
-                    {user.birthDate ? moment(user.birthDate).format(DATE_FORMAT) : "-"}
+                <InfoBox label="用户年纪">
+                    {user.birthDate ? user.birthDate.substring(2, 4) + "后" : "-"}
                 </InfoBox>
                 <InfoBox label="用户地区">
                     {user.province ? user.province + " - " + user.city : "-"}

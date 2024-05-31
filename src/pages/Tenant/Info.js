@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { DATE_FORMAT, DATE_TIME_FORMAT } from "my/constants";
+import { DATE_TIME_FORMAT } from "my/constants";
 import styles from "./index.module.css";
 import http from "my/http";
 import moment from "moment";
@@ -40,8 +40,8 @@ class Info extends PureComponent {
                     <InfoBox label="性别">
                         <GenderSymbol gender={userInfo.gender} />
                     </InfoBox>
-                    <InfoBox label="出生日期">
-                        {userInfo.birthDate ? moment(userInfo.birthDate).format(DATE_FORMAT) : "-"}
+                    <InfoBox label="年纪">
+                        {userInfo.birthDate ? userInfo.birthDate.substring(2, 4) + "后" : "-"}
                     </InfoBox>
                     <InfoBox label="地区">
                         {userInfo.province ? userInfo.province + " - " + userInfo.city : "-"}
