@@ -8,14 +8,14 @@ export default function GenderSymbol({ gender, dense }) {
 
     let icon;
     switch (gender) {
-        case "MALE":
+        case "male":
             icon = (
                 <span className="material-icons" style={{ color: "#1890ff" }}>
                     male
                 </span>
             );
             break;
-        case "FEMALE":
+        case "female":
             icon = (
                 <span className="material-icons" style={{ color: "#f06292" }}>
                     female
