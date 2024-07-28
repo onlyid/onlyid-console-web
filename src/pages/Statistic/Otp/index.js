@@ -22,7 +22,7 @@ class Otp extends PureComponent {
         const typeList = [
             { label: "请求发送量", value: "request" },
             { label: "发送成功量", value: "sendSuccess" },
-            { label: "校验成功量", value: "verifySuccess" }
+            { label: "核验成功量", value: "verifySuccess" }
         ];
 
         return (
@@ -43,7 +43,7 @@ class Otp extends PureComponent {
                     <ol>
                         <li>
                             汇总数据受应用和时间筛选栏影响，如：时间筛选栏选择
-                            "最近7天"，则右侧展示的是最近7天的发送/校验数据。
+                            "最近7天"，则右侧展示的是最近7天的发送/核验数据。
                         </li>
                         <li>
                             最近发送列表受应用筛选栏影响，如：应用筛选栏选择

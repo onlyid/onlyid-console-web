@@ -92,7 +92,7 @@ export default class ExportDialog extends PureComponent {
                     </ul>
                     <ul className={styles.ul1}>
                         <li>
-                            <span>校验状态：</span>
+                            <span>核验状态：</span>
                             {this.getStatusText(verifySuccess)}
                         </li>
                         <li>

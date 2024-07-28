@@ -68,11 +68,11 @@ class Summary extends PureComponent {
                 <div className={styles.countBox}>
                     <CountItem title="请求发送" days="昨天" count={yesterdayRequest} />
                     <CountItem title="发送成功" days="昨天" count={yesterdaySendSuccess} />
-                    <CountItem title="校验成功" days="昨天" count={yesterdayVerifySuccess} />
+                    <CountItem title="核验成功" days="昨天" count={yesterdayVerifySuccess} />
                     <CountItem title="请求发送" days={`最近${days}天`} count={periodRequest} />
                     <CountItem title="发送成功" days={`最近${days}天`} count={periodSendSuccess} />
                     <CountItem
-                        title="校验成功"
+                        title="核验成功"
                         days={`最近${days}天`}
                         count={periodVerifySuccess}
                     />

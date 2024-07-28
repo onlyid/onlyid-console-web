@@ -47,7 +47,7 @@ export default function SelectBar({
                         name="verify-select"
                         value={verifySuccess}
                         onChange={onChange}
-                        startAdornment={<InputAdornment position="start">校验状态</InputAdornment>}
+                        startAdornment={<InputAdornment position="start">核验状态</InputAdornment>}
                     >
                         <MenuItem value="all">查看全部</MenuItem>
                         <MenuItem value="true">只看成功</MenuItem>

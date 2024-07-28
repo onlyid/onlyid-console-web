@@ -105,7 +105,7 @@ class Otp extends PureComponent {
                             ))}
                         </RadioGroup>
                         <FormHelperText>
-                            当某条验证码校验失败次数达到该值后，标记验证码失效，后续校验都直接返回失败，不再尝试校验。
+                            当某条验证码核验失败次数达到该值后，标记验证码失效，后续核验都直接返回失败，不再尝试核验。
                         </FormHelperText>
                     </FormControl>
                 </InputBox>

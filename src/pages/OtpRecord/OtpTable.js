@@ -34,7 +34,7 @@ export default function OtpTable({ list, loading, current, pageSize, total, onPa
                         <br />
                         失败次数
                     </TableCell>
-                    <TableCell>校验状态</TableCell>
+                    <TableCell>核验状态</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
