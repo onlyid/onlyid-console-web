@@ -109,30 +109,6 @@ class Otp extends PureComponent {
                         </FormHelperText>
                     </FormControl>
                 </InputBox>
-                <InputBox label="是否重用" radioGroup>
-                    <FormControl variant="outlined">
-                        <RadioGroup
-                            row
-                            id="reuse"
-                            value={values.reuse !== undefined ? String(values.reuse) : ""}
-                            onChange={this.onChange}
-                        >
-                            <FormControlLabel
-                                value="true"
-                                control={<Radio name="reuse" color="primary" />}
-                                label="是（推荐）"
-                            />
-                            <FormControlLabel
-                                value="false"
-                                control={<Radio name="reuse" color="primary" />}
-                                label="否"
-                            />
-                        </RadioGroup>
-                        <FormHelperText>
-                            当发送给某用户的一条验证码未过期时再发送一条，会重用前一条验证码，并更新有效期，可以避免用户在短时间收到多条不一样的验证码。
-                        </FormHelperText>
-                    </FormControl>
-                </InputBox>
                 <InputBox>
                     <div style={{ marginTop: 5 }}>
                         <Button variant="contained" color="primary" onClick={this.onSubmit}>
