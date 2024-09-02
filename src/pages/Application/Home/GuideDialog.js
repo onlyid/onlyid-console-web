@@ -23,7 +23,7 @@ export default function GuideDialog({ open, onClose }) {
                             <div>
                                 <span className="material-icons">sms</span>
                                 <Link
-                                    href="https://www.onlyid.net/home/docs/otp/integrate"
+                                    href="https://onlyid.net/web/docs/one-time-password/send-otp"
                                     target="_blank"
                                 >
                                     使用文档
@@ -40,7 +40,7 @@ export default function GuideDialog({ open, onClose }) {
                             <div>
                                 <span className="iconfont">&#xe743;</span>
                                 <Link
-                                    href="https://www.onlyid.net/home/docs/sso/web"
+                                    href="https://onlyid.net/web/docs/single-sign-on/web"
                                     target="_blank"
                                 >
                                     网站接入文档
@@ -49,7 +49,7 @@ export default function GuideDialog({ open, onClose }) {
                             <div>
                                 <span className="material-icons">android</span>
                                 <Link
-                                    href="https://www.onlyid.net/home/docs/sso/android"
+                                    href="https://onlyid.net/web/docs/single-sign-on/android"
                                     target="_blank"
                                 >
                                     Android接入文档
@@ -58,7 +58,7 @@ export default function GuideDialog({ open, onClose }) {
                             <div>
                                 <span className="iconfont">&#xe72c;</span>
                                 <Link
-                                    href="https://www.onlyid.net/home/docs/sso/ios"
+                                    href="https://onlyid.net/web/docs/single-sign-on/ios"
                                     target="_blank"
                                 >
                                     iOS接入文档

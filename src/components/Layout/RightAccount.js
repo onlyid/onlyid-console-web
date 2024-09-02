@@ -5,7 +5,7 @@ import { eventEmitter } from "my/utils";
 import { Link } from "react-router-dom";
 import { ButtonBase, ListItemIcon, ListItemText, Menu, MenuItem } from "@material-ui/core";
 
-const HOME_URL = "https://www.onlyid.net/home";
+const HOME_URL = "https://onlyid.net/web";
 
 class RightAccount extends PureComponent {
     state = {

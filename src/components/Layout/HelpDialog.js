@@ -38,23 +38,24 @@ export default class HelpDialog extends PureComponent {
                     </h3>
                     <ul>
                         <li>
-                            <Link href="https://www.onlyid.net/home/docs" target="_blank">
+                            <Link href="https://onlyid.net/web/docs/home" target="_blank">
                                 文档首页
                             </Link>
                         </li>
                         <li>
-                            <Link href="https://www.onlyid.net/home/docs/otp/intro" target="_blank">
+                            <Link
+                                href="https://onlyid.net/web/docs/one-time-password/send-otp"
+                                target="_blank"
+                            >
                                 使用唯ID OTP
                             </Link>
                         </li>
                         <li>
-                            <Link href="https://www.onlyid.net/home/docs/sso/oauth" target="_blank">
+                            <Link
+                                href="https://onlyid.net/web/docs/single-sign-on/oauth"
+                                target="_blank"
+                            >
                                 接入唯ID SSO
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="https://www.onlyid.net/home/docs/other/faq" target="_blank">
-                                常见问题
                             </Link>
                         </li>
                     </ul>

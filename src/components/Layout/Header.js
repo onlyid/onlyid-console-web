@@ -56,7 +56,7 @@ class Header extends PureComponent {
             <AppBar className={styles.root}>
                 <Toolbar variant="dense" className={styles.toolbar}>
                     <Tooltip title="打开官网">
-                        <a href="https://www.onlyid.net" target="_blank" rel="noopener noreferrer">
+                        <a href="https://onlyid.net/web" target="_blank" rel="noopener noreferrer">
                             <Logo style={{ fill: "#fff", width: 75, verticalAlign: "middle" }} />
                         </a>
                     </Tooltip>

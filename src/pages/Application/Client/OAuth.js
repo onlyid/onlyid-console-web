@@ -73,7 +73,7 @@ class OAuth extends PureComponent {
 
         const { redirectUris, background, ...rest } = data;
         const previewUrl =
-            "https://www.onlyid.net/oauth?client-id=" +
+            "https://onlyid.net/oauth?client-id=" +
             clientId +
             "&redirect-uri=" +
             encodeURIComponent(redirectUris[0]);

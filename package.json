@@ -41,5 +41,5 @@
     "not op_mini all"
   ],
   "proxy": "http://localhost:8000",
-  "homepage": "https://www.onlyid.net/console"
+  "homepage": "https://onlyid.net/console"
 }
