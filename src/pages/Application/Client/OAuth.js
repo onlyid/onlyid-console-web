@@ -16,7 +16,8 @@ const getArray = (value) =>
 
 const RULES_APP = {
     packageName: { max: 50, message: "最多输入50字" },
-    bundleId: { max: 50, message: "最多输入50字" }
+    bundleId: { max: 50, message: "最多输入50字" },
+    universalLink: { type: "url", message: "不是合法的url" }
 };
 
 const RULES_WEB = {
@@ -50,7 +51,8 @@ class OAuth extends PureComponent {
             redirectUris: {},
             background: {},
             termsUrl: {},
-            privacyUrl: {}
+            privacyUrl: {},
+            universalLink: {}
         },
         packageName: "",
         bundleId: "",
@@ -58,7 +60,8 @@ class OAuth extends PureComponent {
         background: "",
         previewUrl: null,
         termsUrl: "",
-        privacyUrl: ""
+        privacyUrl: "",
+        universalLink: ""
     };
 
     componentDidMount() {
@@ -110,6 +113,7 @@ class OAuth extends PureComponent {
             background,
             termsUrl,
             privacyUrl,
+            universalLink,
             validation
         } = this.state;
         const { clientType, match } = this.props;
@@ -120,10 +124,16 @@ class OAuth extends PureComponent {
             return;
         }
 
+        if (bundleId && !universalLink) {
+            const text = "iOS应用请填写Universal Link";
+            eventEmitter.emit("app/openToast", { text, severity: "warning" });
+            return;
+        }
+
         let rules, source;
         if (clientType === "APP") {
             rules = { ...RULES_APP, ...RULES_COM };
-            source = { packageName, bundleId, termsUrl, privacyUrl };
+            source = { packageName, bundleId, termsUrl, privacyUrl, universalLink };
         } else {
             rules = { ...RULES_WEB, ...RULES_COM };
             source = { redirectUris, background, termsUrl, privacyUrl };
@@ -143,7 +153,8 @@ class OAuth extends PureComponent {
             redirectUris: getArray(redirectUris),
             background: getArray(background),
             termsUrl,
-            privacyUrl
+            privacyUrl,
+            universalLink
         };
         await http.put(`clients/${match.params.id}/oauth-config`, values);
         eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
@@ -159,7 +170,8 @@ class OAuth extends PureComponent {
             previewUrl,
             validation,
             termsUrl,
-            privacyUrl
+            privacyUrl,
+            universalLink
         } = this.state;
         const { clientType } = this.props;
 
@@ -187,6 +199,21 @@ class OAuth extends PureComponent {
                                     value={bundleId || ""}
                                 />
                                 <FormHelperText>{validation.bundleId.text}</FormHelperText>
+                            </FormControl>
+                        </InputBox>
+                        <InputBox label="iOS Universal Link">
+                            <FormControl error={validation.universalLink.error} variant="outlined">
+                                <OutlinedInput
+                                    id="universalLink"
+                                    onChange={this.onChange}
+                                    onBlur={this.validateField}
+                                    value={universalLink || ""}
+                                    placeholder="https://your_domain/app/"
+                                />
+                                <FormHelperText>{validation.universalLink.text}</FormHelperText>
+                                <FormHelperText error={false}>
+                                    能唤起当前应用的Universal Link路径
+                                </FormHelperText>
                             </FormControl>
                         </InputBox>
                     </>
