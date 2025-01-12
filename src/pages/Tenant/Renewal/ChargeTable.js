@@ -46,6 +46,24 @@ export default class ChargeTable extends PureComponent {
         );
     };
 
+    separateNumber = (num) => {
+        const s = num.toString()
+
+        if (s.length > 5) {
+            const part1 = s.substring(0, s.length - 4)
+            const part2 = s.substring(s.length - 4)
+            return part1 + "," + part2
+        }
+
+        return s
+    }
+
+    countCell = (item) => {
+        if (item.type === "Renew") return item.count + " 年"
+
+        return this.separateNumber(item.count) + " 条"
+    }
+
     render() {
         const { loading, list } = this.state;
 
@@ -66,8 +84,8 @@ export default class ChargeTable extends PureComponent {
                     {list.map((item) => (
                         <TableRow key={item.id} hover>
                             <TableCell style={{ minWidth: 100 }}>{item.id}</TableCell>
-                            <TableCell style={{ minWidth: 100 }}>{item.type == "Renew" ? "订阅续费" : "购买短信"}</TableCell>
-                            <TableCell style={{ minWidth: 100 }}>{item.type == "Renew" ? item.count + " 年" : item.count * 100 + " 条"}</TableCell>
+                            <TableCell style={{ minWidth: 100 }}>{item.type === "Renew" ? "订阅续费" : "购买短信"}</TableCell>
+                            <TableCell style={{ minWidth: 100 }}>{this.countCell(item)}</TableCell>
                             <TableCell className={styles.amount} style={{ minWidth: 100 }}>
                                 {item.amount}
                             </TableCell>

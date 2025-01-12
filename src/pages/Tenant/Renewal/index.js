@@ -5,19 +5,37 @@ import styles from "./index.module.css";
 import { Button } from "@material-ui/core";
 import tipBox from "components/TipBox.module.css";
 import RenewDialog from "./RenewDialog";
+import BuySmsDialog from "./BuySmsDialog"
 import ChargeTable from "./ChargeTable";
 
 class Renewal extends PureComponent {
     state = {
-        renewOpen: false
+        renewOpen: false,
+        buySmsOpen: false
     };
 
     toggleRenew = () => {
         this.setState(({ renewOpen }) => ({ renewOpen: !renewOpen }));
     };
 
+    toggleBuySms = () => {
+        this.setState(({ buySmsOpen }) => ({ buySmsOpen: !buySmsOpen }));
+    }
+
+    separateNumber = (num) => {
+        const s = num.toString()
+
+        if (s.length > 5) {
+            const part1 = s.substring(0, s.length - 4)
+            const part2 = s.substring(s.length - 4)
+            return part1 + "," + part2
+        }
+
+        return s
+    }
+
     render() {
-        const { renewOpen } = this.state;
+        const { renewOpen, buySmsOpen } = this.state;
         const { expireDate, smsRemain } = localStorage.getObj("tenantInfo");
         const expired = moment(expireDate) < moment();
 
@@ -35,7 +53,7 @@ class Renewal extends PureComponent {
         );
 
         const smsStatus = smsRemain ? (
-            <span>{smsRemain}</span>
+            <span>{this.separateNumber(smsRemain) + " 条"}</span>
         ) : (
             <span style={{ color: "#f44336" }}>已耗尽</span>
         )
@@ -67,7 +85,7 @@ class Renewal extends PureComponent {
                         </Button>
                         <Button
                             variant="contained"
-                            onClick={this.toggleRenew}
+                            onClick={this.toggleBuySms}
                         >
                             购买短信
                         </Button>
@@ -85,11 +103,13 @@ class Renewal extends PureComponent {
                 <div className={tipBox.root}>
                     <p>提示：</p>
                     <ol>
-                        <li>如果续费遇到问题，请联系客服处理。</li>
-                        <li>保留最长三年的续费记录，过期会自动删除。</li>
+                        <li>如果支付遇到问题，请联系客服处理。</li>
+                        <li>赠送/购买的短信长期有效，不会自动过期。</li>
+                        <li>保留最长三年的支付记录，过期会自动删除。</li>
                     </ol>
                 </div>
                 <RenewDialog expireDate={expireDate} open={renewOpen} onCancel={this.toggleRenew} />
+                <BuySmsDialog smsRemain={smsRemain} open={buySmsOpen} onCancel={this.toggleBuySms} />
             </>
         );
     }
