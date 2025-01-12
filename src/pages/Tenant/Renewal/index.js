@@ -18,7 +18,7 @@ class Renewal extends PureComponent {
 
     render() {
         const { renewOpen } = this.state;
-        const { expireDate } = localStorage.getObj("tenantInfo");
+        const { expireDate, smsRemain } = localStorage.getObj("tenantInfo");
         const expired = moment(expireDate) < moment();
 
         const status = expired ? (
@@ -34,36 +34,42 @@ class Renewal extends PureComponent {
             </>
         );
 
+        const smsStatus = smsRemain ? (
+            <span>{smsRemain}</span>
+        ) : (
+            <span style={{ color: "#f44336" }}>已耗尽</span>
+        )
+
         return (
             <>
-                <div className={styles.subscription}>
-                    <div>
-                        <p>订阅产品</p>
-                        <p>统一账号和认证解决方案</p>
+                <div className={styles.headerBox}>
+                    <div className={styles.statusBox}>
+                        <div>
+                            <p>订阅有效期</p>
+                            <p>{moment(expireDate).format(DATE_TIME_FORMAT)}</p>
+                        </div>
+                        <div>
+                            <p>订阅状态</p>
+                            <p>{status}</p>
+                        </div>
+                        <div>
+                            <p>短信余量</p>
+                            <p style={{ textAlign: "center" }}>{smsStatus}</p>
+                        </div>
                     </div>
-                    <div>
-                        <p>有效期</p>
-                        <p>{moment(expireDate).format(DATE_TIME_FORMAT)}</p>
-                    </div>
-                    <div>
-                        <p>状态</p>
-                        <p>{status}</p>
-                    </div>
-                    <div>
+                    <div className={styles.buttonBox}>
                         <Button
                             color="primary"
                             variant="contained"
-                            startIcon={
-                                <span
-                                    className="iconfont"
-                                    style={{ fontSize: 18, lineHeight: "normal" }}
-                                >
-                                    &#xe650;
-                                </span>
-                            }
                             onClick={this.toggleRenew}
                         >
-                            续费
+                            订阅续费
+                        </Button>
+                        <Button
+                            variant="contained"
+                            onClick={this.toggleRenew}
+                        >
+                            购买短信
                         </Button>
                     </div>
                 </div>
@@ -74,7 +80,7 @@ class Renewal extends PureComponent {
                     </p>
                 )}
                 <hr className={styles.hr1} />
-                <h3>续费记录</h3>
+                <h3>支付记录</h3>
                 <ChargeTable />
                 <div className={tipBox.root}>
                     <p>提示：</p>

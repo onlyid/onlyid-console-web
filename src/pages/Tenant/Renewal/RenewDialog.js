@@ -18,12 +18,12 @@ import DialogClose from "components/DialogClose";
 
 export default class RenewDialog extends PureComponent {
     state = {
-        year: "2"
+        year: "1"
     };
 
     submit = async () => {
         const { year } = this.state;
-        const { formHtml } = await http.post("tenant/renew", { year });
+        const { formHtml } = await http.post("tenant/pay", { count: year, type: "renew" });
         document.body.innerHTML = formHtml;
         document.forms[0].submit();
     };
@@ -53,7 +53,7 @@ export default class RenewDialog extends PureComponent {
         return (
             <Dialog open={open} onClose={onCancel}>
                 <DialogTitle>
-                    续费
+                    订阅续费
                     <DialogClose onClose={onCancel} />
                 </DialogTitle>
                 <DialogContent style={{ width: 600 }}>
@@ -82,14 +82,12 @@ export default class RenewDialog extends PureComponent {
                     <table className={styles.table1}>
                         <thead>
                             <tr>
-                                <td>订阅产品</td>
                                 <td>当前有效期</td>
                                 <td>续费有效期</td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>统一账号和认证解决方案</td>
                                 <td>{moment(expireDate).format(DATE_TIME_FORMAT)}</td>
                                 <td>{this.newExpireDate().format(DATE_TIME_FORMAT)}</td>
                             </tr>
@@ -97,7 +95,7 @@ export default class RenewDialog extends PureComponent {
                     </table>
                     <div className={styles.fee}>
                         <p>
-                            总计费用<span>{year * 200}</span>元
+                            总计费用<span>{year * 300}</span>元
                         </p>
                         <p className={styles.tip1}>点击“支付”将跳转支付宝页面进行支付</p>
                     </div>

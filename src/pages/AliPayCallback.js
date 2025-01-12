@@ -24,9 +24,9 @@ class AliPayCallback extends PureComponent {
         const { history } = this.props;
 
         try {
-            const tenantInfo = await http.post("tenant/check-renew", { chargeId });
+            const tenantInfo = await http.post("tenant/check-pay", { chargeId });
             localStorage.setObj("tenantInfo", tenantInfo);
-            eventEmitter.emit("app/openToast", { text: "续费成功", timeout: 2000 });
+            eventEmitter.emit("app/openToast", { text: "支付成功", timeout: 2000 });
         } finally {
             history.replace("/tenant/renewal");
         }

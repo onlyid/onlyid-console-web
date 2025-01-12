@@ -54,7 +54,8 @@ export default class ChargeTable extends PureComponent {
                 <TableHead>
                     <TableRow>
                         <TableCell>费用ID</TableCell>
-                        <TableCell>续费时长</TableCell>
+                        <TableCell>类型</TableCell>
+                        <TableCell>数量</TableCell>
                         <TableCell>总金额</TableCell>
                         <TableCell>创建时间</TableCell>
                         <TableCell>支付状态</TableCell>
@@ -65,7 +66,8 @@ export default class ChargeTable extends PureComponent {
                     {list.map((item) => (
                         <TableRow key={item.id} hover>
                             <TableCell style={{ minWidth: 100 }}>{item.id}</TableCell>
-                            <TableCell style={{ minWidth: 100 }}>{item.year + " 年"}</TableCell>
+                            <TableCell style={{ minWidth: 100 }}>{item.type == "Renew" ? "订阅续费" : "购买短信"}</TableCell>
+                            <TableCell style={{ minWidth: 100 }}>{item.type == "Renew" ? item.count + " 年" : item.count * 100 + " 条"}</TableCell>
                             <TableCell className={styles.amount} style={{ minWidth: 100 }}>
                                 {item.amount}
                             </TableCell>
