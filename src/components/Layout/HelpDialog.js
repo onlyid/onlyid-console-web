@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import { Dialog, DialogContent, DialogTitle, Link, Paper, Popper } from "@material-ui/core";
 import styles from "./HelpDialog.module.css";
 import DialogClose from "components/DialogClose";
-import tipBox from "components/TipBox.module.css";
 import weChat155 from "assets/wechat-155.jpeg";
 import classNames from "classnames";
 
@@ -47,7 +46,7 @@ export default class HelpDialog extends PureComponent {
                                 href="https://onlyid.net/web/docs/one-time-password/send-otp"
                                 target="_blank"
                             >
-                                使用唯ID OTP
+                                使用OTP功能
                             </Link>
                         </li>
                         <li>
@@ -55,7 +54,7 @@ export default class HelpDialog extends PureComponent {
                                 href="https://onlyid.net/web/docs/single-sign-on/oauth"
                                 target="_blank"
                             >
-                                接入唯ID SSO
+                                接入SSO功能
                             </Link>
                         </li>
                     </ul>
@@ -87,16 +86,11 @@ export default class HelpDialog extends PureComponent {
                         </li>
                     </ul>
                     <p>客服时间是每天9:00-21:00（国家法定节假日除外）。</p>
-                    <p>
+                    <p style={{ marginBottom: 20 }}>
                         生产问题请直接电话联系：
                         <span className={styles.contact}>15521312099</span>，
                         <span style={{ fontWeight: 500 }}>7x24小时随时响应</span>确保服务稳定运行。
                     </p>
-                    <div className={tipBox.root} style={{ margin: "1em 0" }}>
-                        <p>
-                            提示：唯ID不使用工单系统，请通过上述方式与我们联系，服务响应更及时，更快速解决问题。
-                        </p>
-                    </div>
                 </DialogContent>
 
                 <Popper

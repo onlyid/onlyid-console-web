@@ -13,12 +13,12 @@ export default function GuideDialog({ open, onClose }) {
             </DialogTitle>
             <DialogContent className={styles.content}>
                 <p style={{ marginTop: 0 }}>
-                    <span style={{ color: "#4caf50" }}>应用创建成功</span>，接下来你可能想：
+                    应用创建成功，接下来你可能想：
                 </p>
                 <div className={styles.section}>
                     <span className={classNames("material-icons", styles.starIcon)}>star_half</span>
                     <div className={styles.right}>
-                        <p>使用唯ID OTP 发送无限量短信验证码：</p>
+                        <p>使用OTP功能发送低成本验证码：</p>
                         <div className={styles.linkBox}>
                             <div>
                                 <span className="material-icons">sms</span>
@@ -35,7 +35,7 @@ export default function GuideDialog({ open, onClose }) {
                 <div className={styles.section}>
                     <span className={classNames("material-icons", styles.starIcon)}>star</span>
                     <div className={styles.right}>
-                        <p>接入唯ID SSO 彻底解耦认证和业务，把琐事交给唯ID：</p>
+                        <p>接入SSO功能彻底解耦认证和业务：</p>
                         <div className={styles.linkBox}>
                             <div>
                                 <span className="iconfont">&#xe743;</span>
