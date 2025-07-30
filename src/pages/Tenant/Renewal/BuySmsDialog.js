@@ -125,7 +125,7 @@ export default class BuySmsDialog extends PureComponent {
                     </table>
                     <div className={styles.fee}>
                         <p>
-                            总计费用<span>{num * unit * 0.03}</span>元
+                            总计费用<span>{(num * unit * 0.035).toFixed()}</span>元
                         </p>
                         <p className={styles.tip1}>点击“支付”将跳转支付宝页面进行支付</p>
                     </div>
