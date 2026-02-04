@@ -1,60 +1,54 @@
-import React, { PureComponent } from "react";
-import http from "my/http";
-import { Button } from "@material-ui/core";
-import { Add as AddIcon } from "@material-ui/icons";
-import EmptyPage from "components/EmptyPage";
-import CreateDialog from "./CreateDialog";
-import GuideDialog from "./GuideDialog";
-import ClientTable from "./ClientTable";
-import moment from "moment";
-import WelcomeDialog from "./WelcomeDialog";
+import React, { PureComponent } from "react"
+import http from "my/http"
+import { Button } from "@material-ui/core"
+import { Add as AddIcon } from "@material-ui/icons"
+import EmptyPage from "components/EmptyPage"
+import CreateDialog from "./CreateDialog"
+import ClientTable from "./ClientTable"
+import moment from "moment"
+import WelcomeDialog from "./WelcomeDialog"
 
 export default class Home extends PureComponent {
     state = {
         list: [],
         loading: true,
         createOpen: false,
-        guideOpen: false,
         welcomeOpen: false
-    };
+    }
 
     componentDidMount() {
-        this.initData();
+        this.initData()
 
-        const tenantInfo = localStorage.getObj("tenantInfo");
+        const tenantInfo = localStorage.getObj("tenantInfo")
         if (moment(tenantInfo.createDate) > moment().subtract(5, "seconds"))
-            this.setState({ welcomeOpen: true });
+            this.setState({ welcomeOpen: true })
     }
 
     initData = async () => {
-        this.setState({ loading: true });
-        const list = await http.get("clients");
-        this.setState({ list, loading: false });
-    };
+        this.setState({ loading: true })
+        const list = await http.get("clients")
+        this.setState({ list, loading: false })
+    }
 
     openCreate = () => {
-        this.setState({ createOpen: true });
-    };
+        this.setState({ createOpen: true })
+    }
 
     cancelCreate = () => {
-        this.setState({ createOpen: false });
-    };
+        this.setState({ createOpen: false })
+    }
 
     saveCreate = () => {
-        this.setState({ createOpen: false, guideOpen: true });
-        this.initData();
-    };
-
-    closeGuide = () => {
-        this.setState({ guideOpen: false });
-    };
+        this.setState({ createOpen: false })
+        this.initData()
+    }
 
     closeWelcome = () => {
-        this.setState({ welcomeOpen: false });
-    };
+        this.setState({ welcomeOpen: false })
+    }
 
     render() {
-        const { list, loading, createOpen, guideOpen, welcomeOpen } = this.state;
+        const { list, loading, createOpen, welcomeOpen } = this.state
 
         const createNew = (
             <>
@@ -72,9 +66,8 @@ export default class Home extends PureComponent {
                     onSave={this.saveCreate}
                     key={Date()}
                 />
-                <GuideDialog open={guideOpen} onClose={this.closeGuide} />
             </>
-        );
+        )
 
         if (!list.length && !loading)
             return (
@@ -86,15 +79,15 @@ export default class Home extends PureComponent {
                         onCreate={this.openCreate}
                     />
                 </EmptyPage>
-            );
+            )
 
         return (
             <>
                 <div className="mainActionBox">{createNew}</div>
                 <h1>应用管理</h1>
-                <p>新建一个应用来使用唯ID的认证产品。</p>
+                <p>新建一个应用来使用唯ID的认证产品</p>
                 <ClientTable list={list} loading={loading} />
             </>
-        );
+        )
     }
 }

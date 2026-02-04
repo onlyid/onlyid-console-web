@@ -1,12 +1,12 @@
-import React, { PureComponent } from "react";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@material-ui/core";
-import DangerZone from "components/DangerZone";
-import DialogClose from "components/DialogClose";
-import http from "my/http";
-import { withRouter } from "react-router-dom";
-import { eventEmitter } from "my/utils";
-import styles from "./index.module.css";
-import tipBox from "components/TipBox.module.css";
+import React, { PureComponent } from "react"
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@material-ui/core"
+import DangerZone from "components/DangerZone"
+import DialogClose from "components/DialogClose"
+import http from "my/http"
+import { withRouter } from "react-router-dom"
+import { eventEmitter } from "my/utils"
+import styles from "./index.module.css"
+import tipBox from "components/TipBox.module.css"
 
 function BlockDialog({ open, blocked, onCancel, onSubmit }) {
     return (
@@ -29,49 +29,49 @@ function BlockDialog({ open, blocked, onCancel, onSubmit }) {
                 </Button>
             </DialogActions>
         </Dialog>
-    );
+    )
 }
 
 class Danger extends PureComponent {
     state = {
         blockOpen: false,
         blocked: false
-    };
+    }
 
     componentDidMount() {
-        this.initData();
+        this.initData()
     }
 
     initData = async () => {
-        const { match } = this.props;
-        const { blocked } = await http.get(`users/${match.params.id}/check-blocked`);
-        this.setState({ blocked });
-    };
+        const { match } = this.props
+        const { blocked } = await http.get(`users/${match.params.id}/check-blocked`)
+        this.setState({ blocked })
+    }
 
     toggleBlock = () => {
-        this.setState(({ blockOpen }) => ({ blockOpen: !blockOpen }));
-    };
+        this.setState(({ blockOpen }) => ({ blockOpen: !blockOpen }))
+    }
 
     onSubmit = async () => {
-        const { match } = this.props;
-        const { blocked } = this.state;
+        const { match } = this.props
+        const { blocked } = this.state
 
-        let toastText;
+        let toastText
         if (blocked) {
-            await http.post(`users/${match.params.id}/unblock`);
-            toastText = "移出黑名单成功";
+            await http.post(`users/${match.params.id}/unblock`)
+            toastText = "移出黑名单成功"
         } else {
-            await http.post(`users/${match.params.id}/block`);
-            toastText = "加入黑名单成功";
+            await http.post(`users/${match.params.id}/block`)
+            toastText = "加入黑名单成功"
         }
 
-        this.toggleBlock();
-        this.initData();
-        eventEmitter.emit("app/openToast", { text: toastText, timeout: 3000 });
-    };
+        this.toggleBlock()
+        this.initData()
+        eventEmitter.emit("app/openToast", { text: toastText, timeout: 3000 })
+    }
 
     render() {
-        const { blockOpen, blocked } = this.state;
+        const { blockOpen, blocked } = this.state
 
         return (
             <>
@@ -81,8 +81,8 @@ class Danger extends PureComponent {
                             <h3>{blocked ? "已加黑名单" : "加入黑名单"}</h3>
                             <p>
                                 {blocked
-                                    ? "已经将用户加入黑名单，TA不能登录你名下的所有应用。"
-                                    : "将恶意用户加入黑名单，禁止TA登录你名下的所有应用。"}
+                                    ? "已经将用户加入黑名单，TA不能登录你名下的所有应用"
+                                    : "将恶意用户加入黑名单，禁止TA登录你名下的所有应用"}
                             </p>
                         </div>
                         <Button variant="contained" color="secondary" onClick={this.toggleBlock}>
@@ -105,8 +105,8 @@ class Danger extends PureComponent {
                     onSubmit={this.onSubmit}
                 />
             </>
-        );
+        )
     }
 }
 
-export default withRouter(Danger);
+export default withRouter(Danger)

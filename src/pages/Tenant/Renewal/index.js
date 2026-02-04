@@ -1,25 +1,19 @@
-import React, { PureComponent } from "react";
-import moment from "moment";
-import { DATE_TIME_FORMAT } from "my/constants";
-import styles from "./index.module.css";
-import { Button } from "@material-ui/core";
-import tipBox from "components/TipBox.module.css";
-import RenewDialog from "./RenewDialog";
-import BuySmsDialog from "./BuySmsDialog"
-import ChargeTable from "./ChargeTable";
+import React, { PureComponent } from "react"
+import moment from "moment"
+import { DATE_TIME_FORMAT } from "my/constants"
+import styles from "./index.module.css"
+import { Button, Tooltip } from "@material-ui/core"
+import tipBox from "components/TipBox.module.css"
+import RenewDialog from "./RenewDialog"
+import ChargeTable from "./ChargeTable"
 
 class Renewal extends PureComponent {
     state = {
-        renewOpen: false,
-        buySmsOpen: false
-    };
+        renewOpen: false
+    }
 
     toggleRenew = () => {
-        this.setState(({ renewOpen }) => ({ renewOpen: !renewOpen }));
-    };
-
-    toggleBuySms = () => {
-        this.setState(({ buySmsOpen }) => ({ buySmsOpen: !buySmsOpen }));
+        this.setState(({ renewOpen }) => ({ renewOpen: !renewOpen }))
     }
 
     separateNumber = (num) => {
@@ -35,9 +29,9 @@ class Renewal extends PureComponent {
     }
 
     render() {
-        const { renewOpen, buySmsOpen } = this.state;
-        const { expireDate, smsRemain } = localStorage.getObj("tenantInfo");
-        const expired = moment(expireDate) < moment();
+        const { renewOpen } = this.state
+        const { expireDate, smsRemain } = localStorage.getObj("tenantInfo")
+        const expired = moment(expireDate) < moment()
 
         const status = expired ? (
             <>
@@ -50,7 +44,7 @@ class Renewal extends PureComponent {
                 {moment(expireDate).diff(moment(), "days")}
                 天后到期）
             </>
-        );
+        )
 
         const smsStatus = smsRemain ? (
             <span>{this.separateNumber(smsRemain) + " 条"}</span>
@@ -71,23 +65,22 @@ class Renewal extends PureComponent {
                             <p>{status}</p>
                         </div>
                         <div>
-                            <p>短信余量</p>
+                            <p>
+                                短信余量{" "}
+                                <Tooltip
+                                    title="SSO功能不消耗短信，本字段仅供使用OTP功能（已移除）的开发者使用"
+                                    placement="top"
+                                    classes={{ tooltip: styles.tooltip1 }}
+                                >
+                                    <span className="material-icons">help</span>
+                                </Tooltip>
+                            </p>
                             <p style={{ textAlign: "center" }}>{smsStatus}</p>
                         </div>
                     </div>
                     <div className={styles.buttonBox}>
-                        <Button
-                            color="primary"
-                            variant="contained"
-                            onClick={this.toggleRenew}
-                        >
+                        <Button color="primary" variant="contained" onClick={this.toggleRenew}>
                             订阅续费
-                        </Button>
-                        <Button
-                            variant="contained"
-                            onClick={this.toggleBuySms}
-                        >
-                            购买短信
                         </Button>
                     </div>
                 </div>
@@ -104,15 +97,13 @@ class Renewal extends PureComponent {
                     <p>提示：</p>
                     <ol>
                         <li>如果支付遇到问题，请联系客服处理。</li>
-                        <li>赠送/购买的短信长期有效，不会自动过期。</li>
                         <li>保留最长三年的支付记录，过期会自动删除。</li>
                     </ol>
                 </div>
                 <RenewDialog expireDate={expireDate} open={renewOpen} onCancel={this.toggleRenew} />
-                <BuySmsDialog smsRemain={smsRemain} open={buySmsOpen} onCancel={this.toggleBuySms} />
             </>
-        );
+        )
     }
 }
 
-export default Renewal;
+export default Renewal

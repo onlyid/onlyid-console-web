@@ -1,36 +1,36 @@
-import React, { PureComponent } from "react";
-import styles from "./ClientTable.module.css";
-import MyTable from "components/MyTable";
-import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
-import moment from "moment";
-import { DATE_TIME_FORMAT } from "my/constants";
-import http from "my/http";
-import { withRouter } from "react-router-dom";
+import React, { PureComponent } from "react"
+import styles from "./ClientTable.module.css"
+import MyTable from "components/MyTable"
+import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
+import moment from "moment"
+import { DATE_TIME_FORMAT } from "my/constants"
+import http from "my/http"
+import { withRouter } from "react-router-dom"
 
 class ClientTable extends PureComponent {
     state = {
         list: [],
         loading: true
-    };
+    }
 
     componentDidMount() {
-        this.initData();
+        this.initData()
     }
 
     initData = async () => {
-        const { match } = this.props;
-        const params = { userId: match.params.id };
-        const list = await http.get("clients/by-user", { params });
-        this.setState({ list, loading: false });
-    };
+        const { match } = this.props
+        const params = { userId: match.params.id }
+        const list = await http.get("clients/by-user", { params })
+        this.setState({ list, loading: false })
+    }
 
     render() {
-        const { list, loading } = this.state;
+        const { list, loading } = this.state
 
         return (
             <>
                 <p style={{ marginTop: 30 }}>
-                    用户授权的应用列表，这些应用可以访问该用户的账号数据。
+                    用户授权的应用列表，这些应用可以访问该用户的账号数据
                 </p>
                 <MyTable length={list.length} loading={loading} className={styles.table1}>
                     <TableHead>
@@ -66,8 +66,8 @@ class ClientTable extends PureComponent {
                     </TableBody>
                 </MyTable>
             </>
-        );
+        )
     }
 }
 
-export default withRouter(ClientTable);
+export default withRouter(ClientTable)

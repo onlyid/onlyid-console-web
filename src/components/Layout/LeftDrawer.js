@@ -1,22 +1,22 @@
-import React from "react";
-import styles from "./LeftDrawer.module.css";
-import { Drawer, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
-import { Link, useLocation } from "react-router-dom";
-import moment from "moment";
+import React from "react"
+import styles from "./LeftDrawer.module.css"
+import { Drawer, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core"
+import { Link, useLocation } from "react-router-dom"
+import moment from "moment"
 
 function Item({ to, children }) {
-    const location = useLocation();
+    const location = useLocation()
 
     return (
         <ListItem button component={Link} to={to} selected={location.pathname.startsWith(to)}>
             {children}
         </ListItem>
-    );
+    )
 }
 
 export default function LeftDrawer() {
-    const tenantInfo = localStorage.getObj("tenantInfo");
-    if (!tenantInfo) return null;
+    const tenantInfo = localStorage.getObj("tenantInfo")
+    if (!tenantInfo) return null
 
     return (
         <Drawer className={styles.root} variant="permanent">
@@ -35,12 +35,6 @@ export default function LeftDrawer() {
                             </ListItemIcon>
                             <ListItemText primary="应用管理" />
                         </Item>
-                        <Item to="/otp-records">
-                            <ListItemIcon>
-                                <span className="material-icons">sms</span>
-                            </ListItemIcon>
-                            <ListItemText primary="OTP记录" />
-                        </Item>
                         <Item to="/users">
                             <ListItemIcon>
                                 <span className="material-icons">person</span>
@@ -51,7 +45,7 @@ export default function LeftDrawer() {
                             <ListItemIcon>
                                 <span className="material-icons">receipt</span>
                             </ListItemIcon>
-                            <ListItemText primary="用户日志" />
+                            <ListItemText primary="登录日志" />
                         </Item>
                         <Item to="/my-messages">
                             <ListItemIcon>
@@ -69,5 +63,5 @@ export default function LeftDrawer() {
                 </Item>
             </List>
         </Drawer>
-    );
+    )
 }

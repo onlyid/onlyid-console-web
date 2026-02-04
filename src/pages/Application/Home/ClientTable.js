@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent } from "react"
 import {
     IconButton,
     Link,
@@ -9,45 +9,45 @@ import {
     TableCell,
     TableHead,
     TableRow
-} from "@material-ui/core";
-import styles from "./ClientTable.module.css";
-import { CLIENT_TYPE_TEXT, DATE_TIME_FORMAT } from "my/constants";
-import moment from "moment";
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import CopyButton from "components/CopyButton";
-import MyTable from "components/MyTable";
+} from "@material-ui/core"
+import styles from "./ClientTable.module.css"
+import { CLIENT_TYPE_TEXT, DATE_TIME_FORMAT } from "my/constants"
+import moment from "moment"
+import { withRouter } from "react-router-dom"
+import { connect } from "react-redux"
+import CopyButton from "components/CopyButton"
+import MyTable from "components/MyTable"
 
 class ClientTable extends PureComponent {
     state = {
         clientId: null,
         anchorEl: null
-    };
+    }
 
     openMenu = (event, clientId) => {
-        this.setState({ anchorEl: event.currentTarget, clientId });
-    };
+        this.setState({ anchorEl: event.currentTarget, clientId })
+    }
 
     closeMenu = () => {
-        this.setState({ anchorEl: null });
-    };
+        this.setState({ anchorEl: null })
+    }
 
     go = (tab) => {
-        const { history, match, dispatch } = this.props;
-        const { clientId } = this.state;
+        const { history, match, dispatch } = this.props
+        const { clientId } = this.state
 
-        dispatch({ type: "application", currentTab: tab });
-        history.push(`${match.url}/${clientId}`);
-    };
+        dispatch({ type: "application", currentTab: tab })
+        history.push(`${match.url}/${clientId}`)
+    }
 
     onClick = (event, clientId) => {
-        event.preventDefault();
-        this.setState({ clientId }, () => this.go("basic"));
-    };
+        event.preventDefault()
+        this.setState({ clientId }, () => this.go("basic"))
+    }
 
     render() {
-        const { list, loading } = this.props;
-        const { anchorEl } = this.state;
+        const { list, loading } = this.props
+        const { anchorEl } = this.state
 
         return (
             <>
@@ -108,19 +108,16 @@ class ClientTable extends PureComponent {
                     <MenuItem onClick={() => this.go("basic")}>
                         <ListItemText>应用详情</ListItemText>
                     </MenuItem>
-                    <MenuItem onClick={() => this.go("otp")}>
-                        <ListItemText>OTP 验证码设置</ListItemText>
-                    </MenuItem>
                     <MenuItem onClick={() => this.go("oauth")}>
-                        <ListItemText>SSO OAuth 设置</ListItemText>
+                        <ListItemText>OAuth 设置</ListItemText>
                     </MenuItem>
                     <MenuItem onClick={() => this.go("danger")}>
                         <ListItemText>危险设置</ListItemText>
                     </MenuItem>
                 </Menu>
             </>
-        );
+        )
     }
 }
 
-export default connect()(withRouter(ClientTable));
+export default connect()(withRouter(ClientTable))

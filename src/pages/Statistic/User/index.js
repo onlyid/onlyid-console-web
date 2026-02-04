@@ -1,33 +1,33 @@
-import React, { PureComponent } from "react";
-import TitleAndSelect from "../TitleAndSelect";
-import Chart from "./Chart";
-import Summary from "./Summary";
-import Latest from "./Latest";
-import tipBox from "components/TipBox.module.css";
+import React, { PureComponent } from "react"
+import TitleAndSelect from "../TitleAndSelect"
+import Chart from "./Chart"
+import Summary from "./Summary"
+import Latest from "./Latest"
+import tipBox from "components/TipBox.module.css"
 
 class User extends PureComponent {
     state = {
         clientId: "all",
         days: 30,
         type: "new"
-    };
+    }
 
     onChange = (key, value) => {
-        this.setState({ [key]: value });
-    };
+        this.setState({ [key]: value })
+    }
 
     render() {
-        const { clientId, days, type } = this.state;
+        const { clientId, days, type } = this.state
 
         const typeList = [
             { label: "新增用户", value: "new" },
             { label: "活跃用户", value: "active" }
-        ];
+        ]
 
         return (
             <>
                 <TitleAndSelect
-                    title="最近新增/活跃用户"
+                    title=""
                     clientId={clientId}
                     days={days}
                     type={type}
@@ -64,8 +64,8 @@ class User extends PureComponent {
                     </ol>
                 </div>
             </>
-        );
+        )
     }
 }
 
-export default User;
+export default User

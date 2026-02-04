@@ -2,15 +2,6 @@
     padding-bottom: 20px;
 }
 
-.typeSelect {
-    float: right;
-    width: 160px;
-}
-
-.typeSelect :global .MuiInputAdornment-positionStart {
-    margin-right: 16px;
-}
-
 .chart {
     margin-top: 30px;
 }

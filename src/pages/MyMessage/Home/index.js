@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent } from "react"
 import {
     Button,
     Dialog,
@@ -8,84 +8,84 @@ import {
     FormControl,
     Input,
     InputAdornment
-} from "@material-ui/core";
-import { connect } from "react-redux";
-import http from "my/http";
-import { eventEmitter } from "my/utils";
-import selectBar from "components/SelectBar.module.css";
-import MessageTable from "./MessageTable";
-import DialogClose from "components/DialogClose";
-import { withRouter } from "react-router-dom";
+} from "@material-ui/core"
+import { connect } from "react-redux"
+import http from "my/http"
+import { eventEmitter } from "my/utils"
+import selectBar from "components/SelectBar.module.css"
+import MessageTable from "./MessageTable"
+import DialogClose from "components/DialogClose"
+import { withRouter } from "react-router-dom"
 
 class MyMessage extends PureComponent {
     state = {
         loading: true,
         confirmOpen: false
-    };
+    }
 
     componentDidMount() {
-        this.initData();
+        this.initData()
     }
 
     initData = async () => {
-        this.setState({ loading: true });
+        this.setState({ loading: true })
         const {
             myMessage: { current, pageSize, keyword },
             dispatch
-        } = this.props;
+        } = this.props
 
-        const params = { current, pageSize, keyword };
-        const { list, total } = await http.get("my-messages", { params });
+        const params = { current, pageSize, keyword }
+        const { list, total } = await http.get("my-messages", { params })
 
         if (list.length || current === 1) {
-            dispatch({ type: "myMessage", list, total });
-            this.setState({ loading: false });
+            dispatch({ type: "myMessage", list, total })
+            this.setState({ loading: false })
         } else {
-            await dispatch({ type: "myMessage", current: current - 1 });
-            this.initData();
+            await dispatch({ type: "myMessage", current: current - 1 })
+            this.initData()
         }
-    };
+    }
 
     toggleConfirm = () => {
-        this.setState(({ confirmOpen }) => ({ confirmOpen: !confirmOpen }));
-    };
+        this.setState(({ confirmOpen }) => ({ confirmOpen: !confirmOpen }))
+    }
 
     markReadAll = async () => {
-        await http.put("my-messages/mark-read-all");
-        await this.initData();
-        eventEmitter.emit("app/openToast", { text: "操作成功", timeout: 2000 });
-        eventEmitter.emit("myMessage/countChange");
-        this.toggleConfirm();
-    };
+        await http.put("my-messages/mark-read-all")
+        await this.initData()
+        eventEmitter.emit("app/openToast", { text: "操作成功", timeout: 2000 })
+        eventEmitter.emit("myMessage/countChange")
+        this.toggleConfirm()
+    }
 
     onPaginationChange = async ({ pageSize, current }) => {
-        const { dispatch } = this.props;
-        await dispatch({ type: "myMessage", pageSize, current });
-        this.initData();
-    };
+        const { dispatch } = this.props
+        await dispatch({ type: "myMessage", pageSize, current })
+        this.initData()
+    }
 
     onChange = async ({ target }) => {
-        const { dispatch } = this.props;
-        await dispatch({ type: "myMessage", [target.name]: target.value });
-    };
+        const { dispatch } = this.props
+        await dispatch({ type: "myMessage", [target.name]: target.value })
+    }
 
     onSearch = async () => {
-        const { dispatch } = this.props;
-        await dispatch({ type: "myMessage", current: 1 });
-        this.initData();
-    };
+        const { dispatch } = this.props
+        await dispatch({ type: "myMessage", current: 1 })
+        this.initData()
+    }
 
     goNotification = () => {
-        const { history } = this.props;
+        const { history } = this.props
 
-        history.push("/tenant/notification");
-    };
+        history.push("/tenant/notification")
+    }
 
     render() {
-        const { loading, confirmOpen } = this.state;
+        const { loading, confirmOpen } = this.state
         const {
             myMessage: { unreadCount, totalCount, keyword, list, current, pageSize, total }
-        } = this.props;
+        } = this.props
 
         return (
             <>
@@ -99,7 +99,7 @@ class MyMessage extends PureComponent {
                 </div>
                 <h1>站内信</h1>
                 <p>
-                    共 {totalCount} 封消息，其中 {unreadCount} 封未读。
+                    共 {totalCount} 封消息，其中 {unreadCount} 封未读
                 </p>
                 <div className={selectBar.root}>
                     <FormControl>
@@ -146,8 +146,8 @@ class MyMessage extends PureComponent {
                     </DialogActions>
                 </Dialog>
             </>
-        );
+        )
     }
 }
 
-export default connect(({ myMessage }) => ({ myMessage }))(withRouter(MyMessage));
+export default connect(({ myMessage }) => ({ myMessage }))(withRouter(MyMessage))

@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./TitleAndSelect.module.css";
-import ClientSelect from "components/ClientSelect";
-import { FormControl, InputAdornment, MenuItem, Select } from "@material-ui/core";
+import React from "react"
+import styles from "./TitleAndSelect.module.css"
+import ClientSelect from "components/ClientSelect"
+import { FormControl, InputAdornment, MenuItem, Select } from "@material-ui/core"
 
 export default function TitleAndSelect({ title, clientId, days, type, onChange, typeList }) {
     return (
@@ -40,5 +40,5 @@ export default function TitleAndSelect({ title, clientId, days, type, onChange, 
                 </FormControl>
             </div>
         </div>
-    );
+    )
 }
