@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react"
+import { useEffect, useRef } from "react"
 import moment from "moment"
 import echarts from "echarts"
 import styles from "./index.module.css"
@@ -19,30 +19,27 @@ const CHART_OPTION = {
     yAxis: { minInterval: 1 }
 }
 
-class BaseChart extends PureComponent {
-    chart
+export default function BaseChart({ list, days, name }) {
+    const chartRef = useRef()
+    const domRef = useRef()
 
-    constructor(props) {
-        super(props)
-        this.ref = React.createRef()
-    }
+    useEffect(() => {
+        chartRef.current = echarts.init(domRef.current)
+        chartRef.current.setOption(CHART_OPTION)
 
-    componentDidMount() {
-        this.chart = echarts.init(this.ref.current)
-        this.chart.setOption(CHART_OPTION)
-    }
+        return () => {
+            chartRef.current.dispose()
+        }
+    }, [])
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        const { list } = this.props
-        if (list !== prevProps.list) this.showChart(this.formatData(list))
-    }
+    useEffect(() => {
+        showChart(formatData(list))
+    }, [list])
 
     /**
      * 补齐空项 转换成count数组
      */
-    formatData = (list) => {
-        const { days } = this.props
-
+    const formatData = (list) => {
         const date = new Date()
         date.setHours(0, 0, 0, 0)
         date.setDate(date.getDate() - days + 1)
@@ -72,9 +69,7 @@ class BaseChart extends PureComponent {
         return countArr
     }
 
-    showChart = (countArr) => {
-        const { days, name } = this.props
-
+    const showChart = (countArr) => {
         const xAxisData = []
         const date = new Date()
         date.setDate(date.getDate() - days + 1)
@@ -87,16 +82,12 @@ class BaseChart extends PureComponent {
             series: [{ name, data: countArr }],
             xAxis: { data: xAxisData }
         }
-        this.chart.setOption(chartOption)
+        chartRef.current.setOption(chartOption)
     }
 
-    render() {
-        return (
-            <div className={styles.chart}>
-                <div ref={this.ref} />
-            </div>
-        )
-    }
+    return (
+        <div className={styles.chart}>
+            <div ref={domRef} />
+        </div>
+    )
 }
-
-export default BaseChart

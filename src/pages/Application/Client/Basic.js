@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react"
+import { useState, useEffect } from "react"
 import {
     Button,
     FormControl,
@@ -25,157 +25,142 @@ const RULES = {
     description: { max: 200, message: "最多输入200字" }
 }
 
-class Basic extends PureComponent {
-    state = {
-        validation: { name: {}, description: {} },
-        values: {},
-        hiddenSecret: true
-    }
+export default function Basic({ client, onSave }) {
+    const [validation, setValidation] = useState({
+        name: {},
+        description: {}
+    })
+    const [values, setValues] = useState({})
+    const [hiddenSecret, setHiddenSecret] = useState(true)
 
-    componentDidMount() {
-        const { client } = this.props
-        if (client.id) this.setState({ values: { ...client } })
-    }
+    useEffect(() => {
+        // mount的时候，不用执行
+        if (client.id) setValues({ ...client })
+    }, [client])
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        const { client } = this.props
-        if (client !== prevProps.client) this.setState({ values: { ...client } })
-    }
-
-    onSubmit = async () => {
-        const { values, validation } = this.state
-        const { client, onSave } = this.props
-
+    const onSubmit = async () => {
         try {
             await new Validator(RULES).validate(values, { firstFields: true })
         } catch ({ errors }) {
-            for (const e of errors) validation[e.field] = { text: e.message, error: true }
+            const v = { ...validation }
 
-            return this.setState({ validation: { ...validation } })
+            for (const e of errors) v[e.field] = { text: e.message, error: true }
+
+            return setValidation(v)
         }
 
         await http.put("clients/" + client.id, values)
+
         eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 })
         onSave()
     }
 
-    toggleHideSecret = () => {
-        this.setState(({ hiddenSecret }) => ({ hiddenSecret: !hiddenSecret }))
+    const toggleHideSecret = () => {
+        setHiddenSecret((prev) => !prev)
     }
 
-    onChange = ({ target }) => {
-        this.setState(({ values }) => ({ values: { ...values, [target.id]: target.value } }))
+    const onChange = ({ target }) => {
+        setValues((values) => ({ ...values, [target.id]: target.value }))
     }
 
-    onTypeChange = ({ target: { value } }) => {
-        this.setState(({ values }) => ({ values: { ...values, type: value } }))
+    const onTypeChange = ({ target: { value } }) => {
+        setValues((values) => ({ ...values, type: value }))
     }
 
-    validateField = async ({ target: { id: key, value } }) => {
-        const { validation } = this.state
+    const validateField = async ({ target: { id: key, value } }) => {
+        const v = { ...validation }
         try {
             await new Validator({ [key]: RULES[key] }).validate({ [key]: value }, { first: true })
-            validation[key] = {}
+            v[key] = {}
         } catch ({ errors }) {
-            validation[key] = { text: errors[0].message, error: true }
+            v[key] = { text: errors[0].message, error: true }
         }
-        this.setState({ validation: { ...validation } })
+        setValidation(v)
     }
 
-    render() {
-        const { values, hiddenSecret, validation } = this.state
-
-        return (
-            <form>
-                <InputBox label="应用名称" required>
-                    <FormControl error={validation.name.error} variant="outlined">
-                        <OutlinedInput
-                            id="name"
-                            onChange={this.onChange}
-                            onBlur={this.validateField}
-                            value={values.name || ""}
-                        />
-                        <FormHelperText>{validation.name.text}</FormHelperText>
-                    </FormControl>
-                </InputBox>
-                <InputBox label="应用 ID">
-                    <FormControl variant="outlined">
-                        <OutlinedInput
-                            id="id"
-                            value={values.id || ""}
-                            disabled
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <CopyButton value={values.id} />
-                                </InputAdornment>
-                            }
-                        />
-                        <FormHelperText />
-                    </FormControl>
-                </InputBox>
-                <InputBox label="应用 Secret">
-                    <FormControl variant="outlined">
-                        <OutlinedInput
-                            id="secret"
-                            value={values.secret || ""}
-                            disabled
-                            type={hiddenSecret ? "password" : "text"}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <RevealButton
-                                        tip="显示明文Secret"
-                                        hidden={hiddenSecret}
-                                        toggle={this.toggleHideSecret}
-                                    />
-                                    <CopyButton value={values.secret} />
-                                </InputAdornment>
-                            }
-                        />
-                        <FormHelperText />
-                    </FormControl>
-                </InputBox>
-                <InputBox label="应用类型" radioGroup>
-                    <FormControl variant="outlined">
-                        <RadioGroup
-                            row
-                            id="type"
-                            value={values.type || ""}
-                            onChange={this.onTypeChange}
-                        >
-                            {Object.keys(CLIENT_TYPE_TEXT).map((key) => (
-                                <FormControlLabel
-                                    value={key}
-                                    key={key}
-                                    control={<Radio color="primary" />}
-                                    label={CLIENT_TYPE_TEXT[key]}
+    return (
+        <form>
+            <InputBox label="应用名称" required>
+                <FormControl error={validation.name.error} variant="outlined">
+                    <OutlinedInput
+                        id="name"
+                        onChange={onChange}
+                        onBlur={validateField}
+                        value={values.name || ""}
+                    />
+                    <FormHelperText>{validation.name.text}</FormHelperText>
+                </FormControl>
+            </InputBox>
+            <InputBox label="应用 ID">
+                <FormControl variant="outlined">
+                    <OutlinedInput
+                        id="id"
+                        value={values.id || ""}
+                        disabled
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <CopyButton value={values.id} />
+                            </InputAdornment>
+                        }
+                    />
+                    <FormHelperText />
+                </FormControl>
+            </InputBox>
+            <InputBox label="应用 Secret">
+                <FormControl variant="outlined">
+                    <OutlinedInput
+                        id="secret"
+                        value={values.secret || ""}
+                        disabled
+                        type={hiddenSecret ? "password" : "text"}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <RevealButton
+                                    tip="显示明文Secret"
+                                    hidden={hiddenSecret}
+                                    toggle={toggleHideSecret}
                                 />
-                            ))}
-                        </RadioGroup>
-                    </FormControl>
-                </InputBox>
-                <InputBox label="应用描述">
-                    <FormControl error={validation.description.error} variant="outlined">
-                        <OutlinedInput
-                            id="description"
-                            onChange={this.onChange}
-                            onBlur={this.validateField}
-                            value={values.description || ""}
-                            multiline
-                            rows={3}
-                        />
-                        <FormHelperText>{validation.description.text}</FormHelperText>
-                    </FormControl>
-                </InputBox>
-                <InputBox>
-                    <div style={{ marginTop: 5 }}>
-                        <Button variant="contained" color="primary" onClick={this.onSubmit}>
-                            保 存
-                        </Button>
-                    </div>
-                </InputBox>
-            </form>
-        )
-    }
+                                <CopyButton value={values.secret} />
+                            </InputAdornment>
+                        }
+                    />
+                    <FormHelperText />
+                </FormControl>
+            </InputBox>
+            <InputBox label="应用类型" radioGroup>
+                <FormControl variant="outlined">
+                    <RadioGroup row id="type" value={values.type || ""} onChange={onTypeChange}>
+                        {Object.keys(CLIENT_TYPE_TEXT).map((key) => (
+                            <FormControlLabel
+                                value={key}
+                                key={key}
+                                control={<Radio color="primary" />}
+                                label={CLIENT_TYPE_TEXT[key]}
+                            />
+                        ))}
+                    </RadioGroup>
+                </FormControl>
+            </InputBox>
+            <InputBox label="应用描述">
+                <FormControl error={validation.description.error} variant="outlined">
+                    <OutlinedInput
+                        id="description"
+                        onChange={onChange}
+                        onBlur={validateField}
+                        value={values.description || ""}
+                        multiline
+                        rows={3}
+                    />
+                    <FormHelperText>{validation.description.text}</FormHelperText>
+                </FormControl>
+            </InputBox>
+            <InputBox>
+                <div style={{ marginTop: 5 }}>
+                    <Button variant="contained" color="primary" onClick={onSubmit}>
+                        保 存
+                    </Button>
+                </div>
+            </InputBox>
+        </form>
+    )
 }
-
-export default Basic

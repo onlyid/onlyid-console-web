@@ -1,8 +1,8 @@
-import React, { PureComponent } from "react"
-import { connect } from "react-redux"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import MainHeader from "components/MainHeader"
 import http from "my/http"
-import { withRouter } from "react-router-dom"
+import { useRouteMatch } from "react-router-dom"
 import { CLIENT_TYPE_TEXT, IMG_UPLOAD_TIP } from "my/constants"
 import mainTabs from "components/MainTabs.module.css"
 import { Tab, Tabs } from "@material-ui/core"
@@ -12,86 +12,78 @@ import OAuth from "./OAuth"
 import Danger from "./Danger"
 import { eventEmitter } from "my/utils"
 
-class Client extends PureComponent {
-    state = {
-        client: {}
-    }
+export default function Client() {
+    const [client, setClient] = useState({})
 
-    componentDidMount() {
-        this.initData()
-    }
+    const application = useSelector((state) => state.application)
+    const dispatch = useDispatch()
+    const match = useRouteMatch()
 
-    initData = async () => {
-        const { match } = this.props
+    useEffect(() => {
+        initData()
+    }, [])
+
+    const initData = async () => {
         const client = await http.get(`clients/${match.params.id}`)
-        this.setState({ client })
+        setClient(client)
     }
 
-    onTabChange = (event, value) => {
-        const { dispatch } = this.props
+    const onTabChange = (event, value) => {
         dispatch({ type: "application", currentTab: value })
     }
 
-    onUpload = async (filename) => {
-        const { match } = this.props
+    const onUpload = async (filename) => {
         const { iconUrl } = await http.put(`clients/${match.params.id}/icon`, { filename })
-        this.setState(({ client }) => ({ client: { ...client, iconUrl } }))
+        setClient((client) => ({ ...client, iconUrl }))
         eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 })
     }
 
-    render() {
-        const { client } = this.state
-        const { application } = this.props
-
-        let content
-        switch (application.currentTab) {
-            case "otp":
-                content = <Otp />
-                break
-            case "oauth":
-                content = <OAuth clientType={client.type} />
-                break
-            case "danger":
-                content = <Danger onSave={this.initData} />
-                break
-            default:
-                content = <Basic client={client} onSave={this.initData} />
-        }
-
-        return (
-            <>
-                <MainHeader
-                    backText="返回应用列表"
-                    imgUrl={client.iconUrl}
-                    title={client.name}
-                    uploadTip={IMG_UPLOAD_TIP}
-                    onUpload={this.onUpload}
-                >
-                    <ul>
-                        <li>
-                            <span>ID：</span>
-                            <span className="spanId">{client.id}</span>
-                        </li>
-                        <li>
-                            <span>类型：</span>
-                            {CLIENT_TYPE_TEXT[client.type]}
-                        </li>
-                    </ul>
-                </MainHeader>
-                <Tabs
-                    value={application.currentTab}
-                    onChange={this.onTabChange}
-                    indicatorColor="primary"
-                    className={mainTabs.root}
-                >
-                    <Tab label="应用详情" value="basic" />
-                    <Tab label="OAuth 设置" value="oauth" />
-                    <Tab label="危险设置" value="danger" />
-                </Tabs>
-                {content}
-            </>
-        )
+    let content
+    switch (application.currentTab) {
+        case "otp":
+            content = <Otp />
+            break
+        case "oauth":
+            content = <OAuth clientType={client.type} />
+            break
+        case "danger":
+            content = <Danger onSave={initData} />
+            break
+        default:
+            content = <Basic client={client} onSave={initData} />
     }
-}
 
-export default connect(({ application }) => ({ application }))(withRouter(Client))
+    return (
+        <>
+            <MainHeader
+                backText="返回应用列表"
+                imgUrl={client.iconUrl}
+                title={client.name}
+                uploadTip={IMG_UPLOAD_TIP}
+                onUpload={onUpload}
+            >
+                <ul>
+                    <li>
+                        <span>ID：</span>
+                        <span className="spanId">{client.id}</span>
+                    </li>
+                    <li>
+                        <span>类型：</span>
+                        {CLIENT_TYPE_TEXT[client.type]}
+                    </li>
+                </ul>
+            </MainHeader>
+            <Tabs
+                value={application.currentTab}
+                onChange={onTabChange}
+                indicatorColor="primary"
+                className={mainTabs.root}
+            >
+                <Tab label="应用详情" value="basic" />
+                <Tab label="OAuth 设置" value="oauth" />
+                <Tab label="危险设置" value="danger" />
+            </Tabs>
+            {content}
+        </>
+    )
+}

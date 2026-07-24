@@ -1,32 +1,28 @@
-import React, { PureComponent } from "react"
+import { useState } from "react"
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@material-ui/core"
 import DangerZone from "components/DangerZone"
 import DialogClose from "components/DialogClose"
 import http from "my/http"
-import { withRouter } from "react-router-dom"
+import { useRouteMatch, useHistory } from "react-router-dom"
 import { eventEmitter } from "my/utils"
 
-class Danger extends PureComponent {
-    state = {
-        dialogOpen: false,
-        operation: ""
+export default function Danger({ onSave }) {
+    const [dialogOpen, setDialogOpen] = useState(false)
+    const [operation, setOperation] = useState("")
+    const history = useHistory()
+    const match = useRouteMatch()
+
+    const confirm = (operation) => {
+        setOperation(operation)
+        setDialogOpen(true)
     }
 
-    confirm = (operation) => {
-        this.setState({ dialogOpen: true, operation })
+    const closeDialog = () => {
+        setDialogOpen(false)
     }
 
-    closeDialog = () => {
-        this.setState({ dialogOpen: false })
-    }
-
-    onSubmit = async () => {
-        const {
-            match: { params },
-            history,
-            onSave
-        } = this.props
-        const { operation } = this.state
+    const onSubmit = async () => {
+        const { params } = match
 
         let toastText
         if (operation === "delete") {
@@ -38,70 +34,56 @@ class Danger extends PureComponent {
             toastText = "重置成功"
             onSave()
         }
-        this.closeDialog()
+        closeDialog()
         eventEmitter.emit("app/openToast", { text: toastText, timeout: 2000 })
     }
 
-    render() {
-        const { dialogOpen, operation } = this.state
-
-        let dialogTitle, dialogContent, dialogButtonText
-        if (operation === "delete") {
-            dialogTitle = "删除应用"
-            dialogContent = "删除后不可恢复，确定删除？"
-            dialogButtonText = "删 除"
-        } else {
-            dialogTitle = "重置 Secret"
-            dialogContent = "重置后不可还原，确定重置？"
-            dialogButtonText = "重 置"
-        }
-
-        return (
-            <DangerZone>
-                <li>
-                    <div>
-                        <h3>删除应用</h3>
-                        <p>删除后，和该应用相关的SSO认证产品将立即停止工作</p>
-                    </div>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={() => this.confirm("delete")}
-                    >
-                        删 除
-                    </Button>
-                </li>
-                <li>
-                    <div>
-                        <h3>重置 Secret</h3>
-                        <p>一般仅在原secret泄漏时需要重置，重置后原secret马上失效</p>
-                    </div>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={() => this.confirm("rotate")}
-                    >
-                        重 置
-                    </Button>
-                </li>
-                <Dialog open={dialogOpen} onClose={this.closeDialog}>
-                    <DialogTitle>
-                        {dialogTitle}
-                        <DialogClose onClose={this.closeDialog} />
-                    </DialogTitle>
-                    <DialogContent>
-                        <p style={{ margin: 0, minWidth: 400 }}>{dialogContent}</p>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={this.closeDialog}>取 消</Button>
-                        <Button onClick={this.onSubmit} color="secondary">
-                            {dialogButtonText}
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-            </DangerZone>
-        )
+    let dialogTitle, dialogContent, dialogButtonText
+    if (operation === "delete") {
+        dialogTitle = "删除应用"
+        dialogContent = "删除后不可恢复，确定删除？"
+        dialogButtonText = "删 除"
+    } else {
+        dialogTitle = "重置 Secret"
+        dialogContent = "重置后不可还原，确定重置？"
+        dialogButtonText = "重 置"
     }
-}
 
-export default withRouter(Danger)
+    return (
+        <DangerZone>
+            <li>
+                <div>
+                    <h3>删除应用</h3>
+                    <p>删除后，和该应用相关的SSO认证产品将立即停止工作</p>
+                </div>
+                <Button variant="contained" color="secondary" onClick={() => confirm("delete")}>
+                    删 除
+                </Button>
+            </li>
+            <li>
+                <div>
+                    <h3>重置 Secret</h3>
+                    <p>一般仅在原secret泄漏时需要重置，重置后原secret马上失效</p>
+                </div>
+                <Button variant="contained" color="secondary" onClick={() => confirm("rotate")}>
+                    重 置
+                </Button>
+            </li>
+            <Dialog open={dialogOpen} onClose={closeDialog}>
+                <DialogTitle>
+                    {dialogTitle}
+                    <DialogClose onClose={closeDialog} />
+                </DialogTitle>
+                <DialogContent>
+                    <p style={{ margin: 0, minWidth: 400 }}>{dialogContent}</p>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={closeDialog}>取 消</Button>
+                    <Button onClick={onSubmit} color="secondary">
+                        {dialogButtonText}
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </DangerZone>
+    )
+}
