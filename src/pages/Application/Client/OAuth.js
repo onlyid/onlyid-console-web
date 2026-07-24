@@ -1,24 +1,24 @@
-import React, { PureComponent } from "react";
-import InputBox from "components/InputBox";
-import { Button, FormControl, FormHelperText, Link, OutlinedInput } from "@material-ui/core";
-import Validator from "async-validator";
-import http from "my/http";
-import { eventEmitter } from "my/utils";
-import { withRouter } from "react-router-dom";
-import tipBox from "components/TipBox.module.css";
+import React, { PureComponent } from "react"
+import InputBox from "components/InputBox"
+import { Button, FormControl, FormHelperText, Link, OutlinedInput } from "@material-ui/core"
+import Validator from "async-validator"
+import http from "my/http"
+import { eventEmitter } from "my/utils"
+import { withRouter } from "react-router-dom"
+import tipBox from "components/TipBox.module.css"
 
 const getArray = (value) =>
     value
         .replace(/[\n]/g, "")
         .split(";")
         .filter((item) => item)
-        .map((item) => item.trim());
+        .map((item) => item.trim())
 
 const RULES_APP = {
     packageName: { max: 50, message: "最多输入50字" },
     bundleId: { max: 50, message: "最多输入50字" },
     universalLink: { type: "url", message: "不是合法的url" }
-};
+}
 
 const RULES_WEB = {
     redirectUris: {
@@ -36,12 +36,12 @@ const RULES_WEB = {
         },
         transform: getArray
     }
-};
+}
 
 const RULES_COM = {
     termsUrl: { type: "url", message: "不是合法的url" },
     privacyUrl: { type: "url", message: "不是合法的url" }
-};
+}
 
 class OAuth extends PureComponent {
     state = {
@@ -62,48 +62,48 @@ class OAuth extends PureComponent {
         termsUrl: "",
         privacyUrl: "",
         universalLink: ""
-    };
+    }
 
     componentDidMount() {
-        this.initData();
+        this.initData()
     }
 
     initData = async () => {
-        const { match } = this.props;
+        const { match } = this.props
 
-        const clientId = match.params.id;
-        const data = await http.get(`clients/${clientId}/oauth-config`);
+        const clientId = match.params.id
+        const data = await http.get(`clients/${clientId}/oauth-config`)
 
-        const { redirectUris, background, ...rest } = data;
+        const { redirectUris, background, ...rest } = data
         const previewUrl =
             "https://onlyid.net/oauth?client-id=" +
             clientId +
             "&redirect-uri=" +
-            encodeURIComponent(redirectUris[0]);
+            encodeURIComponent(redirectUris[0])
         this.setState({
             redirectUris: redirectUris.join(";\n"),
             background: background.join(";\n"),
             previewUrl,
             ...rest
-        });
-    };
+        })
+    }
 
     onChange = ({ target }) => {
-        this.setState({ [target.id]: target.value });
-    };
+        this.setState({ [target.id]: target.value })
+    }
 
     validateField = async ({ target: { id: key, value } }) => {
-        const { validation } = this.state;
-        const rules = { ...RULES_APP, ...RULES_WEB, ...RULES_COM };
-        const validator = new Validator({ [key]: rules[key] });
+        const { validation } = this.state
+        const rules = { ...RULES_APP, ...RULES_WEB, ...RULES_COM }
+        const validator = new Validator({ [key]: rules[key] })
         try {
-            await validator.validate({ [key]: value }, { first: true });
-            validation[key] = {};
+            await validator.validate({ [key]: value }, { first: true })
+            validation[key] = {}
         } catch ({ errors }) {
-            validation[key] = { text: errors[0].message, error: true };
+            validation[key] = { text: errors[0].message, error: true }
         }
-        this.setState({ validation: { ...validation } });
-    };
+        this.setState({ validation: { ...validation } })
+    }
 
     onSubmit = async () => {
         const {
@@ -115,36 +115,36 @@ class OAuth extends PureComponent {
             privacyUrl,
             universalLink,
             validation
-        } = this.state;
-        const { clientType, match } = this.props;
+        } = this.state
+        const { clientType, match } = this.props
 
         if (clientType === "APP" && !packageName && !bundleId) {
-            const text = "应用包名和Bundle ID至少要填一项";
-            eventEmitter.emit("app/openToast", { text, severity: "warning" });
-            return;
+            const text = "应用包名和Bundle ID至少要填一项"
+            eventEmitter.emit("app/openToast", { text, severity: "warning" })
+            return
         }
 
         if (bundleId && !universalLink) {
-            const text = "iOS应用请填写Universal Link";
-            eventEmitter.emit("app/openToast", { text, severity: "warning" });
-            return;
+            const text = "iOS应用请填写Universal Link"
+            eventEmitter.emit("app/openToast", { text, severity: "warning" })
+            return
         }
 
-        let rules, source;
+        let rules, source
         if (clientType === "APP") {
-            rules = { ...RULES_APP, ...RULES_COM };
-            source = { packageName, bundleId, termsUrl, privacyUrl, universalLink };
+            rules = { ...RULES_APP, ...RULES_COM }
+            source = { packageName, bundleId, termsUrl, privacyUrl, universalLink }
         } else {
-            rules = { ...RULES_WEB, ...RULES_COM };
-            source = { redirectUris, background, termsUrl, privacyUrl };
+            rules = { ...RULES_WEB, ...RULES_COM }
+            source = { redirectUris, background, termsUrl, privacyUrl }
         }
 
         try {
-            await new Validator(rules).validate(source, { firstFields: true });
+            await new Validator(rules).validate(source, { firstFields: true })
         } catch ({ errors }) {
-            for (const e of errors) validation[e.field] = { text: e.message, error: true };
+            for (const e of errors) validation[e.field] = { text: e.message, error: true }
 
-            return this.setState({ validation: { ...validation } });
+            return this.setState({ validation: { ...validation } })
         }
 
         const values = {
@@ -155,11 +155,11 @@ class OAuth extends PureComponent {
             termsUrl,
             privacyUrl,
             universalLink
-        };
-        await http.put(`clients/${match.params.id}/oauth-config`, values);
-        eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
-        this.initData();
-    };
+        }
+        await http.put(`clients/${match.params.id}/oauth-config`, values)
+        eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 })
+        this.initData()
+    }
 
     render() {
         const {
@@ -172,8 +172,8 @@ class OAuth extends PureComponent {
             termsUrl,
             privacyUrl,
             universalLink
-        } = this.state;
-        const { clientType } = this.props;
+        } = this.state
+        const { clientType } = this.props
 
         return (
             <form>
@@ -307,8 +307,8 @@ class OAuth extends PureComponent {
                     </ol>
                 </div>
             </form>
-        );
+        )
     }
 }
 
-export default withRouter(OAuth);
+export default withRouter(OAuth)

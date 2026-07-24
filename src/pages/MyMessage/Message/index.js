@@ -1,23 +1,16 @@
-import React, { PureComponent } from "react";
-import http from "my/http";
-import { eventEmitter } from "my/utils";
-import MainHeader from "components/MainHeader";
-import { withRouter } from "react-router-dom";
-import LevelSymbol from "components/LevelSymbol";
-import moment from "moment";
-import { DATE_TIME_FORMAT } from "my/constants";
-import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    Paper
-} from "@material-ui/core";
-import styles from "./index.module.css";
-import { Delete } from "@material-ui/icons";
-import DialogClose from "components/DialogClose";
-import { connect } from "react-redux";
+import React, { PureComponent } from "react"
+import http from "my/http"
+import { eventEmitter } from "my/utils"
+import MainHeader from "components/MainHeader"
+import { withRouter } from "react-router-dom"
+import LevelSymbol from "components/LevelSymbol"
+import moment from "moment"
+import { DATE_TIME_FORMAT } from "my/constants"
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Paper } from "@material-ui/core"
+import styles from "./index.module.css"
+import { Delete } from "@material-ui/icons"
+import DialogClose from "components/DialogClose"
+import { connect } from "react-redux"
 
 class Index extends PureComponent {
     state = {
@@ -27,61 +20,61 @@ class Index extends PureComponent {
         deleteOpen: false,
         prevId: null,
         nextId: null
-    };
+    }
 
     componentDidMount() {
-        this.initData();
+        this.initData()
     }
 
     initData = async () => {
         const {
             match,
             myMessage: { keyword }
-        } = this.props;
+        } = this.props
 
-        const message = await http.get(`my-messages/${match.params.id}`);
+        const message = await http.get(`my-messages/${match.params.id}`)
 
-        this.setState({ message });
+        this.setState({ message })
 
-        const params = { keyword };
-        const data = await http.get(`my-messages/${match.params.id}/adjacent`, { params });
-        const { prevId, nextId } = data;
-        this.setState({ prevId, nextId });
+        const params = { keyword }
+        const data = await http.get(`my-messages/${match.params.id}/adjacent`, { params })
+        const { prevId, nextId } = data
+        this.setState({ prevId, nextId })
 
         if (!message.isRead) {
-            await http.put(`my-messages/${match.params.id}/mark-read`);
-            eventEmitter.emit("myMessage/countChange");
+            await http.put(`my-messages/${match.params.id}/mark-read`)
+            eventEmitter.emit("myMessage/countChange")
         }
-    };
+    }
 
     toggleDelete = () => {
-        this.setState(({ deleteOpen }) => ({ deleteOpen: !deleteOpen }));
-    };
+        this.setState(({ deleteOpen }) => ({ deleteOpen: !deleteOpen }))
+    }
 
     submitDelete = async () => {
-        const { match, history } = this.props;
+        const { match, history } = this.props
 
-        await http.delete("my-messages/" + match.params.id);
-        eventEmitter.emit("myMessage/countChange");
-        eventEmitter.emit("app/openToast", { text: "删除成功", timeout: 2000 });
+        await http.delete("my-messages/" + match.params.id)
+        eventEmitter.emit("myMessage/countChange")
+        eventEmitter.emit("app/openToast", { text: "删除成功", timeout: 2000 })
 
-        history.goBack();
-    };
+        history.goBack()
+    }
 
     go = async (type) => {
-        const id = type === "prev" ? this.state.prevId : this.state.nextId;
-        const { history } = this.props;
-        await history.replace("/my-messages/" + id);
-        this.initData();
-    };
+        const id = type === "prev" ? this.state.prevId : this.state.nextId
+        const { history } = this.props
+        await history.replace("/my-messages/" + id)
+        this.initData()
+    }
 
     render() {
-        const { message, deleteOpen, prevId, nextId } = this.state;
-        const userInfo = localStorage.getObj("userInfo");
+        const { message, deleteOpen, prevId, nextId } = this.state
+        const userInfo = localStorage.getObj("userInfo")
 
         const html = message.html
             .replace("#nickname#", userInfo.nickname)
-            .replace(/<h1[\s\S]+<\/h1>/, "");
+            .replace(/<h1[\s\S]+<\/h1>/, "")
 
         return (
             <>
@@ -145,8 +138,8 @@ class Index extends PureComponent {
                     </DialogActions>
                 </Dialog>
             </>
-        );
+        )
     }
 }
 
-export default connect(({ myMessage }) => ({ myMessage }))(withRouter(Index));
+export default connect(({ myMessage }) => ({ myMessage }))(withRouter(Index))

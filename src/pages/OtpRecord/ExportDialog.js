@@ -1,62 +1,62 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Link } from "@material-ui/core";
-import DialogClose from "components/DialogClose";
-import React, { PureComponent } from "react";
-import http from "my/http";
-import styles from "./ExportDialog.module.css";
-import tipBox from "components/TipBox.module.css";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Link } from "@material-ui/core"
+import DialogClose from "components/DialogClose"
+import React, { PureComponent } from "react"
+import http from "my/http"
+import styles from "./ExportDialog.module.css"
+import tipBox from "components/TipBox.module.css"
 
 export default class ExportDialog extends PureComponent {
     state = {
         list: [],
         fileUrl: "",
         loading: false
-    };
+    }
 
     componentDidMount() {
-        this.initData();
+        this.initData()
     }
 
     componentDidUpdate(prevProps) {
-        const { open } = this.props;
-        if (open && !prevProps.open) this.setState({ fileUrl: "", loading: false });
+        const { open } = this.props
+        if (open && !prevProps.open) this.setState({ fileUrl: "", loading: false })
     }
 
     initData = async () => {
-        const list = await http.get("clients");
-        this.setState({ list });
-    };
+        const list = await http.get("clients")
+        this.setState({ list })
+    }
 
     onSubmit = async () => {
-        this.setState({ loading: true });
+        this.setState({ loading: true })
 
-        const { clientId, days, sendSuccess, verifySuccess, keyword } = this.props;
+        const { clientId, days, sendSuccess, verifySuccess, keyword } = this.props
 
-        const params = { keyword, days };
-        if (clientId !== "all") params.clientId = clientId;
-        if (sendSuccess !== "all") params.sendSuccess = sendSuccess;
-        if (verifySuccess !== "all") params.verifySuccess = verifySuccess;
+        const params = { keyword, days }
+        if (clientId !== "all") params.clientId = clientId
+        if (sendSuccess !== "all") params.sendSuccess = sendSuccess
+        if (verifySuccess !== "all") params.verifySuccess = verifySuccess
 
-        const { fileUrl } = await http.post("otp/export", params);
-        this.setState({ fileUrl, loading: false });
-    };
+        const { fileUrl } = await http.post("otp/export", params)
+        this.setState({ fileUrl, loading: false })
+    }
 
     getStatusText = (success) => {
         switch (success) {
             case "all":
-                return "查看全部";
+                return "查看全部"
             case "true":
-                return "只看成功";
+                return "只看成功"
             default:
-                return "只看失败";
+                return "只看失败"
         }
-    };
+    }
 
     render() {
-        const { open, onClose, clientId, days, sendSuccess, verifySuccess, keyword } = this.props;
-        const { list, fileUrl, loading } = this.state;
+        const { open, onClose, clientId, days, sendSuccess, verifySuccess, keyword } = this.props
+        const { list, fileUrl, loading } = this.state
 
         const clientName =
-            clientId === "all" ? "全部应用" : `${list.find((item) => item.id === clientId).name}`;
+            clientId === "all" ? "全部应用" : `${list.find((item) => item.id === clientId).name}`
 
         return (
             <Dialog open={open} onClose={onClose}>
@@ -121,6 +121,6 @@ export default class ExportDialog extends PureComponent {
                     </Button>
                 </DialogActions>
             </Dialog>
-        );
+        )
     }
 }

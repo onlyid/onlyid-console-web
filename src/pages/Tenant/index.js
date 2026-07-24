@@ -1,23 +1,23 @@
-import React, { PureComponent } from "react";
-import styles from "./index.module.css";
-import { Redirect, Route, Switch, withRouter } from "react-router-dom";
-import mainTabs from "components/MainTabs.module.css";
-import { Tab, Tabs } from "@material-ui/core";
-import Info from "./Info";
-import Renewal from "./Renewal";
-import Notification from "./Notification";
+import React, { PureComponent } from "react"
+import styles from "./index.module.css"
+import { Redirect, Route, Switch, withRouter } from "react-router-dom"
+import mainTabs from "components/MainTabs.module.css"
+import { Tab, Tabs } from "@material-ui/core"
+import Info from "./Info"
+import Renewal from "./Renewal"
+import Notification from "./Notification"
 
 class Tenant extends PureComponent {
-    state = {};
+    state = {}
 
     onTabChange = (event, value) => {
-        const { history, match } = this.props;
-        history.push(`${match.url}/${value}`);
-    };
+        const { history, match } = this.props
+        history.push(`${match.url}/${value}`)
+    }
 
     render() {
-        const { match, location } = this.props;
-        const currentTab = location.pathname.split("/")[2];
+        const { match, location } = this.props
+        const currentTab = location.pathname.split("/")[2]
 
         return (
             <div className={styles.root}>
@@ -48,8 +48,8 @@ class Tenant extends PureComponent {
                     </Route>
                 </Switch>
             </div>
-        );
+        )
     }
 }
 
-export default withRouter(Tenant);
+export default withRouter(Tenant)

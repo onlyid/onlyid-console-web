@@ -1,8 +1,8 @@
-import React, { PureComponent } from "react";
-import http from "my/http";
-import moment from "moment";
-import { DATE_TIME_FORMAT } from "my/constants";
-import styles from "./RenewDialog.module.css";
+import React, { PureComponent } from "react"
+import http from "my/http"
+import moment from "moment"
+import { DATE_TIME_FORMAT } from "my/constants"
+import styles from "./RenewDialog.module.css"
 import {
     Button,
     Dialog,
@@ -13,42 +13,42 @@ import {
     FormControlLabel,
     Radio,
     RadioGroup
-} from "@material-ui/core";
-import DialogClose from "components/DialogClose";
+} from "@material-ui/core"
+import DialogClose from "components/DialogClose"
 
 export default class RenewDialog extends PureComponent {
     state = {
         year: "1"
-    };
+    }
 
     submit = async () => {
-        const { year } = this.state;
-        const { formHtml } = await http.post("tenant/pay", { count: year, type: "renew" });
-        document.body.innerHTML = formHtml;
-        document.forms[0].submit();
-    };
+        const { year } = this.state
+        const { formHtml } = await http.post("tenant/pay", { count: year, type: "renew" })
+        document.body.innerHTML = formHtml
+        document.forms[0].submit()
+    }
 
     onChange = (e) => {
-        this.setState({ year: e.target.value });
-    };
+        this.setState({ year: e.target.value })
+    }
 
     newExpireDate = () => {
-        const { expireDate } = this.props;
-        const { year } = this.state;
+        const { expireDate } = this.props
+        const { year } = this.state
 
-        const now = moment();
-        let date = moment(expireDate);
+        const now = moment()
+        let date = moment(expireDate)
 
-        if (date.isBefore(now)) date = now;
+        if (date.isBefore(now)) date = now
 
-        date.add(year, "y");
+        date.add(year, "y")
 
-        return date;
-    };
+        return date
+    }
 
     render() {
-        const { open, onCancel, expireDate } = this.props;
-        const { year } = this.state;
+        const { open, onCancel, expireDate } = this.props
+        const { year } = this.state
 
         return (
             <Dialog open={open} onClose={onCancel}>
@@ -107,6 +107,6 @@ export default class RenewDialog extends PureComponent {
                     </Button>
                 </DialogActions>
             </Dialog>
-        );
+        )
     }
 }

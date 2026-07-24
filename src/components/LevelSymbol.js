@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./LevelSymbol.module.css";
+import React from "react"
+import styles from "./LevelSymbol.module.css"
 
 export default function LevelSymbol({ important }) {
     return (
@@ -20,5 +20,5 @@ export default function LevelSymbol({ important }) {
                 </>
             )}
         </div>
-    );
+    )
 }

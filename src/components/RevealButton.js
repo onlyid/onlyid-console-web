@@ -1,5 +1,5 @@
-import { Tooltip } from "@material-ui/core";
-import React from "react";
+import { Tooltip } from "@material-ui/core"
+import React from "react"
 
 export default function RevealButton({ tip, hidden, toggle }) {
     return (
@@ -10,5 +10,5 @@ export default function RevealButton({ tip, hidden, toggle }) {
                 </span>
             </div>
         </Tooltip>
-    );
+    )
 }

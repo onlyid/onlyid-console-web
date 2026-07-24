@@ -56,11 +56,7 @@ export default class BuySmsDialog extends PureComponent {
                     <div className={styles.countBox}>
                         购买条数：
                         <FormControl style={{ marginLeft: 15, marginRight: 15 }}>
-                            <Select
-                                name="num"
-                                value={num}
-                                onChange={this.onChange}
-                            >
+                            <Select name="num" value={num} onChange={this.onChange}>
                                 <MenuItem key="1" value="1">
                                     1
                                 </MenuItem>
@@ -92,11 +88,7 @@ export default class BuySmsDialog extends PureComponent {
                         </FormControl>
                         X
                         <FormControl style={{ marginLeft: 15 }}>
-                            <Select
-                                name="unit"
-                                value={unit}
-                                onChange={this.onChange}
-                            >
+                            <Select name="unit" value={unit} onChange={this.onChange}>
                                 <MenuItem key="1000" value="1000">
                                     1000 条
                                 </MenuItem>

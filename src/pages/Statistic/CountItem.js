@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./index.module.css";
+import React from "react"
+import styles from "./index.module.css"
 
 export default function CountItem({ title, days, count }) {
     return (
@@ -8,5 +8,5 @@ export default function CountItem({ title, days, count }) {
             <span className={styles.count}>{count}</span>
             <span className={styles.days}>{days}</span>
         </div>
-    );
+    )
 }

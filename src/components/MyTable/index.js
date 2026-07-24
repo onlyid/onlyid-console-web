@@ -1,25 +1,25 @@
-import React, { PureComponent } from "react";
-import styles from "./index.module.css";
-import { CircularProgress, Table, TableCell, TableFooter, TableRow } from "@material-ui/core";
-import Empty from "../Empty";
-import Pagination from "./Pagination";
-import classNames from "classnames";
+import React, { PureComponent } from "react"
+import styles from "./index.module.css"
+import { CircularProgress, Table, TableCell, TableFooter, TableRow } from "@material-ui/core"
+import Empty from "../Empty"
+import Pagination from "./Pagination"
+import classNames from "classnames"
 
 export default class MyTable extends PureComponent {
     onPageChange = (event, page) => {
-        const { onPaginationChange, pagination } = this.props;
-        onPaginationChange({ pageSize: pagination.pageSize, current: page + 1 });
-    };
+        const { onPaginationChange, pagination } = this.props
+        onPaginationChange({ pageSize: pagination.pageSize, current: page + 1 })
+    }
 
     onRowsPerPageChange = (event) => {
-        const { onPaginationChange } = this.props;
-        onPaginationChange({ pageSize: event.target.value, current: 1 });
-    };
+        const { onPaginationChange } = this.props
+        onPaginationChange({ pageSize: event.target.value, current: 1 })
+    }
 
     render() {
-        const { children, length, loading, pagination, className } = this.props;
+        const { children, length, loading, pagination, className } = this.props
 
-        const emptyRows = length && length < 5 ? 5 - length : 0;
+        const emptyRows = length && length < 5 ? 5 - length : 0
 
         return (
             <div className={styles.root}>
@@ -51,6 +51,6 @@ export default class MyTable extends PureComponent {
                 </div>
                 {loading && <CircularProgress className={styles.loading} />}
             </div>
-        );
+        )
     }
 }

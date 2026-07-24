@@ -1,75 +1,75 @@
-import { IconButton, Input, TablePagination } from "@material-ui/core";
-import React, { PureComponent } from "react";
-import { FirstPage, KeyboardArrowLeft, KeyboardArrowRight, LastPage } from "@material-ui/icons";
-import styles from "./index.module.css";
+import { IconButton, Input, TablePagination } from "@material-ui/core"
+import React, { PureComponent } from "react"
+import { FirstPage, KeyboardArrowLeft, KeyboardArrowRight, LastPage } from "@material-ui/icons"
+import styles from "./index.module.css"
 
 class Actions extends PureComponent {
     state = {
         inputValue: 1
-    };
+    }
 
     componentDidMount() {
-        const { page } = this.props;
-        if (page !== 0) this.setState({ inputValue: page + 1 });
+        const { page } = this.props
+        if (page !== 0) this.setState({ inputValue: page + 1 })
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const { page } = this.props;
-        if (page !== prevProps.page) this.setState({ inputValue: page + 1 });
+        const { page } = this.props
+        if (page !== prevProps.page) this.setState({ inputValue: page + 1 })
     }
 
     onClick = (event, type) => {
-        const { page, onPageChange, count, rowsPerPage } = this.props;
-        let newPage;
+        const { page, onPageChange, count, rowsPerPage } = this.props
+        let newPage
         switch (type) {
             case "first":
-                newPage = 0;
-                break;
+                newPage = 0
+                break
             case "prev":
-                newPage = page - 1;
-                break;
+                newPage = page - 1
+                break
             case "next":
-                newPage = page + 1;
-                break;
+                newPage = page + 1
+                break
             default:
                 // last
-                newPage = Math.ceil(count / rowsPerPage) - 1;
+                newPage = Math.ceil(count / rowsPerPage) - 1
         }
-        onPageChange(event, newPage);
-        this.setState({ inputValue: newPage + 1 });
-    };
+        onPageChange(event, newPage)
+        this.setState({ inputValue: newPage + 1 })
+    }
 
     onKeyUp = (event) => {
-        const { inputValue } = this.state;
-        const { page, count, rowsPerPage, onPageChange } = this.props;
+        const { inputValue } = this.state
+        const { page, count, rowsPerPage, onPageChange } = this.props
 
-        if (event.key !== "Enter") return;
+        if (event.key !== "Enter") return
 
         if (isNaN(inputValue)) {
-            this.setState({ inputValue: page + 1 });
-            return;
+            this.setState({ inputValue: page + 1 })
+            return
         }
 
-        let value = Math.round(inputValue) - 1;
+        let value = Math.round(inputValue) - 1
 
-        if (value < 0) value = 0;
+        if (value < 0) value = 0
 
-        const maxPage = Math.ceil(count / rowsPerPage) - 1;
-        if (value > maxPage) value = maxPage;
+        const maxPage = Math.ceil(count / rowsPerPage) - 1
+        if (value > maxPage) value = maxPage
 
-        this.setState({ inputValue: value + 1 });
-        onPageChange(event, value);
-    };
+        this.setState({ inputValue: value + 1 })
+        onPageChange(event, value)
+    }
 
     onChange = ({ target: { value } }) => {
-        this.setState({ inputValue: value });
-    };
+        this.setState({ inputValue: value })
+    }
 
     render() {
-        const { page, count, rowsPerPage } = this.props;
-        const { inputValue } = this.state;
+        const { page, count, rowsPerPage } = this.props
+        const { inputValue } = this.state
 
-        const maxPage = Math.ceil(count / rowsPerPage) - 1;
+        const maxPage = Math.ceil(count / rowsPerPage) - 1
 
         return (
             <div className={styles.actionBox}>
@@ -109,7 +109,7 @@ class Actions extends PureComponent {
                     <LastPage />
                 </IconButton>
             </div>
-        );
+        )
     }
 }
 
@@ -133,5 +133,5 @@ export default function Pagination({
             labelDisplayedRows={({ count }) => `共 ${count} 条`}
             className={styles.pagination}
         />
-    );
+    )
 }

@@ -1,9 +1,9 @@
-import React from "react";
-import selectBar from "components/SelectBar.module.css";
-import ClientSelect from "components/ClientSelect";
-import { Button, FormControl, Input, InputAdornment, MenuItem, Select } from "@material-ui/core";
-import { DATE_FORMAT } from "my/constants";
-import moment from "moment";
+import React from "react"
+import selectBar from "components/SelectBar.module.css"
+import ClientSelect from "components/ClientSelect"
+import { Button, FormControl, Input, InputAdornment, MenuItem, Select } from "@material-ui/core"
+import { DATE_FORMAT } from "my/constants"
+import moment from "moment"
 
 export default function SelectBar({
     clientId,
@@ -15,8 +15,8 @@ export default function SelectBar({
     onChange,
     onSearch
 }) {
-    const minDate = moment().subtract(90, "days").format(DATE_FORMAT);
-    const maxDate = moment().format(DATE_FORMAT);
+    const minDate = moment().subtract(90, "days").format(DATE_FORMAT)
+    const maxDate = moment().format(DATE_FORMAT)
 
     return (
         <>
@@ -78,5 +78,5 @@ export default function SelectBar({
                 </Button>
             </div>
         </>
-    );
+    )
 }

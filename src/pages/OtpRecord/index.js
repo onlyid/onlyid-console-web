@@ -1,9 +1,9 @@
-import React, { PureComponent } from "react";
-import styles from "./index.module.css";
-import http from "my/http";
-import ExportDialog from "./ExportDialog";
-import SelectBar from "./SelectBar";
-import OtpTable from "./OtpTable";
+import React, { PureComponent } from "react"
+import styles from "./index.module.css"
+import http from "my/http"
+import ExportDialog from "./ExportDialog"
+import SelectBar from "./SelectBar"
+import OtpTable from "./OtpTable"
 
 class OtpRecord extends PureComponent {
     state = {
@@ -18,59 +18,59 @@ class OtpRecord extends PureComponent {
         total: 0,
         loading: true,
         exportOpen: false
-    };
+    }
 
     componentDidMount() {
-        this.initData();
+        this.initData()
     }
 
     initData = async () => {
-        this.setState({ loading: true });
+        this.setState({ loading: true })
         const { clientId, days, sendSuccess, verifySuccess, keyword, current, pageSize } =
-            this.state;
+            this.state
 
-        const params = { current, pageSize, keyword, days };
-        if (clientId !== "all") params.clientId = clientId;
-        if (sendSuccess !== "all") params.sendSuccess = sendSuccess;
-        if (verifySuccess !== "all") params.verifySuccess = verifySuccess;
+        const params = { current, pageSize, keyword, days }
+        if (clientId !== "all") params.clientId = clientId
+        if (sendSuccess !== "all") params.sendSuccess = sendSuccess
+        if (verifySuccess !== "all") params.verifySuccess = verifySuccess
 
-        const { list, total } = await http.get("otp", { params });
-        this.setState({ list, total, loading: false });
-    };
+        const { list, total } = await http.get("otp", { params })
+        this.setState({ list, total, loading: false })
+    }
 
     onClientChange = (clientId) => {
-        this.setState({ clientId });
-    };
+        this.setState({ clientId })
+    }
 
     onChange = ({ target }) => {
-        let key;
+        let key
         switch (target.name) {
             case "days-select":
-                key = "days";
-                break;
+                key = "days"
+                break
             case "send-select":
-                key = "sendSuccess";
-                break;
+                key = "sendSuccess"
+                break
             case "verify-select":
-                key = "verifySuccess";
-                break;
+                key = "verifySuccess"
+                break
             default:
-                key = target.name;
+                key = target.name
         }
-        this.setState({ [key]: target.value });
-    };
+        this.setState({ [key]: target.value })
+    }
 
     onPaginationChange = ({ pageSize, current }) => {
-        this.setState({ pageSize, current }, this.initData);
-    };
+        this.setState({ pageSize, current }, this.initData)
+    }
 
     onSearch = () => {
-        this.setState({ current: 1 }, this.initData);
-    };
+        this.setState({ current: 1 }, this.initData)
+    }
 
     toggleExport = () => {
-        this.setState(({ exportOpen }) => ({ exportOpen: !exportOpen }));
-    };
+        this.setState(({ exportOpen }) => ({ exportOpen: !exportOpen }))
+    }
 
     render() {
         const {
@@ -85,7 +85,7 @@ class OtpRecord extends PureComponent {
             current,
             loading,
             exportOpen
-        } = this.state;
+        } = this.state
 
         return (
             <div className={styles.root}>
@@ -123,8 +123,8 @@ class OtpRecord extends PureComponent {
                     keyword={keyword}
                 />
             </div>
-        );
+        )
     }
 }
 
-export default OtpRecord;
+export default OtpRecord

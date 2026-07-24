@@ -1,24 +1,24 @@
-import React, { PureComponent } from "react";
-import { Button, Drawer, IconButton } from "@material-ui/core";
-import http from "my/http";
-import moment from "moment";
-import { DATE_TIME_FORMAT } from "my/constants";
-import styles from "./MessageBox.module.css";
-import { eventEmitter } from "my/utils";
-import { withRouter } from "react-router-dom";
-import { Close as CloseIcon } from "@material-ui/icons";
-import Empty from "components/Empty";
+import React, { PureComponent } from "react"
+import { Button, Drawer, IconButton } from "@material-ui/core"
+import http from "my/http"
+import moment from "moment"
+import { DATE_TIME_FORMAT } from "my/constants"
+import styles from "./MessageBox.module.css"
+import { eventEmitter } from "my/utils"
+import { withRouter } from "react-router-dom"
+import { Close as CloseIcon } from "@material-ui/icons"
+import Empty from "components/Empty"
 
 class Item extends PureComponent {
     onClick = (event) => {
-        event.stopPropagation();
+        event.stopPropagation()
 
-        const { markRead } = this.props;
-        markRead();
-    };
+        const { markRead } = this.props
+        markRead()
+    }
 
     render() {
-        const { message, markRead, ...restProps } = this.props;
+        const { message, markRead, ...restProps } = this.props
 
         return (
             <div className={styles.item} {...restProps}>
@@ -46,7 +46,7 @@ class Item extends PureComponent {
                 </div>
                 <p className={styles.itemTitle}>{message.title}</p>
             </div>
-        );
+        )
     }
 }
 
@@ -54,33 +54,33 @@ class List extends PureComponent {
     state = {
         showEmpty: false,
         list: []
-    };
+    }
 
     componentDidMount() {
-        this.initData();
+        this.initData()
     }
 
     initData = async () => {
-        const list = await http.get("my-messages/unread");
-        this.setState({ list, showEmpty: !list.length });
-    };
+        const list = await http.get("my-messages/unread")
+        this.setState({ list, showEmpty: !list.length })
+    }
 
     markRead = async (id) => {
-        await http.put(`my-messages/${id}/mark-read`);
-        this.initData();
-        eventEmitter.emit("myMessage/countChange");
-    };
+        await http.put(`my-messages/${id}/mark-read`)
+        this.initData()
+        eventEmitter.emit("myMessage/countChange")
+    }
 
     render() {
-        const { showEmpty, list } = this.state;
-        const { onItemClick } = this.props;
+        const { showEmpty, list } = this.state
+        const { onItemClick } = this.props
 
         if (showEmpty)
             return (
                 <div className="emptyBox">
                     <Empty description="暂无未读消息" />
                 </div>
-            );
+            )
 
         return (
             <div className={styles.list}>
@@ -93,27 +93,27 @@ class List extends PureComponent {
                     />
                 ))}
             </div>
-        );
+        )
     }
 }
 
 class MessageBox extends PureComponent {
     goMessageHome = () => {
-        const { history, onClose } = this.props;
+        const { history, onClose } = this.props
 
-        history.push("/my-messages");
-        onClose();
-    };
+        history.push("/my-messages")
+        onClose()
+    }
 
     onItemClick = (id) => {
-        const { history, onClose } = this.props;
+        const { history, onClose } = this.props
 
-        history.push(`/my-messages/${id}`);
-        onClose();
-    };
+        history.push(`/my-messages/${id}`)
+        onClose()
+    }
 
     render() {
-        const { visible, onClose } = this.props;
+        const { visible, onClose } = this.props
 
         const drawerTitle = (
             <div className={styles.drawerTitle}>
@@ -127,15 +127,15 @@ class MessageBox extends PureComponent {
                     <CloseIcon />
                 </IconButton>
             </div>
-        );
+        )
 
         return (
             <Drawer anchor="right" open={visible} onClose={onClose}>
                 {drawerTitle}
                 <List onItemClick={(id) => this.onItemClick(id)} />
             </Drawer>
-        );
+        )
     }
 }
 
-export default withRouter(MessageBox);
+export default withRouter(MessageBox)

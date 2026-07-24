@@ -1,50 +1,50 @@
-import React, { PureComponent } from "react";
-import http from "my/http";
-import styles from "./index.module.css";
-import MyTable from "components/MyTable";
-import { Button, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
-import moment from "moment";
-import { DATE_TIME_FORMAT } from "my/constants";
+import React, { PureComponent } from "react"
+import http from "my/http"
+import styles from "./index.module.css"
+import MyTable from "components/MyTable"
+import { Button, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
+import moment from "moment"
+import { DATE_TIME_FORMAT } from "my/constants"
 
 export default class ChargeTable extends PureComponent {
     state = {
         list: [],
         loading: true
-    };
+    }
 
     componentDidMount() {
-        this.initData();
+        this.initData()
     }
 
     initData = async () => {
-        this.setState({ loading: true });
-        const list = await http.get("tenant/charges");
-        this.setState({ list, loading: false });
-    };
+        this.setState({ loading: true })
+        const list = await http.get("tenant/charges")
+        this.setState({ list, loading: false })
+    }
 
     statusCell = (item) => {
-        if (item.paid) return <span style={{ color: "#4caf50" }}>已支付</span>;
+        if (item.paid) return <span style={{ color: "#4caf50" }}>已支付</span>
 
-        if (moment(item.expireDate).isBefore(moment())) return <span>已过期</span>;
+        if (moment(item.expireDate).isBefore(moment())) return <span>已过期</span>
 
-        return <span style={{ color: "#f50057" }}>未支付</span>;
-    };
+        return <span style={{ color: "#f50057" }}>未支付</span>
+    }
 
     actionCell = (item) => {
-        if (item.paid || moment(item.expireDate).isBefore(moment())) return "-";
+        if (item.paid || moment(item.expireDate).isBefore(moment())) return "-"
 
         return (
             <Button
                 color="primary"
                 onClick={() => {
-                    document.body.innerHTML = item.formHtml;
-                    document.forms[0].submit();
+                    document.body.innerHTML = item.formHtml
+                    document.forms[0].submit()
                 }}
             >
                 支付
             </Button>
-        );
-    };
+        )
+    }
 
     separateNumber = (num) => {
         const s = num.toString()
@@ -65,7 +65,7 @@ export default class ChargeTable extends PureComponent {
     }
 
     render() {
-        const { loading, list } = this.state;
+        const { loading, list } = this.state
 
         return (
             <MyTable length={list.length} loading={loading}>
@@ -84,7 +84,9 @@ export default class ChargeTable extends PureComponent {
                     {list.map((item) => (
                         <TableRow key={item.id} hover>
                             <TableCell style={{ minWidth: 100 }}>{item.id}</TableCell>
-                            <TableCell style={{ minWidth: 100 }}>{item.type === "Renew" ? "订阅续费" : "购买短信"}</TableCell>
+                            <TableCell style={{ minWidth: 100 }}>
+                                {item.type === "Renew" ? "订阅续费" : "购买短信"}
+                            </TableCell>
                             <TableCell style={{ minWidth: 100 }}>{this.countCell(item)}</TableCell>
                             <TableCell className={styles.amount} style={{ minWidth: 100 }}>
                                 {item.amount}
@@ -98,6 +100,6 @@ export default class ChargeTable extends PureComponent {
                     ))}
                 </TableBody>
             </MyTable>
-        );
+        )
     }
 }

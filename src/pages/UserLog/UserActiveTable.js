@@ -1,15 +1,15 @@
-import React, { PureComponent } from "react";
-import styles from "./Table.module.css";
-import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
-import MyTable from "components/MyTable";
-import moment from "moment";
-import { DATE_TIME_FORMAT } from "my/constants";
-import SuccessStatus from "components/SuccessStatus";
+import React, { PureComponent } from "react"
+import styles from "./Table.module.css"
+import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
+import MyTable from "components/MyTable"
+import moment from "moment"
+import { DATE_TIME_FORMAT } from "my/constants"
+import SuccessStatus from "components/SuccessStatus"
 
 export default class UserActiveTable extends PureComponent {
     render() {
-        const { list, loading, current, pageSize, total, onPaginationChange } = this.props;
-        const pagination = { current, pageSize, total };
+        const { list, loading, current, pageSize, total, onPaginationChange } = this.props
+        const pagination = { current, pageSize, total }
 
         return (
             <MyTable
@@ -63,6 +63,6 @@ export default class UserActiveTable extends PureComponent {
                     ))}
                 </TableBody>
             </MyTable>
-        );
+        )
     }
 }

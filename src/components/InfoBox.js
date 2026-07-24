@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./InfoBox.module.css";
+import React from "react"
+import styles from "./InfoBox.module.css"
 
 export default function InfoBox({ label, children }) {
     return (
@@ -7,5 +7,5 @@ export default function InfoBox({ label, children }) {
             <label>{label}：</label>
             <span>{children}</span>
         </div>
-    );
+    )
 }

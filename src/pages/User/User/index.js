@@ -1,55 +1,55 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import http from "my/http";
-import MainHeader from "components/MainHeader";
-import { Tab, Tabs } from "@material-ui/core";
-import mainTabs from "components/MainTabs.module.css";
-import Info from "./Info";
-import Json from "./Json";
-import ClientTable from "./ClientTable";
-import Danger from "./Danger";
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import { withRouter } from "react-router-dom"
+import http from "my/http"
+import MainHeader from "components/MainHeader"
+import { Tab, Tabs } from "@material-ui/core"
+import mainTabs from "components/MainTabs.module.css"
+import Info from "./Info"
+import Json from "./Json"
+import ClientTable from "./ClientTable"
+import Danger from "./Danger"
 
 class User extends PureComponent {
     state = {
         user: {}
-    };
+    }
 
     componentDidMount() {
-        this.initData();
+        this.initData()
     }
 
     initData = async () => {
-        const { match } = this.props;
-        const user = await http.get(`users/${match.params.id}`);
-        this.setState({ user });
-    };
+        const { match } = this.props
+        const user = await http.get(`users/${match.params.id}`)
+        this.setState({ user })
+    }
 
     onTabChange = (event, value) => {
-        const { dispatch } = this.props;
-        dispatch({ type: "user", currentTab: value });
-    };
+        const { dispatch } = this.props
+        dispatch({ type: "user", currentTab: value })
+    }
 
     render() {
-        const { user } = this.state;
+        const { user } = this.state
         const {
             user: { currentTab },
             location: { state }
-        } = this.props;
+        } = this.props
 
-        let content;
+        let content
         switch (currentTab) {
             case "json":
-                content = <Json />;
-                break;
+                content = <Json />
+                break
             case "client":
-                content = <ClientTable />;
-                break;
+                content = <ClientTable />
+                break
             case "danger":
-                content = <Danger />;
-                break;
+                content = <Danger />
+                break
             default:
-                content = <Info user={user} />;
+                content = <Info user={user} />
         }
 
         return (
@@ -87,8 +87,8 @@ class User extends PureComponent {
                 </Tabs>
                 {content}
             </>
-        );
+        )
     }
 }
 
-export default connect(({ user }) => ({ user }))(withRouter(User));
+export default connect(({ user }) => ({ user }))(withRouter(User))

@@ -1,8 +1,8 @@
-import React from "react";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Link } from "@material-ui/core";
-import DialogClose from "components/DialogClose";
-import styles from "./GuideDialog.module.css";
-import classNames from "classnames";
+import React from "react"
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Link } from "@material-ui/core"
+import DialogClose from "components/DialogClose"
+import styles from "./GuideDialog.module.css"
+import classNames from "classnames"
 
 export default function GuideDialog({ open, onClose }) {
     return (
@@ -12,9 +12,7 @@ export default function GuideDialog({ open, onClose }) {
                 <DialogClose onClose={onClose} />
             </DialogTitle>
             <DialogContent className={styles.content}>
-                <p style={{ marginTop: 0 }}>
-                    应用创建成功，接下来你可能想：
-                </p>
+                <p style={{ marginTop: 0 }}>应用创建成功，接下来你可能想：</p>
                 <div className={styles.section}>
                     <span className={classNames("material-icons", styles.starIcon)}>star_half</span>
                     <div className={styles.right}>
@@ -72,5 +70,5 @@ export default function GuideDialog({ open, onClose }) {
                 <Button onClick={onClose}>关 闭</Button>
             </DialogActions>
         </Dialog>
-    );
+    )
 }

@@ -1,38 +1,38 @@
-import React, { PureComponent } from "react";
-import { ArrowBack } from "@material-ui/icons";
-import { Button, Tooltip } from "@material-ui/core";
-import styles from "./MainHeader.module.css";
-import { withRouter } from "react-router-dom";
-import http from "my/http";
-import { transformImage } from "my/utils";
+import React, { PureComponent } from "react"
+import { ArrowBack } from "@material-ui/icons"
+import { Button, Tooltip } from "@material-ui/core"
+import styles from "./MainHeader.module.css"
+import { withRouter } from "react-router-dom"
+import http from "my/http"
+import { transformImage } from "my/utils"
 
 class MainHeader extends PureComponent {
     back = () => {
-        const { history } = this.props;
-        history.goBack();
-    };
+        const { history } = this.props
+        history.goBack()
+    }
 
     onChange = async (e) => {
-        const { files } = e.target;
-        const { onUpload } = this.props;
+        const { files } = e.target
+        const { onUpload } = this.props
 
-        if (!files.length) return;
+        if (!files.length) return
 
-        const file = files[0];
-        e.target.value = null;
-        const { blob } = await transformImage(file);
+        const file = files[0]
+        e.target.value = null
+        const { blob } = await transformImage(file)
 
-        const formData = new FormData();
-        formData.append("file", blob);
-        const { filename } = await http.post("image", formData);
+        const formData = new FormData()
+        formData.append("file", blob)
+        const { filename } = await http.post("image", formData)
 
-        onUpload(filename);
-    };
+        onUpload(filename)
+    }
 
     render() {
-        const { backText, imgUrl, title, children, uploadTip } = this.props;
+        const { backText, imgUrl, title, children, uploadTip } = this.props
 
-        let icon = null;
+        let icon = null
         if (uploadTip)
             icon = (
                 <>
@@ -49,8 +49,8 @@ class MainHeader extends PureComponent {
                         </Tooltip>
                     </label>
                 </>
-            );
-        else if (imgUrl) icon = <img src={imgUrl} alt="icon" />;
+            )
+        else if (imgUrl) icon = <img src={imgUrl} alt="icon" />
 
         return (
             <>
@@ -70,8 +70,8 @@ class MainHeader extends PureComponent {
                     </div>
                 </div>
             </>
-        );
+        )
     }
 }
 
-export default withRouter(MainHeader);
+export default withRouter(MainHeader)

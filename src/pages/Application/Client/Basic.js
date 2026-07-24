@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent } from "react"
 import {
     Button,
     FormControl,
@@ -8,14 +8,14 @@ import {
     OutlinedInput,
     Radio,
     RadioGroup
-} from "@material-ui/core";
-import { CLIENT_TYPE_TEXT } from "my/constants";
-import CopyButton from "components/CopyButton";
-import RevealButton from "components/RevealButton";
-import Validator from "async-validator";
-import http from "my/http";
-import InputBox from "components/InputBox";
-import { eventEmitter } from "my/utils";
+} from "@material-ui/core"
+import { CLIENT_TYPE_TEXT } from "my/constants"
+import CopyButton from "components/CopyButton"
+import RevealButton from "components/RevealButton"
+import Validator from "async-validator"
+import http from "my/http"
+import InputBox from "components/InputBox"
+import { eventEmitter } from "my/utils"
 
 const RULES = {
     name: [
@@ -23,67 +23,67 @@ const RULES = {
         { max: 20, message: "最多输入20字" }
     ],
     description: { max: 200, message: "最多输入200字" }
-};
+}
 
 class Basic extends PureComponent {
     state = {
         validation: { name: {}, description: {} },
         values: {},
         hiddenSecret: true
-    };
+    }
 
     componentDidMount() {
-        const { client } = this.props;
-        if (client.id) this.setState({ values: { ...client } });
+        const { client } = this.props
+        if (client.id) this.setState({ values: { ...client } })
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const { client } = this.props;
-        if (client !== prevProps.client) this.setState({ values: { ...client } });
+        const { client } = this.props
+        if (client !== prevProps.client) this.setState({ values: { ...client } })
     }
 
     onSubmit = async () => {
-        const { values, validation } = this.state;
-        const { client, onSave } = this.props;
+        const { values, validation } = this.state
+        const { client, onSave } = this.props
 
         try {
-            await new Validator(RULES).validate(values, { firstFields: true });
+            await new Validator(RULES).validate(values, { firstFields: true })
         } catch ({ errors }) {
-            for (const e of errors) validation[e.field] = { text: e.message, error: true };
+            for (const e of errors) validation[e.field] = { text: e.message, error: true }
 
-            return this.setState({ validation: { ...validation } });
+            return this.setState({ validation: { ...validation } })
         }
 
-        await http.put("clients/" + client.id, values);
-        eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
-        onSave();
-    };
+        await http.put("clients/" + client.id, values)
+        eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 })
+        onSave()
+    }
 
     toggleHideSecret = () => {
-        this.setState(({ hiddenSecret }) => ({ hiddenSecret: !hiddenSecret }));
-    };
+        this.setState(({ hiddenSecret }) => ({ hiddenSecret: !hiddenSecret }))
+    }
 
     onChange = ({ target }) => {
-        this.setState(({ values }) => ({ values: { ...values, [target.id]: target.value } }));
-    };
+        this.setState(({ values }) => ({ values: { ...values, [target.id]: target.value } }))
+    }
 
     onTypeChange = ({ target: { value } }) => {
-        this.setState(({ values }) => ({ values: { ...values, type: value } }));
-    };
+        this.setState(({ values }) => ({ values: { ...values, type: value } }))
+    }
 
     validateField = async ({ target: { id: key, value } }) => {
-        const { validation } = this.state;
+        const { validation } = this.state
         try {
-            await new Validator({ [key]: RULES[key] }).validate({ [key]: value }, { first: true });
-            validation[key] = {};
+            await new Validator({ [key]: RULES[key] }).validate({ [key]: value }, { first: true })
+            validation[key] = {}
         } catch ({ errors }) {
-            validation[key] = { text: errors[0].message, error: true };
+            validation[key] = { text: errors[0].message, error: true }
         }
-        this.setState({ validation: { ...validation } });
-    };
+        this.setState({ validation: { ...validation } })
+    }
 
     render() {
-        const { values, hiddenSecret, validation } = this.state;
+        const { values, hiddenSecret, validation } = this.state
 
         return (
             <form>
@@ -174,8 +174,8 @@ class Basic extends PureComponent {
                     </div>
                 </InputBox>
             </form>
-        );
+        )
     }
 }
 
-export default Basic;
+export default Basic

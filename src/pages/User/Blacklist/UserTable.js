@@ -1,25 +1,25 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import styles from "./UserTable.module.css";
-import { Link, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
-import moment from "moment";
-import { DATE_TIME_FORMAT } from "my/constants";
-import MyTable from "components/MyTable";
-import GenderSymbol from "components/GenderSymbol";
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import { withRouter } from "react-router-dom"
+import styles from "./UserTable.module.css"
+import { Link, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
+import moment from "moment"
+import { DATE_TIME_FORMAT } from "my/constants"
+import MyTable from "components/MyTable"
+import GenderSymbol from "components/GenderSymbol"
 
 class UserTable extends PureComponent {
     onClick = (event, id) => {
-        event.preventDefault();
+        event.preventDefault()
 
-        const { history, dispatch } = this.props;
-        dispatch({ type: "user", currentTab: "danger" });
-        history.push(id, { fromBlacklist: true });
-    };
+        const { history, dispatch } = this.props
+        dispatch({ type: "user", currentTab: "danger" })
+        history.push(id, { fromBlacklist: true })
+    }
 
     render() {
-        const { list, loading, current, pageSize, total, onPaginationChange } = this.props;
-        const pagination = { current, pageSize, total };
+        const { list, loading, current, pageSize, total, onPaginationChange } = this.props
+        const pagination = { current, pageSize, total }
 
         return (
             <MyTable
@@ -63,8 +63,8 @@ class UserTable extends PureComponent {
                     ))}
                 </TableBody>
             </MyTable>
-        );
+        )
     }
 }
 
-export default connect()(withRouter(UserTable));
+export default connect()(withRouter(UserTable))

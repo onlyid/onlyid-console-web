@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent } from "react"
 import {
     Button,
     Dialog,
@@ -12,14 +12,14 @@ import {
     Radio,
     RadioGroup,
     Tooltip
-} from "@material-ui/core";
-import DialogClose from "components/DialogClose";
-import InputBox from "components/InputBox";
-import { CLIENT_TYPE_TEXT, IMG_UPLOAD_TIP } from "my/constants";
-import styles from "./CreateDialog.module.css";
-import Validator from "async-validator";
-import { eventEmitter, transformImage } from "my/utils";
-import http from "my/http";
+} from "@material-ui/core"
+import DialogClose from "components/DialogClose"
+import InputBox from "components/InputBox"
+import { CLIENT_TYPE_TEXT, IMG_UPLOAD_TIP } from "my/constants"
+import styles from "./CreateDialog.module.css"
+import Validator from "async-validator"
+import { eventEmitter, transformImage } from "my/utils"
+import http from "my/http"
 
 const RULES = {
     name: [
@@ -28,7 +28,7 @@ const RULES = {
     ],
     type: { required: true, message: "请选择" },
     description: { max: 200, message: "最多输入200字" }
-};
+}
 
 export default class CreateDialog extends PureComponent {
     state = {
@@ -37,70 +37,70 @@ export default class CreateDialog extends PureComponent {
         iconDataUrl: null,
         filename: null,
         iconRequiredVisible: false
-    };
+    }
 
     onUploadChange = async ({ target }) => {
-        const { files } = target;
+        const { files } = target
 
-        if (!files.length) return;
+        if (!files.length) return
 
-        const file = files[0];
-        target.value = null;
-        const { blob, dataURL } = await transformImage(file);
+        const file = files[0]
+        target.value = null
+        const { blob, dataURL } = await transformImage(file)
 
-        const formData = new FormData();
-        formData.append("file", blob);
-        const { filename } = await http.post("image", formData);
+        const formData = new FormData()
+        formData.append("file", blob)
+        const { filename } = await http.post("image", formData)
 
-        this.setState({ filename, iconDataUrl: dataURL, iconRequiredVisible: false });
-    };
+        this.setState({ filename, iconDataUrl: dataURL, iconRequiredVisible: false })
+    }
 
     onChange = ({ target }) => {
-        this.setState(({ values }) => ({ values: { ...values, [target.id]: target.value } }));
-    };
+        this.setState(({ values }) => ({ values: { ...values, [target.id]: target.value } }))
+    }
 
     onTypeChange = ({ target: { value } }) => {
-        this.setState(({ values }) => ({ values: { ...values, type: value } }));
-        this.validateField({ target: { id: "type", value } });
-    };
+        this.setState(({ values }) => ({ values: { ...values, type: value } }))
+        this.validateField({ target: { id: "type", value } })
+    }
 
     validateField = async ({ target: { id: key, value } }) => {
-        const { validation } = this.state;
+        const { validation } = this.state
         try {
-            await new Validator({ [key]: RULES[key] }).validate({ [key]: value }, { first: true });
-            validation[key] = {};
+            await new Validator({ [key]: RULES[key] }).validate({ [key]: value }, { first: true })
+            validation[key] = {}
         } catch ({ errors }) {
-            validation[key] = { text: errors[0].message, error: true };
+            validation[key] = { text: errors[0].message, error: true }
         }
-        this.setState({ validation: { ...validation } });
-    };
+        this.setState({ validation: { ...validation } })
+    }
 
     submit = async () => {
-        const { values, filename, validation } = this.state;
-        const { onSave } = this.props;
+        const { values, filename, validation } = this.state
+        const { onSave } = this.props
 
         if (!filename) {
-            this.setState({ iconRequiredVisible: true });
-            return;
+            this.setState({ iconRequiredVisible: true })
+            return
         }
 
         try {
-            await new Validator(RULES).validate(values, { firstFields: true });
+            await new Validator(RULES).validate(values, { firstFields: true })
         } catch ({ errors }) {
-            for (const e of errors) validation[e.field] = { text: e.message, error: true };
+            for (const e of errors) validation[e.field] = { text: e.message, error: true }
 
-            return this.setState({ validation: { ...validation } });
+            return this.setState({ validation: { ...validation } })
         }
 
-        values.filename = filename;
-        await http.post("clients", values);
-        eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
-        onSave();
-    };
+        values.filename = filename
+        await http.post("clients", values)
+        eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 })
+        onSave()
+    }
 
     render() {
-        const { open, onCancel } = this.props;
-        const { validation, values, iconDataUrl, iconRequiredVisible } = this.state;
+        const { open, onCancel } = this.props
+        const { validation, values, iconDataUrl, iconRequiredVisible } = this.state
 
         return (
             <Dialog open={open}>
@@ -184,6 +184,6 @@ export default class CreateDialog extends PureComponent {
                     </Button>
                 </DialogActions>
             </Dialog>
-        );
+        )
     }
 }

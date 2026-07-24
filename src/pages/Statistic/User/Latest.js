@@ -1,39 +1,39 @@
-import React, { PureComponent } from "react";
-import http from "my/http";
-import { Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
-import styles from "../Latest.module.css";
-import moment from "moment";
-import { DATE_TIME_FORMAT } from "my/constants";
-import Empty from "components/Empty";
-import GenderSymbol from "components/GenderSymbol";
+import React, { PureComponent } from "react"
+import http from "my/http"
+import { Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
+import styles from "../Latest.module.css"
+import moment from "moment"
+import { DATE_TIME_FORMAT } from "my/constants"
+import Empty from "components/Empty"
+import GenderSymbol from "components/GenderSymbol"
 
 class Latest extends PureComponent {
     state = {
         list: []
-    };
+    }
 
     componentDidMount() {
-        this.initData();
+        this.initData()
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const { clientId } = this.props;
-        if (clientId !== prevProps.clientId) this.initData();
+        const { clientId } = this.props
+        if (clientId !== prevProps.clientId) this.initData()
     }
 
     initData = async () => {
-        const { clientId, type } = this.props;
+        const { clientId, type } = this.props
 
-        const params = { type };
-        if (clientId !== "all") params.clientId = clientId;
+        const params = { type }
+        if (clientId !== "all") params.clientId = clientId
 
-        const list = await http.get("statistics/users", { params });
-        this.setState({ list });
-    };
+        const list = await http.get("statistics/users", { params })
+        this.setState({ list })
+    }
 
     render() {
-        const { list } = this.state;
-        const { type } = this.props;
+        const { list } = this.state
+        const { type } = this.props
 
         return (
             <div className={styles.root}>
@@ -84,8 +84,8 @@ class Latest extends PureComponent {
                     </div>
                 )}
             </div>
-        );
+        )
     }
 }
 
-export default Latest;
+export default Latest

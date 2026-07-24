@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+import { combineReducers } from "redux"
 
 const defaultUser = {
     currentTab: "basic",
@@ -17,11 +17,11 @@ const defaultUser = {
     bl_pageSize: 10,
     bl_total: 0,
     bl_keyword: ""
-};
+}
 
 const defaultApplication = {
     currentTab: "basic"
-};
+}
 
 const defaultMyMessage = {
     unreadCount: 0,
@@ -32,25 +32,25 @@ const defaultMyMessage = {
     pageSize: 10,
     total: 0,
     keyword: ""
-};
+}
 
 function user(state = defaultUser, { type, ...rest }) {
-    if (type === "user") return { ...state, ...rest };
-    else return state;
+    if (type === "user") return { ...state, ...rest }
+    else return state
 }
 
 function application(state = defaultApplication, { type, ...rest }) {
-    if (type === "application") return { ...state, ...rest };
-    else return state;
+    if (type === "application") return { ...state, ...rest }
+    else return state
 }
 
 function myMessage(state = defaultMyMessage, { type, ...rest }) {
-    if (type === "myMessage") return { ...state, ...rest };
-    else return state;
+    if (type === "myMessage") return { ...state, ...rest }
+    else return state
 }
 
 export default combineReducers({
     user,
     application,
     myMessage
-});
+})

@@ -1,12 +1,12 @@
-import React, { PureComponent } from "react";
-import { Route, Switch, withRouter } from "react-router-dom";
-import styles from "./index.module.css";
-import Message from "./Message";
-import Home from "./Home";
+import React, { PureComponent } from "react"
+import { Route, Switch, withRouter } from "react-router-dom"
+import styles from "./index.module.css"
+import Message from "./Message"
+import Home from "./Home"
 
 class Index extends PureComponent {
     render() {
-        const { match } = this.props;
+        const { match } = this.props
 
         return (
             <div className={styles.root}>
@@ -19,8 +19,8 @@ class Index extends PureComponent {
                     </Route>
                 </Switch>
             </div>
-        );
+        )
     }
 }
 
-export default withRouter(Index);
+export default withRouter(Index)

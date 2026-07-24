@@ -1,26 +1,26 @@
-import React, { PureComponent } from "react";
-import { Dialog, DialogContent, DialogTitle, Link, Paper, Popper } from "@material-ui/core";
-import styles from "./HelpDialog.module.css";
-import DialogClose from "components/DialogClose";
-import weChat155 from "assets/wechat-155.jpeg";
-import classNames from "classnames";
+import React, { PureComponent } from "react"
+import { Dialog, DialogContent, DialogTitle, Link, Paper, Popper } from "@material-ui/core"
+import styles from "./HelpDialog.module.css"
+import DialogClose from "components/DialogClose"
+import weChat155 from "assets/wechat-155.jpeg"
+import classNames from "classnames"
 
 export default class HelpDialog extends PureComponent {
     state = {
         anchorEl: null
-    };
+    }
 
     showWeChat = (e) => {
-        this.setState({ anchorEl: e.currentTarget });
-    };
+        this.setState({ anchorEl: e.currentTarget })
+    }
 
     closeWeChat = () => {
-        this.setState({ anchorEl: null });
-    };
+        this.setState({ anchorEl: null })
+    }
 
     render() {
-        const { visible, onClose } = this.props;
-        const { anchorEl } = this.state;
+        const { visible, onClose } = this.props
+        const { anchorEl } = this.state
 
         return (
             <Dialog open={visible} onClose={onClose}>
@@ -104,6 +104,6 @@ export default class HelpDialog extends PureComponent {
                     </Paper>
                 </Popper>
             </Dialog>
-        );
+        )
     }
 }

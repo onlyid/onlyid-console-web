@@ -1,7 +1,7 @@
-import React, { PureComponent } from "react";
-import http from "my/http";
-import { withRouter } from "react-router-dom";
-import InputBox from "components/InputBox";
+import React, { PureComponent } from "react"
+import http from "my/http"
+import { withRouter } from "react-router-dom"
+import InputBox from "components/InputBox"
 import {
     Button,
     FormControl,
@@ -9,43 +9,43 @@ import {
     FormHelperText,
     Radio,
     RadioGroup
-} from "@material-ui/core";
-import { OTP_EXPIRE_TEXT, OTP_FAIL_TEXT, OTP_LENGTH_TEXT } from "my/constants";
-import styles from "./index.module.css";
-import { eventEmitter } from "my/utils";
-import tipBox from "components/TipBox.module.css";
+} from "@material-ui/core"
+import { OTP_EXPIRE_TEXT, OTP_FAIL_TEXT, OTP_LENGTH_TEXT } from "my/constants"
+import styles from "./index.module.css"
+import { eventEmitter } from "my/utils"
+import tipBox from "components/TipBox.module.css"
 
 class Otp extends PureComponent {
     state = {
         values: {}
-    };
+    }
 
     componentDidMount() {
-        this.initData();
+        this.initData()
     }
 
     initData = async () => {
-        const { match } = this.props;
+        const { match } = this.props
 
-        const values = await http.get(`clients/${match.params.id}/otp-config`);
-        this.setState({ values });
-    };
+        const values = await http.get(`clients/${match.params.id}/otp-config`)
+        this.setState({ values })
+    }
 
     onChange = ({ target }) => {
-        this.setState(({ values }) => ({ values: { ...values, [target.name]: target.value } }));
-    };
+        this.setState(({ values }) => ({ values: { ...values, [target.name]: target.value } }))
+    }
 
     onSubmit = async () => {
-        const { match } = this.props;
-        const { values } = this.state;
+        const { match } = this.props
+        const { values } = this.state
 
-        await http.put(`clients/${match.params.id}/otp-config`, values);
+        await http.put(`clients/${match.params.id}/otp-config`, values)
 
-        eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
-    };
+        eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 })
+    }
 
     render() {
-        const { values } = this.state;
+        const { values } = this.state
 
         return (
             <form className={styles.otpForm}>
@@ -125,8 +125,8 @@ class Otp extends PureComponent {
                     </ol>
                 </div>
             </form>
-        );
+        )
     }
 }
 
-export default withRouter(Otp);
+export default withRouter(Otp)

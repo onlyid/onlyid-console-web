@@ -1,7 +1,7 @@
-import React from "react";
-import selectBar from "components/SelectBar.module.css";
-import { Button, FormControl, Input, InputAdornment, MenuItem, Select } from "@material-ui/core";
-import ClientSelect from "components/ClientSelect";
+import React from "react"
+import selectBar from "components/SelectBar.module.css"
+import { Button, FormControl, Input, InputAdornment, MenuItem, Select } from "@material-ui/core"
+import ClientSelect from "components/ClientSelect"
 
 export default function SelectBar({
     clientId,
@@ -44,5 +44,5 @@ export default function SelectBar({
                 查 询
             </Button>
         </div>
-    );
+    )
 }

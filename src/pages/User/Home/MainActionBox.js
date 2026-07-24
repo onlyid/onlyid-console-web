@@ -1,22 +1,22 @@
-import { Button, ListItemText, Menu, MenuItem } from "@material-ui/core";
-import React, { PureComponent } from "react";
+import { Button, ListItemText, Menu, MenuItem } from "@material-ui/core"
+import React, { PureComponent } from "react"
 
 export default class MainActionBox extends PureComponent {
     state = {
         anchorEl: null
-    };
+    }
 
     openMenu = (event) => {
-        this.setState({ anchorEl: event.currentTarget });
-    };
+        this.setState({ anchorEl: event.currentTarget })
+    }
 
     closeMenu = () => {
-        this.setState({ anchorEl: null });
-    };
+        this.setState({ anchorEl: null })
+    }
 
     render() {
-        const { anchorEl } = this.state;
-        const { goBlacklist } = this.props;
+        const { anchorEl } = this.state
+        const { goBlacklist } = this.props
 
         return (
             <div className="mainActionBox">
@@ -43,6 +43,6 @@ export default class MainActionBox extends PureComponent {
                     </MenuItem>
                 </Menu>
             </div>
-        );
+        )
     }
 }

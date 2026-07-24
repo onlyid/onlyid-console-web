@@ -1,32 +1,32 @@
-import React, { PureComponent } from "react";
-import { DATE_TIME_FORMAT } from "my/constants";
-import styles from "./index.module.css";
-import http from "my/http";
-import moment from "moment";
-import SuccessStatus from "components/SuccessStatus";
-import GenderSymbol from "components/GenderSymbol";
-import InfoBox from "components/InfoBox";
-import tipBox from "components/TipBox.module.css";
+import React, { PureComponent } from "react"
+import { DATE_TIME_FORMAT } from "my/constants"
+import styles from "./index.module.css"
+import http from "my/http"
+import moment from "moment"
+import SuccessStatus from "components/SuccessStatus"
+import GenderSymbol from "components/GenderSymbol"
+import InfoBox from "components/InfoBox"
+import tipBox from "components/TipBox.module.css"
 
 class Info extends PureComponent {
     state = {
         lastLogin: {}
-    };
+    }
 
     componentDidMount() {
-        this.initData();
+        this.initData()
     }
 
     initData = async () => {
-        const lastLogin = await http.get("tenant/last-login");
-        this.setState({ lastLogin });
-    };
+        const lastLogin = await http.get("tenant/last-login")
+        this.setState({ lastLogin })
+    }
 
     render() {
-        const { lastLogin } = this.state;
-        const userInfo = localStorage.getObj("userInfo");
-        const tenantInfo = localStorage.getObj("tenantInfo");
-        if (!userInfo) return null;
+        const { lastLogin } = this.state
+        const userInfo = localStorage.getObj("userInfo")
+        const tenantInfo = localStorage.getObj("tenantInfo")
+        if (!userInfo) return null
 
         return (
             <>
@@ -63,8 +63,8 @@ class Info extends PureComponent {
                     <p>提示：和所有接入唯ID SSO的应用一样，请使用唯ID APP修改本页用户信息。</p>
                 </div>
             </>
-        );
+        )
     }
 }
 
-export default Info;
+export default Info

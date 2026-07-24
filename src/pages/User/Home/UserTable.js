@@ -1,7 +1,7 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import styles from "./UserTable.module.css";
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import { withRouter } from "react-router-dom"
+import styles from "./UserTable.module.css"
 import {
     IconButton,
     Link,
@@ -12,43 +12,43 @@ import {
     TableCell,
     TableHead,
     TableRow
-} from "@material-ui/core";
-import moment from "moment";
-import { DATE_TIME_FORMAT } from "my/constants";
-import MyTable from "components/MyTable";
-import GenderSymbol from "components/GenderSymbol";
+} from "@material-ui/core"
+import moment from "moment"
+import { DATE_TIME_FORMAT } from "my/constants"
+import MyTable from "components/MyTable"
+import GenderSymbol from "components/GenderSymbol"
 
 class UserTable extends PureComponent {
     state = {
         id: null,
         anchorEl: null
-    };
+    }
 
     openMenu = (event, id) => {
-        this.setState({ anchorEl: event.currentTarget, id });
-    };
+        this.setState({ anchorEl: event.currentTarget, id })
+    }
 
     closeMenu = () => {
-        this.setState({ anchorEl: null });
-    };
+        this.setState({ anchorEl: null })
+    }
 
     go = (tab) => {
-        const { history, match, dispatch } = this.props;
-        const { id } = this.state;
+        const { history, match, dispatch } = this.props
+        const { id } = this.state
 
-        dispatch({ type: "user", currentTab: tab });
-        history.push(`${match.url}/${id}`);
-    };
+        dispatch({ type: "user", currentTab: tab })
+        history.push(`${match.url}/${id}`)
+    }
 
     onClick = (event, id) => {
-        event.preventDefault();
-        this.setState({ id }, () => this.go("basic"));
-    };
+        event.preventDefault()
+        this.setState({ id }, () => this.go("basic"))
+    }
 
     render() {
-        const { list, loading, current, pageSize, total, onPaginationChange, orderBy } = this.props;
-        const { anchorEl } = this.state;
-        const pagination = { current, pageSize, total };
+        const { list, loading, current, pageSize, total, onPaginationChange, orderBy } = this.props
+        const { anchorEl } = this.state
+        const pagination = { current, pageSize, total }
 
         return (
             <>
@@ -132,8 +132,8 @@ class UserTable extends PureComponent {
                     </MenuItem>
                 </Menu>
             </>
-        );
+        )
     }
 }
 
-export default connect()(withRouter(UserTable));
+export default connect()(withRouter(UserTable))

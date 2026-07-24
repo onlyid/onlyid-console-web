@@ -1,29 +1,29 @@
-import React, { PureComponent } from "react";
-import TitleAndSelect from "../TitleAndSelect";
-import Chart from "./Chart";
-import Summary from "./Summary";
-import Latest from "./Latest";
-import tipBox from "components/TipBox.module.css";
+import React, { PureComponent } from "react"
+import TitleAndSelect from "../TitleAndSelect"
+import Chart from "./Chart"
+import Summary from "./Summary"
+import Latest from "./Latest"
+import tipBox from "components/TipBox.module.css"
 
 class Otp extends PureComponent {
     state = {
         clientId: "all",
         days: 30,
         type: "request"
-    };
+    }
 
     onChange = (key, value) => {
-        this.setState({ [key]: value });
-    };
+        this.setState({ [key]: value })
+    }
 
     render() {
-        const { clientId, days, type } = this.state;
+        const { clientId, days, type } = this.state
 
         const typeList = [
             { label: "请求发送量", value: "request" },
             { label: "发送成功量", value: "sendSuccess" },
             { label: "核验成功量", value: "verifySuccess" }
-        ];
+        ]
 
         return (
             <>
@@ -56,8 +56,8 @@ class Otp extends PureComponent {
                     </ol>
                 </div>
             </>
-        );
+        )
     }
 }
 
-export default Otp;
+export default Otp

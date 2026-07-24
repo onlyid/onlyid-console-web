@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "./InputBox.module.css";
-import classNames from "classnames";
+import React from "react"
+import styles from "./InputBox.module.css"
+import classNames from "classnames"
 
 export default function InputBox({ label, children, radioGroup, required, vertical }) {
     return (
@@ -10,5 +10,5 @@ export default function InputBox({ label, children, radioGroup, required, vertic
             </label>
             {children}
         </div>
-    );
+    )
 }

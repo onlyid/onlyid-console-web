@@ -1,43 +1,37 @@
-import React, { PureComponent } from "react";
-import styles from "./Notification.module.css";
-import http from "my/http";
-import tipBox from "components/TipBox.module.css";
-import LevelSymbol from "components/LevelSymbol";
-import {
-    FormControl,
-    FormControlLabel,
-    FormHelperText,
-    Radio,
-    RadioGroup
-} from "@material-ui/core";
-import { eventEmitter } from "my/utils";
+import React, { PureComponent } from "react"
+import styles from "./Notification.module.css"
+import http from "my/http"
+import tipBox from "components/TipBox.module.css"
+import LevelSymbol from "components/LevelSymbol"
+import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from "@material-ui/core"
+import { eventEmitter } from "my/utils"
 
 class Notification extends PureComponent {
     state = {
         notifyNormal: true
-    };
+    }
 
     componentDidMount() {
-        this.initData();
+        this.initData()
     }
 
     initData = async () => {
-        const { notifyNormal } = localStorage.getObj("tenantInfo");
-        this.setState({ notifyNormal: String(notifyNormal) });
-    };
+        const { notifyNormal } = localStorage.getObj("tenantInfo")
+        this.setState({ notifyNormal: String(notifyNormal) })
+    }
 
     submit = async () => {
-        const tenantInfo = await http.put("tenant/notification", this.state);
-        localStorage.setObj("tenantInfo", tenantInfo);
-        eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 });
-    };
+        const tenantInfo = await http.put("tenant/notification", this.state)
+        localStorage.setObj("tenantInfo", tenantInfo)
+        eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 })
+    }
 
     onChange = (e) => {
-        this.setState({ notifyNormal: e.target.value }, this.submit);
-    };
+        this.setState({ notifyNormal: e.target.value }, this.submit)
+    }
 
     render() {
-        const { notifyNormal } = this.state;
+        const { notifyNormal } = this.state
 
         return (
             <>
@@ -108,8 +102,8 @@ class Notification extends PureComponent {
                     </ol>
                 </div>
             </>
-        );
+        )
     }
 }
 
-export default Notification;
+export default Notification

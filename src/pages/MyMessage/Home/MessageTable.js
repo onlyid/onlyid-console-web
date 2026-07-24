@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent } from "react"
 import {
     Button,
     Dialog,
@@ -14,77 +14,77 @@ import {
     TableCell,
     TableHead,
     TableRow
-} from "@material-ui/core";
-import styles from "./MessageTable.module.css";
-import http from "my/http";
-import classNames from "classnames";
-import { eventEmitter } from "my/utils";
-import MyTable from "components/MyTable";
-import { withRouter } from "react-router-dom";
-import moment from "moment";
-import { DATE_TIME_FORMAT } from "my/constants";
-import DialogClose from "components/DialogClose";
-import LevelSymbol from "components/LevelSymbol";
+} from "@material-ui/core"
+import styles from "./MessageTable.module.css"
+import http from "my/http"
+import classNames from "classnames"
+import { eventEmitter } from "my/utils"
+import MyTable from "components/MyTable"
+import { withRouter } from "react-router-dom"
+import moment from "moment"
+import { DATE_TIME_FORMAT } from "my/constants"
+import DialogClose from "components/DialogClose"
+import LevelSymbol from "components/LevelSymbol"
 
 class MessageTable extends PureComponent {
     state = {
         anchorEl: null,
         id: null,
         deleteOpen: false
-    };
+    }
 
     openMenu = (event, id) => {
-        this.setState({ anchorEl: event.currentTarget, id });
-    };
+        this.setState({ anchorEl: event.currentTarget, id })
+    }
 
     closeMenu = () => {
-        this.setState({ anchorEl: null });
-    };
+        this.setState({ anchorEl: null })
+    }
 
     markRead = async () => {
-        const { list } = this.props;
-        const { id } = this.state;
+        const { list } = this.props
+        const { id } = this.state
 
-        await http.put(`my-messages/${id}/mark-read`);
-        eventEmitter.emit("myMessage/countChange");
+        await http.put(`my-messages/${id}/mark-read`)
+        eventEmitter.emit("myMessage/countChange")
 
-        list.find((item) => item.id === id).isRead = true;
-        this.forceUpdate();
-    };
+        list.find((item) => item.id === id).isRead = true
+        this.forceUpdate()
+    }
 
     toggleDelete = () => {
-        this.setState(({ deleteOpen }) => ({ deleteOpen: !deleteOpen }));
-    };
+        this.setState(({ deleteOpen }) => ({ deleteOpen: !deleteOpen }))
+    }
 
     submitDelete = async () => {
-        const { id } = this.state;
-        const { onDelete } = this.props;
+        const { id } = this.state
+        const { onDelete } = this.props
 
-        await http.delete("my-messages/" + id);
-        eventEmitter.emit("myMessage/countChange");
-        eventEmitter.emit("app/openToast", { text: "删除成功", timeout: 2000 });
-        this.toggleDelete();
-        onDelete();
-    };
+        await http.delete("my-messages/" + id)
+        eventEmitter.emit("myMessage/countChange")
+        eventEmitter.emit("app/openToast", { text: "删除成功", timeout: 2000 })
+        this.toggleDelete()
+        onDelete()
+    }
 
     go = () => {
-        const { history, match } = this.props;
-        const { id } = this.state;
+        const { history, match } = this.props
+        const { id } = this.state
 
-        history.push(`${match.url}/${id}`);
-    };
+        history.push(`${match.url}/${id}`)
+    }
 
     onClick = (event, id) => {
-        event.preventDefault();
-        this.setState({ id }, this.go);
-    };
+        event.preventDefault()
+        this.setState({ id }, this.go)
+    }
 
     render() {
-        const { anchorEl, deleteOpen } = this.state;
-        const { list, current, pageSize, total, loading, onPaginationChange } = this.props;
-        const userInfo = localStorage.getObj("userInfo");
+        const { anchorEl, deleteOpen } = this.state
+        const { list, current, pageSize, total, loading, onPaginationChange } = this.props
+        const userInfo = localStorage.getObj("userInfo")
 
-        const pagination = { current, pageSize, total };
+        const pagination = { current, pageSize, total }
 
         return (
             <>
@@ -178,8 +178,8 @@ class MessageTable extends PureComponent {
                     </DialogActions>
                 </Dialog>
             </>
-        );
+        )
     }
 }
 
-export default withRouter(MessageTable);
+export default withRouter(MessageTable)

@@ -1,23 +1,23 @@
-import React, { Suspense } from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import Layout from "components/Layout";
-import OAuthCallback from "pages/OAuthCallback";
-import AliPayCallback from "pages/AliPayCallback";
-import { CircularProgress } from "@material-ui/core";
+import React, { Suspense } from "react"
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom"
+import Layout from "components/Layout"
+import OAuthCallback from "pages/OAuthCallback"
+import AliPayCallback from "pages/AliPayCallback"
+import { CircularProgress } from "@material-ui/core"
 
-const Statistic = React.lazy(() => import("pages/Statistic"));
-const Application = React.lazy(() => import("pages/Application"));
-const OtpRecord = React.lazy(() => import("pages/OtpRecord"));
-const User = React.lazy(() => import("pages/User"));
-const UserLog = React.lazy(() => import("pages/UserLog"));
-const Tenant = React.lazy(() => import("pages/Tenant"));
-const MyMessage = React.lazy(() => import("pages/MyMessage"));
+const Statistic = React.lazy(() => import("pages/Statistic"))
+const Application = React.lazy(() => import("pages/Application"))
+const OtpRecord = React.lazy(() => import("pages/OtpRecord"))
+const User = React.lazy(() => import("pages/User"))
+const UserLog = React.lazy(() => import("pages/UserLog"))
+const Tenant = React.lazy(() => import("pages/Tenant"))
+const MyMessage = React.lazy(() => import("pages/MyMessage"))
 
 const loading = (
     <div style={{ textAlign: "center", padding: "100px 0" }}>
         <CircularProgress />
     </div>
-);
+)
 
 function App() {
     return (
@@ -59,7 +59,7 @@ function App() {
                 </Suspense>
             </Layout>
         </BrowserRouter>
-    );
+    )
 }
 
-export default App;
+export default App

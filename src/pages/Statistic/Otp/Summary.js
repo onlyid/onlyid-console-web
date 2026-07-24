@@ -1,7 +1,7 @@
-import React, { PureComponent } from "react";
-import http from "my/http";
-import CountItem from "../CountItem";
-import styles from "../index.module.css";
+import React, { PureComponent } from "react"
+import http from "my/http"
+import CountItem from "../CountItem"
+import styles from "../index.module.css"
 
 class Summary extends PureComponent {
     state = {
@@ -11,35 +11,35 @@ class Summary extends PureComponent {
         periodRequest: 0,
         periodSendSuccess: 0,
         periodVerifySuccess: 0
-    };
+    }
 
     componentDidMount() {
-        this.initData();
+        this.initData()
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const { clientId, days } = this.props;
-        if (clientId !== prevProps.clientId || days !== prevProps.days) this.initData();
+        const { clientId, days } = this.props
+        if (clientId !== prevProps.clientId || days !== prevProps.days) this.initData()
     }
 
     initData = async () => {
-        const { clientId, days } = this.props;
-        const params = {};
-        if (clientId !== "all") params.clientId = clientId;
+        const { clientId, days } = this.props
+        const params = {}
+        if (clientId !== "all") params.clientId = clientId
 
-        params.days = 1;
+        params.days = 1
         const {
             request: yesterdayRequest,
             sendSuccess: yesterdaySendSuccess,
             verifySuccess: yesterdayVerifySuccess
-        } = await http.get("statistics/otp/summary", { params });
+        } = await http.get("statistics/otp/summary", { params })
 
-        params.days = days;
+        params.days = days
         const {
             request: periodRequest,
             sendSuccess: periodSendSuccess,
             verifySuccess: periodVerifySuccess
-        } = await http.get("statistics/otp/summary", { params });
+        } = await http.get("statistics/otp/summary", { params })
 
         this.setState({
             yesterdayRequest,
@@ -48,8 +48,8 @@ class Summary extends PureComponent {
             periodRequest,
             periodSendSuccess,
             periodVerifySuccess
-        });
-    };
+        })
+    }
 
     render() {
         const {
@@ -59,8 +59,8 @@ class Summary extends PureComponent {
             periodRequest,
             periodSendSuccess,
             periodVerifySuccess
-        } = this.state;
-        const { days } = this.props;
+        } = this.state
+        const { days } = this.props
 
         return (
             <div className={styles.summary}>
@@ -78,8 +78,8 @@ class Summary extends PureComponent {
                     />
                 </div>
             </div>
-        );
+        )
     }
 }
 
-export default Summary;
+export default Summary

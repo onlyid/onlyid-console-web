@@ -1,7 +1,7 @@
-import React, { PureComponent } from "react";
-import http from "my/http";
-import CountItem from "../CountItem";
-import styles from "../index.module.css";
+import React, { PureComponent } from "react"
+import http from "my/http"
+import CountItem from "../CountItem"
+import styles from "../index.module.css"
 
 class Summary extends PureComponent {
     state = {
@@ -10,34 +10,34 @@ class Summary extends PureComponent {
         yesterdayActive: 0,
         periodNew: 0,
         periodActive: 0
-    };
+    }
 
     componentDidMount() {
-        this.initData();
+        this.initData()
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const { clientId, days } = this.props;
-        if (clientId !== prevProps.clientId || days !== prevProps.days) this.initData();
+        const { clientId, days } = this.props
+        if (clientId !== prevProps.clientId || days !== prevProps.days) this.initData()
     }
 
     initData = async () => {
-        const { clientId, days } = this.props;
-        const params = {};
-        if (clientId !== "all") params.clientId = clientId;
-        const { totalCount } = await http.get("statistics/users/total-count", { params });
+        const { clientId, days } = this.props
+        const params = {}
+        if (clientId !== "all") params.clientId = clientId
+        const { totalCount } = await http.get("statistics/users/total-count", { params })
 
-        params.days = 1;
+        params.days = 1
         const { active: yesterdayActive, new: yesterdayNew } = await http.get(
             "statistics/users/summary",
             { params }
-        );
+        )
 
-        params.days = days;
+        params.days = days
         const { active: periodActive, new: periodNew } = await http.get(
             "statistics/users/summary",
             { params }
-        );
+        )
 
         this.setState({
             totalCount,
@@ -45,12 +45,12 @@ class Summary extends PureComponent {
             yesterdayActive,
             periodNew,
             periodActive
-        });
-    };
+        })
+    }
 
     render() {
-        const { totalCount, yesterdayNew, yesterdayActive, periodNew, periodActive } = this.state;
-        const { days } = this.props;
+        const { totalCount, yesterdayNew, yesterdayActive, periodNew, periodActive } = this.state
+        const { days } = this.props
 
         return (
             <div className={styles.summary}>
@@ -63,8 +63,8 @@ class Summary extends PureComponent {
                     <CountItem title="活跃用户" days={`最近${days}天`} count={periodActive} />
                 </div>
             </div>
-        );
+        )
     }
 }
 
-export default Summary;
+export default Summary

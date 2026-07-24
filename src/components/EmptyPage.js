@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./EmptyPage.module.css";
+import React from "react"
+import styles from "./EmptyPage.module.css"
 
 export default function EmptyPage({ title, icon, description, children }) {
     return (
@@ -9,5 +9,5 @@ export default function EmptyPage({ title, icon, description, children }) {
             <p className={styles.tip}>{description}</p>
             {children}
         </div>
-    );
+    )
 }

@@ -1,39 +1,39 @@
-import React, { PureComponent } from "react";
-import styles from "./RightAccount.module.css";
-import http from "my/http";
-import { eventEmitter } from "my/utils";
-import { Link } from "react-router-dom";
-import { ButtonBase, ListItemIcon, ListItemText, Menu, MenuItem } from "@material-ui/core";
+import React, { PureComponent } from "react"
+import styles from "./RightAccount.module.css"
+import http from "my/http"
+import { eventEmitter } from "my/utils"
+import { Link } from "react-router-dom"
+import { ButtonBase, ListItemIcon, ListItemText, Menu, MenuItem } from "@material-ui/core"
 
-const HOME_URL = "https://onlyid.net/web";
+const HOME_URL = "https://onlyid.net/web"
 
 class RightAccount extends PureComponent {
     state = {
         anchorEl: null
-    };
+    }
 
     componentDidMount() {
-        eventEmitter.on("app/login", () => this.forceUpdate());
+        eventEmitter.on("app/login", () => this.forceUpdate())
     }
 
     logout = async () => {
-        await http.post("logout");
+        await http.post("logout")
 
-        window.location.replace(HOME_URL);
-    };
+        window.location.replace(HOME_URL)
+    }
 
     openMenu = (event) => {
-        this.setState({ anchorEl: event.currentTarget });
-    };
+        this.setState({ anchorEl: event.currentTarget })
+    }
 
     closeMenu = () => {
-        this.setState({ anchorEl: null });
-    };
+        this.setState({ anchorEl: null })
+    }
 
     render() {
-        const { anchorEl } = this.state;
-        const userInfo = localStorage.getObj("userInfo");
-        if (!userInfo) return null;
+        const { anchorEl } = this.state
+        const userInfo = localStorage.getObj("userInfo")
+        if (!userInfo) return null
 
         return (
             <>
@@ -81,8 +81,8 @@ class RightAccount extends PureComponent {
                     </MenuItem>
                 </Menu>
             </>
-        );
+        )
     }
 }
 
-export default RightAccount;
+export default RightAccount

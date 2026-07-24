@@ -1,11 +1,11 @@
-import React from "react";
+import React from "react"
 
 export default function SuccessStatus({ success }) {
-    if (success == null) return "-";
+    if (success == null) return "-"
 
     return success ? (
         <span style={{ color: "#4caf50" }}>成功</span>
     ) : (
         <span style={{ color: "#f44336" }}>失败</span>
-    );
+    )
 }
