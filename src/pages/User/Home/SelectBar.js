@@ -3,14 +3,9 @@ import selectBar from "components/SelectBar.module.css"
 import { Button, FormControl, Input, InputAdornment, MenuItem, Select } from "@material-ui/core"
 import ClientSelect from "components/ClientSelect"
 
-export default function SelectBar({
-    clientId,
-    orderBy,
-    keyword,
-    onClientChange,
-    onChange,
-    onSearch
-}) {
+export default function SelectBar(props) {
+    const { clientId, orderBy, keyword, onClientChange, onChange, onSearch } = props
+
     return (
         <div className={selectBar.root}>
             <ClientSelect value={clientId} onChange={onClientChange} />

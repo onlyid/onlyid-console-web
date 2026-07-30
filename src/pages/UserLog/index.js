@@ -1,30 +1,27 @@
-import React, { PureComponent } from "react"
+import { useState, useEffect } from "react"
 import styles from "./index.module.css"
 import http from "my/http"
 import SelectBar from "./SelectBar"
 import UserActiveTable from "./UserActiveTable"
 
-class UserLog extends PureComponent {
-    state = {
-        list: [],
-        current: 1,
-        pageSize: 10,
-        total: 0,
-        loading: true,
-        keyword: "",
-        clientId: "all",
-        gteDate: "",
-        lteDate: "",
-        success: "all"
-    }
+export default function UserLog() {
+    const [list, setList] = useState([])
+    const [current, setCurrent] = useState(1)
+    const [pageSize, setPageSize] = useState(10)
+    const [total, setTotal] = useState(0)
+    const [loading, setLoading] = useState(true)
+    const [keyword, setKeyword] = useState("")
+    const [clientId, setClientId] = useState("all")
+    const [gteDate, setGteDate] = useState("")
+    const [lteDate, setLteDate] = useState("")
+    const [success, setSuccess] = useState("all")
 
-    componentDidMount() {
-        this.initData()
-    }
+    useEffect(() => {
+        initData()
+    }, [current, pageSize])
 
-    initData = async () => {
-        this.setState({ loading: true })
-        const { clientId, keyword, current, pageSize, gteDate, lteDate, success } = this.state
+    const initData = async () => {
+        setLoading(true)
 
         const params = { current, pageSize, keyword }
         if (clientId !== "all") params.clientId = clientId
@@ -33,67 +30,61 @@ class UserLog extends PureComponent {
         if (lteDate) params.lteDate = lteDate
 
         const { list, total } = await http.get("user-logs", { params })
-        this.setState({ list, total, loading: false })
+        setList(list)
+        setTotal(total)
+        setLoading(false)
     }
 
-    onClientChange = (clientId) => {
-        this.setState({ clientId })
+    const onClientChange = (clientId) => {
+        setClientId(clientId)
     }
 
-    onChange = ({ target }) => {
-        this.setState({ [target.name]: target.value })
+    const onChange = ({ target }) => {
+        const setters = {
+            keyword: setKeyword,
+            gteDate: setGteDate,
+            lteDate: setLteDate,
+            success: setSuccess
+        }
+        setters[target.name](target.value)
     }
 
-    onSearch = () => {
-        this.setState({ current: 1 }, this.initData)
+    const onSearch = () => {
+        // current=1时，手动发起请求
+        if (current === 1) initData()
+        else setCurrent(1)
     }
 
-    onPaginationChange = ({ pageSize, current }) => {
-        this.setState({ pageSize, current }, this.initData)
+    const onPaginationChange = ({ pageSize, current }) => {
+        setPageSize(pageSize)
+        setCurrent(current)
     }
 
-    render() {
-        const {
-            clientId,
-            lteDate,
-            gteDate,
-            success,
-            keyword,
-            list,
-            loading,
-            current,
-            pageSize,
-            total
-        } = this.state
-
-        return (
-            <div className={styles.root}>
-                <h1>登录日志</h1>
-                <p>
-                    查看最近的用户登录行为日志
-                    <span style={{ color: "#7f7f7f" }}>（保留三个月数据）</span>
-                </p>
-                <SelectBar
-                    clientId={clientId}
-                    lteDate={lteDate}
-                    gteDate={gteDate}
-                    success={success}
-                    keyword={keyword}
-                    onClientChange={this.onClientChange}
-                    onChange={this.onChange}
-                    onSearch={this.onSearch}
-                />
-                <UserActiveTable
-                    list={list}
-                    loading={loading}
-                    current={current}
-                    pageSize={pageSize}
-                    total={total}
-                    onPaginationChange={this.onPaginationChange}
-                />
-            </div>
-        )
-    }
+    return (
+        <div className={styles.root}>
+            <h1>登录日志</h1>
+            <p>
+                查看最近的用户登录行为日志
+                <span style={{ color: "#7f7f7f" }}>（保留三个月数据）</span>
+            </p>
+            <SelectBar
+                clientId={clientId}
+                lteDate={lteDate}
+                gteDate={gteDate}
+                success={success}
+                keyword={keyword}
+                onClientChange={onClientChange}
+                onChange={onChange}
+                onSearch={onSearch}
+            />
+            <UserActiveTable
+                list={list}
+                loading={loading}
+                current={current}
+                pageSize={pageSize}
+                total={total}
+                onPaginationChange={onPaginationChange}
+            />
+        </div>
+    )
 }
-
-export default UserLog

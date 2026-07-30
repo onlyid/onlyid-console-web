@@ -1,28 +1,28 @@
-import React, { PureComponent } from "react"
-import { withRouter } from "react-router-dom"
+import { useEffect } from "react"
+import { useHistory, useLocation } from "react-router-dom"
 import qs from "qs"
 import http from "my/http"
 import { eventEmitter } from "my/utils"
 import moment from "moment"
 import { CircularProgress } from "@material-ui/core"
 
-class OAuthCallback extends PureComponent {
-    componentDidMount() {
-        const {
-            location: { search },
-            history
-        } = this.props
+export default function OAuthCallback() {
+    const history = useHistory()
+    const location = useLocation()
+
+    const { search } = location
+
+    useEffect(() => {
         const query = qs.parse(search, { ignoreQueryPrefix: true })
         if (!query.code) {
             history.replace("/")
             return
         }
 
-        this.login(query.code)
-    }
+        login(query.code)
+    }, [])
 
-    login = async (code) => {
-        const { history } = this.props
+    const login = async (code) => {
         const { userInfo, tenantInfo } = await http.post("login", { code })
         localStorage.setObj("userInfo", userInfo)
         localStorage.setObj("tenantInfo", tenantInfo)
@@ -38,13 +38,9 @@ class OAuthCallback extends PureComponent {
         }
     }
 
-    render() {
-        return (
-            <div style={{ textAlign: "center", padding: "100px 0" }}>
-                <CircularProgress />
-            </div>
-        )
-    }
+    return (
+        <div style={{ textAlign: "center", padding: "100px 0" }}>
+            <CircularProgress />
+        </div>
+    )
 }
-
-export default withRouter(OAuthCallback)
