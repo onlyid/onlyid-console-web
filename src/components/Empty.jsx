@@ -1,6 +1,6 @@
 import React from "react"
-import { ReactComponent as EmptyDefault } from "assets/empty-default.svg"
-import { ReactComponent as EmptySimple } from "assets/empty-simple.svg"
+import EmptyDefault from "@/assets/empty-default.svg?react"
+import EmptySimple from "@/assets/empty-simple.svg?react"
 import styles from "./Empty.module.css"
 import classNames from "classnames"
 

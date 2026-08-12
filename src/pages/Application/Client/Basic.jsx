@@ -9,13 +9,13 @@ import {
     Radio,
     RadioGroup
 } from "@material-ui/core"
-import { CLIENT_TYPE_TEXT } from "my/constants"
-import CopyButton from "components/CopyButton"
-import RevealButton from "components/RevealButton"
+import { CLIENT_TYPE_TEXT } from "@/my/constants"
+import CopyButton from "@/components/CopyButton"
+import RevealButton from "@/components/RevealButton"
 import Validator from "async-validator"
-import request from "my/request"
-import InputBox from "components/InputBox"
-import { eventEmitter } from "my/utils"
+import request from "@/my/request"
+import InputBox from "@/components/InputBox"
+import { eventEmitter } from "@/my/utils"
 
 const RULES = {
     name: [

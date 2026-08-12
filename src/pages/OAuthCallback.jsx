@@ -1,8 +1,8 @@
 import { useEffect } from "react"
 import { useHistory, useLocation } from "react-router-dom"
 import qs from "qs"
-import request from "my/request"
-import { eventEmitter } from "my/utils"
+import request from "@/my/request"
+import { eventEmitter } from "@/my/utils"
 import moment from "moment"
 import { CircularProgress } from "@material-ui/core"
 

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react"
-import request from "my/request"
+import request from "@/my/request"
 import { withRouter } from "react-router-dom"
-import InputBox from "components/InputBox"
+import InputBox from "@/components/InputBox"
 import {
     Button,
     FormControl,
@@ -10,10 +10,10 @@ import {
     Radio,
     RadioGroup
 } from "@material-ui/core"
-import { OTP_EXPIRE_TEXT, OTP_FAIL_TEXT, OTP_LENGTH_TEXT } from "my/constants"
+import { OTP_EXPIRE_TEXT, OTP_FAIL_TEXT, OTP_LENGTH_TEXT } from "@/my/constants"
 import styles from "./index.module.css"
-import { eventEmitter } from "my/utils"
-import tipBox from "components/TipBox.module.css"
+import { eventEmitter } from "@/my/utils"
+import tipBox from "@/components/TipBox.module.css"
 
 class Otp extends PureComponent {
     state = {

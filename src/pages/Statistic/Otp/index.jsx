@@ -3,7 +3,7 @@ import TitleAndSelect from "../TitleAndSelect"
 import Chart from "./Chart"
 import Summary from "./Summary"
 import Latest from "./Latest"
-import tipBox from "components/TipBox.module.css"
+import tipBox from "@/components/TipBox.module.css"
 
 class Otp extends PureComponent {
     state = {

@@ -1,7 +1,7 @@
 import { useState } from "react"
-import request from "my/request"
+import request from "@/my/request"
 import moment from "moment"
-import { DATE_TIME_FORMAT } from "my/constants"
+import { DATE_TIME_FORMAT } from "@/my/constants"
 import styles from "./RenewDialog.module.css"
 import {
     Button,
@@ -14,7 +14,7 @@ import {
     Radio,
     RadioGroup
 } from "@material-ui/core"
-import DialogClose from "components/DialogClose"
+import DialogClose from "@/components/DialogClose"
 
 export default function RenewDialog({ open, onCancel, expireDate }) {
     const [year, setYear] = useState("1")

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
-import request from "my/request"
+import request from "@/my/request"
 import styles from "./index.module.css"
-import MyTable from "components/MyTable"
+import MyTable from "@/components/MyTable"
 import { Button, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
 import moment from "moment"
-import { DATE_TIME_FORMAT } from "my/constants"
+import { DATE_TIME_FORMAT } from "@/my/constants"
 
 const separateNumber = (num) => {
     const s = num.toString()

@@ -3,11 +3,11 @@ import styles from "./index.module.css"
 import Header from "./Header"
 import { withRouter } from "react-router-dom"
 import moment from "moment"
-import { loginUrl } from "my/request"
+import { loginUrl } from "@/my/request"
 import LeftDrawer from "./LeftDrawer"
 import { Alert } from "@material-ui/lab"
 import { Snackbar } from "@material-ui/core"
-import { eventEmitter } from "my/utils"
+import { eventEmitter } from "@/my/utils"
 
 class Layout extends PureComponent {
     state = {

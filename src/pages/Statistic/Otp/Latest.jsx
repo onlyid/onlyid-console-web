@@ -1,11 +1,11 @@
 import React, { PureComponent } from "react"
-import request from "my/request"
+import request from "@/my/request"
 import { Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
 import styles from "../Latest.module.css"
 import moment from "moment"
-import { DATE_TIME_FORMAT } from "my/constants"
-import SuccessStatus from "components/SuccessStatus"
-import Empty from "components/Empty"
+import { DATE_TIME_FORMAT } from "@/my/constants"
+import SuccessStatus from "@/components/SuccessStatus"
+import Empty from "@/components/Empty"
 
 class Latest extends PureComponent {
     state = {

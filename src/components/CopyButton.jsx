@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react"
 import { Tooltip } from "@material-ui/core"
-import { eventEmitter } from "my/utils"
+import { eventEmitter } from "@/my/utils"
 
 export default class CopyButton extends PureComponent {
     copy = () => {

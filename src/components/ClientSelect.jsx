@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react"
-import request from "my/request"
+import request from "@/my/request"
 import { FormControl, InputAdornment, MenuItem, Select } from "@material-ui/core"
 
 class ClientSelect extends PureComponent {

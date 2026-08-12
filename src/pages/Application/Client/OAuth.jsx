@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react"
-import InputBox from "components/InputBox"
+import InputBox from "@/components/InputBox"
 import { Button, FormControl, FormHelperText, Link, OutlinedInput } from "@material-ui/core"
 import Validator from "async-validator"
-import request from "my/request"
-import { eventEmitter } from "my/utils"
+import request from "@/my/request"
+import { eventEmitter } from "@/my/utils"
 import { useRouteMatch } from "react-router-dom"
-import tipBox from "components/TipBox.module.css"
+import tipBox from "@/components/TipBox.module.css"
 
 const getArray = (value) =>
     value

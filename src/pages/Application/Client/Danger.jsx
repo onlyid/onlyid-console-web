@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@material-ui/core"
-import DangerZone from "components/DangerZone"
-import DialogClose from "components/DialogClose"
-import request from "my/request"
+import DangerZone from "@/components/DangerZone"
+import DialogClose from "@/components/DialogClose"
+import request from "@/my/request"
 import { useRouteMatch, useHistory } from "react-router-dom"
-import { eventEmitter } from "my/utils"
+import { eventEmitter } from "@/my/utils"
 
 export default function Danger({ onSave }) {
     const [dialogOpen, setDialogOpen] = useState(false)

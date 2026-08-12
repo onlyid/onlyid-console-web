@@ -16,15 +16,15 @@ import {
     TableRow
 } from "@material-ui/core"
 import styles from "./MessageTable.module.css"
-import request from "my/request"
+import request from "@/my/request"
 import classNames from "classnames"
-import { eventEmitter } from "my/utils"
-import MyTable from "components/MyTable"
+import { eventEmitter } from "@/my/utils"
+import MyTable from "@/components/MyTable"
 import { useHistory, useRouteMatch } from "react-router-dom"
 import moment from "moment"
-import { DATE_TIME_FORMAT } from "my/constants"
-import DialogClose from "components/DialogClose"
-import LevelSymbol from "components/LevelSymbol"
+import { DATE_TIME_FORMAT } from "@/my/constants"
+import DialogClose from "@/components/DialogClose"
+import LevelSymbol from "@/components/LevelSymbol"
 import { useDispatch } from "react-redux"
 
 export default function MessageTable({

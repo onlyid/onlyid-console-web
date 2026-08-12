@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import moment from "moment"
-import { DATE_TIME_FORMAT } from "my/constants"
+import { DATE_TIME_FORMAT } from "@/my/constants"
 import styles from "./index.module.css"
 import { Button, Tooltip } from "@material-ui/core"
-import tipBox from "components/TipBox.module.css"
+import tipBox from "@/components/TipBox.module.css"
 import RenewDialog from "./RenewDialog"
 import ChargeTable from "./ChargeTable"
 

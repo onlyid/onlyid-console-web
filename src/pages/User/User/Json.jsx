@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
-import request from "my/request"
+import request from "@/my/request"
 import { Button } from "@material-ui/core"
 import { useRouteMatch } from "react-router-dom"
-import { eventEmitter } from "my/utils"
-import tipBox from "components/TipBox.module.css"
+import { eventEmitter } from "@/my/utils"
+import tipBox from "@/components/TipBox.module.css"
 
 export default function Json() {
     const [user, setUser] = useState({})

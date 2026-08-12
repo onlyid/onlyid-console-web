@@ -1,13 +1,13 @@
 import React, { PureComponent } from "react"
 import { Button, Drawer, IconButton } from "@material-ui/core"
-import request from "my/request"
+import request from "@/my/request"
 import moment from "moment"
-import { DATE_TIME_FORMAT } from "my/constants"
+import { DATE_TIME_FORMAT } from "@/my/constants"
 import styles from "./MessageBox.module.css"
-import { eventEmitter } from "my/utils"
+import { eventEmitter } from "@/my/utils"
 import { withRouter } from "react-router-dom"
 import { Close as CloseIcon } from "@material-ui/icons"
-import Empty from "components/Empty"
+import Empty from "@/components/Empty"
 
 class Item extends PureComponent {
     onClick = (event) => {

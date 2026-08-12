@@ -1,7 +1,7 @@
 import React from "react"
-import selectBar from "components/SelectBar.module.css"
+import selectBar from "@/components/SelectBar.module.css"
 import { Button, FormControl, Input, InputAdornment, MenuItem, Select } from "@material-ui/core"
-import ClientSelect from "components/ClientSelect"
+import ClientSelect from "@/components/ClientSelect"
 
 export default function SelectBar(props) {
     const { clientId, orderBy, keyword, onClientChange, onChange, onSearch } = props

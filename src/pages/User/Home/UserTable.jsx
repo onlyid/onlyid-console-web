@@ -14,9 +14,9 @@ import {
     TableRow
 } from "@material-ui/core"
 import moment from "moment"
-import { DATE_TIME_FORMAT } from "my/constants"
-import MyTable from "components/MyTable"
-import GenderSymbol from "components/GenderSymbol"
+import { DATE_TIME_FORMAT } from "@/my/constants"
+import MyTable from "@/components/MyTable"
+import GenderSymbol from "@/components/GenderSymbol"
 
 export default function UserTable({
     list,

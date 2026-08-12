@@ -5,7 +5,7 @@ import styles from "./index.module.css"
 import { Button } from "@material-ui/core"
 import SelectBar from "./SelectBar"
 import { ArrowBack } from "@material-ui/icons"
-import request from "my/request"
+import request from "@/my/request"
 import UserTable from "./UserTable"
 
 export default function Blacklist() {

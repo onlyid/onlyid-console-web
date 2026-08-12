@@ -1,6 +1,6 @@
 import React from "react"
 import styles from "./GenderSymbol.module.css"
-import { GENDER_TEXT } from "my/constants"
+import { GENDER_TEXT } from "@/my/constants"
 import cn from "classnames"
 
 export default function GenderSymbol({ gender, dense }) {

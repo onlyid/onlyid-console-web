@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react"
-import request from "my/request"
+import request from "@/my/request"
 import styles from "./BuySmsDialog.module.css"
 import {
     Button,
@@ -11,7 +11,7 @@ import {
     Select,
     MenuItem
 } from "@material-ui/core"
-import DialogClose from "components/DialogClose"
+import DialogClose from "@/components/DialogClose"
 
 export default class BuySmsDialog extends PureComponent {
     state = {

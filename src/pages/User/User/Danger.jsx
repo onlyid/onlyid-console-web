@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@material-ui/core"
-import DangerZone from "components/DangerZone"
-import DialogClose from "components/DialogClose"
-import request from "my/request"
+import DangerZone from "@/components/DangerZone"
+import DialogClose from "@/components/DialogClose"
+import request from "@/my/request"
 import { useRouteMatch } from "react-router-dom"
-import { eventEmitter } from "my/utils"
+import { eventEmitter } from "@/my/utils"
 import styles from "./index.module.css"
-import tipBox from "components/TipBox.module.css"
+import tipBox from "@/components/TipBox.module.css"
 
 const BlockDialog = ({ open, blocked, onCancel, onSubmit }) => {
     return (

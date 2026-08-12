@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react"
 import styles from "./RightAccount.module.css"
-import request from "my/request"
-import { eventEmitter } from "my/utils"
+import request from "@/my/request"
+import { eventEmitter } from "@/my/utils"
 import { Link } from "react-router-dom"
 import { ButtonBase, ListItemIcon, ListItemText, Menu, MenuItem } from "@material-ui/core"
 

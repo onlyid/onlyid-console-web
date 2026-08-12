@@ -1,13 +1,13 @@
 import React, { PureComponent } from "react"
 import { AppBar, Badge, IconButton, Toolbar, Tooltip } from "@material-ui/core"
-import { ReactComponent as Logo } from "assets/logo.svg"
+import Logo from "@/assets/logo.svg?react"
 import styles from "./Header.module.css"
 import { Help as HelpIcon, Notifications as NotificationsIcon } from "@material-ui/icons"
 import RightAccount from "./RightAccount"
 import HelpDialog from "./HelpDialog"
 import MessageBox from "./MessageBox"
-import { eventEmitter } from "my/utils"
-import request from "my/request"
+import { eventEmitter } from "@/my/utils"
+import request from "@/my/request"
 import { connect } from "react-redux"
 
 class Header extends PureComponent {

@@ -3,8 +3,8 @@ import { ArrowBack } from "@material-ui/icons"
 import { Button, Tooltip } from "@material-ui/core"
 import styles from "./MainHeader.module.css"
 import { withRouter } from "react-router-dom"
-import request from "my/request"
-import { transformImage } from "my/utils"
+import request from "@/my/request"
+import { transformImage } from "@/my/utils"
 
 class MainHeader extends PureComponent {
     back = () => {

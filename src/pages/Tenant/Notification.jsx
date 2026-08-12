@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
 import styles from "./Notification.module.css"
-import request from "my/request"
-import tipBox from "components/TipBox.module.css"
-import LevelSymbol from "components/LevelSymbol"
+import request from "@/my/request"
+import tipBox from "@/components/TipBox.module.css"
+import LevelSymbol from "@/components/LevelSymbol"
 import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from "@material-ui/core"
-import { eventEmitter } from "my/utils"
+import { eventEmitter } from "@/my/utils"
 
 export default function Notification() {
     const [notifyNormal, setNotifyNormal] = useState(true)

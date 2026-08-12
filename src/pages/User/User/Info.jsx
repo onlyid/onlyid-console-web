@@ -1,8 +1,8 @@
 import React from "react"
-import InfoBox from "components/InfoBox"
-import GenderSymbol from "components/GenderSymbol"
+import InfoBox from "@/components/InfoBox"
+import GenderSymbol from "@/components/GenderSymbol"
 import { Paper } from "@material-ui/core"
-import tipBox from "components/TipBox.module.css"
+import tipBox from "@/components/TipBox.module.css"
 
 export default function Info({ user }) {
     return (

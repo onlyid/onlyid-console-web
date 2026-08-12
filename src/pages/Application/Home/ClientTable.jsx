@@ -11,12 +11,12 @@ import {
     TableRow
 } from "@material-ui/core"
 import styles from "./ClientTable.module.css"
-import { CLIENT_TYPE_TEXT, DATE_TIME_FORMAT } from "my/constants"
+import { CLIENT_TYPE_TEXT, DATE_TIME_FORMAT } from "@/my/constants"
 import moment from "moment"
 import { useHistory, useRouteMatch } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import CopyButton from "components/CopyButton"
-import MyTable from "components/MyTable"
+import CopyButton from "@/components/CopyButton"
+import MyTable from "@/components/MyTable"
 
 export default function ClientTable({ list, loading }) {
     const clientId = useRef(null)

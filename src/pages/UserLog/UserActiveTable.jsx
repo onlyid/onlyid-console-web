@@ -1,9 +1,9 @@
 import styles from "./Table.module.css"
 import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
-import MyTable from "components/MyTable"
+import MyTable from "@/components/MyTable"
 import moment from "moment"
-import { DATE_TIME_FORMAT } from "my/constants"
-import SuccessStatus from "components/SuccessStatus"
+import { DATE_TIME_FORMAT } from "@/my/constants"
+import SuccessStatus from "@/components/SuccessStatus"
 
 export default function UserActiveTable({
     list,

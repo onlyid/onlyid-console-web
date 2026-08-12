@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import MainHeader from "components/MainHeader"
-import request from "my/request"
+import MainHeader from "@/components/MainHeader"
+import request from "@/my/request"
 import { useRouteMatch } from "react-router-dom"
-import { CLIENT_TYPE_TEXT, IMG_UPLOAD_TIP } from "my/constants"
-import mainTabs from "components/MainTabs.module.css"
+import { CLIENT_TYPE_TEXT, IMG_UPLOAD_TIP } from "@/my/constants"
+import mainTabs from "@/components/MainTabs.module.css"
 import { Tab, Tabs } from "@material-ui/core"
 import Basic from "./Basic"
 import Otp from "./Otp"
 import OAuth from "./OAuth"
 import Danger from "./Danger"
-import { eventEmitter } from "my/utils"
+import { eventEmitter } from "@/my/utils"
 
 export default function Client() {
     const [client, setClient] = useState({})

@@ -13,13 +13,13 @@ import {
     RadioGroup,
     Tooltip
 } from "@material-ui/core"
-import DialogClose from "components/DialogClose"
-import InputBox from "components/InputBox"
-import { CLIENT_TYPE_TEXT, IMG_UPLOAD_TIP } from "my/constants"
+import DialogClose from "@/components/DialogClose"
+import InputBox from "@/components/InputBox"
+import { CLIENT_TYPE_TEXT, IMG_UPLOAD_TIP } from "@/my/constants"
 import styles from "./CreateDialog.module.css"
 import Validator from "async-validator"
-import { eventEmitter, transformImage } from "my/utils"
-import request from "my/request"
+import { eventEmitter, transformImage } from "@/my/utils"
+import request from "@/my/request"
 
 const RULES = {
     name: [

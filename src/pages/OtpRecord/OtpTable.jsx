@@ -2,9 +2,9 @@ import React from "react"
 import styles from "./index.module.css"
 import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
 import moment from "moment"
-import { DATE_TIME_FORMAT } from "my/constants"
-import SuccessStatus from "components/SuccessStatus"
-import MyTable from "components/MyTable"
+import { DATE_TIME_FORMAT } from "@/my/constants"
+import SuccessStatus from "@/components/SuccessStatus"
+import MyTable from "@/components/MyTable"
 
 export default function OtpTable({ list, loading, current, pageSize, total, onPaginationChange }) {
     const pagination = { current, pageSize, total }

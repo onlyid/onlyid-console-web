@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react"
 import { Dialog, DialogContent, DialogTitle, Link, Paper, Popper } from "@material-ui/core"
 import styles from "./HelpDialog.module.css"
-import DialogClose from "components/DialogClose"
-import weChat155 from "assets/wechat-155.jpeg"
+import DialogClose from "@/components/DialogClose"
+import weChat155 from "@/assets/wechat-155.jpeg"
 import classNames from "classnames"
 
 export default class HelpDialog extends PureComponent {

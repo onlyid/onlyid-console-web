@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-import { DATE_TIME_FORMAT } from "my/constants"
+import { DATE_TIME_FORMAT } from "@/my/constants"
 import styles from "./index.module.css"
-import request from "my/request"
+import request from "@/my/request"
 import moment from "moment"
-import SuccessStatus from "components/SuccessStatus"
-import GenderSymbol from "components/GenderSymbol"
-import InfoBox from "components/InfoBox"
-import tipBox from "components/TipBox.module.css"
+import SuccessStatus from "@/components/SuccessStatus"
+import GenderSymbol from "@/components/GenderSymbol"
+import InfoBox from "@/components/InfoBox"
+import tipBox from "@/components/TipBox.module.css"
 
 export default function Info() {
     const [lastLogin, setLastLogin] = useState({})

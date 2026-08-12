@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import request from "my/request"
+import request from "@/my/request"
 import BaseChart from "../BaseChart"
 
 export default function Chart({ clientId, days, type, typeList }) {

@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useHistory, useLocation } from "react-router-dom"
 import qs from "qs"
-import request from "my/request"
+import request from "@/my/request"
 import { eventEmitter } from "../my/utils"
 import { CircularProgress } from "@material-ui/core"
 

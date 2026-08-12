@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import styles from "./index.module.css"
-import request from "my/request"
+import request from "@/my/request"
 import SelectBar from "./SelectBar"
 import UserActiveTable from "./UserActiveTable"
 

@@ -10,11 +10,11 @@ import {
     InputAdornment
 } from "@material-ui/core"
 import { useDispatch, useSelector } from "react-redux"
-import request from "my/request"
-import { eventEmitter } from "my/utils"
-import selectBar from "components/SelectBar.module.css"
+import request from "@/my/request"
+import { eventEmitter } from "@/my/utils"
+import selectBar from "@/components/SelectBar.module.css"
 import MessageTable from "./MessageTable"
-import DialogClose from "components/DialogClose"
+import DialogClose from "@/components/DialogClose"
 import { useHistory } from "react-router-dom"
 
 export default function MyMessage() {

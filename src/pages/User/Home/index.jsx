@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react"
-import EmptyPage from "components/EmptyPage"
+import EmptyPage from "@/components/EmptyPage"
 import MainActionBox from "./MainActionBox"
 import SelectBar from "./SelectBar"
-import request from "my/request"
+import request from "@/my/request"
 import UserTable from "./UserTable"
 import { useSelector, useDispatch } from "react-redux"
-import tipBox from "components/TipBox.module.css"
+import tipBox from "@/components/TipBox.module.css"
 import { useRouteMatch, useHistory } from "react-router-dom"
 
 export default function Home() {

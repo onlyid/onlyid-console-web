@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react"
 import styles from "./ClientTable.module.css"
-import MyTable from "components/MyTable"
+import MyTable from "@/components/MyTable"
 import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
 import moment from "moment"
-import { DATE_TIME_FORMAT } from "my/constants"
-import request from "my/request"
+import { DATE_TIME_FORMAT } from "@/my/constants"
+import request from "@/my/request"
 import { useRouteMatch } from "react-router-dom"
 
 export default function ClientTable() {

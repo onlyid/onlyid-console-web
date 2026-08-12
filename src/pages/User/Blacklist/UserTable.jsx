@@ -3,9 +3,9 @@ import { useHistory } from "react-router-dom"
 import styles from "./UserTable.module.css"
 import { Link, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
 import moment from "moment"
-import { DATE_TIME_FORMAT } from "my/constants"
-import MyTable from "components/MyTable"
-import GenderSymbol from "components/GenderSymbol"
+import { DATE_TIME_FORMAT } from "@/my/constants"
+import MyTable from "@/components/MyTable"
+import GenderSymbol from "@/components/GenderSymbol"
 
 export default function UserTable({ list, loading, current, pageSize, total, onPaginationChange }) {
     const dispatch = useDispatch()
