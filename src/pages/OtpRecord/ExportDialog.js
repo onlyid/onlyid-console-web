@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Link } from "@material-ui/core"
 import DialogClose from "components/DialogClose"
 import React, { PureComponent } from "react"
-import http from "my/http"
+import request from "my/request"
 import styles from "./ExportDialog.module.css"
 import tipBox from "components/TipBox.module.css"
 
@@ -22,7 +22,7 @@ export default class ExportDialog extends PureComponent {
     }
 
     initData = async () => {
-        const list = await http.get("clients")
+        const list = await request.get("clients")
         this.setState({ list })
     }
 
@@ -36,7 +36,7 @@ export default class ExportDialog extends PureComponent {
         if (sendSuccess !== "all") params.sendSuccess = sendSuccess
         if (verifySuccess !== "all") params.verifySuccess = verifySuccess
 
-        const { fileUrl } = await http.post("otp/export", params)
+        const { fileUrl } = await request.post("otp/export", params)
         this.setState({ fileUrl, loading: false })
     }
 

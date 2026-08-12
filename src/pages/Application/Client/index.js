@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import MainHeader from "components/MainHeader"
-import http from "my/http"
+import request from "my/request"
 import { useRouteMatch } from "react-router-dom"
 import { CLIENT_TYPE_TEXT, IMG_UPLOAD_TIP } from "my/constants"
 import mainTabs from "components/MainTabs.module.css"
@@ -24,7 +24,7 @@ export default function Client() {
     }, [])
 
     const initData = async () => {
-        const client = await http.get(`clients/${match.params.id}`)
+        const client = await request.get(`clients/${match.params.id}`)
         setClient(client)
     }
 
@@ -33,7 +33,7 @@ export default function Client() {
     }
 
     const onUpload = async (filename) => {
-        const { iconUrl } = await http.put(`clients/${match.params.id}/icon`, { filename })
+        const { iconUrl } = await request.put(`clients/${match.params.id}/icon`, { filename })
         setClient((client) => ({ ...client, iconUrl }))
         eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 })
     }

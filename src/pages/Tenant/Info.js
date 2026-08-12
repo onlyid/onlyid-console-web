@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { DATE_TIME_FORMAT } from "my/constants"
 import styles from "./index.module.css"
-import http from "my/http"
+import request from "my/request"
 import moment from "moment"
 import SuccessStatus from "components/SuccessStatus"
 import GenderSymbol from "components/GenderSymbol"
@@ -16,7 +16,7 @@ export default function Info() {
     }, [])
 
     const initData = async () => {
-        const lastLogin = await http.get("tenant/last-login")
+        const lastLogin = await request.get("tenant/last-login")
         setLastLogin(lastLogin)
     }
 

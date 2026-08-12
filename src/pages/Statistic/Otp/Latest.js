@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react"
-import http from "my/http"
+import request from "my/request"
 import { Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
 import styles from "../Latest.module.css"
 import moment from "moment"
@@ -27,7 +27,7 @@ class Latest extends PureComponent {
         const params = { current: 1, pageSize: 5, days: 90 }
         if (clientId !== "all") params.clientId = clientId
 
-        const { list } = await http.get("otp", { params })
+        const { list } = await request.get("otp", { params })
         this.setState({ list })
     }
 

@@ -13,7 +13,7 @@ import { CLIENT_TYPE_TEXT } from "my/constants"
 import CopyButton from "components/CopyButton"
 import RevealButton from "components/RevealButton"
 import Validator from "async-validator"
-import http from "my/http"
+import request from "my/request"
 import InputBox from "components/InputBox"
 import { eventEmitter } from "my/utils"
 
@@ -49,7 +49,7 @@ export default function Basic({ client, onSave }) {
             return setValidation(v)
         }
 
-        await http.put("clients/" + client.id, values)
+        await request.put("clients/" + client.id, values)
 
         eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 })
         onSave()

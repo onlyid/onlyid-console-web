@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import InputBox from "components/InputBox"
 import { Button, FormControl, FormHelperText, Link, OutlinedInput } from "@material-ui/core"
 import Validator from "async-validator"
-import http from "my/http"
+import request from "my/request"
 import { eventEmitter } from "my/utils"
 import { useRouteMatch } from "react-router-dom"
 import tipBox from "components/TipBox.module.css"
@@ -66,7 +66,7 @@ export default function OAuth({ clientType }) {
 
     const initData = async () => {
         const clientId = match.params.id
-        const data = await http.get(`clients/${clientId}/oauth-config`)
+        const data = await request.get(`clients/${clientId}/oauth-config`)
 
         const { redirectUris, background, ...rest } = data
         const previewUrl =
@@ -141,7 +141,7 @@ export default function OAuth({ clientType }) {
             privacyUrl,
             universalLink
         }
-        await http.put(`clients/${match.params.id}/oauth-config`, values)
+        await request.put(`clients/${match.params.id}/oauth-config`, values)
         eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 })
         initData()
     }

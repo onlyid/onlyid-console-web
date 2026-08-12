@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@material-ui/core"
 import DangerZone from "components/DangerZone"
 import DialogClose from "components/DialogClose"
-import http from "my/http"
+import request from "my/request"
 import { useRouteMatch } from "react-router-dom"
 import { eventEmitter } from "my/utils"
 import styles from "./index.module.css"
@@ -42,7 +42,7 @@ export default function Danger() {
     }, [])
 
     const initData = async () => {
-        const { blocked } = await http.get(`users/${match.params.id}/check-blocked`)
+        const { blocked } = await request.get(`users/${match.params.id}/check-blocked`)
         setBlocked(blocked)
     }
 
@@ -53,10 +53,10 @@ export default function Danger() {
     const onSubmit = async () => {
         let toastText
         if (blocked) {
-            await http.post(`users/${match.params.id}/unblock`)
+            await request.post(`users/${match.params.id}/unblock`)
             toastText = "移出黑名单成功"
         } else {
-            await http.post(`users/${match.params.id}/block`)
+            await request.post(`users/${match.params.id}/block`)
             toastText = "加入黑名单成功"
         }
 

@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react"
 import styles from "./RightAccount.module.css"
-import http from "my/http"
+import request from "my/request"
 import { eventEmitter } from "my/utils"
 import { Link } from "react-router-dom"
 import { ButtonBase, ListItemIcon, ListItemText, Menu, MenuItem } from "@material-ui/core"
@@ -17,7 +17,7 @@ class RightAccount extends PureComponent {
     }
 
     logout = async () => {
-        await http.post("logout")
+        await request.post("logout")
 
         window.location.replace(HOME_URL)
     }

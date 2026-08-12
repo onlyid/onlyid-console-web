@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import http from "my/http"
+import request from "my/request"
 import { eventEmitter } from "my/utils"
 import MainHeader from "components/MainHeader"
 import { useHistory, useRouteMatch } from "react-router-dom"
@@ -29,11 +29,11 @@ export default function Index() {
     }, [currentId])
 
     const initData = async () => {
-        const message = await http.get(`my-messages/${currentId}`)
+        const message = await request.get(`my-messages/${currentId}`)
         setMessage(message)
 
         const params = { keyword: myMessage.keyword }
-        const data = await http.get(`my-messages/${currentId}/adjacent`, {
+        const data = await request.get(`my-messages/${currentId}/adjacent`, {
             params
         })
         const { prevId, nextId } = data
@@ -41,7 +41,7 @@ export default function Index() {
         setNextId(nextId)
 
         if (!message.isRead) {
-            await http.put(`my-messages/${currentId}/mark-read`)
+            await request.put(`my-messages/${currentId}/mark-read`)
             eventEmitter.emit("myMessage/countChange")
         }
     }
@@ -51,7 +51,7 @@ export default function Index() {
     }
 
     const submitDelete = async () => {
-        await http.delete("my-messages/" + currentId)
+        await request.delete("my-messages/" + currentId)
         eventEmitter.emit("myMessage/countChange")
         eventEmitter.emit("app/openToast", { text: "删除成功", timeout: 2000 })
 

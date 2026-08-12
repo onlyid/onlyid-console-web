@@ -4,7 +4,7 @@ import MyTable from "components/MyTable"
 import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
 import moment from "moment"
 import { DATE_TIME_FORMAT } from "my/constants"
-import http from "my/http"
+import request from "my/request"
 import { useRouteMatch } from "react-router-dom"
 
 export default function ClientTable() {
@@ -18,7 +18,7 @@ export default function ClientTable() {
 
     const initData = async () => {
         const params = { userId: match.params.id }
-        const list = await http.get("clients/by-user", { params })
+        const list = await request.get("clients/by-user", { params })
         setList(list)
         setLoading(false)
     }

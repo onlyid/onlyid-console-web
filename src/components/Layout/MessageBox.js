@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react"
 import { Button, Drawer, IconButton } from "@material-ui/core"
-import http from "my/http"
+import request from "my/request"
 import moment from "moment"
 import { DATE_TIME_FORMAT } from "my/constants"
 import styles from "./MessageBox.module.css"
@@ -61,12 +61,12 @@ class List extends PureComponent {
     }
 
     initData = async () => {
-        const list = await http.get("my-messages/unread")
+        const list = await request.get("my-messages/unread")
         this.setState({ list, showEmpty: !list.length })
     }
 
     markRead = async (id) => {
-        await http.put(`my-messages/${id}/mark-read`)
+        await request.put(`my-messages/${id}/mark-read`)
         this.initData()
         eventEmitter.emit("myMessage/countChange")
     }

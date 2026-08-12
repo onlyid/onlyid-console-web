@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react"
-import http from "my/http"
+import request from "my/request"
 import styles from "./BuySmsDialog.module.css"
 import {
     Button,
@@ -21,7 +21,7 @@ export default class BuySmsDialog extends PureComponent {
 
     submit = async () => {
         const { num, unit } = this.state
-        const { formHtml } = await http.post("tenant/pay", { count: num * unit, type: "sms" })
+        const { formHtml } = await request.post("tenant/pay", { count: num * unit, type: "sms" })
         document.body.innerHTML = formHtml
         document.forms[0].submit()
     }

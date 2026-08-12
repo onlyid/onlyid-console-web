@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react"
 import styles from "./index.module.css"
-import http from "my/http"
+import request from "my/request"
 import ExportDialog from "./ExportDialog"
 import SelectBar from "./SelectBar"
 import OtpTable from "./OtpTable"
@@ -34,7 +34,7 @@ class OtpRecord extends PureComponent {
         if (sendSuccess !== "all") params.sendSuccess = sendSuccess
         if (verifySuccess !== "all") params.verifySuccess = verifySuccess
 
-        const { list, total } = await http.get("otp", { params })
+        const { list, total } = await request.get("otp", { params })
         this.setState({ list, total, loading: false })
     }
 

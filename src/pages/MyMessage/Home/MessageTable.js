@@ -16,7 +16,7 @@ import {
     TableRow
 } from "@material-ui/core"
 import styles from "./MessageTable.module.css"
-import http from "my/http"
+import request from "my/request"
 import classNames from "classnames"
 import { eventEmitter } from "my/utils"
 import MyTable from "components/MyTable"
@@ -54,7 +54,7 @@ export default function MessageTable({
     }
 
     const markRead = async () => {
-        await http.put(`my-messages/${idRef.current}/mark-read`)
+        await request.put(`my-messages/${idRef.current}/mark-read`)
         eventEmitter.emit("myMessage/countChange")
 
         const newList = list.map((item) =>
@@ -68,7 +68,7 @@ export default function MessageTable({
     }
 
     const submitDelete = async () => {
-        await http.delete("my-messages/" + idRef.current)
+        await request.delete("my-messages/" + idRef.current)
         eventEmitter.emit("myMessage/countChange")
         eventEmitter.emit("app/openToast", { text: "删除成功", timeout: 2000 })
         toggleDelete()

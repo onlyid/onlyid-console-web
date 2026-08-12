@@ -1,5 +1,5 @@
 import { useState, useEffect, memo } from "react"
-import http from "my/http"
+import request from "my/request"
 import { Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
 import styles from "../Latest.module.css"
 import moment from "moment"
@@ -18,7 +18,7 @@ function Latest({ clientId, type }) {
         const params = { type }
         if (clientId !== "all") params.clientId = clientId
 
-        const list = await http.get("statistics/users", { params })
+        const list = await request.get("statistics/users", { params })
         setList(list)
     }
 

@@ -3,7 +3,7 @@ import { ArrowBack } from "@material-ui/icons"
 import { Button, Tooltip } from "@material-ui/core"
 import styles from "./MainHeader.module.css"
 import { withRouter } from "react-router-dom"
-import http from "my/http"
+import request from "my/request"
 import { transformImage } from "my/utils"
 
 class MainHeader extends PureComponent {
@@ -24,7 +24,7 @@ class MainHeader extends PureComponent {
 
         const formData = new FormData()
         formData.append("file", blob)
-        const { filename } = await http.post("image", formData)
+        const { filename } = await request.post("image", formData)
 
         onUpload(filename)
     }

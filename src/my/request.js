@@ -5,9 +5,9 @@ export const baseURL = "/api/console"
 export const loginUrl =
     "https://onlyid.net/oauth?client-id=98d44b4a3543db79&redirect-uri=https%3A%2F%2Fonlyid.net%2Fconsole%2Foauth-callback"
 
-const instance = axios.create({ baseURL })
+const request = axios.create({ baseURL })
 
-instance.interceptors.response.use(
+request.interceptors.response.use(
     (res) => res.data,
     (err) => {
         let errMsg
@@ -27,4 +27,4 @@ instance.interceptors.response.use(
     }
 )
 
-export default instance
+export default request

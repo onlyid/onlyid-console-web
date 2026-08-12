@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useRouteMatch, useLocation } from "react-router-dom"
-import http from "my/http"
+import request from "my/request"
 import MainHeader from "components/MainHeader"
 import { Tab, Tabs } from "@material-ui/core"
 import mainTabs from "components/MainTabs.module.css"
@@ -22,7 +22,7 @@ export default function User() {
     }, [])
 
     const initData = async () => {
-        const user = await http.get(`users/${match.params.id}`)
+        const user = await request.get(`users/${match.params.id}`)
         setUser(user)
     }
 

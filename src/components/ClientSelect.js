@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react"
-import http from "my/http"
+import request from "my/request"
 import { FormControl, InputAdornment, MenuItem, Select } from "@material-ui/core"
 
 class ClientSelect extends PureComponent {
@@ -12,7 +12,7 @@ class ClientSelect extends PureComponent {
     }
 
     initData = async () => {
-        const list = await http.get("clients")
+        const list = await request.get("clients")
         this.setState({ list })
     }
 

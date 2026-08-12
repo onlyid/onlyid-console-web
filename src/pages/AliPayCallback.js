@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useHistory, useLocation } from "react-router-dom"
 import qs from "qs"
-import http from "my/http"
+import request from "my/request"
 import { eventEmitter } from "../my/utils"
 import { CircularProgress } from "@material-ui/core"
 
@@ -23,7 +23,7 @@ export default function AliPayCallback() {
 
     const checkRenew = async (chargeId) => {
         try {
-            const tenantInfo = await http.post("tenant/check-pay", { chargeId })
+            const tenantInfo = await request.post("tenant/check-pay", { chargeId })
             localStorage.setObj("tenantInfo", tenantInfo)
             eventEmitter.emit("app/openToast", { text: "支付成功", timeout: 2000 })
         } finally {

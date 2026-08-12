@@ -10,7 +10,7 @@ import {
     InputAdornment
 } from "@material-ui/core"
 import { useDispatch, useSelector } from "react-redux"
-import http from "my/http"
+import request from "my/request"
 import { eventEmitter } from "my/utils"
 import selectBar from "components/SelectBar.module.css"
 import MessageTable from "./MessageTable"
@@ -35,7 +35,7 @@ export default function MyMessage() {
         setLoading(true)
 
         const params = { current, pageSize, keyword }
-        const { list, total } = await http.get("my-messages", { params })
+        const { list, total } = await request.get("my-messages", { params })
 
         if (list.length || current === 1) {
             dispatch({ type: "myMessage", list, total })
@@ -50,7 +50,7 @@ export default function MyMessage() {
     }
 
     const markReadAll = async () => {
-        await http.put("my-messages/mark-read-all")
+        await request.put("my-messages/mark-read-all")
         await initData()
         eventEmitter.emit("app/openToast", { text: "操作成功", timeout: 2000 })
         eventEmitter.emit("myMessage/countChange")

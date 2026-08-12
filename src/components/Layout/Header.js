@@ -7,7 +7,7 @@ import RightAccount from "./RightAccount"
 import HelpDialog from "./HelpDialog"
 import MessageBox from "./MessageBox"
 import { eventEmitter } from "my/utils"
-import http from "my/http"
+import request from "my/request"
 import { connect } from "react-redux"
 
 class Header extends PureComponent {
@@ -26,7 +26,7 @@ class Header extends PureComponent {
     getMessageCount = async () => {
         const { dispatch } = this.props
 
-        const { unreadCount, totalCount } = await http.get("my-messages/count")
+        const { unreadCount, totalCount } = await request.get("my-messages/count")
         dispatch({ type: "myMessage", unreadCount, totalCount })
     }
 

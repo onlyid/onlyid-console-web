@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import styles from "./index.module.css"
-import http from "my/http"
+import request from "my/request"
 import SelectBar from "./SelectBar"
 import UserActiveTable from "./UserActiveTable"
 
@@ -29,7 +29,7 @@ export default function UserLog() {
         if (gteDate) params.gteDate = gteDate
         if (lteDate) params.lteDate = lteDate
 
-        const { list, total } = await http.get("user-logs", { params })
+        const { list, total } = await request.get("user-logs", { params })
         setList(list)
         setTotal(total)
         setLoading(false)

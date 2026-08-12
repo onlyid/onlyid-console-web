@@ -19,7 +19,7 @@ import { CLIENT_TYPE_TEXT, IMG_UPLOAD_TIP } from "my/constants"
 import styles from "./CreateDialog.module.css"
 import Validator from "async-validator"
 import { eventEmitter, transformImage } from "my/utils"
-import http from "my/http"
+import request from "my/request"
 
 const RULES = {
     name: [
@@ -52,7 +52,7 @@ export default function CreateDialog({ open, onCancel, onSave }) {
 
         const formData = new FormData()
         formData.append("file", blob)
-        const { filename } = await http.post("image", formData)
+        const { filename } = await request.post("image", formData)
 
         setFilename(filename)
         setIconDataUrl(dataURL)
@@ -96,7 +96,7 @@ export default function CreateDialog({ open, onCancel, onSave }) {
         }
 
         values.filename = filename
-        await http.post("clients", values)
+        await request.post("clients", values)
 
         eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 })
         onSave()

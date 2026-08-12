@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import http from "my/http"
+import request from "my/request"
 import styles from "./index.module.css"
 import MyTable from "components/MyTable"
 import { Button, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
@@ -26,7 +26,7 @@ export default function ChargeTable() {
 
     const initData = async () => {
         setLoading(true)
-        const list = await http.get("tenant/charges")
+        const list = await request.get("tenant/charges")
         setList(list)
         setLoading(false)
     }

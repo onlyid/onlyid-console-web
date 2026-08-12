@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import http from "my/http"
+import request from "my/request"
 import { Button } from "@material-ui/core"
 import { useRouteMatch } from "react-router-dom"
 import { eventEmitter } from "my/utils"
@@ -18,7 +18,7 @@ export default function Json() {
     }, [user])
 
     const initData = async () => {
-        const user = await http.get(`users/${match.params.id}`)
+        const user = await request.get(`users/${match.params.id}`)
         setUser(user)
     }
 

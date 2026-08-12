@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react"
-import http from "my/http"
+import request from "my/request"
 import BaseChart from "../BaseChart"
 
 class Chart extends PureComponent {
@@ -21,7 +21,7 @@ class Chart extends PureComponent {
         const { clientId, days, type } = this.props
         const params = { days, type }
         if (clientId !== "all") params.clientId = clientId
-        const list = await http.get("statistics/otp/group-by-date", {
+        const list = await request.get("statistics/otp/group-by-date", {
             params
         })
         this.setState({ list })

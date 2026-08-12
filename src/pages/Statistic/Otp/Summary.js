@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react"
-import http from "my/http"
+import request from "my/request"
 import CountItem from "../CountItem"
 import styles from "../index.module.css"
 
@@ -32,14 +32,14 @@ class Summary extends PureComponent {
             request: yesterdayRequest,
             sendSuccess: yesterdaySendSuccess,
             verifySuccess: yesterdayVerifySuccess
-        } = await http.get("statistics/otp/summary", { params })
+        } = await request.get("statistics/otp/summary", { params })
 
         params.days = days
         const {
             request: periodRequest,
             sendSuccess: periodSendSuccess,
             verifySuccess: periodVerifySuccess
-        } = await http.get("statistics/otp/summary", { params })
+        } = await request.get("statistics/otp/summary", { params })
 
         this.setState({
             yesterdayRequest,

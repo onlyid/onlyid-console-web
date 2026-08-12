@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import EmptyPage from "components/EmptyPage"
 import MainActionBox from "./MainActionBox"
 import SelectBar from "./SelectBar"
-import http from "my/http"
+import request from "my/request"
 import UserTable from "./UserTable"
 import { useSelector, useDispatch } from "react-redux"
 import tipBox from "components/TipBox.module.css"
@@ -30,7 +30,7 @@ export default function Home() {
         const params = { current, pageSize, keyword, orderBy }
         if (clientId !== "all") params.clientId = clientId
 
-        const { list, total } = await http.get("users", { params })
+        const { list, total } = await request.get("users", { params })
         if (list.length || current === 1) {
             dispatch({ type: "user", list, total, realOrderBy: orderBy })
             setLoading(false)

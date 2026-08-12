@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import http from "my/http"
+import request from "my/request"
 import BaseChart from "../BaseChart"
 
 export default function Chart({ clientId, days, type, typeList }) {
@@ -12,7 +12,7 @@ export default function Chart({ clientId, days, type, typeList }) {
     const initData = async () => {
         const params = { days, type }
         if (clientId !== "all") params.clientId = clientId
-        const list = await http.get("statistics/users/group-by-date", {
+        const list = await request.get("statistics/users/group-by-date", {
             params
         })
         setList(list)

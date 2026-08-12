@@ -1,5 +1,5 @@
 import { useState } from "react"
-import http from "my/http"
+import request from "my/request"
 import moment from "moment"
 import { DATE_TIME_FORMAT } from "my/constants"
 import styles from "./RenewDialog.module.css"
@@ -20,7 +20,7 @@ export default function RenewDialog({ open, onCancel, expireDate }) {
     const [year, setYear] = useState("1")
 
     const submit = async () => {
-        const { formHtml } = await http.post("tenant/pay", { count: year, type: "renew" })
+        const { formHtml } = await request.post("tenant/pay", { count: year, type: "renew" })
         document.body.innerHTML = formHtml
         document.forms[0].submit()
     }

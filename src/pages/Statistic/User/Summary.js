@@ -1,5 +1,5 @@
 import { useState, useEffect, memo } from "react"
-import http from "my/http"
+import request from "my/request"
 import CountItem from "../CountItem"
 import styles from "../index.module.css"
 
@@ -19,16 +19,16 @@ function Summary({ clientId, days }) {
     const initData = async () => {
         const params = {}
         if (clientId !== "all") params.clientId = clientId
-        const { totalCount } = await http.get("statistics/users/total-count", { params })
+        const { totalCount } = await request.get("statistics/users/total-count", { params })
 
         params.days = 1
-        const { active: yesterdayActive, new: yesterdayNew } = await http.get(
+        const { active: yesterdayActive, new: yesterdayNew } = await request.get(
             "statistics/users/summary",
             { params }
         )
 
         params.days = days
-        const { active: periodActive, new: periodNew } = await http.get(
+        const { active: periodActive, new: periodNew } = await request.get(
             "statistics/users/summary",
             { params }
         )

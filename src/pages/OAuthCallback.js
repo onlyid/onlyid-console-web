@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useHistory, useLocation } from "react-router-dom"
 import qs from "qs"
-import http from "my/http"
+import request from "my/request"
 import { eventEmitter } from "my/utils"
 import moment from "moment"
 import { CircularProgress } from "@material-ui/core"
@@ -23,7 +23,7 @@ export default function OAuthCallback() {
     }, [])
 
     const login = async (code) => {
-        const { userInfo, tenantInfo } = await http.post("login", { code })
+        const { userInfo, tenantInfo } = await request.post("login", { code })
         localStorage.setObj("userInfo", userInfo)
         localStorage.setObj("tenantInfo", tenantInfo)
         eventEmitter.emit("app/login")

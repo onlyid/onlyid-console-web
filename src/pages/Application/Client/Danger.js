@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@material-ui/core"
 import DangerZone from "components/DangerZone"
 import DialogClose from "components/DialogClose"
-import http from "my/http"
+import request from "my/request"
 import { useRouteMatch, useHistory } from "react-router-dom"
 import { eventEmitter } from "my/utils"
 
@@ -26,11 +26,11 @@ export default function Danger({ onSave }) {
 
         let toastText
         if (operation === "delete") {
-            await http.delete("clients/" + params.id)
+            await request.delete("clients/" + params.id)
             toastText = "删除成功"
             history.goBack()
         } else {
-            await http.put(`clients/${params.id}/secret`)
+            await request.put(`clients/${params.id}/secret`)
             toastText = "重置成功"
             onSave()
         }

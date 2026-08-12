@@ -5,7 +5,7 @@ import styles from "./index.module.css"
 import { Button } from "@material-ui/core"
 import SelectBar from "./SelectBar"
 import { ArrowBack } from "@material-ui/icons"
-import http from "my/http"
+import request from "my/request"
 import UserTable from "./UserTable"
 
 export default function Blacklist() {
@@ -25,7 +25,7 @@ export default function Blacklist() {
 
         setLoading(true)
         const params = { current: bl_current, pageSize: bl_pageSize, keyword: bl_keyword }
-        const { list, total } = await http.get("users/blacklist", { params })
+        const { list, total } = await request.get("users/blacklist", { params })
 
         if (list.length || bl_current === 1) {
             dispatch({ type: "user", bl_list: list, bl_total: total })

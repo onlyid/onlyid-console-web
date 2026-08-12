@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import styles from "./Notification.module.css"
-import http from "my/http"
+import request from "my/request"
 import tipBox from "components/TipBox.module.css"
 import LevelSymbol from "components/LevelSymbol"
 import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from "@material-ui/core"
@@ -19,7 +19,7 @@ export default function Notification() {
     }
 
     const submit = async (notifyNormal) => {
-        const tenantInfo = await http.put("tenant/notification", { notifyNormal })
+        const tenantInfo = await request.put("tenant/notification", { notifyNormal })
         localStorage.setObj("tenantInfo", tenantInfo)
         eventEmitter.emit("app/openToast", { text: "保存成功", timeout: 2000 })
     }

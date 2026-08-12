@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import http from "my/http"
+import request from "my/request"
 import { Button } from "@material-ui/core"
 import { Add as AddIcon } from "@material-ui/icons"
 import EmptyPage from "components/EmptyPage"
@@ -23,7 +23,7 @@ export default function Home() {
 
     const initData = async () => {
         setLoading(true)
-        const list = await http.get("clients")
+        const list = await request.get("clients")
         setList(list)
         setLoading(false)
     }
