@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react"
+import { PureComponent } from "react"
 import { Dialog, DialogContent, DialogTitle, Link, Paper, Popper } from "@material-ui/core"
 import styles from "./HelpDialog.module.css"
 import DialogClose from "@/components/DialogClose"

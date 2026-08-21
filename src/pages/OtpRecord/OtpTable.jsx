@@ -1,4 +1,3 @@
-import React from "react"
 import styles from "./index.module.css"
 import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
 import moment from "moment"

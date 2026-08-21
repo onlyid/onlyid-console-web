@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react"
+import { PureComponent } from "react"
 import request from "@/my/request"
 import CountItem from "../CountItem"
 import styles from "../index.module.css"

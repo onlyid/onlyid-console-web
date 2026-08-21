@@ -1,4 +1,3 @@
-import React from "react"
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Link } from "@material-ui/core"
 import DialogClose from "@/components/DialogClose"
 import styles from "./GuideDialog.module.css"

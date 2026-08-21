@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react"
+import { PureComponent } from "react"
 import { AppBar, Badge, IconButton, Toolbar, Tooltip } from "@material-ui/core"
 import Logo from "@/assets/logo.svg?react"
 import styles from "./Header.module.css"

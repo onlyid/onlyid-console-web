@@ -1,5 +1,5 @@
 import { IconButton, Input, TablePagination } from "@material-ui/core"
-import React, { PureComponent } from "react"
+import { PureComponent } from "react"
 import { FirstPage, KeyboardArrowLeft, KeyboardArrowRight, LastPage } from "@material-ui/icons"
 import styles from "./index.module.css"
 

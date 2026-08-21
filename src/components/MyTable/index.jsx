@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react"
+import { PureComponent } from "react"
 import styles from "./index.module.css"
 import { CircularProgress, Table, TableCell, TableFooter, TableRow } from "@material-ui/core"
 import Empty from "../Empty"

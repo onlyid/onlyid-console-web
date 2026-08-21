@@ -1,4 +1,3 @@
-import React from "react"
 import styles from "./LeftDrawer.module.css"
 import { Drawer, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core"
 import { Link, useLocation } from "react-router-dom"

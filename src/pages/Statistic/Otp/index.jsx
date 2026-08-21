@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react"
+import { PureComponent } from "react"
 import TitleAndSelect from "../TitleAndSelect"
 import Chart from "./Chart"
 import Summary from "./Summary"

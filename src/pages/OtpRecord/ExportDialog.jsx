@@ -1,6 +1,6 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Link } from "@material-ui/core"
 import DialogClose from "@/components/DialogClose"
-import React, { PureComponent } from "react"
+import { PureComponent } from "react"
 import request from "@/my/request"
 import styles from "./ExportDialog.module.css"
 import tipBox from "@/components/TipBox.module.css"

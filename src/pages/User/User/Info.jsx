@@ -1,4 +1,3 @@
-import React from "react"
 import InfoBox from "@/components/InfoBox"
 import GenderSymbol from "@/components/GenderSymbol"
 import { Paper } from "@material-ui/core"

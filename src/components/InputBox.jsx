@@ -1,4 +1,3 @@
-import React from "react"
 import styles from "./InputBox.module.css"
 import classNames from "classnames"
 

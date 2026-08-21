@@ -1,4 +1,3 @@
-import React from "react"
 import styles from "./LevelSymbol.module.css"
 
 export default function LevelSymbol({ important }) {

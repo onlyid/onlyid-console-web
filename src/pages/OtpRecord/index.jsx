@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react"
+import { PureComponent } from "react"
 import styles from "./index.module.css"
 import request from "@/my/request"
 import ExportDialog from "./ExportDialog"

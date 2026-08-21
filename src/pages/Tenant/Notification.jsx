@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import styles from "./Notification.module.css"
 import request from "@/my/request"
 import tipBox from "@/components/TipBox.module.css"

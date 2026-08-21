@@ -1,4 +1,3 @@
-import React from "react"
 import EmptyDefault from "@/assets/empty-default.svg?react"
 import EmptySimple from "@/assets/empty-simple.svg?react"
 import styles from "./Empty.module.css"

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import moment from "moment"
 import { DATE_TIME_FORMAT } from "@/my/constants"
 import styles from "./index.module.css"

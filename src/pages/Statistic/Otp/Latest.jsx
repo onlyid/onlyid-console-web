@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react"
+import { PureComponent } from "react"
 import request from "@/my/request"
 import { Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
 import styles from "../Latest.module.css"

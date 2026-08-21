@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react"
+import { PureComponent } from "react"
 import request from "@/my/request"
 import { withRouter } from "react-router-dom"
 import InputBox from "@/components/InputBox"

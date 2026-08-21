@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react"
+import { PureComponent } from "react"
 import { Tooltip } from "@material-ui/core"
 import { eventEmitter } from "@/my/utils"
 

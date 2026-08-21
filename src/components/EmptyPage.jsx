@@ -1,4 +1,3 @@
-import React from "react"
 import styles from "./EmptyPage.module.css"
 
 export default function EmptyPage({ title, icon, description, children }) {

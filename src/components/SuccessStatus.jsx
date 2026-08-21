@@ -1,5 +1,3 @@
-import React from "react"
-
 export default function SuccessStatus({ success }) {
     if (success == null) return "-"
 

@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react"
+import { PureComponent } from "react"
 import styles from "./RightAccount.module.css"
 import request from "@/my/request"
 import { eventEmitter } from "@/my/utils"

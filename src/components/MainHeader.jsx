@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react"
+import { PureComponent } from "react"
 import { ArrowBack } from "@material-ui/icons"
 import { Button, Tooltip } from "@material-ui/core"
 import styles from "./MainHeader.module.css"

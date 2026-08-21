@@ -1,4 +1,3 @@
-import React from "react"
 import styles from "./InfoBox.module.css"
 
 export default function InfoBox({ label, children }) {
