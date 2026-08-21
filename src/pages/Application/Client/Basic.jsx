@@ -8,7 +8,7 @@ import {
     OutlinedInput,
     Radio,
     RadioGroup
-} from "@material-ui/core"
+} from "@mui/material"
 import { CLIENT_TYPE_TEXT } from "@/my/constants"
 import CopyButton from "@/components/CopyButton"
 import RevealButton from "@/components/RevealButton"

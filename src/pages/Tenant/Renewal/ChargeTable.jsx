@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import request from "@/my/request"
 import styles from "./index.module.css"
 import MyTable from "@/components/MyTable"
-import { Button, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
+import { Button, TableBody, TableCell, TableHead, TableRow } from "@mui/material"
 import moment from "moment"
 import { DATE_TIME_FORMAT } from "@/my/constants"
 

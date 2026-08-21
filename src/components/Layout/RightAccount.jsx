@@ -3,7 +3,7 @@ import styles from "./RightAccount.module.css"
 import request from "@/my/request"
 import { eventEmitter } from "@/my/utils"
 import { Link } from "react-router-dom"
-import { ButtonBase, ListItemIcon, ListItemText, Menu, MenuItem } from "@material-ui/core"
+import { ButtonBase, ListItemIcon, ListItemText, Menu, MenuItem } from "@mui/material"
 
 const HOME_URL = "https://onlyid.net/web"
 

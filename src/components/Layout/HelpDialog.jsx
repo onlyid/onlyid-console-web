@@ -1,5 +1,5 @@
 import { PureComponent } from "react"
-import { Dialog, DialogContent, DialogTitle, Link, Paper, Popper } from "@material-ui/core"
+import { Dialog, DialogContent, DialogTitle, Link, Paper, Popper } from "@mui/material"
 import styles from "./HelpDialog.module.css"
 import DialogClose from "@/components/DialogClose"
 import weChat155 from "@/assets/wechat-155.jpeg"

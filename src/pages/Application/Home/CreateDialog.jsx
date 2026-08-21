@@ -12,7 +12,7 @@ import {
     Radio,
     RadioGroup,
     Tooltip
-} from "@material-ui/core"
+} from "@mui/material"
 import DialogClose from "@/components/DialogClose"
 import InputBox from "@/components/InputBox"
 import { CLIENT_TYPE_TEXT, IMG_UPLOAD_TIP } from "@/my/constants"

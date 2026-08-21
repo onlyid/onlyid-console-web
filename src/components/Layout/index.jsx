@@ -5,8 +5,7 @@ import { withRouter } from "react-router-dom"
 import moment from "moment"
 import { loginUrl } from "@/my/request"
 import LeftDrawer from "./LeftDrawer"
-import { Alert } from "@material-ui/lab"
-import { Snackbar } from "@material-ui/core"
+import { Alert, Snackbar } from "@mui/material"
 import { eventEmitter } from "@/my/utils"
 
 class Layout extends PureComponent {

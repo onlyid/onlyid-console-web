@@ -1,4 +1,4 @@
-import { Paper } from "@material-ui/core"
+import { Paper } from "@mui/material"
 import styles from "./DangerZone.module.css"
 
 export default function DangerZone({ children }) {

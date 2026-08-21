@@ -1,4 +1,4 @@
-import { Tooltip } from "@material-ui/core"
+import { Tooltip } from "@mui/material"
 
 export default function RevealButton({ tip, hidden, toggle }) {
     return (

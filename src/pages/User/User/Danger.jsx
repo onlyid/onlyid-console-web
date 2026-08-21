@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@material-ui/core"
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material"
 import DangerZone from "@/components/DangerZone"
 import DialogClose from "@/components/DialogClose"
 import request from "@/my/request"

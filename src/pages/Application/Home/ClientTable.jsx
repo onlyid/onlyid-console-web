@@ -9,7 +9,7 @@ import {
     TableCell,
     TableHead,
     TableRow
-} from "@material-ui/core"
+} from "@mui/material"
 import styles from "./ClientTable.module.css"
 import { CLIENT_TYPE_TEXT, DATE_TIME_FORMAT } from "@/my/constants"
 import moment from "moment"

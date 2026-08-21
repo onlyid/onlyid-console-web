@@ -4,7 +4,7 @@ import qs from "qs"
 import request from "@/my/request"
 import { eventEmitter } from "@/my/utils"
 import moment from "moment"
-import { CircularProgress } from "@material-ui/core"
+import { CircularProgress } from "@mui/material"
 
 export default function OAuthCallback() {
     const history = useHistory()

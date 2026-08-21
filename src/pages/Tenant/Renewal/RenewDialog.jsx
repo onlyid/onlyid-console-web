@@ -13,7 +13,7 @@ import {
     FormControlLabel,
     Radio,
     RadioGroup
-} from "@material-ui/core"
+} from "@mui/material"
 import DialogClose from "@/components/DialogClose"
 
 export default function RenewDialog({ open, onCancel, expireDate }) {

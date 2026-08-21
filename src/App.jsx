@@ -3,7 +3,7 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom"
 import Layout from "@/components/Layout"
 import OAuthCallback from "@/pages/OAuthCallback"
 import AliPayCallback from "@/pages/AliPayCallback"
-import { CircularProgress } from "@material-ui/core"
+import { CircularProgress } from "@mui/material"
 
 const Statistic = React.lazy(() => import("@/pages/Statistic"))
 const Application = React.lazy(() => import("@/pages/Application"))

@@ -1,12 +1,12 @@
 import { PureComponent } from "react"
-import { Button, Drawer, IconButton } from "@material-ui/core"
+import { Button, Drawer, IconButton } from "@mui/material"
 import request from "@/my/request"
 import moment from "moment"
 import { DATE_TIME_FORMAT } from "@/my/constants"
 import styles from "./MessageBox.module.css"
 import { eventEmitter } from "@/my/utils"
 import { withRouter } from "react-router-dom"
-import { Close as CloseIcon } from "@material-ui/icons"
+import CloseIcon from "@mui/icons-material/Close"
 import Empty from "@/components/Empty"
 
 class Item extends PureComponent {

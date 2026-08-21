@@ -1,6 +1,6 @@
 import selectBar from "@/components/SelectBar.module.css"
 import ClientSelect from "@/components/ClientSelect"
-import { Button, FormControl, Input, InputAdornment, MenuItem, Select } from "@material-ui/core"
+import { Button, FormControl, Input, InputAdornment, MenuItem, Select } from "@mui/material"
 
 export default function SelectBar({
     clientId,

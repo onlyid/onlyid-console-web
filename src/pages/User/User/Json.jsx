@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import request from "@/my/request"
-import { Button } from "@material-ui/core"
+import { Button } from "@mui/material"
 import { useRouteMatch } from "react-router-dom"
 import { eventEmitter } from "@/my/utils"
 import tipBox from "@/components/TipBox.module.css"

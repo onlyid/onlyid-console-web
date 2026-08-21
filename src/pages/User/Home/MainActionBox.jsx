@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Button, ListItemText, Menu, MenuItem } from "@material-ui/core"
+import { Button, ListItemText, Menu, MenuItem } from "@mui/material"
 
 export default function MainActionBox({ goBlacklist }) {
     const [anchorEl, setAnchorEl] = useState(null)

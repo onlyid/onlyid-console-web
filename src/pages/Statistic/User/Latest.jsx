@@ -1,6 +1,6 @@
 import { useState, useEffect, memo } from "react"
 import request from "@/my/request"
-import { Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
+import { Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material"
 import styles from "../Latest.module.css"
 import moment from "moment"
 import { DATE_TIME_FORMAT } from "@/my/constants"

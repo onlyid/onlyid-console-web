@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Link } from "@material-ui/core"
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Link } from "@mui/material"
 import DialogClose from "@/components/DialogClose"
 import styles from "./GuideDialog.module.css"
 import classNames from "classnames"

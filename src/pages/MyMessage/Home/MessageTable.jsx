@@ -14,7 +14,7 @@ import {
     TableCell,
     TableHead,
     TableRow
-} from "@material-ui/core"
+} from "@mui/material"
 import styles from "./MessageTable.module.css"
 import request from "@/my/request"
 import classNames from "classnames"

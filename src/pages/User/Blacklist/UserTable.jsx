@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
 import styles from "./UserTable.module.css"
-import { Link, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
+import { Link, TableBody, TableCell, TableHead, TableRow } from "@mui/material"
 import moment from "moment"
 import { DATE_TIME_FORMAT } from "@/my/constants"
 import MyTable from "@/components/MyTable"

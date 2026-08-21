@@ -9,7 +9,7 @@ import {
     FormHelperText,
     Radio,
     RadioGroup
-} from "@material-ui/core"
+} from "@mui/material"
 import { OTP_EXPIRE_TEXT, OTP_FAIL_TEXT, OTP_LENGTH_TEXT } from "@/my/constants"
 import styles from "./index.module.css"
 import { eventEmitter } from "@/my/utils"

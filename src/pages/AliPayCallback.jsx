@@ -3,7 +3,7 @@ import { useHistory, useLocation } from "react-router-dom"
 import qs from "qs"
 import request from "@/my/request"
 import { eventEmitter } from "../my/utils"
-import { CircularProgress } from "@material-ui/core"
+import { CircularProgress } from "@mui/material"
 
 export default function AliPayCallback() {
     const history = useHistory()

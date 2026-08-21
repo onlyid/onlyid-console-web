@@ -12,7 +12,7 @@ import {
     TableCell,
     TableHead,
     TableRow
-} from "@material-ui/core"
+} from "@mui/material"
 import moment from "moment"
 import { DATE_TIME_FORMAT } from "@/my/constants"
 import MyTable from "@/components/MyTable"

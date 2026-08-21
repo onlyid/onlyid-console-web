@@ -1,5 +1,5 @@
 import styles from "./Table.module.css"
-import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
+import { TableBody, TableCell, TableHead, TableRow } from "@mui/material"
 import MyTable from "@/components/MyTable"
 import moment from "moment"
 import { DATE_TIME_FORMAT } from "@/my/constants"

@@ -10,7 +10,7 @@ import {
     FormControl,
     Select,
     MenuItem
-} from "@material-ui/core"
+} from "@mui/material"
 import DialogClose from "@/components/DialogClose"
 
 export default class BuySmsDialog extends PureComponent {

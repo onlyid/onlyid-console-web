@@ -1,6 +1,6 @@
 import styles from "./TitleAndSelect.module.css"
 import ClientSelect from "@/components/ClientSelect"
-import { FormControl, InputAdornment, MenuItem, Select } from "@material-ui/core"
+import { FormControl, InputAdornment, MenuItem, Select } from "@mui/material"
 
 export default function TitleAndSelect({ title, clientId, days, type, onChange, typeList }) {
     return (

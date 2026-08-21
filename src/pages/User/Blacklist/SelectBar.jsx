@@ -1,5 +1,5 @@
 import selectBar from "@/components/SelectBar.module.css"
-import { Button, FormControl, Input, InputAdornment } from "@material-ui/core"
+import { Button, FormControl, Input, InputAdornment } from "@mui/material"
 
 export default function SelectBar({ keyword, onChange, onSearch }) {
     return (

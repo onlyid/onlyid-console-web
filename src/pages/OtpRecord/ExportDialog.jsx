@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Link } from "@material-ui/core"
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Link } from "@mui/material"
 import DialogClose from "@/components/DialogClose"
 import { PureComponent } from "react"
 import request from "@/my/request"

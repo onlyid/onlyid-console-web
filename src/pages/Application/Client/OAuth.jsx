@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import InputBox from "@/components/InputBox"
-import { Button, FormControl, FormHelperText, Link, OutlinedInput } from "@material-ui/core"
+import { Button, FormControl, FormHelperText, Link, OutlinedInput } from "@mui/material"
 import Validator from "async-validator"
 import request from "@/my/request"
 import { eventEmitter } from "@/my/utils"

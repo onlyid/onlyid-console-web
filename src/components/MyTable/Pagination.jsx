@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react"
-import { IconButton, Input, TablePagination } from "@material-ui/core"
-import { FirstPage, KeyboardArrowLeft, KeyboardArrowRight, LastPage } from "@material-ui/icons"
+import { IconButton, Input, TablePagination } from "@mui/material"
+import FirstPage from "@mui/icons-material/FirstPage"
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft"
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight"
+import LastPage from "@mui/icons-material/LastPage"
 import styles from "./index.module.css"
 
 function Actions({ page, onPageChange, count, rowsPerPage }) {

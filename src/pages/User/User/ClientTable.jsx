@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import styles from "./ClientTable.module.css"
 import MyTable from "@/components/MyTable"
-import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
+import { TableBody, TableCell, TableHead, TableRow } from "@mui/material"
 import moment from "moment"
 import { DATE_TIME_FORMAT } from "@/my/constants"
 import request from "@/my/request"

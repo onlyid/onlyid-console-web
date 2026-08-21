@@ -3,7 +3,7 @@ import styles from "./Notification.module.css"
 import request from "@/my/request"
 import tipBox from "@/components/TipBox.module.css"
 import LevelSymbol from "@/components/LevelSymbol"
-import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from "@material-ui/core"
+import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from "@mui/material"
 import { eventEmitter } from "@/my/utils"
 
 export default function Notification() {

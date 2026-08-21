@@ -1,7 +1,7 @@
 import styles from "./index.module.css"
 import { Redirect, Route, Switch, useHistory, useLocation, useRouteMatch } from "react-router-dom"
 import mainTabs from "@/components/MainTabs.module.css"
-import { Tab, Tabs } from "@material-ui/core"
+import { Tab, Tabs } from "@mui/material"
 import Info from "./Info"
 import Renewal from "./Renewal"
 import Notification from "./Notification"

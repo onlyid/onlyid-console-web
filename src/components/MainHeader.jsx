@@ -1,6 +1,6 @@
 import { PureComponent } from "react"
-import { ArrowBack } from "@material-ui/icons"
-import { Button, Tooltip } from "@material-ui/core"
+import ArrowBack from "@mui/icons-material/ArrowBack"
+import { Button, Tooltip } from "@mui/material"
 import styles from "./MainHeader.module.css"
 import { withRouter } from "react-router-dom"
 import request from "@/my/request"

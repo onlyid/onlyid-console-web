@@ -1,6 +1,6 @@
 import InfoBox from "@/components/InfoBox"
 import GenderSymbol from "@/components/GenderSymbol"
-import { Paper } from "@material-ui/core"
+import { Paper } from "@mui/material"
 import tipBox from "@/components/TipBox.module.css"
 
 export default function Info({ user }) {
