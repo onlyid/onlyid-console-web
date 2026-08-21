@@ -16,10 +16,6 @@ export default function Blacklist() {
 
     const { bl_current, bl_pageSize } = user
 
-    useEffect(() => {
-        initData()
-    }, [bl_current, bl_pageSize])
-
     const initData = async () => {
         const { bl_keyword } = user
 
@@ -34,6 +30,10 @@ export default function Blacklist() {
             dispatch({ type: "user", bl_current: bl_current - 1 })
         }
     }
+
+    useEffect(() => {
+        initData()
+    }, [bl_current, bl_pageSize])
 
     const goBack = () => {
         history.goBack()

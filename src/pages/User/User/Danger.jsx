@@ -37,14 +37,14 @@ export default function Danger() {
     const [blocked, setBlocked] = useState(false)
     const match = useRouteMatch()
 
-    useEffect(() => {
-        initData()
-    }, [])
-
     const initData = async () => {
         const { blocked } = await request.get(`users/${match.params.id}/check-blocked`)
         setBlocked(blocked)
     }
+
+    useEffect(() => {
+        initData()
+    }, [])
 
     const toggleBlock = () => {
         setBlockOpen((prev) => !prev)

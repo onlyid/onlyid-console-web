@@ -19,14 +19,14 @@ export default function Client() {
     const dispatch = useDispatch()
     const match = useRouteMatch()
 
-    useEffect(() => {
-        initData()
-    }, [])
-
     const initData = async () => {
         const client = await request.get(`clients/${match.params.id}`)
         setClient(client)
     }
+
+    useEffect(() => {
+        initData()
+    }, [])
 
     const onTabChange = (event, value) => {
         dispatch({ type: "application", currentTab: value })

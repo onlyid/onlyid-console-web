@@ -14,19 +14,19 @@ export default function Home() {
     const [createOpen, setCreateOpen] = useState(false)
     const [welcomeOpen, setWelcomeOpen] = useState(false)
 
-    useEffect(() => {
-        initData()
-
-        const tenantInfo = localStorage.getObj("tenantInfo")
-        if (moment(tenantInfo.createDate) > moment().subtract(5, "seconds")) setWelcomeOpen(true)
-    }, [])
-
     const initData = async () => {
         setLoading(true)
         const list = await request.get("clients")
         setList(list)
         setLoading(false)
     }
+
+    useEffect(() => {
+        initData()
+
+        const tenantInfo = localStorage.getObj("tenantInfo")
+        if (moment(tenantInfo.createDate) > moment().subtract(5, "seconds")) setWelcomeOpen(true)
+    }, [])
 
     const openCreate = () => {
         setCreateOpen(true)

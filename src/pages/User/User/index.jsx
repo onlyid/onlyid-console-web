@@ -17,14 +17,14 @@ export default function User() {
     const dispatch = useDispatch()
     const { currentTab } = useSelector((state) => state.user)
 
-    useEffect(() => {
-        initData()
-    }, [])
-
     const initData = async () => {
         const user = await request.get(`users/${match.params.id}`)
         setUser(user)
     }
+
+    useEffect(() => {
+        initData()
+    }, [])
 
     const onTabChange = (event, value) => {
         dispatch({ type: "user", currentTab: value })

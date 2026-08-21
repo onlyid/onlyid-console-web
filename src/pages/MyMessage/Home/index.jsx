@@ -27,10 +27,6 @@ export default function MyMessage() {
 
     const { current, pageSize, keyword } = myMessage
 
-    useEffect(() => {
-        initData()
-    }, [current, pageSize])
-
     const initData = async () => {
         setLoading(true)
 
@@ -44,6 +40,10 @@ export default function MyMessage() {
             dispatch({ type: "myMessage", current: current - 1 })
         }
     }
+
+    useEffect(() => {
+        initData()
+    }, [current, pageSize])
 
     const toggleConfirm = () => {
         setConfirmOpen((value) => !value)

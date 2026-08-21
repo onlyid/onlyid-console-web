@@ -12,10 +12,6 @@ function Summary({ clientId, days }) {
         periodActive: 0
     })
 
-    useEffect(() => {
-        initData()
-    }, [clientId, days])
-
     const initData = async () => {
         const params = {}
         if (clientId !== "all") params.clientId = clientId
@@ -41,6 +37,10 @@ function Summary({ clientId, days }) {
             periodActive
         })
     }
+
+    useEffect(() => {
+        initData()
+    }, [clientId, days])
 
     const { totalCount, yesterdayNew, yesterdayActive, periodNew, periodActive } = values
 

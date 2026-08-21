@@ -9,6 +9,11 @@ export default function Json() {
     const [user, setUser] = useState({})
     const match = useRouteMatch()
 
+    const initData = async () => {
+        const user = await request.get(`users/${match.params.id}`)
+        setUser(user)
+    }
+
     useEffect(() => {
         initData()
     }, [])
@@ -16,11 +21,6 @@ export default function Json() {
     useEffect(() => {
         window.Prism.highlightAll()
     }, [user])
-
-    const initData = async () => {
-        const user = await request.get(`users/${match.params.id}`)
-        setUser(user)
-    }
 
     const copy = () => {
         const el = document.createElement("textarea")

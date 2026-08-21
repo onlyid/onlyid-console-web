@@ -32,10 +32,6 @@ export default function BaseChart({ list, days, name }) {
         }
     }, [])
 
-    useEffect(() => {
-        showChart(formatData(list))
-    }, [list])
-
     /**
      * 补齐空项 转换成count数组
      */
@@ -84,6 +80,10 @@ export default function BaseChart({ list, days, name }) {
         }
         chartRef.current.setOption(chartOption)
     }
+
+    useEffect(() => {
+        showChart(formatData(list))
+    }, [list])
 
     return (
         <div className={styles.chart}>

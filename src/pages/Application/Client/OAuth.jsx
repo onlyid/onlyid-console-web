@@ -60,10 +60,6 @@ export default function OAuth({ clientType }) {
     const { packageName, bundleId, redirectUris, background, termsUrl, privacyUrl, universalLink } =
         values
 
-    useEffect(() => {
-        initData()
-    }, [])
-
     const initData = async () => {
         const clientId = match.params.id
         const data = await request.get(`clients/${clientId}/oauth-config`)
@@ -82,6 +78,10 @@ export default function OAuth({ clientType }) {
             ...rest
         })
     }
+
+    useEffect(() => {
+        initData()
+    }, [])
 
     const onChange = ({ target }) => {
         setValues((values) => ({ ...values, [target.id]: target.value }))

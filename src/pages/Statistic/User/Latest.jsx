@@ -10,10 +10,6 @@ import GenderSymbol from "@/components/GenderSymbol"
 function Latest({ clientId, type }) {
     const [list, setList] = useState([])
 
-    useEffect(() => {
-        initData()
-    }, [clientId])
-
     const initData = async () => {
         const params = { type }
         if (clientId !== "all") params.clientId = clientId
@@ -21,6 +17,10 @@ function Latest({ clientId, type }) {
         const list = await request.get("statistics/users", { params })
         setList(list)
     }
+
+    useEffect(() => {
+        initData()
+    }, [clientId])
 
     return (
         <div className={styles.root}>

@@ -12,16 +12,6 @@ export default function OAuthCallback() {
 
     const { search } = location
 
-    useEffect(() => {
-        const query = qs.parse(search, { ignoreQueryPrefix: true })
-        if (!query.code) {
-            history.replace("/")
-            return
-        }
-
-        login(query.code)
-    }, [])
-
     const login = async (code) => {
         const { userInfo, tenantInfo } = await request.post("login", { code })
         localStorage.setObj("userInfo", userInfo)
@@ -37,6 +27,16 @@ export default function OAuthCallback() {
             history.replace("/")
         }
     }
+
+    useEffect(() => {
+        const query = qs.parse(search, { ignoreQueryPrefix: true })
+        if (!query.code) {
+            history.replace("/")
+            return
+        }
+
+        login(query.code)
+    }, [])
 
     return (
         <div style={{ textAlign: "center", padding: "100px 0" }}>

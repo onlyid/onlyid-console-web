@@ -1,25 +1,16 @@
+import { useState, useEffect } from "react"
 import { IconButton, Input, TablePagination } from "@material-ui/core"
-import { PureComponent } from "react"
 import { FirstPage, KeyboardArrowLeft, KeyboardArrowRight, LastPage } from "@material-ui/icons"
 import styles from "./index.module.css"
 
-class Actions extends PureComponent {
-    state = {
-        inputValue: 1
-    }
+function Actions({ page, onPageChange, count, rowsPerPage }) {
+    const [inputValue, setInputValue] = useState(1)
 
-    componentDidMount() {
-        const { page } = this.props
-        if (page !== 0) this.setState({ inputValue: page + 1 })
-    }
+    useEffect(() => {
+        setInputValue(page + 1)
+    }, [page])
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        const { page } = this.props
-        if (page !== prevProps.page) this.setState({ inputValue: page + 1 })
-    }
-
-    onClick = (event, type) => {
-        const { page, onPageChange, count, rowsPerPage } = this.props
+    const onClick = (event, type) => {
         let newPage
         switch (type) {
             case "first":
@@ -36,17 +27,14 @@ class Actions extends PureComponent {
                 newPage = Math.ceil(count / rowsPerPage) - 1
         }
         onPageChange(event, newPage)
-        this.setState({ inputValue: newPage + 1 })
+        setInputValue(newPage + 1)
     }
 
-    onKeyUp = (event) => {
-        const { inputValue } = this.state
-        const { page, count, rowsPerPage, onPageChange } = this.props
-
+    const onKeyUp = (event) => {
         if (event.key !== "Enter") return
 
         if (isNaN(inputValue)) {
-            this.setState({ inputValue: page + 1 })
+            setInputValue(page + 1)
             return
         }
 
@@ -57,60 +45,50 @@ class Actions extends PureComponent {
         const maxPage = Math.ceil(count / rowsPerPage) - 1
         if (value > maxPage) value = maxPage
 
-        this.setState({ inputValue: value + 1 })
+        setInputValue(value + 1)
         onPageChange(event, value)
     }
 
-    onChange = ({ target: { value } }) => {
-        this.setState({ inputValue: value })
+    const onChange = ({ target: { value } }) => {
+        setInputValue(value)
     }
 
-    render() {
-        const { page, count, rowsPerPage } = this.props
-        const { inputValue } = this.state
+    const maxPage = Math.ceil(count / rowsPerPage) - 1
 
-        const maxPage = Math.ceil(count / rowsPerPage) - 1
-
-        return (
-            <div className={styles.actionBox}>
-                <IconButton
-                    onClick={(event) => this.onClick(event, "first")}
-                    disabled={page === 0}
-                    title="第一页"
-                >
-                    <FirstPage />
-                </IconButton>
-                <IconButton
-                    onClick={(event) => this.onClick(event, "prev")}
-                    disabled={page === 0}
-                    title="上一页"
-                >
-                    <KeyboardArrowLeft />
-                </IconButton>
-                <Input
-                    id="current-input"
-                    value={inputValue}
-                    onKeyUp={this.onKeyUp}
-                    onChange={this.onChange}
-                />{" "}
-                / {maxPage + 1} 页
-                <IconButton
-                    onClick={(event) => this.onClick(event, "next")}
-                    disabled={page >= maxPage}
-                    title="下一页"
-                >
-                    <KeyboardArrowRight />
-                </IconButton>
-                <IconButton
-                    onClick={(event) => this.onClick(event, "last")}
-                    disabled={page >= maxPage}
-                    title="最后一页"
-                >
-                    <LastPage />
-                </IconButton>
-            </div>
-        )
-    }
+    return (
+        <div className={styles.actionBox}>
+            <IconButton
+                onClick={(event) => onClick(event, "first")}
+                disabled={page === 0}
+                title="第一页"
+            >
+                <FirstPage />
+            </IconButton>
+            <IconButton
+                onClick={(event) => onClick(event, "prev")}
+                disabled={page === 0}
+                title="上一页"
+            >
+                <KeyboardArrowLeft />
+            </IconButton>
+            <Input id="current-input" value={inputValue} onKeyUp={onKeyUp} onChange={onChange} /> /{" "}
+            {maxPage + 1} 页
+            <IconButton
+                onClick={(event) => onClick(event, "next")}
+                disabled={page >= maxPage}
+                title="下一页"
+            >
+                <KeyboardArrowRight />
+            </IconButton>
+            <IconButton
+                onClick={(event) => onClick(event, "last")}
+                disabled={page >= maxPage}
+                title="最后一页"
+            >
+                <LastPage />
+            </IconButton>
+        </div>
+    )
 }
 
 export default function Pagination({

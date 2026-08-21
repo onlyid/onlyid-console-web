@@ -20,16 +20,16 @@ export default function ChargeTable() {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        initData()
-    }, [])
-
     const initData = async () => {
         setLoading(true)
         const list = await request.get("tenant/charges")
         setList(list)
         setLoading(false)
     }
+
+    useEffect(() => {
+        initData()
+    }, [])
 
     const statusCell = (item) => {
         if (item.paid) return <span style={{ color: "#4caf50" }}>已支付</span>

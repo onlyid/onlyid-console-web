@@ -5,10 +5,6 @@ import BaseChart from "../BaseChart"
 export default function Chart({ clientId, days, type, typeList }) {
     const [list, setList] = useState([])
 
-    useEffect(() => {
-        initData()
-    }, [clientId, days, type])
-
     const initData = async () => {
         const params = { days, type }
         if (clientId !== "all") params.clientId = clientId
@@ -17,6 +13,10 @@ export default function Chart({ clientId, days, type, typeList }) {
         })
         setList(list)
     }
+
+    useEffect(() => {
+        initData()
+    }, [clientId, days, type])
 
     const name = typeList.find((item) => item.value === type).label
 

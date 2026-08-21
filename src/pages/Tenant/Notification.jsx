@@ -9,14 +9,14 @@ import { eventEmitter } from "@/my/utils"
 export default function Notification() {
     const [notifyNormal, setNotifyNormal] = useState(true)
 
-    useEffect(() => {
-        initData()
-    }, [])
-
     const initData = async () => {
         const { notifyNormal } = localStorage.getObj("tenantInfo")
         setNotifyNormal(String(notifyNormal))
     }
+
+    useEffect(() => {
+        initData()
+    }, [])
 
     const submit = async (notifyNormal) => {
         const tenantInfo = await request.put("tenant/notification", { notifyNormal })

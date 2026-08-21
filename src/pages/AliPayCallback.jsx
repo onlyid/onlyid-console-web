@@ -11,16 +11,6 @@ export default function AliPayCallback() {
 
     const { search } = location
 
-    useEffect(() => {
-        const query = qs.parse(search, { ignoreQueryPrefix: true })
-        if (!query["out_trade_no"]) {
-            history.replace("/")
-            return
-        }
-
-        checkRenew(query["out_trade_no"])
-    }, [])
-
     const checkRenew = async (chargeId) => {
         try {
             const tenantInfo = await request.post("tenant/check-pay", { chargeId })
@@ -30,6 +20,16 @@ export default function AliPayCallback() {
             history.replace("/tenant/renewal")
         }
     }
+
+    useEffect(() => {
+        const query = qs.parse(search, { ignoreQueryPrefix: true })
+        if (!query["out_trade_no"]) {
+            history.replace("/")
+            return
+        }
+
+        checkRenew(query["out_trade_no"])
+    }, [])
 
     return (
         <div style={{ textAlign: "center", padding: "100px 0" }}>

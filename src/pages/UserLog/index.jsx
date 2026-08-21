@@ -16,10 +16,6 @@ export default function UserLog() {
     const [lteDate, setLteDate] = useState("")
     const [success, setSuccess] = useState("all")
 
-    useEffect(() => {
-        initData()
-    }, [current, pageSize])
-
     const initData = async () => {
         setLoading(true)
 
@@ -34,6 +30,10 @@ export default function UserLog() {
         setTotal(total)
         setLoading(false)
     }
+
+    useEffect(() => {
+        initData()
+    }, [current, pageSize])
 
     const onClientChange = (clientId) => {
         setClientId(clientId)

@@ -12,16 +12,16 @@ export default function ClientTable() {
     const [loading, setLoading] = useState(true)
     const match = useRouteMatch()
 
-    useEffect(() => {
-        initData()
-    }, [])
-
     const initData = async () => {
         const params = { userId: match.params.id }
         const list = await request.get("clients/by-user", { params })
         setList(list)
         setLoading(false)
     }
+
+    useEffect(() => {
+        initData()
+    }, [])
 
     return (
         <>

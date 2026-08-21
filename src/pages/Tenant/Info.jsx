@@ -11,14 +11,14 @@ import tipBox from "@/components/TipBox.module.css"
 export default function Info() {
     const [lastLogin, setLastLogin] = useState({})
 
-    useEffect(() => {
-        initData()
-    }, [])
-
     const initData = async () => {
         const lastLogin = await request.get("tenant/last-login")
         setLastLogin(lastLogin)
     }
+
+    useEffect(() => {
+        initData()
+    }, [])
 
     const userInfo = localStorage.getObj("userInfo")
     const tenantInfo = localStorage.getObj("tenantInfo")

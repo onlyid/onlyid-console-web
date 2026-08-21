@@ -24,10 +24,6 @@ export default function Index() {
 
     const { id: currentId } = match.params
 
-    useEffect(() => {
-        initData()
-    }, [currentId])
-
     const initData = async () => {
         const message = await request.get(`my-messages/${currentId}`)
         setMessage(message)
@@ -45,6 +41,10 @@ export default function Index() {
             eventEmitter.emit("myMessage/countChange")
         }
     }
+
+    useEffect(() => {
+        initData()
+    }, [currentId])
 
     const toggleDelete = () => {
         setDeleteOpen((value) => !value)

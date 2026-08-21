@@ -18,10 +18,6 @@ export default function Home() {
 
     const { current, pageSize } = user
 
-    useEffect(() => {
-        initData()
-    }, [current, pageSize])
-
     const initData = async () => {
         const { current, pageSize, keyword, clientId, orderBy } = user
 
@@ -41,6 +37,10 @@ export default function Home() {
             dispatch({ type: "user", current: current - 1 })
         }
     }
+
+    useEffect(() => {
+        initData()
+    }, [current, pageSize])
 
     const goBlacklist = () => {
         history.push(`${match.url}/blacklist`)
