@@ -24,9 +24,7 @@ const BlockDialog = ({ open, blocked, onCancel, onSubmit }) => {
             </DialogContent>
             <DialogActions>
                 <Button onClick={onCancel}>取 消</Button>
-                <Button onClick={onSubmit} color="secondary">
-                    {blocked ? "移 出" : "拉 黑"}
-                </Button>
+                <Button onClick={onSubmit}>{blocked ? "移 出" : "拉 黑"}</Button>
             </DialogActions>
         </Dialog>
     )
@@ -77,7 +75,7 @@ export default function Danger() {
                                 : "将恶意用户加入黑名单，禁止TA登录你名下的所有应用"}
                         </p>
                     </div>
-                    <Button variant="contained" color="secondary" onClick={toggleBlock}>
+                    <Button variant="contained" color="error" onClick={toggleBlock}>
                         {blocked ? "移 出" : "拉 黑"}
                     </Button>
                 </li>

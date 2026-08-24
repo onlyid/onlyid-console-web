@@ -1,5 +1,5 @@
 import styles from "./LeftDrawer.module.css"
-import { Drawer, List, ListItem, ListItemIcon, ListItemText } from "@mui/material"
+import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
 import { Link, useLocation } from "react-router-dom"
 import moment from "moment"
 
@@ -7,8 +7,8 @@ function Item({ to, children }) {
     const location = useLocation()
 
     return (
-        <ListItem button component={Link} to={to} selected={location.pathname.startsWith(to)}>
-            {children}
+        <ListItem disablePadding component={Link} to={to}>
+            <ListItemButton selected={location.pathname.startsWith(to)}>{children}</ListItemButton>
         </ListItem>
     )
 }

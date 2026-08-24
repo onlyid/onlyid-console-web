@@ -1,14 +1,12 @@
 body {
     background-color: white;
-}
-
-p {
-    line-height: 1.5;
+    font-size: 14px;
 }
 
 h1 {
     font-size: 22px;
     font-weight: 500;
+    margin: 14px 0;
 }
 
 h2 {
@@ -61,56 +59,6 @@ h3 {
     font-feature-settings: "liga";
 }
 
-/* reset mui start */
-.MuiTooltip-tooltip {
-    font-size: 12px;
-}
-
-.MuiTypography-h6 {
-    font-size: 18px;
-}
-
-.MuiTypography-body1 {
-    font-size: 14px;
-}
-
-.MuiInputBase-root {
-    font-size: 14px;
-}
-
-.MuiInputBase-root.Mui-disabled {
-    background-color: #fafafa;
-}
-
-.MuiMenuItem-root {
-    font-size: 14px;
-}
-
-.MuiTab-root {
-    text-transform: none;
-}
-
-.MuiOutlinedInput-input {
-    padding: 14px;
-}
-
-.MuiOutlinedInput-multiline {
-    padding: 14px;
-}
-
-.MuiOutlinedInput-inputMultiline {
-    padding: 0;
-}
-
-.MuiFormHelperText-root {
-    font-size: 13px;
-}
-
-.MuiSelect-selectMenu {
-    min-height: 0;
-}
-/* reset mui end */
-
 .mainActionBox {
     float: right;
     margin-top: -9px;
@@ -132,7 +80,7 @@ pre[class*="language-"] {
     padding-left: 8px;
     padding-right: 8px;
     cursor: pointer;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     user-select: none;
 }

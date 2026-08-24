@@ -14,6 +14,7 @@ export default function SelectBar(props) {
                     value={orderBy}
                     onChange={onChange}
                     startAdornment={<InputAdornment position="start">排序</InputAdornment>}
+                    variant="standard"
                 >
                     <MenuItem value="firstDate">最近新增</MenuItem>
                     <MenuItem value="lastDate">最近活跃</MenuItem>

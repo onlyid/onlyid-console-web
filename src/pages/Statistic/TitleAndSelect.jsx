@@ -17,6 +17,7 @@ export default function TitleAndSelect({ title, clientId, days, type, onChange, 
                         value={days}
                         onChange={({ target: { value } }) => onChange("days", value)}
                         startAdornment={<InputAdornment position="start">时间</InputAdornment>}
+                        variant="standard"
                     >
                         <MenuItem value={7}>最近7天</MenuItem>
                         <MenuItem value={30}>最近30天</MenuItem>
@@ -29,6 +30,7 @@ export default function TitleAndSelect({ title, clientId, days, type, onChange, 
                         value={type}
                         onChange={({ target: { value } }) => onChange("type", value)}
                         startAdornment={<InputAdornment position="start">类型</InputAdornment>}
+                        variant="standard"
                     >
                         {typeList.map((type) => (
                             <MenuItem key={type.value} value={type.value}>

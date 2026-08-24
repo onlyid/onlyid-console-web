@@ -166,7 +166,7 @@ export default function CreateDialog({ open, onCancel, onSave }) {
                             onBlur={validateField}
                             value={values.description || ""}
                             multiline
-                            rows={3}
+                            rows={2}
                         />
                         <FormHelperText>{validation.description.text}</FormHelperText>
                     </FormControl>

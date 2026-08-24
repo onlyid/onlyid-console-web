@@ -1,6 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import "./index.css"
+import "./reset-mui.css"
 import App from "./App"
 import { Provider } from "react-redux"
 import { legacy_createStore as createStore } from "redux"
@@ -22,7 +23,14 @@ const theme = createTheme(
                 main: "#3F51B5"
             }
         },
-        typography: { fontFamily }
+        typography: { fontFamily },
+        components: {
+            MuiLink: {
+                defaultProps: {
+                    underline: "hover"
+                }
+            }
+        }
     },
     zhCN
 )

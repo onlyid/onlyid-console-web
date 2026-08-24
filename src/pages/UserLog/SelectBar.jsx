@@ -27,6 +27,7 @@ export default function SelectBar({
                         value={success}
                         onChange={onChange}
                         startAdornment={<InputAdornment position="start">状态</InputAdornment>}
+                        variant="standard"
                     >
                         <MenuItem value="all">查看全部</MenuItem>
                         <MenuItem value="true">只看成功</MenuItem>

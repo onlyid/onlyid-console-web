@@ -56,7 +56,7 @@ export default function Danger({ onSave }) {
                     <h3>删除应用</h3>
                     <p>删除后，和该应用相关的SSO认证产品将立即停止工作</p>
                 </div>
-                <Button variant="contained" color="secondary" onClick={() => confirm("delete")}>
+                <Button variant="contained" color="error" onClick={() => confirm("delete")}>
                     删 除
                 </Button>
             </li>
@@ -65,7 +65,7 @@ export default function Danger({ onSave }) {
                     <h3>重置 Secret</h3>
                     <p>一般仅在原secret泄漏时需要重置，重置后原secret马上失效</p>
                 </div>
-                <Button variant="contained" color="secondary" onClick={() => confirm("rotate")}>
+                <Button variant="contained" color="error" onClick={() => confirm("rotate")}>
                     重 置
                 </Button>
             </li>
@@ -79,9 +79,7 @@ export default function Danger({ onSave }) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={closeDialog}>取 消</Button>
-                    <Button onClick={onSubmit} color="secondary">
-                        {dialogButtonText}
-                    </Button>
+                    <Button onClick={onSubmit}>{dialogButtonText}</Button>
                 </DialogActions>
             </Dialog>
         </DangerZone>

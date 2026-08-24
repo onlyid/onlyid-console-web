@@ -80,10 +80,8 @@ export default function MyMessage() {
     return (
         <>
             <div className="mainActionBox">
-                <Button variant="contained" onClick={goNotification}>
-                    通知设置
-                </Button>
-                <Button variant="contained" onClick={toggleConfirm}>
+                <Button onClick={goNotification}>通知设置</Button>
+                <Button variant="contained" onClick={toggleConfirm} size="small">
                     全部标为已读
                 </Button>
             </div>
@@ -130,9 +128,7 @@ export default function MyMessage() {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={toggleConfirm}>取 消</Button>
-                    <Button onClick={markReadAll} color="secondary">
-                        确 定
-                    </Button>
+                    <Button onClick={markReadAll}>确 定</Button>
                 </DialogActions>
             </Dialog>
         </>

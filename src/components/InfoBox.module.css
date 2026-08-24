@@ -1,7 +1,7 @@
 .root {
     border-bottom: 1px solid #eee;
     display: flex;
-    padding: 20px 0;
+    padding: 20px 0 19px;
 }
 
 .root:last-of-type {

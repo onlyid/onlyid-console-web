@@ -19,7 +19,7 @@
     justify-content: space-between;
     border-top: 1px solid rgb(224, 224, 224);
     border-bottom: 1px solid rgb(224, 224, 224);
-    padding: 14px 0;
+    padding: 14px 0 12px;
 }
 
 .countItem {
@@ -29,7 +29,7 @@
 }
 
 .countItem .count {
-    padding: 8px 0;
+    padding: 7px 0 6px;
     font-size: 21px;
 }
 

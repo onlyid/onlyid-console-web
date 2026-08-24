@@ -149,7 +149,7 @@ export default function Basic({ client, onSave }) {
                         onBlur={validateField}
                         value={values.description || ""}
                         multiline
-                        rows={3}
+                        rows={2}
                     />
                     <FormHelperText>{validation.description.text}</FormHelperText>
                 </FormControl>

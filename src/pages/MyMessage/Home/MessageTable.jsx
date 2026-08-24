@@ -171,9 +171,7 @@ export default function MessageTable({
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={toggleDelete}>取 消</Button>
-                    <Button onClick={submitDelete} color="secondary">
-                        删 除
-                    </Button>
+                    <Button onClick={submitDelete}>删 除</Button>
                 </DialogActions>
             </Dialog>
         </>

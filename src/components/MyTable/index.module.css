@@ -17,7 +17,7 @@
 
 .pagination .actionBox :global .MuiInput-input {
     width: 32px;
-    padding: 5px;
+    padding: 3px;
     text-align: center;
 }
 

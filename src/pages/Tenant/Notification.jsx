@@ -78,7 +78,7 @@ export default function Notification() {
                             label="自动（推荐）"
                         />
                     </RadioGroup>
-                    <FormHelperText>
+                    <FormHelperText variant="standard">
                         自动：除重要消息外，由唯ID从普通消息挑选有价值的发送邮件、短信。
                     </FormHelperText>
                 </FormControl>

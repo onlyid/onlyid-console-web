@@ -9,10 +9,9 @@ import tipBox from "@/components/TipBox.module.css"
 
 const getArray = (value) =>
     value
-        .replace(/[\n]/g, "")
-        .split(";")
-        .filter((item) => item)
+        .split(/[;\r\n]+/) // 分号/回车/换行都视为分隔符
         .map((item) => item.trim())
+        .filter((item) => item)
 
 const RULES_APP = {
     packageName: { max: 50, message: "最多输入50字" },
@@ -199,7 +198,8 @@ export default function OAuth({ clientType }) {
                                 value={redirectUris || ""}
                                 placeholder="https://www.example.com/my-app/oauth-callback"
                                 multiline
-                                rows={5}
+                                minRows={3}
+                                maxRows={5}
                             />
                             <FormHelperText>{validation.redirectUris.text}</FormHelperText>
                             <FormHelperText error={false}>
@@ -216,7 +216,8 @@ export default function OAuth({ clientType }) {
                                 value={background || ""}
                                 placeholder="background-color: #fefefe"
                                 multiline
-                                rows={5}
+                                minRows={3}
+                                maxRows={5}
                             />
                             <FormHelperText>{validation.background.text}</FormHelperText>
                             <FormHelperText error={false}>

@@ -1,4 +1,4 @@
-import { PureComponent } from "react"
+import { useState, useEffect } from "react"
 import { AppBar, Badge, IconButton, Toolbar, Tooltip } from "@mui/material"
 import Logo from "@/assets/logo.svg?react"
 import styles from "./Header.module.css"
@@ -9,83 +9,82 @@ import HelpDialog from "./HelpDialog"
 import MessageBox from "./MessageBox"
 import { eventEmitter } from "@/my/utils"
 import request from "@/my/request"
-import { connect } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
-class Header extends PureComponent {
-    state = {
-        drawerVisible: false,
-        dialogVisible: false
-    }
+function Header() {
+    const [drawerVisible, setDrawerVisible] = useState(false)
+    const [dialogVisible, setDialogVisible] = useState(false)
+    const myMessage = useSelector((state) => state.myMessage)
+    const dispatch = useDispatch()
 
-    componentDidMount() {
-        // 如果还在登录中，直接请求会报401，所以推迟一点
-        setTimeout(this.getMessageCount, 2000)
+    const { unreadCount } = myMessage
 
-        eventEmitter.on("myMessage/countChange", this.getMessageCount)
-    }
-
-    getMessageCount = async () => {
-        const { dispatch } = this.props
-
+    const getMessageCount = async () => {
         const { unreadCount, totalCount } = await request.get("my-messages/count")
         dispatch({ type: "myMessage", unreadCount, totalCount })
     }
 
-    showDrawer = () => {
-        this.setState({ drawerVisible: true })
+    useEffect(() => {
+        // 如果还在登录中，直接请求会报401，所以推迟一点
+        setTimeout(getMessageCount, 2000)
+
+        eventEmitter.on("myMessage/countChange", getMessageCount)
+
+        return () => {
+            eventEmitter.off("myMessage/countChange", getMessageCount)
+        }
+    }, [])
+
+    const showDrawer = () => {
+        setDrawerVisible(true)
     }
 
-    closeDrawer = () => {
-        this.setState({ drawerVisible: false })
+    const closeDrawer = () => {
+        setDrawerVisible(false)
     }
 
-    showDialog = () => {
-        this.setState({ dialogVisible: true })
+    const showDialog = () => {
+        setDialogVisible(true)
     }
 
-    closeDialog = () => {
-        this.setState({ dialogVisible: false })
+    const closeDialog = () => {
+        setDialogVisible(false)
     }
 
-    render() {
-        const { drawerVisible, dialogVisible } = this.state
-        const {
-            myMessage: { unreadCount }
-        } = this.props
-
-        return (
-            <AppBar className={styles.root}>
-                <Toolbar variant="dense" className={styles.toolbar}>
-                    <Tooltip title="打开官网">
-                        <a href="https://onlyid.net/web" target="_blank" rel="noopener noreferrer">
-                            <Logo style={{ fill: "#fff", width: 75, verticalAlign: "middle" }} />
-                        </a>
-                    </Tooltip>
-                    <div className={styles.rightBox}>
-                        <IconButton
-                            color="inherit"
-                            className={styles.iconButton}
-                            onClick={this.showDialog}
-                        >
-                            <HelpIcon />
-                        </IconButton>
-                        <IconButton
-                            color="inherit"
-                            className={styles.iconButton}
-                            onClick={this.showDrawer}
-                        >
-                            <Badge badgeContent={unreadCount} color="secondary">
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
-                        <RightAccount />
-                    </div>
-                </Toolbar>
-                <HelpDialog onClose={this.closeDialog} visible={dialogVisible} />
-                <MessageBox onClose={this.closeDrawer} visible={drawerVisible} />
-            </AppBar>
-        )
-    }
+    return (
+        <AppBar className={styles.root}>
+            <Toolbar variant="dense" className={styles.toolbar}>
+                <Tooltip title="打开官网">
+                    <a href="https://onlyid.net/web" target="_blank" rel="noopener noreferrer">
+                        <Logo style={{ fill: "#fff", width: 75, verticalAlign: "middle" }} />
+                    </a>
+                </Tooltip>
+                <div className={styles.rightBox}>
+                    <IconButton
+                        color="inherit"
+                        className={styles.iconButton}
+                        onClick={showDialog}
+                        style={{ marginRight: 8 }}
+                    >
+                        <HelpIcon />
+                    </IconButton>
+                    <IconButton
+                        color="inherit"
+                        className={styles.iconButton}
+                        onClick={showDrawer}
+                        style={{ marginRight: 4 }}
+                    >
+                        <Badge badgeContent={unreadCount} color="error">
+                            <NotificationsIcon />
+                        </Badge>
+                    </IconButton>
+                    <RightAccount />
+                </div>
+            </Toolbar>
+            <HelpDialog onClose={closeDialog} visible={dialogVisible} />
+            <MessageBox onClose={closeDrawer} visible={drawerVisible} />
+        </AppBar>
+    )
 }
 
-export default connect(({ myMessage }) => ({ myMessage }))(Header)
+export default Header

@@ -1,0 +1,48 @@
+.MuiTooltip-tooltip {
+    font-size: 12px;
+}
+
+.MuiTypography-h6 {
+    font-size: 18px;
+}
+
+.MuiTypography-body1 {
+    font-size: 14px;
+}
+
+.MuiInputBase-root {
+    font-size: 14px;
+}
+
+.MuiInputBase-root.Mui-disabled {
+    background-color: #fafafa;
+}
+
+.MuiMenuItem-root {
+    font-size: 14px;
+}
+
+.MuiTab-root {
+    text-transform: none;
+}
+
+/* 前面的input是必需的，不然会修饰到textarea */
+input.MuiOutlinedInput-input {
+    padding: 12.5px;
+}
+
+.MuiInputBase-multiline {
+    padding: 12.5px;
+}
+
+.MuiFormHelperText-root {
+    font-size: 13px;
+}
+
+.MuiDialogTitle-root + .MuiDialogContent-root {
+    padding-top: 8px;
+}
+
+.MuiDialogContent-root {
+    padding-bottom: 8px;
+}

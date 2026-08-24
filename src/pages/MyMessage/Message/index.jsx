@@ -73,7 +73,7 @@ export default function Index() {
         <>
             <div className="mainActionBox">
                 <Button
-                    variant="contained"
+                    variant="outlined"
                     disabled={!prevId}
                     onClick={() => go("prev")}
                     className="small"
@@ -81,7 +81,7 @@ export default function Index() {
                     上一封
                 </Button>
                 <Button
-                    variant="contained"
+                    variant="outlined"
                     disabled={!nextId}
                     onClick={() => go("next")}
                     className="small"
@@ -89,7 +89,7 @@ export default function Index() {
                     下一封
                 </Button>
                 <Button
-                    variant="contained"
+                    variant="outlined"
                     startIcon={<Delete />}
                     onClick={toggleDelete}
                     className="small"
@@ -125,9 +125,7 @@ export default function Index() {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={toggleDelete}>取 消</Button>
-                    <Button onClick={submitDelete} color="secondary">
-                        删 除
-                    </Button>
+                    <Button onClick={submitDelete}>删 除</Button>
                 </DialogActions>
             </Dialog>
         </>
